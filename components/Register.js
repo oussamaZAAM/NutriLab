@@ -1,7 +1,34 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { BsGoogle, BsFacebook, BsTwitter } from "react-icons/bs";
-export default function Register({ setLogin }) {
+import { useState } from "react";
+import axios from "axios";
+
+export default function Register({ users }) {
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
+
+  const router = useRouter();
+  const handleSubmit = async (e) => {
+    const data = {
+      name: user.name,
+      email: user.email,
+    };
+    console.log(data);
+    await axios
+      .post("/api/register", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // await router.push("/");
+  };
+
   return (
     <div>
       <Head>
@@ -34,6 +61,8 @@ export default function Register({ setLogin }) {
                 </div>
                 <input
                   type="text"
+                  value={user.name}
+                  onChange={(e) => setUser({ ...user, name: e.target.value })}
                   placeholder="Name"
                   className="basis-3/4 w-max px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
@@ -46,6 +75,8 @@ export default function Register({ setLogin }) {
                 </div>
                 <input
                   type="text"
+                  value={user.email}
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
                   placeholder="Email"
                   className="basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
@@ -56,6 +87,9 @@ export default function Register({ setLogin }) {
                 </div>
                 <input
                   type="password"
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
                   placeholder="Password"
                   className=" basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
@@ -74,7 +108,10 @@ export default function Register({ setLogin }) {
                 Password must be same!
               </span> */}
               <div className="flex">
-                <button className="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
+                <button
+                  onClick={handleSubmit}
+                  className="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
+                >
                   Create Account
                 </button>
               </div>

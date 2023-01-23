@@ -1,18 +1,17 @@
 import prisma from "./prisma";
 import { Prisma } from "@prisma/client";
 
-export default async function register(req, res) {
+export default async function login(req, res) {
   const user = req.body;
   console.log(user);
   try {
-    const result = await prisma.User.create({
-      data: {
-        name: user.name,
+    const user = await prisma.user.findUnique({
+      where: {
         email: user.email,
-        password: user.password,
       },
     });
-    res.json(result);
+    console.log("user");
+    res.json(user);
   } catch (e) {
     console.log(e);
     if (e instanceof Prisma.PrismaClientKnownRequestError) {

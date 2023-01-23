@@ -19,6 +19,7 @@ function classNames(...classes) {
 
 export default function Example() {
   const [open1, setOpen] = useState(false);
+  const [user, setUser] = useState({});
   const [login, setLogin] = useState(true);
 
   const cancelButtonRef = useRef(null);
@@ -87,8 +88,7 @@ export default function Example() {
                       "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     }
                   >
-                    {/* <LoginBtn /> */}
-                    Login
+                    {login === true ? "Log in" : "Log out"}
                   </a>
                 </button>
                 <Transition.Root show={open1} as={Fragment}>
@@ -127,7 +127,7 @@ export default function Example() {
                           <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                             {login ? (
                               <div>
-                                <Login setLogin={setLogin} />
+                                <Login setLogin={setLogin} setAuth={setUser} />
                               </div>
                             ) : (
                               <div>

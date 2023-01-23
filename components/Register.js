@@ -4,29 +4,40 @@ import { BsGoogle, BsFacebook, BsTwitter } from "react-icons/bs";
 import { useState } from "react";
 import axios from "axios";
 
-export default function Register({ users }) {
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
+export default function Register({ setLogin, setAuth }) {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    rePass: "",
+  });
+  const [error, setError] = useState("");
 
   const router = useRouter();
   const handleSubmit = async (e) => {
-    const data = {
-      name: user.name,
-      email: user.email,
-    };
-    console.log(data);
-    await axios
-      .post("/api/register", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // await router.push("/");
+    if (user.password == user.rePass) {
+      const data = {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      };
+      console.log(data);
+      await axios
+        .post("/api/register", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(async (response) => {
+          console.log(response.data);
+          // await router.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setError("wrongPass");
+    }
   };
 
   return (
@@ -78,21 +89,33 @@ export default function Register({ users }) {
                   value={user.email}
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
                   placeholder="Email"
-                  className="basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className={
+                    "basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  }
                 />
               </div>
-              <div className="mt-4 flex flex-row">
+
+              <div className="mt-4 flex flex-row relative">
                 <div className=" basis-1/4 flex items-center">
                   <label className=" text-center">Password</label>
                 </div>
                 <input
+                  onFocus={() => setError("")}
                   type="password"
                   onChange={(e) =>
                     setUser({ ...user, password: e.target.value })
                   }
                   placeholder="Password"
-                  className=" basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className={
+                    " basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 hover:ring-blue-600" +
+                    (error === "wrongPass" && "border-3 border-rose-500")
+                  }
                 />
+                {error === "wrongPass" && (
+                  <p className="text-rose-500 absolute left-20 -top-3 sm:-top-5 sm:left-32 text-xs sm:text-sm">
+                    Make sure to repeat the password correctly.
+                  </p>
+                )}
               </div>
               <div className="mt-4 flex flex-row">
                 <div className=" basis-1/4">
@@ -100,6 +123,7 @@ export default function Register({ users }) {
                 </div>
                 <input
                   type="password"
+                  onChange={(e) => setUser({ ...user, rePass: e.target.value })}
                   placeholder="Password"
                   className="basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />

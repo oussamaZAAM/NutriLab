@@ -2,7 +2,7 @@ import Head from "next/head";
 import { BsGoogle, BsFacebook, BsTwitter } from "react-icons/bs";
 import axios from "axios";
 import { useState } from "react";
-export default function Login({ setLogin, setAuth }) {
+export default function Login({ setLogin, setAuth, setOpen }) {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -21,13 +21,13 @@ export default function Login({ setLogin, setAuth }) {
       .then(async (response) => {
         console.log(response.data);
         setAuth(response.data);
+        setOpen(false);
       })
       .catch((error) => {
         console.log(error);
       });
   };
   return (
-    
     <div className="">
       <Head>
         <title>NutriLab - Login</title>

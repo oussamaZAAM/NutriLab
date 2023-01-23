@@ -4,7 +4,7 @@ import { BsGoogle, BsFacebook, BsTwitter } from "react-icons/bs";
 import { useState } from "react";
 import axios from "axios";
 
-export default function Register({ setLogin, setAuth }) {
+export default function Register({ setLogin, setAuth, setOpen }) {
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -30,7 +30,8 @@ export default function Register({ setLogin, setAuth }) {
         })
         .then(async (response) => {
           console.log(response.data);
-          // await router.push("/");
+          setAuth(response.data);
+          setOpen(false);
         })
         .catch((error) => {
           console.log(error);

@@ -1,7 +1,8 @@
 import Navbar from "../components/Navbar";
-import { useRouter } from "next/router";
+import isAuthenticated from "./api/Auth";
+import getCookie from "next-cookies";
 import Head from "next/head";
-export default function Home() {
+export default function Home({ user }) {
   return (
     <div>
       <Head>
@@ -10,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
       {/* <Register /> */}
-      <Navbar />
+      <Navbar User={user} />
       {/* <Login /> */}
       {/* <Navbar />
 
@@ -20,3 +21,11 @@ export default function Home() {
     </div>
   );
 }
+Home.getInitialProps = async (context) => {
+  const { NutriLab } = getCookie(context);
+  const user = isAuthenticated(NutriLab);
+  if (!user) {
+    return { user: false };
+  }
+  return { user: user };
+};

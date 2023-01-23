@@ -7,7 +7,11 @@ export default function Login({ setLogin, setAuth, setOpen }) {
     email: "",
     password: "",
   });
+  const [error, setError] = useState({ email: "", password: "" });
+
   const handleSubmit = async (e) => {
+    event.preventDefault();
+
     const data = {
       email: user.email,
       password: user.password,
@@ -24,7 +28,9 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         setOpen(false);
       })
       .catch((error) => {
-        console.log(error);
+        error.response.status === 401
+          ? setError({ email: error.response.data.message })
+          : setError({ password: error.response.data.message });
       });
   };
   return (
@@ -50,30 +56,45 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         <h3 className="text-2xl font-bold text-center">Welcome back!</h3>
         <form action="">
           <div className="mt-4">
-            <div className="flex flex-row">
+            <div className="flex flex-row relative">
               <div className=" basis-1/4 flex items-center">
                 <label className="text-center" htmlFor="Email">
                   Email
                 </label>
               </div>
               <input
+                onFocus={() => setError({ email: "", password: "" })}
                 type="text"
                 placeholder="Email"
                 value={user.email}
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
-                className="basis-3/4 w-max px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                className={
+                  "basis-3/4 w-max px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" +
+                  (error.email && "border-3 border-rose-500")
+                }
               />
+              {error.email && (
+                <p className="text-rose-500 absolute left-20 -top-3 sm:-top-4 sm:left-32 text-xs sm:text-sm">
+                  {error.email}
+                </p>
+              )}
             </div>
-            <div className="mt-4 flex flex-row">
+            <div className="mt-4 flex flex-row relative">
               <div className=" basis-1/4 flex items-center">
                 <label className=" text-center">Password</label>
               </div>
               <input
+                onFocus={() => setError({ email: "", password: "" })}
                 type="password"
                 placeholder="Password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 className=" basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
+              {error.password && (
+                <p className="text-rose-500 absolute left-20 -top-3 sm:-top-4 sm:left-32 text-xs sm:text-sm">
+                  {error.password}
+                </p>
+              )}
             </div>
 
             {/* <span className="text-xs text-red-400">

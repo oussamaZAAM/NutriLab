@@ -16,10 +16,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Example({ User }) {
   const [open1, setOpen] = useState(false);
-  const [user, setUser] = useState(false);
-  const [login, setLogin] = useState(true);
+  const [user, setUser] = useState(User);
+  const [login, setLogin] = useState(User === false ? true : false);
 
   const cancelButtonRef = useRef(null);
 
@@ -96,15 +96,14 @@ export default function Example() {
                   <button
                     onClick={() => (user ? handleLogout() : setOpen(true))}
                   >
-                    <a
-                      href={"#loginForm"}
+                    <p
                       className={
                         "text-black hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       }
                     >
                       {/* <LoginBtn /> */}
                       {user ? "Log out" : "Login"}
-                    </a>
+                    </p>
                   </button>
                   {!user && (
                     <Transition.Root show={open1} as={Fragment}>

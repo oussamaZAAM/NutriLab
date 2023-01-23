@@ -6,8 +6,8 @@ export default function isAuthenticated(token) {
   console.log(token);
   //   const token = authorization.replace("Bearer ", "");
   try {
-    jwt.verify(token, process.env.JWT_SECRET);
-    return true;
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    return user;
   } catch (err) {
     return false;
   }

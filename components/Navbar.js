@@ -7,10 +7,10 @@ import Register from "./Register";
 // import LoginBtn from "./LoginBtn";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
+  { name: "Home", href: "/", current: true },
+  { name: "How it works", href: "#", current: false },
+  { name: "Contact", href: "#", current: false },
   { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
 ];
 
 function classNames(...classes) {

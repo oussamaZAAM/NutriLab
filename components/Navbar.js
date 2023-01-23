@@ -127,11 +127,17 @@ export default function Example() {
                             <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                               {login ? (
                                 <div>
-                                  <Login setLogin={setLogin} />
+                                  <Login
+                                    setLogin={setLogin}
+                                    setAuth={setUser}
+                                  />
                                 </div>
                               ) : (
                                 <div>
-                                  <Register setLogin={setLogin} />
+                                  <Register
+                                    setLogin={setLogin}
+                                    setAuth={setUser}
+                                  />
                                 </div>
                               )}
                             </Dialog.Panel>

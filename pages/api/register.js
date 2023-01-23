@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 export default async function register(req, res) {
   const user = req.body;
   console.log(user);
+
   try {
     const result = await prisma.User.create({
       data: {

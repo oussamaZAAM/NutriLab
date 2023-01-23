@@ -6,10 +6,10 @@ import Login from "./Login";
 import Register from "./Register";
 import axios from "axios";
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
+  { name: "Home", href: "/", current: true },
+  { name: "How it works", href: "#", current: false },
+  { name: "Contact", href: "#", current: false },
   { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
 ];
 
 function classNames(...classes) {

@@ -1,7 +1,6 @@
 import prisma from "./prisma";
 import { Prisma } from "@prisma/client";
 import jwt from "jsonwebtoken";
-import nextCookies from "next-cookies";
 import { serialize } from "cookie";
 export default async function login(req, res) {
   const data = req.body;

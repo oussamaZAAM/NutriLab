@@ -1,10 +1,12 @@
 import Navbar from "../components/Navbar";
-import { useRouter } from "next/router";
-import Head from "next/head";
+import isAuthenticated from "./api/Auth";
+import getCookie from "next-cookies";
+
 import styles from "../styles/Home.module.css";
-import HowItsBuilt from "../components/HowItsBuilt";
+// import HowItsBuilt from "../components/HowItsBuilt";
 import Footer from "../components/Footer";
-export default function Home() {
+import Head from "next/head";
+export default function Home({ user }) {
   return (
     <div>
       <Head>
@@ -24,12 +26,8 @@ export default function Home() {
           rel="stylesheet"
         />
       </Head>
-      <Navbar />
-
-      {/* <Hero />
-      <PickOne reload={() => router.push("/Loading")} ayoub="ayoub" />
-      <Footer /> */}
-
+      {/* <Register /> */}
+      <Navbar User={user} />
       <div className="mx-auto w-full">
         <div className="flex justify-center items-center bg-gradient-to-b from-gradient1 via-gradient2 to-transparent">
           <div className="flex flex-1 flex-col justify-center items-center m-4 sm:m-12 lg:m-28 space-y-8">
@@ -81,7 +79,9 @@ export default function Home() {
               }
             >
               <div className="flex flex-1 flex-col justify-start item-start h-full mt-8">
-                <b className="font-black text-4xl xs:text-5xl m-4">Customized Nutrients</b>
+                <b className="font-black text-4xl xs:text-5xl m-4">
+                  Customized Nutrients
+                </b>
                 <p className="font-paragraph m-4">
                   Donec ut neque lorem. Sed ac aliquam erat. Vestibulum neque
                   magna, congue a volutpat at, porttitor at ligula.
@@ -108,7 +108,9 @@ export default function Home() {
                 }
               ></div>
               <div className="flex flex-1 flex-col justify-start item-start h-full mt-8">
-                <b className="font-black text-4xl xs:text-5xl m-4">Food Generated</b>
+                <b className="font-black text-4xl xs:text-5xl m-4">
+                  Food Generated
+                </b>
                 <p className="font-paragraph m-4">
                   Neque lorem. Sed ac aliquam erat. Vestibulum neque magna,
                   congue a
@@ -123,7 +125,9 @@ export default function Home() {
               }
             >
               <div className="flex flex-1 flex-col justify-start item-start h-full mt-8">
-                <b className="font-black text-4xl xs:text-5xl m-4">Suggested Meals</b>
+                <b className="font-black text-4xl xs:text-5xl m-4">
+                  Suggested Meals
+                </b>
                 <p className="font-paragraph m-4">
                   Volutpat at, porttitor at ligula.
                 </p>
@@ -194,10 +198,18 @@ export default function Home() {
           </div>
         </div>
 
-        <HowItsBuilt />
+        {/* <HowItsBuilt /> */}
 
         <Footer />
       </div>
     </div>
   );
 }
+Home.getInitialProps = async (context) => {
+  const { NutriLab } = getCookie(context);
+  const user = isAuthenticated(NutriLab);
+  if (!user) {
+    return { user: false };
+  }
+  return { user: user };
+};

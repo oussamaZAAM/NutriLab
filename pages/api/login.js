@@ -12,6 +12,8 @@ export default async function login(req, res) {
         email: data.email,
       },
     });
+    user.password !== data.password &&
+      res.status(400).json({ message: "Wrong Password" });
     // const refreshPayload = { user: user, jti: uuidv4() };
     const token = jwt.sign(user, process.env.JWT_SECRET);
     console.log(token);
@@ -26,15 +28,6 @@ export default async function login(req, res) {
 
     res.status(200).json(token);
   } catch (e) {
-    console.log(e);
-    if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      // The .code property can be accessed in a type-safe manner
-      if (e.code === "P2002") {
-        console.log("Email already registered");
-        res.json({ error: "Email already registered" });
-      } else {
-        res.json(e);
-      }
-    }
+    res.status(401).json({ message: "Wrong Email" });
   }
 }

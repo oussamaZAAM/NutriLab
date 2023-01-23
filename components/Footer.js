@@ -3,10 +3,10 @@ import { TbBrandGoogle } from "react-icons/tb";
 
 const Footer = () => {
   return (
-    <div className="grid grid-cols-8 bg-footer">
+    <div className="grid grid-cols-8 bg-footer mt-24">
       <div className="flex flex-col-reverse justify-center items-center divide-y-2 divide-y-reverse | md:col-start-2 col-span-8 md:col-span-6">
-        <div className="flex-flex-row justify-center items-center">
-          <div className="flex justify-between items-center my-4">
+        <div className="flex flex-col justify-center items-center w-64">
+          <div className="flex justify-between items-center my-4 xs:w-full">
             <CiFacebook size={40} color="#FF9351" />
             <CiTwitter size={40} color="#FF9351" />
             <CiInstagram size={40} color="#FF9351" />
@@ -14,7 +14,7 @@ const Footer = () => {
             <CiLinkedin size={40} color="#FF9351" />
           </div>
           <p className="text-custom-orange">
-            © Copyright - All Rights Reserved to Ars slum
+            © Copyright - All Rights Reserved
           </p>
         </div>
         <div className="flex flex-col md:flex-row justify-between items-start w-75 p-4">

@@ -19,12 +19,16 @@ function classNames(...classes) {
 
 export default function Example() {
   const [open1, setOpen] = useState(false);
+  const [user, setUser] = useState({});
   const [login, setLogin] = useState(true);
 
   const cancelButtonRef = useRef(null);
   return (
     <div className="grid grid-cols-8">
-      <Disclosure as="nav" className="col-start-0 lg:col-start-2 col-span-8 lg:col-span-6 bg-white">
+      <Disclosure
+        as="nav"
+        className="col-start-0 lg:col-start-2 col-span-8 lg:col-span-6 bg-white"
+      >
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -123,11 +127,17 @@ export default function Example() {
                             <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                               {login ? (
                                 <div>
-                                  <Login setLogin={setLogin} />
+                                  <Login
+                                    setLogin={setLogin}
+                                    setAuth={setUser}
+                                  />
                                 </div>
                               ) : (
                                 <div>
-                                  <Register setLogin={setLogin} />
+                                  <Register
+                                    setLogin={setLogin}
+                                    setAuth={setUser}
+                                  />
                                 </div>
                               )}
                             </Dialog.Panel>

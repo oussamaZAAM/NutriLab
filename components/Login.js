@@ -1,6 +1,31 @@
 import Head from "next/head";
 import { BsGoogle, BsFacebook, BsTwitter } from "react-icons/bs";
-export default function Login({ setLogin }) {
+import axios from "axios";
+import { useState } from "react";
+export default function Login({ setLogin, setAuth }) {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const handleSubmit = async (e) => {
+    const data = {
+      email: user.email,
+      password: user.password,
+    };
+    await axios
+      .post("/api/login", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(async (response) => {
+        console.log(response.data);
+        setAuth(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     
     <div className="">
@@ -27,13 +52,15 @@ export default function Login({ setLogin }) {
           <div className="mt-4">
             <div className="flex flex-row">
               <div className=" basis-1/4 flex items-center">
-                <label className="text-center" htmlFor="Name">
-                  Name
+                <label className="text-center" htmlFor="Email">
+                  Email
                 </label>
               </div>
               <input
                 type="text"
-                placeholder="Name"
+                placeholder="Email"
+                value={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
                 className="basis-3/4 w-max px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
             </div>
@@ -44,6 +71,7 @@ export default function Login({ setLogin }) {
               <input
                 type="password"
                 placeholder="Password"
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
                 className=" basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
             </div>
@@ -52,7 +80,10 @@ export default function Login({ setLogin }) {
                 Password must be same!
               </span> */}
             <div className="flex">
-              <button className="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
+              <button
+                onClick={handleSubmit}
+                className="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
+              >
                 Login to Account
               </button>
             </div>

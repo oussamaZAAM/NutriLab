@@ -24,7 +24,6 @@ export default function Example({ User }) {
   const cancelButtonRef = useRef(null);
 
   const handleLogout = async (e) => {
-    console.log("ayouv");
     await axios
       .get("/api/logout")
       .then(async (response) => {
@@ -35,6 +34,7 @@ export default function Example({ User }) {
         console.log(error);
       });
   };
+
   return (
     <div className="grid grid-cols-8">
       <Disclosure

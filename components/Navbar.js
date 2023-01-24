@@ -36,7 +36,7 @@ export default function Example({ User }) {
       });
   };
   return (
-    <div className="grid grid-cols-8">
+    <div className="grid grid-cols-8 border-b-4 border-custom-orange">
       <Disclosure
         as="nav"
         className="col-start-0 lg:col-start-2 col-span-8 lg:col-span-6 bg-white"

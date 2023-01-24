@@ -1,7 +1,9 @@
-import Navbar from "../components/Navbar";
 import Head from "next/head";
+
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import HowItsBuilt from "../components/HowItsBuilt";
+import DietInfo from "../components/DietInfo";
 
 const Nutrients = ({ user }) => {
   return (
@@ -15,12 +17,12 @@ const Nutrients = ({ user }) => {
       {/* Nutrients Page  */}
       <Navbar User={user} />
 
-      <div className="grid grid-cols-6">
-        <div className="flex flex-col justify-center items-center | sm:col-start-2 md:col-start-3 col-span-6 sm:col-span-4 md:col-span-2 | mx-4">
+      <div className="grid grid-cols-6 justify-items-center">
+        <div className="flex flex-col justify-center items-center | sm:col-start-2 xl:col-start-3 col-span-6 sm:col-span-4 xl:col-span-2 | max-w-xl mx-4">
           <h1 className="font-title text-6xl text-center | w-full my-16">
             Let us know You
           </h1>
-          <div className="test h-96 w-full border-2"></div>
+          <DietInfo />
         </div>
       </div>
 

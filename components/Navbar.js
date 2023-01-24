@@ -61,7 +61,7 @@ export default function Example({ User }) {
                     <img
                       className="block h-8 w-auto p-1"
                       src="https://i.ibb.co/Z8KdKVg/orange-slice-1.png"
-                      alt="Your Company"
+                      alt="logo"
                     />
                     <h1 className="font-bold text-white">NutriLab</h1>
                   </div>
@@ -75,7 +75,7 @@ export default function Example({ User }) {
                             item.current
                               ? "bg-gray-900 text-white"
                               : "text-black hover:bg-gray-700 hover:text-white hover:scale-x-110 duration-200",
-                            "px-3 py-2 rounded-md text-sm font-medium"
+                            "px-3 py-2 rounded-md text-sm font-medium truncate"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >

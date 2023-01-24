@@ -6,6 +6,7 @@ import styles from "../styles/Home.module.css";
 // import HowItsBuilt from "../components/HowItsBuilt";
 import Footer from "../components/Footer";
 import Head from "next/head";
+import Link from "next/link";
 export default function Home({ user }) {
   return (
     <div>
@@ -39,12 +40,14 @@ export default function Home({ user }) {
               volutpat at, porttitor at ligula.
             </p>
             <div className="flex justify-end items-center w-full">
-              <button
-                className="py-4 px-9 font-extrabold rounded-2xl"
-                style={{ backgroundColor: "#DCF8FF" }}
-              >
-                Start
-              </button>
+              <Link href='/nutrients'>
+                <button
+                  className="py-4 px-9 font-extrabold rounded-2xl"
+                  style={{ backgroundColor: "#DCF8FF" }}
+                >
+                  Start
+                </button>
+              </Link>
             </div>
           </div>
           <div className="hidden sm:flex flex-1 justify-center items-center my-28 mx-12">

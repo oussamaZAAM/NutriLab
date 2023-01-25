@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { IoMdMale, IoMdFemale } from "react-icons/io";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.css"; 
 
 
 // Irrelevent Fcts 
@@ -10,10 +10,12 @@ function capitalizeFirstLetter(string) {
 }
 
 
-const DietInfo = () => {
-  // State Variables
+const DietInfo = ({handleApply, isInfosApplied, flushInfos}) => {
+  // Next is SSR so we should wait for window object to get rendered into the Client-Side
+  const data = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('dietInfos')) : false
+
   const [stepper, setStepper] = useState(1);
-  const [dietInfos, setDietInfos] = useState({
+  const [dietInfos, setDietInfos] = useState(data || {
     age: "",
     sex: "",
     height: "",
@@ -24,34 +26,32 @@ const DietInfo = () => {
   // Function
   const handleChange = (event) => {
     setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
-    if (event.target.name === "activity") {
-      switch (event.target.value) {
-        case "sedentary":
-          setMyActivity("Sedentary");
-          break;
-        case "light":
-          setMyActivity("Lighty Active");
-          break;
-        case "active":
-          setMyActivity("Moderately Active");
-          break;
-        case "very":
-          setMyActivity("Very Active");
-          break;
-        case "super":
-          setMyActivity("Super Active");
-          break;
-      }
-    }
+
+    localStorage.setItem("dietInfos", JSON.stringify({...dietInfos, [event.target.name]: event.target.value}))
   };
 
   const handleSex = (sex) => {
     setDietInfos({ ...dietInfos, sex: sex });
   };
 
+  const recalculateInfos = () => {
+    localStorage.removeItem('dietInfos')
+    setDietInfos({
+      age: "",
+      sex: "",
+      height: "",
+      weight: "",
+      activity: "",
+    })
+    setAgeError(1);
+    setSexError(1);
+    setHeightError(1);
+    setWeightError(1);
+    setActivityError(1);
+    flushInfos();
+  }
 
   // ----------- Handeling Errors---------------------
-  const [myActivity, setMyActivity] = useState("");
   const [ageError, setAgeError] = useState(1);
   const [sexError, setSexError] = useState(1);
   const [heightError, setHeightError] = useState(1);
@@ -95,6 +95,27 @@ const DietInfo = () => {
 
 // ---------------------------------------------
 
+var myActivity = '';
+  switch (dietInfos.activity) {
+    case "sedentary":
+      myActivity = "Sedentary";
+      break;
+    case "light":
+      myActivity = "Lighty Active";
+      break;
+    case "active":
+      myActivity = "Active";
+      break;
+    case "very":
+      myActivity = "Very Active";
+      break;
+    case "super":
+      myActivity = "Super Active";
+      break;
+    case "none":
+      myActivity = "No Entry";
+  }
+
   return (
     <div
       className={
@@ -103,6 +124,7 @@ const DietInfo = () => {
       }
       style={{ height: "480px" }}
     >
+      {/* -----------------------------------------Stepper---------------------------------------------- */}
       <div className="flex justify-center items-center h-10">
         <ol className="h-full flex justify-center items-center w-full p-3 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4">
           <li
@@ -255,6 +277,10 @@ const DietInfo = () => {
           </li>
         </ol>
       </div>
+
+
+      {/* -----------------------------------------End Stepper---------------------------------------------- */}
+
 
       {/* Age Box  */}
       {stepper === 1 && (
@@ -426,6 +452,7 @@ const DietInfo = () => {
                                 disabled:border-0 disabled:bg-blue-gray-50
             "
               >
+                <option value="none">-</option>
                 <option value="sedentary">Sedentary</option>
                 <option value="light">Lightly Active</option>
                 <option value="active">Moderately Active</option>
@@ -481,7 +508,7 @@ const DietInfo = () => {
           >
             <table className="w-full text-sm text-left text-gray-500">
               <tbody>
-                <tr className={"bg-white border-b "+(ageError&&'border-red-500')}>
+                <tr className={"bg-white border-b "+(ageError&&'animate-wiggle border-red-500')}>
                   <th
                     scope="row"
                     className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(ageError&&'text-red-500 font-black')}
@@ -499,7 +526,7 @@ const DietInfo = () => {
                   </td>
                 </tr>
 
-                <tr className={"border-b bg-gray-50 "+(sexError&&'border-red-500')}>
+                <tr className={"border-b bg-gray-50 "+(sexError&&'animate-wiggle border-red-500')}>
                   <th
                     scope="row"
                     className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(sexError&&'text-red-500 font-black')}
@@ -519,7 +546,7 @@ const DietInfo = () => {
                   </td>
                 </tr>
 
-                <tr className={"bg-white border-b "+(heightError&&'border-red-500')}>
+                <tr className={"bg-white border-b "+(heightError&&'animate-wiggle border-red-500')}>
                   <th
                     scope="row"
                     className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(heightError&&'text-red-500 font-black')}
@@ -539,7 +566,7 @@ const DietInfo = () => {
                   </td>
                 </tr>
 
-                <tr className={"border-b bg-gray-50 "+(weightError&&'border-red-500')}>
+                <tr className={"border-b bg-gray-50 "+(weightError&&'animate-wiggle border-red-500')}>
                   <th
                     scope="row"
                     className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(weightError&&'text-red-500 font-black')}
@@ -559,7 +586,7 @@ const DietInfo = () => {
                   </td>
                 </tr>
 
-                <tr className={"bg-white "+(activityError&&'border-b border-red-500')}>
+                <tr className={"bg-white "+(activityError&&'animate-wiggle border-b border-red-500')}>
                   <th
                     scope="row"
                     className={"text-center px-6 py-4 text-gray-900 whitespace-nowrap "+(activityError&&'text-red-500 font-black')}
@@ -580,7 +607,7 @@ const DietInfo = () => {
             </table>
           </div>
 
-          <div className="flex justify-evenly items-center w-full my-12">
+          {!isInfosApplied ? <div className="flex justify-evenly items-center w-full my-12">
             <button
               onClick={() => setStepper(4)}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
@@ -588,17 +615,26 @@ const DietInfo = () => {
               Back
             </button>
             <button
-              // onClick={handleApply}
+              onClick={()=>handleApply(dietInfos)}
               className={`
                         h-12 sm:mx-8 w-24 xs:w-40
                         font-bold font-logo text-2xl
                         border-2 border-custom-orange hover:border-gray-900
                         bg-custom-orange text-white 
                         `+((ageError || sexError || heightError || weightError || activityError) && 'cursor-not-allowed')}
+              disabled={(ageError || sexError || heightError || weightError || activityError)}
             >
               Apply
             </button>
           </div>
+          : 
+          <div className="flex justify-evenly items-center w-full my-12">
+            <button
+              onClick={recalculateInfos}
+              className="h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
+            >Re-calculate</button>
+          </div>
+          }
         </div>
       )}
     </div>

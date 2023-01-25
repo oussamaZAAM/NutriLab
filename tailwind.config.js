@@ -11,6 +11,15 @@ module.exports = {
         'footer': '#584235',
         'gradient1': 'rgba(255, 136, 62, 1)',
         'gradient2': 'rgba(255, 98, 0, 0.35)',
+      },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" }
+        }
+      },
+      animation: {
+        wiggle: "wiggle 200ms ease-in-out"
       }
     },
     fontFamily: {

@@ -1,101 +1,117 @@
 import { useState } from "react";
 
 import { IoMdMale, IoMdFemale } from "react-icons/io";
-import styles from "../styles/Home.module.css"; 
+import styles from "../styles/Home.module.css";
 
-
-// Irrelevent Fcts 
+// Irrelevent Fcts
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// ------------------------------------------------------------------------------------------
 
-const DietInfo = ({handleApply, isInfosApplied, flushInfos}) => {
+const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
   // Next is SSR so we should wait for window object to get rendered into the Client-Side
-  const data = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('dietInfos')) : false
+  const data =
+    typeof window !== "undefined"
+      ? JSON.parse(window.localStorage.getItem("dietInfos"))
+      : false;
 
   const [stepper, setStepper] = useState(1);
-  const [dietInfos, setDietInfos] = useState(data || {
-    age: "",
-    sex: "",
-    height: "",
-    weight: "",
-    activity: "",
-  });
-
-  // Function
-  const handleChange = (event) => {
-    setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
-
-    localStorage.setItem("dietInfos", JSON.stringify({...dietInfos, [event.target.name]: event.target.value}))
-  };
-
-  const handleSex = (sex) => {
-    setDietInfos({ ...dietInfos, sex: sex });
-  };
-
-  const recalculateInfos = () => {
-    localStorage.removeItem('dietInfos')
-    setDietInfos({
+  const [dietInfos, setDietInfos] = useState(
+    data || {
       age: "",
       sex: "",
       height: "",
       weight: "",
       activity: "",
-    })
-    setAgeError(1);
-    setSexError(1);
-    setHeightError(1);
-    setWeightError(1);
-    setActivityError(1);
-    flushInfos();
-  }
-
-  // ----------- Handeling Errors---------------------
+    }
+  );
+  
+  // ----------- Errors States ---------------------
   const [ageError, setAgeError] = useState(1);
   const [sexError, setSexError] = useState(1);
   const [heightError, setHeightError] = useState(1);
   const [weightError, setWeightError] = useState(1);
   const [activityError, setActivityError] = useState(1);
 
+
+  // Function
+  const handleChange = (event) => {
+    setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
+
+    localStorage.setItem(
+      "dietInfos",
+      JSON.stringify({ ...dietInfos, [event.target.name]: event.target.value })
+    );
+  };
+
+  const handleSex = (sex) => {
+    setDietInfos({ ...dietInfos, sex: sex });
+  };
+
+  const resetInfos = () => {
+    localStorage.removeItem("dietInfos");
+    setDietInfos({
+      age: "",
+      sex: "",
+      height: "",
+      weight: "",
+      activity: "",
+    });
+    setAgeError(1);
+    setSexError(1);
+    setHeightError(1);
+    setWeightError(1);
+    setActivityError(1);
+    flushInfos();
+  };
+
+  // ----------- Handeling Errors---------------------
   const CheckValidity = (data) => {
-    const {age, sex, height, weight, activity} = data;
+    const { age, sex, height, weight, activity } = data;
 
     // Check Age
     if (age < 18 || age > 120) {
-      setAgeError(1)
+      setAgeError(1);
     } else {
-      setAgeError(0)
+      setAgeError(0);
     }
     // Check Sex
-    if (sex!=='male' && sex!=='female') {
-      setSexError(1)
+    if (sex !== "male" && sex !== "female") {
+      setSexError(1);
     } else {
-      setSexError(0)
+      setSexError(0);
     }
     // Check Height
     if (height < 80 || height > 300) {
-      setHeightError(1)
+      setHeightError(1);
     } else {
-      setHeightError(0)
+      setHeightError(0);
     }
     // Check Weight
     if (weight < 20 || weight > 220) {
-      setWeightError(1)
+      setWeightError(1);
     } else {
-      setWeightError(0)
+      setWeightError(0);
     }
     // Check Activity
-    if (activity!=='sedentary' && activity!=='light' && activity!=='active' && activity!=='very' && activity!=='super') {
-      setActivityError(1)
+    if (
+      activity !== "sedentary" &&
+      activity !== "light" &&
+      activity !== "active" &&
+      activity !== "very" &&
+      activity !== "super"
+    ) {
+      setActivityError(1);
     } else {
-      setActivityError(0)
+      setActivityError(0);
     }
-  }
+  };
 
-// ---------------------------------------------
+  // ---------------------------------------------
 
-var myActivity = '';
+  var myActivity = "";
   switch (dietInfos.activity) {
     case "sedentary":
       myActivity = "Sedentary";
@@ -257,8 +273,8 @@ var myActivity = '';
           </svg>
           <li
             onClick={() => {
-              setStepper(5)
-              CheckValidity(dietInfos)
+              setStepper(5);
+              CheckValidity(dietInfos);
             }}
             className={
               "flex items-center cursor-pointer " +
@@ -278,9 +294,7 @@ var myActivity = '';
         </ol>
       </div>
 
-
       {/* -----------------------------------------End Stepper---------------------------------------------- */}
-
 
       {/* Age Box  */}
       {stepper === 1 && (
@@ -486,8 +500,8 @@ var myActivity = '';
             </button>
             <button
               onClick={() => {
-                setStepper(5)
-                CheckValidity(dietInfos)
+                setStepper(5);
+                CheckValidity(dietInfos);
               }}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange bg-custom-orange text-white hover:border-gray-900"
             >
@@ -508,10 +522,18 @@ var myActivity = '';
           >
             <table className="w-full text-sm text-left text-gray-500">
               <tbody>
-                <tr className={"bg-white border-b "+(ageError&&'animate-wiggle border-red-500')}>
+                <tr
+                  className={
+                    "bg-white border-b " +
+                    (ageError && "animate-wiggle border-red-500")
+                  }
+                >
                   <th
                     scope="row"
-                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(ageError&&'text-red-500 font-black')}
+                    className={
+                      "px-6 py-4 text-gray-900 whitespace-nowrap " +
+                      (ageError && "text-red-500 font-black")
+                    }
                   >
                     Age
                   </th>
@@ -526,10 +548,18 @@ var myActivity = '';
                   </td>
                 </tr>
 
-                <tr className={"border-b bg-gray-50 "+(sexError&&'animate-wiggle border-red-500')}>
+                <tr
+                  className={
+                    "border-b bg-gray-50 " +
+                    (sexError && "animate-wiggle border-red-500")
+                  }
+                >
                   <th
                     scope="row"
-                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(sexError&&'text-red-500 font-black')}
+                    className={
+                      "px-6 py-4 text-gray-900 whitespace-nowrap " +
+                      (sexError && "text-red-500 font-black")
+                    }
                   >
                     Sex
                   </th>
@@ -546,10 +576,18 @@ var myActivity = '';
                   </td>
                 </tr>
 
-                <tr className={"bg-white border-b "+(heightError&&'animate-wiggle border-red-500')}>
+                <tr
+                  className={
+                    "bg-white border-b " +
+                    (heightError && "animate-wiggle border-red-500")
+                  }
+                >
                   <th
                     scope="row"
-                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(heightError&&'text-red-500 font-black')}
+                    className={
+                      "px-6 py-4 text-gray-900 whitespace-nowrap " +
+                      (heightError && "text-red-500 font-black")
+                    }
                   >
                     Height
                   </th>
@@ -566,10 +604,18 @@ var myActivity = '';
                   </td>
                 </tr>
 
-                <tr className={"border-b bg-gray-50 "+(weightError&&'animate-wiggle border-red-500')}>
+                <tr
+                  className={
+                    "border-b bg-gray-50 " +
+                    (weightError && "animate-wiggle border-red-500")
+                  }
+                >
                   <th
                     scope="row"
-                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(weightError&&'text-red-500 font-black')}
+                    className={
+                      "px-6 py-4 text-gray-900 whitespace-nowrap " +
+                      (weightError && "text-red-500 font-black")
+                    }
                   >
                     Weight
                   </th>
@@ -586,10 +632,18 @@ var myActivity = '';
                   </td>
                 </tr>
 
-                <tr className={"bg-white "+(activityError&&'animate-wiggle border-b border-red-500')}>
+                <tr
+                  className={
+                    "bg-white " +
+                    (activityError && "animate-wiggle border-b border-red-500")
+                  }
+                >
                   <th
                     scope="row"
-                    className={"text-center px-6 py-4 text-gray-900 whitespace-nowrap "+(activityError&&'text-red-500 font-black')}
+                    className={
+                      "text-center px-6 py-4 text-gray-900 whitespace-nowrap " +
+                      (activityError && "text-red-500 font-black")
+                    }
                   >
                     Activity
                   </th>
@@ -607,34 +661,57 @@ var myActivity = '';
             </table>
           </div>
 
-          {!isInfosApplied ? <div className="flex justify-evenly items-center w-full my-12">
-            <button
-              onClick={() => setStepper(4)}
-              className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
-            >
-              Back
-            </button>
-            <button
-              onClick={()=>handleApply(dietInfos)}
-              className={`
+          {!isInfosApplied ? (
+            <div className="flex justify-evenly items-center w-full my-12">
+              <button
+                onClick={() => setStepper(4)}
+                className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
+              >
+                Back
+              </button>
+              <button
+                onClick={() => handleApply(dietInfos)}
+                className={
+                  `
                         h-12 sm:mx-8 w-24 xs:w-40
                         font-bold font-logo text-2xl
                         border-2 border-custom-orange hover:border-gray-900
                         bg-custom-orange text-white 
-                        `+((ageError || sexError || heightError || weightError || activityError) && 'cursor-not-allowed')}
-              disabled={(ageError || sexError || heightError || weightError || activityError)}
-            >
-              Apply
-            </button>
-          </div>
-          : 
-          <div className="flex justify-evenly items-center w-full my-12">
-            <button
-              onClick={recalculateInfos}
-              className="h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
-            >Re-calculate</button>
-          </div>
-          }
+                        ` +
+                  ((ageError ||
+                    sexError ||
+                    heightError ||
+                    weightError ||
+                    activityError) &&
+                    "cursor-not-allowed")
+                }
+                disabled={
+                  ageError ||
+                  sexError ||
+                  heightError ||
+                  weightError ||
+                  activityError
+                }
+              >
+                Apply
+              </button>
+            </div>
+          ) : (
+            <div className="flex justify-evenly items-center w-full my-12">
+              <button
+                onClick={resetInfos}
+                className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
+              >
+                Reset
+              </button>
+              <button
+                onClick={() => handleApply(dietInfos)}
+                className="h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900"
+              >
+                Re-Calculate
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

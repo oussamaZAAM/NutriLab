@@ -9,11 +9,47 @@ import { useState } from "react";
 
 const Nutrients = ({ user }) => {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
+  const [nutrients, setNutrients] = useState({
+    calories: null
+  });
 
   const applyInfos = (dietInfos) => {
     const { age, sex, height, weight, activity } = dietInfos;
 
+    // Calculate BMR : Harris-Benedict Calculator
+    var BMR;
+    if (sex === 'male') {
+      BMR = 66.5 + (13.75 * weight) + (5.003 * height) - 6.75 * age;
+    }
+    if (sex === 'female') {
+      BMR = 655.1 + (9.563 * weight) + (1.850 * height) - 4.676 * age;
+    }
+
+    // Calculate Calories 
+    var calories;
+    if (activity === 'sedentary') {
+      calories = 1.2 * BMR;
+    }
+    if (activity === 'light') {
+      calories = 1.375 * BMR;
+    }
+    if (activity === 'active') {
+      calories = 1.55 * BMR;
+    }
+    if (activity === 'very') {
+      calories = 1.725 * BMR;
+    }
+    if (activity === 'super') {
+      calories = 1.9 * BMR;
+    }
+
+    // Calculate Proteins
+    var proteinsCalories = ((calories * 0.3) / 100);
+    var proteins = proteinsCalories / 4;
+
     setIsInfosApplied(true);
+    setNutrients({calories: calories, proteins: proteins});
+    console.log(calories, proteins)
   };
 
   return (
@@ -41,7 +77,7 @@ const Nutrients = ({ user }) => {
       </div>
 
       <div className="grid grid-cols-8">
-        {isInfosApplied && <DailyNutrients />}
+        {isInfosApplied && <DailyNutrients nutrients={nutrients} />}
       </div>
 
       <HowItsBuilt />

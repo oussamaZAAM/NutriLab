@@ -3,9 +3,12 @@ import { useState } from "react";
 import { IoMdMale, IoMdFemale } from "react-icons/io";
 import styles from "../styles/Home.module.css";
 
+
+// Irrelevent Fcts 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 
 const DietInfo = () => {
   // State Variables
@@ -17,10 +20,8 @@ const DietInfo = () => {
     weight: "",
     activity: "",
   });
-  const [myActivity, setMyActivity] = useState("");
-  const [error, setError] = useState({age: 0, sex: 0, height: 0, weight: 1, activity: 1});
 
-  //   Function
+  // Function
   const handleChange = (event) => {
     setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
     if (event.target.name === "activity") {
@@ -48,12 +49,51 @@ const DietInfo = () => {
     setDietInfos({ ...dietInfos, sex: sex });
   };
 
-  const handleApply = () => {
-    const {age, sex, height, weight, activity} = dietInfos;
-    if (age < 18) {
-        
+
+  // ----------- Handeling Errors---------------------
+  const [myActivity, setMyActivity] = useState("");
+  const [ageError, setAgeError] = useState(1);
+  const [sexError, setSexError] = useState(1);
+  const [heightError, setHeightError] = useState(1);
+  const [weightError, setWeightError] = useState(1);
+  const [activityError, setActivityError] = useState(1);
+
+  const CheckValidity = (data) => {
+    const {age, sex, height, weight, activity} = data;
+
+    // Check Age
+    if (age < 18 || age > 120) {
+      setAgeError(1)
+    } else {
+      setAgeError(0)
+    }
+    // Check Sex
+    if (sex!=='male' && sex!=='female') {
+      setSexError(1)
+    } else {
+      setSexError(0)
+    }
+    // Check Height
+    if (height < 80 || height > 300) {
+      setHeightError(1)
+    } else {
+      setHeightError(0)
+    }
+    // Check Weight
+    if (weight < 20 || weight > 220) {
+      setWeightError(1)
+    } else {
+      setWeightError(0)
+    }
+    // Check Activity
+    if (activity!=='sedentary' && activity!=='light' && activity!=='active' && activity!=='very' && activity!=='super') {
+      setActivityError(1)
+    } else {
+      setActivityError(0)
     }
   }
+
+// ---------------------------------------------
 
   return (
     <div
@@ -194,11 +234,14 @@ const DietInfo = () => {
             ></path>
           </svg>
           <li
+            onClick={() => {
+              setStepper(5)
+              CheckValidity(dietInfos)
+            }}
             className={
               "flex items-center cursor-pointer " +
               (stepper === 5 && "text-custom-orange")
             }
-            onClick={() => setStepper(5)}
           >
             <span
               className={
@@ -415,7 +458,10 @@ const DietInfo = () => {
               Back
             </button>
             <button
-              onClick={() => setStepper(5)}
+              onClick={() => {
+                setStepper(5)
+                CheckValidity(dietInfos)
+              }}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange bg-custom-orange text-white hover:border-gray-900"
             >
               Next
@@ -435,10 +481,10 @@ const DietInfo = () => {
           >
             <table className="w-full text-sm text-left text-gray-500">
               <tbody>
-                <tr className={"bg-white border-b "+(error.age&&'border-red-500')}>
+                <tr className={"bg-white border-b "+(ageError&&'border-red-500')}>
                   <th
                     scope="row"
-                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(error.age&&'text-red-500 font-black')}
+                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(ageError&&'text-red-500 font-black')}
                   >
                     Age
                   </th>
@@ -453,10 +499,10 @@ const DietInfo = () => {
                   </td>
                 </tr>
 
-                <tr className={"border-b bg-gray-50 "+(error.sex&&'border-red-500')}>
+                <tr className={"border-b bg-gray-50 "+(sexError&&'border-red-500')}>
                   <th
                     scope="row"
-                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(error.sex&&'text-red-500 font-black')}
+                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(sexError&&'text-red-500 font-black')}
                   >
                     Sex
                   </th>
@@ -473,10 +519,10 @@ const DietInfo = () => {
                   </td>
                 </tr>
 
-                <tr className={"bg-white border-b "+(error.height&&'border-red-500')}>
+                <tr className={"bg-white border-b "+(heightError&&'border-red-500')}>
                   <th
                     scope="row"
-                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(error.height&&'text-red-500 font-black')}
+                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(heightError&&'text-red-500 font-black')}
                   >
                     Height
                   </th>
@@ -493,10 +539,10 @@ const DietInfo = () => {
                   </td>
                 </tr>
 
-                <tr className={"border-b bg-gray-50 "+(error.weight&&'border-red-500')}>
+                <tr className={"border-b bg-gray-50 "+(weightError&&'border-red-500')}>
                   <th
                     scope="row"
-                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(error.weight&&'text-red-500 font-black')}
+                    className={"px-6 py-4 text-gray-900 whitespace-nowrap "+(weightError&&'text-red-500 font-black')}
                   >
                     Weight
                   </th>
@@ -513,10 +559,10 @@ const DietInfo = () => {
                   </td>
                 </tr>
 
-                <tr className={"bg-white "+(error.activity&&'border-b border-red-500')}>
+                <tr className={"bg-white "+(activityError&&'border-b border-red-500')}>
                   <th
                     scope="row"
-                    className={"text-center px-6 py-4 text-gray-900 whitespace-nowrap "+(error.activity&&'text-red-500 font-black')}
+                    className={"text-center px-6 py-4 text-gray-900 whitespace-nowrap "+(activityError&&'text-red-500 font-black')}
                   >
                     Activity
                   </th>
@@ -542,8 +588,13 @@ const DietInfo = () => {
               Back
             </button>
             <button
-              onClick={handleApply}
-              className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange bg-custom-orange text-white hover:border-gray-900"
+              // onClick={handleApply}
+              className={`
+                        h-12 sm:mx-8 w-24 xs:w-40
+                        font-bold font-logo text-2xl
+                        border-2 border-custom-orange hover:border-gray-900
+                        bg-custom-orange text-white 
+                        `+((ageError || sexError || heightError || weightError || activityError) && 'cursor-not-allowed')}
             >
               Apply
             </button>

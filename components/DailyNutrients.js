@@ -1,12 +1,13 @@
-import React from "react";
 
 function decimalNumber (number) {
     return number.toString().split(".")[0]
 }
 
-const DailyNutrients = ({nutrients}) => {
-  console.log(nutrients)
+const DailyNutrients = ({nutrients, vitamins}) => {
+  console.log(vitamins)
+  
     const {kCalories, proteins, fats, carbs, fiber, sugar, salt} = nutrients;
+
   return (
     <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | mx-4">
       <h1 className="font-title text-5xl text-center | w-full my-16">
@@ -36,7 +37,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Carbs</b>
-            <font-bold className="text-2xl text-custom-orange">{decimalNumber(carbs[0])+' - '+decimalNumber(carbs[1])} g</font-bold>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(carbs[0])+' g - '+decimalNumber(carbs[1])} g</p>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -47,7 +48,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Proteins</b>
-            <font-bold className="text-2xl text-custom-orange">{decimalNumber(proteins[0])+' - '+decimalNumber(proteins[1])} g</font-bold>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(proteins[0])+' g - '+decimalNumber(proteins[1])} g</p>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -58,7 +59,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Fats</b>
-            <font-bold className="text-2xl text-custom-orange">{decimalNumber(fats[0])+' - '+decimalNumber(fats[1])} g</font-bold>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(fats[0])+' g - '+decimalNumber(fats[1])} g</p>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -69,7 +70,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Sugar</b>
-            <font-bold className="text-2xl text-custom-orange">{decimalNumber(sugar)} g</font-bold>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(sugar)} g</p>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -80,7 +81,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Salt</b>
-            <font-bold className="text-2xl text-custom-orange">{decimalNumber(salt)} g</font-bold>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(salt)} g</p>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -91,7 +92,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Fiber</b>
-            <font-bold className="text-2xl text-custom-orange">{decimalNumber(fiber)} g</font-bold>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(fiber)} g</p>
           </div>
         </div>
       </div>

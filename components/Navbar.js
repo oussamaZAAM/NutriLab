@@ -5,6 +5,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Login from "./Login";
 import Register from "./Register";
 import axios from "axios";
+import Link from "next/link";
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "How it works", href: "#", current: false },
@@ -57,14 +58,16 @@ export default function Example({ User }) {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 items-center justify-start ml-10 sm:items-stretch sm:justify-between sm:ml-0">
-                  <div className="flex flex-shrink-0 items-center rounded-full px-3 py-1 bg-custom-orange">
-                    <img
-                      className="block h-8 w-auto p-1"
-                      src="https://i.ibb.co/Z8KdKVg/orange-slice-1.png"
-                      alt="logo"
-                    />
-                    <h1 className="font-bold text-white">NutriLab</h1>
-                  </div>
+                  <Link href='/'>
+                    <div className="flex flex-shrink-0 items-center rounded-full px-3 py-1 bg-custom-orange">
+                      <img
+                        className="block h-8 w-auto p-1"
+                        src="https://i.ibb.co/Z8KdKVg/orange-slice-1.png"
+                        alt="logo"
+                      />
+                      <h1 className="font-bold text-white">NutriLab</h1>
+                    </div>
+                  </Link>
                   <div className="justify-center items-center hidden sm:ml-6 sm:flex">
                     <div className="flex justify-center items-center space-x-4">
                       {navigation.map((item) => (

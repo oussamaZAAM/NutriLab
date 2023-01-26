@@ -711,7 +711,21 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               </button>
               <button
                 onClick={() => handleApply(dietInfos)}
-                className="h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900"
+                className={`h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900 `+
+                ((ageError ||
+                  sexError ||
+                  heightError ||
+                  weightError ||
+                  activityError) &&
+                  "cursor-not-allowed")
+                }
+                disabled={
+                  ageError ||
+                  sexError ||
+                  heightError ||
+                  weightError ||
+                  activityError
+                }
               >
                 Re-Calculate
               </button>

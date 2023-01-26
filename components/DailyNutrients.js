@@ -5,7 +5,8 @@ function decimalNumber (number) {
 }
 
 const DailyNutrients = ({nutrients}) => {
-    const {calories, proteins} = nutrients;
+  console.log(nutrients)
+    const {kCalories, proteins, fats, carbs, fiber, sugar, salt} = nutrients;
   return (
     <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | mx-4">
       <h1 className="font-title text-5xl text-center | w-full my-16">
@@ -22,7 +23,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-2xl">Calories</b>
-            <small className="font-bold text-2xl text-white">{decimalNumber(calories)} cal</small>
+            <small className="font-bold text-2xl text-white">{decimalNumber(kCalories)} Kcal</small>
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 | w-full | justify-items-center">
@@ -35,7 +36,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Carbs</b>
-            <font-bold className="text-2xl text-custom-orange">377g</font-bold>
+            <font-bold className="text-2xl text-custom-orange">{decimalNumber(carbs[0])+' - '+decimalNumber(carbs[1])} g</font-bold>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -46,7 +47,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Proteins</b>
-            <font-bold className="text-2xl text-custom-orange">{decimalNumber(proteins)} g</font-bold>
+            <font-bold className="text-2xl text-custom-orange">{decimalNumber(proteins[0])+' - '+decimalNumber(proteins[1])} g</font-bold>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -57,7 +58,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Fats</b>
-            <font-bold className="text-2xl text-custom-orange">220g</font-bold>
+            <font-bold className="text-2xl text-custom-orange">{decimalNumber(fats[0])+' - '+decimalNumber(fats[1])} g</font-bold>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -68,7 +69,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Sugar</b>
-            <font-bold className="text-2xl text-custom-orange">119g</font-bold>
+            <font-bold className="text-2xl text-custom-orange">{decimalNumber(sugar)} g</font-bold>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -79,7 +80,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Salt</b>
-            <font-bold className="text-2xl text-custom-orange">39g</font-bold>
+            <font-bold className="text-2xl text-custom-orange">{decimalNumber(salt)} g</font-bold>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -90,7 +91,7 @@ const DailyNutrients = ({nutrients}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Fiber</b>
-            <font-bold className="text-2xl text-custom-orange">210g</font-bold>
+            <font-bold className="text-2xl text-custom-orange">{decimalNumber(fiber)} g</font-bold>
           </div>
         </div>
       </div>

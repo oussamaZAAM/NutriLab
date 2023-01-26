@@ -9,9 +9,7 @@ import { useState } from "react";
 
 const Nutrients = ({ user }) => {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
-  const [nutrients, setNutrients] = useState({
-    calories: null
-  });
+  const [nutrients, setNutrients] = useState();
 
   const applyInfos = (dietInfos) => {
     const { age, sex, height, weight, activity } = dietInfos;
@@ -26,30 +24,60 @@ const Nutrients = ({ user }) => {
     }
 
     // Calculate Calories 
-    var calories;
+    var kCalories;
     if (activity === 'sedentary') {
-      calories = 1.2 * BMR;
+      kCalories = 1.2 * BMR;
     }
     if (activity === 'light') {
-      calories = 1.375 * BMR;
+      kCalories = 1.375 * BMR;
     }
     if (activity === 'active') {
-      calories = 1.55 * BMR;
+      kCalories = 1.55 * BMR;
     }
     if (activity === 'very') {
-      calories = 1.725 * BMR;
+      kCalories = 1.725 * BMR;
     }
     if (activity === 'super') {
-      calories = 1.9 * BMR;
+      kCalories = 1.9 * BMR;
     }
 
     // Calculate Proteins
-    var proteinsCalories = ((calories * 0.3) / 100);
-    var proteins = proteinsCalories / 4;
+    var proteins = [(kCalories * 0.1) / 4, (kCalories * 0.3) / 4];
+
+    // Calculate Fats
+    var fats = [(kCalories * 0.2)/9, (kCalories * 0.35)/9];
+
+    // Calculate Carbs
+    var carbs = [(kCalories * 0.45)/4, (kCalories * 0.65)/4];
+
+    // Calculate Iron
+    var iron;
+    if (sex === 'female') {
+      if (age <= 50) {
+        iron = 0.018;
+      } else {
+        iron = 0.008;
+      }
+    } else {
+      iron = 0.008;
+    }
+
+    // Calculate Fiber
+    var fiber = ((kCalories / 1000) * 14);
+
+    // Calculate Sugar
+    var sugar;
+    if (sex === 'female') {
+      sugar = 24;
+    } else {
+      sugar = 36;
+    }
+
+    // Calculate Sugar
+    var salt = 6;
 
     setIsInfosApplied(true);
-    setNutrients({calories: calories, proteins: proteins});
-    console.log(calories, proteins)
+    setNutrients({kCalories: kCalories, proteins: proteins, fats: fats, carbs: carbs, iron: iron, fiber: fiber, sugar: sugar, salt: salt});
   };
 
   return (

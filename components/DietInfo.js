@@ -48,6 +48,11 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
   const handleSex = (sex) => {
     setDietInfos({ ...dietInfos, sex: sex });
+
+    localStorage.setItem(
+      "dietInfos",
+      JSON.stringify({ ...dietInfos, sex: sex })
+    );
   };
 
   const resetInfos = () => {

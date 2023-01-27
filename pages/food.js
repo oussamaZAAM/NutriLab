@@ -1,11 +1,95 @@
 import Head from "next/head";
+import { useState } from "react";
+import server from '/config'
 
-import { MdOutlineAddCircle, MdOutlineCancel, MdOutlineRemoveCircle } from "react-icons/md";
+import {
+  MdOutlineAddCircle,
+  MdOutlineCancel,
+  MdOutlineRemoveCircle,
+} from "react-icons/md";
 
 import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
 
-const Food = ({ user }) => {
+const Food = ({ user, food }) => {
+  const [fade, setFade] = useState(false);
+  const [wiggle, setWiggle] = useState(false);
+  const [addedFood, setAddedFood] = useState({...food[0], addingFade: false, removingFade: false});
+  const [eatenFoodList, setEatenFoodList] = useState([]);
+
+  //Functions
+  const cancelPendingFood = () => {
+    setAddedFood({...addedFood, removingFade: true});
+    setTimeout(()=>setAddedFood(), 250);
+  }
+
+  const addPendingFood = () => {
+    if (addedFood.size) {
+      setAddedFood({...addedFood, addingFade: true});
+      setTimeout(()=>{
+        setEatenFoodList(prevList => {
+          prevList.unshift(addedFood);
+          return prevList;
+        })
+        setEatenFoodList([...eatenFoodList, addedFood]);
+        setAddedFood();
+      }, 250);
+    } else {
+      setWiggle(true);
+    }
+  }
+
+  const eatenFood = eatenFoodList.map((food) => {
+    return (
+      <div
+        key={food.id}
+        className={
+          "flex flex-col xs:flex-row justify-end items-center w-full " +
+          styles.dropshadow
+        }
+      >
+        <img
+          src={food.img}
+          alt="omurice"
+          className="h-16 w-16 my-2 mx-2 md:mx-4"
+        />
+
+        <div className="flex flex-col justify-center items-start w-full xs:ml-12">
+          <b className="font-logo font-bold text-xl text-center xs:text-left truncate text-custom-orange w-full my-4">
+            {food.name}
+          </b>
+          <div className="flex flex-col self-center items-start xs:w-full">
+            <p className="font-paragraph text-xs">
+              Category:{" "}
+              <span className="font-paragraph font-bold text-xs">
+                {food.category}
+              </span>
+            </p>
+            <p className="font-paragraph text-xs">
+              How Much:{" "}
+              <span className="font-paragraph font-bold text-xs">
+                {food.size} g
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
+          <button className="my-2 md:mx-2">
+            <MdOutlineRemoveCircle
+              className=" hover:fill-black transition duration-500"
+              size={50}
+              color={"#FF9351"}
+            />
+          </button>
+        </div>
+      </div>
+    )
+  })
+
+// ---------------------------------------------------------------------------------------------------------------
+
+
   return (
     <div>
       <Head>
@@ -39,7 +123,7 @@ const Food = ({ user }) => {
             <div className="flex flex-col justify-center items-center my-6 w-8/12">
               <input
                 type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm indent-2 rounded-lg focus:ring-custom-orange focus:border-custom-orange block w-full p-2.5"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm indent-2 rounded-lg focus:ring-custom-orange focus:border-custom-orange block w-full p-2.5"
                 placeholder="Search ingredients to add"
               />
 
@@ -63,27 +147,29 @@ const Food = ({ user }) => {
             </div>
 
             {/* Adding Field */}
-            <div
+            {addedFood && <div
               className={
-                "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 " +
-                styles.dropshadow
+                "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 "+
+                (addedFood.removingFade ? 'transition duration-300 -translate-y-6 opacity-0' : 'transition duration-500 opacity-100')+
+                (addedFood.addingFade ? 'transition duration-300 translate-y-6 opacity-0' : 'transition duration-500 opacity-100')+
+                ' '+styles.dropshadow
               }
             >
               <img
-                src="https://i.ibb.co/xHW8qJt/beef.png"
+                src={addedFood.img}
                 alt="beef"
                 className="h-20 w-20 my-4 mx-4 md:mx-8"
               />
 
               <div className="flex flex-col justify-center items-start w-full">
                 <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
-                  Beef Cutlets
+                  {addedFood.name}
                 </b>
                 <div className="flex flex-col self-center items-start xs:w-full">
                   <p className="font-paragraph text-xs">
                     Category:{" "}
                     <span className="font-paragraph font-bold text-xs">
-                      Meat
+                      {addedFood.category}
                     </span>
                   </p>
                   <div className="flex justify-start items-center">
@@ -91,23 +177,33 @@ const Food = ({ user }) => {
                       How much did you eat:{" "}
                     </p>
                     <input
-                      type="text"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm indent-2 rounded-lg focus:ring-custom-orange focus:border-custom-orange block w-20 ml-2"
+                      type="number"
+                      className={`text-gray-900 text-sm indent-2
+                                bg-gray-50 border border-gray-300 rounded-lg focus:ring-custom-orange focus:border-custom-orange
+                                block w-20 ml-2 `+(wiggle && 'border-red-500 animate-wiggle')}
                       placeholder="In grams"
+                      value={addedFood.size || ''}
+                      onChange={(e)=>setAddedFood({...addedFood, size: e.target.value})}
                     />
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
-                <button className="my-2 md:mx-2">
+                <button 
+                  className="my-2 md:mx-2"
+                  onClick={addPendingFood}
+                >
                   <MdOutlineAddCircle
                     className=" hover:fill-black transition duration-500"
                     size={50}
                     color={"#FF9351"}
                   />
                 </button>
-                <button className="my-2 md:mx-2">
+                <button 
+                  className="my-2 md:mx-2"
+                  onClick={cancelPendingFood}
+                >
                   <MdOutlineCancel
                     className=" hover:fill-black transition duration-500"
                     size={45}
@@ -115,18 +211,21 @@ const Food = ({ user }) => {
                   />
                 </button>
               </div>
-            </div>
+            </div>}
 
             <div className="w-full border-b-2 border-custom-orange my-4 w-11/12"></div>
 
-            <div
-              className={
-                "flex justify-center items-center rounded-2 dropshadow my-4 w-11/12 " +
-                styles.dropswhadow
-              }
-            >
+            <div className="flex justify-center items-center rounded-2 dropshadow my-4 w-11/12">
               <div className="grid grid-cols-2 xs:flex xs:flex-col justify-center items-center gap-2 w-full">
-                <div className={"flex flex-col xs:flex-row justify-end items-center w-full "+styles.dropshadow}>
+
+                {eatenFood}
+
+                <div
+                  className={
+                    "flex flex-col xs:flex-row justify-end items-center w-full " +
+                    styles.dropshadow
+                  }
+                >
                   <img
                     src="https://i.ibb.co/syGnpMj/omurice.png"
                     alt="omurice"
@@ -134,7 +233,7 @@ const Food = ({ user }) => {
                   />
 
                   <div className="flex flex-col justify-center items-start w-full xs:ml-12">
-                    <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
+                    <b className="font-logo font-bold text-xl text-center xs:text-left truncate text-custom-orange w-full my-4">
                       Omurice
                     </b>
                     <div className="flex flex-col self-center items-start xs:w-full">
@@ -162,9 +261,14 @@ const Food = ({ user }) => {
                       />
                     </button>
                   </div>
-
                 </div>
-                <div className={"flex flex-col xs:flex-row justify-end items-center w-full "+styles.dropshadow}>
+
+                <div
+                  className={
+                    "flex flex-col xs:flex-row justify-end items-center w-full "+(fade ? 'transition duration-300 translate-x-6 opacity-0' : 'transition duration-500 opacity-100')+' '+
+                    styles.dropshadow
+                  }
+                >
                   <img
                     src="https://i.ibb.co/HpMdr5L/salad.png"
                     alt="salad"
@@ -172,7 +276,7 @@ const Food = ({ user }) => {
                   />
 
                   <div className="flex flex-col justify-center items-start w-full xs:ml-12">
-                    <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
+                    <b className="font-logo font-bold text-xl text-center xs:text-left truncate text-custom-orange w-full my-4">
                       Salad
                     </b>
                     <div className="flex flex-col self-center items-start xs:w-full">
@@ -197,18 +301,30 @@ const Food = ({ user }) => {
                         className=" hover:fill-black transition duration-500"
                         size={50}
                         color={"#FF9351"}
+                        onClick={()=>setFade(true)}
                       />
                     </button>
                   </div>
-
                 </div>
+
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );
 };
 
 export default Food;
+
+export const getStaticProps = async () => {
+  const res = await fetch(`${server}/api/food`);
+  const food = await res.json();
+  return {
+    props: {
+      food,
+    },
+  };
+};

@@ -13,7 +13,7 @@ import styles from "../styles/Home.module.css";
 
 const Food = ({ user, food }) => {
   const [wiggle, setWiggle] = useState(false);
-  const [addedFood, setAddedFood] = useState({...food[0], addingFade: false, removingFade: false});
+  const [addedFood, setAddedFood] = useState();
   const [eatenFoodList, setEatenFoodList] = useState([]);
 
   //Functions
@@ -30,7 +30,7 @@ const Food = ({ user, food }) => {
         //   prevList.unshift(addedFood);
         //   return prevList;
         // })
-        setEatenFoodList([...eatenFoodList, addedFood]);
+        setEatenFoodList([addedFood, ...eatenFoodList]);
         setAddedFood();
       }, 250);
     } else {
@@ -67,6 +67,27 @@ const Food = ({ user, food }) => {
     }, 250)
   }
 
+  // Mapping over the list of Searched Food
+  const searchedFood = food.map((food) => {
+    return (
+      <a href="#addedFood" className="w-full">
+        <p
+          key={food.id}
+          className="
+                      font-paragraph font-bold text-ms indent-4
+                      p-2 w-full
+                      border-b-2 border-x-2 rounded-lg
+                      hover:bg-gray-100 hover:animate-pulse cursor-pointer
+                    "
+          onClick={()=>setAddedFood({...food, addingFade: false, removingFade: false})}
+        >
+          {food.name}
+        </p>
+      </a>
+    )
+  })
+
+  // Mapping over the List of Eaten Food 
   const eatenFood = eatenFoodList.map((food, index) => {
     return (
       <div
@@ -158,26 +179,13 @@ const Food = ({ user, food }) => {
               />
 
               <div className="flex flex-col justify-center items-start w-full">
-                <p className="font-paragraph font-bold text-ms indent-4 p-2 border-b-2 border-x-2 hover:bg-gray-100 hover:animate-pulse cursor-pointer w-full border-t-2 rounded-t-lg">
-                  Sugar
-                </p>
-                <p className="font-paragraph font-bold text-ms indent-4 p-2 border-b-2 border-x-2 hover:bg-gray-100 hover:animate-pulse cursor-pointer w-full">
-                  Sugar
-                </p>
-                <p className="font-paragraph font-bold text-ms indent-4 p-2 border-b-2 border-x-2 hover:bg-gray-100 hover:animate-pulse cursor-pointer w-full">
-                  Sugar
-                </p>
-                <p className="font-paragraph font-bold text-ms indent-4 p-2 border-b-2 border-x-2 hover:bg-gray-100 hover:animate-pulse cursor-pointer w-full">
-                  Sugar
-                </p>
-                <p className="font-paragraph font-bold text-ms indent-4 p-2 border-b-2 border-x-2 hover:bg-gray-100 hover:animate-pulse cursor-pointer w-full rounded-b-lg ">
-                  Sugar
-                </p>
+                {searchedFood}
               </div>
             </div>
 
             {/* Adding Field */}
             {addedFood && <div
+              id='addedFood'
               className={
                 "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 "+
                 (addedFood.removingFade ? 'transition duration-300 scale-y-0 scale-x-100 opacity-0' : 'transition duration-500 opacity-100')+

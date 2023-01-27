@@ -12,7 +12,6 @@ import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
 
 const Food = ({ user, food }) => {
-  const [fade, setFade] = useState(false);
   const [wiggle, setWiggle] = useState(false);
   const [addedFood, setAddedFood] = useState({...food[0], addingFade: false, removingFade: false});
   const [eatenFoodList, setEatenFoodList] = useState([]);
@@ -24,27 +23,56 @@ const Food = ({ user, food }) => {
   }
 
   const addPendingFood = () => {
-    if (addedFood.size) {
+    if (addedFood.size>0) {
       setAddedFood({...addedFood, addingFade: true});
       setTimeout(()=>{
-        setEatenFoodList(prevList => {
-          prevList.unshift(addedFood);
-          return prevList;
-        })
+        // setEatenFoodList(prevList => {
+        //   prevList.unshift(addedFood);
+        //   return prevList;
+        // })
         setEatenFoodList([...eatenFoodList, addedFood]);
         setAddedFood();
       }, 250);
     } else {
       setWiggle(true);
+      setTimeout(()=>{
+        setWiggle(false)
+      }, 1000)
     }
   }
 
-  const eatenFood = eatenFoodList.map((food) => {
+  const deleteFood = (index) => {
+    // setEatenFoodList(prevList => {
+    //   prevList[index].removingFade = true;
+    //   return prevList;
+    // })
+    setEatenFoodList(prevList => {
+      const newList = [];
+      for (let i=0 ; i<prevList.length ; i++) {
+        if (i === index){
+          const editedFood = prevList[i];
+          editedFood.removingFade = true;
+          newList.push(editedFood)
+        } else {
+          newList.push(prevList[i])
+        }
+      }
+      return newList;
+    })
+    setTimeout(()=>{
+      setEatenFoodList(prevList => {
+        const newList = prevList.filter(food => prevList.indexOf(food) !== index);
+        return newList;
+      })
+    }, 250)
+  }
+
+  const eatenFood = eatenFoodList.map((food, index) => {
     return (
       <div
         key={food.id}
         className={
-          "flex flex-col xs:flex-row justify-end items-center w-full " +
+          "flex flex-col xs:flex-row justify-end items-center w-full "+(food.removingFade ? 'transition duration-300 scale-y-0 scale-x-100 opacity-0' : 'transition duration-500 opacity-100')+' '+
           styles.dropshadow
         }
       >
@@ -75,7 +103,10 @@ const Food = ({ user, food }) => {
         </div>
 
         <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
-          <button className="my-2 md:mx-2">
+          <button 
+            className="my-2 md:mx-2"
+            onClick={()=>deleteFood(index)}
+          >
             <MdOutlineRemoveCircle
               className=" hover:fill-black transition duration-500"
               size={50}
@@ -88,7 +119,6 @@ const Food = ({ user, food }) => {
   })
 
 // ---------------------------------------------------------------------------------------------------------------
-
 
   return (
     <div>
@@ -150,7 +180,7 @@ const Food = ({ user, food }) => {
             {addedFood && <div
               className={
                 "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 "+
-                (addedFood.removingFade ? 'transition duration-300 -translate-y-6 opacity-0' : 'transition duration-500 opacity-100')+
+                (addedFood.removingFade ? 'transition duration-300 scale-y-0 scale-x-100 opacity-0' : 'transition duration-500 opacity-100')+
                 (addedFood.addingFade ? 'transition duration-300 translate-y-6 opacity-0' : 'transition duration-500 opacity-100')+
                 ' '+styles.dropshadow
               }
@@ -180,7 +210,7 @@ const Food = ({ user, food }) => {
                       type="number"
                       className={`text-gray-900 text-sm indent-2
                                 bg-gray-50 border border-gray-300 rounded-lg focus:ring-custom-orange focus:border-custom-orange
-                                block w-20 ml-2 `+(wiggle && 'border-red-500 animate-wiggle')}
+                                block w-20 ml-2 `+(wiggle ? 'border-red-500 animate-wiggle': 'border-gray-300')}
                       placeholder="In grams"
                       value={addedFood.size || ''}
                       onChange={(e)=>setAddedFood({...addedFood, size: e.target.value})}
@@ -213,99 +243,15 @@ const Food = ({ user, food }) => {
               </div>
             </div>}
 
-            <div className="w-full border-b-2 border-custom-orange my-4 w-11/12"></div>
+            <div className={`
+                            w-full border-b-2 border-custom-orange my-4 w-11/12 `+
+                            (eatenFoodList.length ? 'transition duration-300 scale-x-100' : 'transition duration-300 scale-x-0')
+                            }></div>
 
             <div className="flex justify-center items-center rounded-2 dropshadow my-4 w-11/12">
               <div className="grid grid-cols-2 xs:flex xs:flex-col justify-center items-center gap-2 w-full">
 
                 {eatenFood}
-
-                <div
-                  className={
-                    "flex flex-col xs:flex-row justify-end items-center w-full " +
-                    styles.dropshadow
-                  }
-                >
-                  <img
-                    src="https://i.ibb.co/syGnpMj/omurice.png"
-                    alt="omurice"
-                    className="h-16 w-16 my-2 mx-2 md:mx-4"
-                  />
-
-                  <div className="flex flex-col justify-center items-start w-full xs:ml-12">
-                    <b className="font-logo font-bold text-xl text-center xs:text-left truncate text-custom-orange w-full my-4">
-                      Omurice
-                    </b>
-                    <div className="flex flex-col self-center items-start xs:w-full">
-                      <p className="font-paragraph text-xs">
-                        Category:{" "}
-                        <span className="font-paragraph font-bold text-xs">
-                          Snack
-                        </span>
-                      </p>
-                      <p className="font-paragraph text-xs">
-                        How Much:{" "}
-                        <span className="font-paragraph font-bold text-xs">
-                          100 g
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
-                    <button className="my-2 md:mx-2">
-                      <MdOutlineRemoveCircle
-                        className=" hover:fill-black transition duration-500"
-                        size={50}
-                        color={"#FF9351"}
-                      />
-                    </button>
-                  </div>
-                </div>
-
-                <div
-                  className={
-                    "flex flex-col xs:flex-row justify-end items-center w-full "+(fade ? 'transition duration-300 translate-x-6 opacity-0' : 'transition duration-500 opacity-100')+' '+
-                    styles.dropshadow
-                  }
-                >
-                  <img
-                    src="https://i.ibb.co/HpMdr5L/salad.png"
-                    alt="salad"
-                    className="h-16 w-16 my-2 mx-2 md:mx-4"
-                  />
-
-                  <div className="flex flex-col justify-center items-start w-full xs:ml-12">
-                    <b className="font-logo font-bold text-xl text-center xs:text-left truncate text-custom-orange w-full my-4">
-                      Salad
-                    </b>
-                    <div className="flex flex-col self-center items-start xs:w-full">
-                      <p className="font-paragraph text-xs">
-                        Category:{" "}
-                        <span className="font-paragraph font-bold text-xs">
-                          Salad
-                        </span>
-                      </p>
-                      <p className="font-paragraph text-xs">
-                        How Much:{" "}
-                        <span className="font-paragraph font-bold text-xs">
-                          290 g
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
-                    <button className="my-2 md:mx-2">
-                      <MdOutlineRemoveCircle
-                        className=" hover:fill-black transition duration-500"
-                        size={50}
-                        color={"#FF9351"}
-                        onClick={()=>setFade(true)}
-                      />
-                    </button>
-                  </div>
-                </div>
 
               </div>
             </div>

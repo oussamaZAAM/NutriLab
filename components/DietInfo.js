@@ -17,7 +17,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       ? JSON.parse(window.localStorage.getItem("dietInfos"))
       : false;
 
-  const [stepper, setStepper] = useState(1);
+  const [stepper, setStepper] = useState([1, 1]);
   const [dietInfos, setDietInfos] = useState(
     data || {
       age: "",
@@ -27,14 +27,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       activity: "",
     }
   );
-  
+
   // ----------- Errors States ---------------------
   const [ageError, setAgeError] = useState(1);
   const [sexError, setSexError] = useState(1);
   const [heightError, setHeightError] = useState(1);
   const [weightError, setWeightError] = useState(1);
   const [activityError, setActivityError] = useState(1);
-
 
   // Function
   const handleChange = (event) => {
@@ -145,26 +144,92 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       }
       style={{ height: "480px" }}
     >
-      {/* -----------------------------------------Stepper---------------------------------------------- */}
+      {/* -----------------------------------------stepper[0]---------------------------------------------- */}
       <div className="flex justify-center items-center h-10">
         <ol className="h-full flex justify-center items-center w-full p-3 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4">
-          <li
+          <div
             className={
               "flex items-center cursor-pointer " +
-              (stepper === 1 && "text-custom-orange")
+              (stepper[0] === 1 &&
+                "text-custom-orange animate-swipe flex-wrap w-16")
             }
-            onClick={() => setStepper(1)}
           >
-            <span
+            <li
               className={
-                "flex items-center justify-center w-5 h-5 mr-2 text-xs border  rounded-full shrink-0 " +
-                (stepper === 1 ? "border-custom-orange" : "border-gray-500")
+                "flex items-center cursor-pointer " +
+                (stepper[0] === 1 &&
+                  "text-custom-orange animate-swipe flex-wrap w-16")
               }
+              onClick={() => setStepper([1, stepper[0]])}
             >
-              1
-            </span>
-            <span className="hidden sm:block">Age</span>
-          </li>
+              <span
+                className={
+                  "flex items-center justify-center w-5 h-5 mr-2 text-xs border  rounded-full shrink-0 " +
+                  (stepper[0] === 1
+                    ? "border-custom-orange"
+                    : "border-gray-500")
+                }
+              >
+                1
+              </span>
+              <span className="hidden sm:block">Age</span>
+            </li>
+            <div
+              className={
+                stepper[0] === 1 &&
+                "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400"
+              }
+            ></div>
+          </div>
+          <svg
+            aria-hidden="true"
+            className="w-2 h-4 ml-2 sm:ml-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 5l7 7-7 7M5 5l7 7-7 7"
+            ></path>
+          </svg>
+          <div
+            className={
+              "flex items-center cursor-pointer " +
+              (stepper[0] === 2 && "text-custom-orange flex-wrap w-16")
+            }
+          >
+            <li
+              className={
+                "flex items-center cursor-pointer " +
+                (stepper[0] === 2 && "text-custom-orange flex-wrap w-16")
+              }
+              onClick={() => setStepper([2, stepper[0]])}
+            >
+              <span
+                className={
+                  "flex items-center justify-center w-5 h-5 mr-2 text-xs border  rounded-full shrink-0 " +
+                  (stepper[0] === 2
+                    ? "border-custom-orange"
+                    : "border-gray-500")
+                }
+              >
+                2
+              </span>
+              <span className="hidden sm:block">Sex</span>
+            </li>
+            <div
+              className={
+                stepper[0] === 2 &&
+                (stepper[1] < 2
+                  ? "ml-5 flex items-center justify-center w-8 animate-lswipe pb-1 bg-orange-400"
+                  : "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400")
+              }
+            ></div>
+          </div>
           <svg
             aria-hidden="true"
             className="w-2 h-4 ml-2 sm:ml-4"
@@ -183,51 +248,27 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           <li
             className={
               "flex items-center cursor-pointer " +
-              (stepper === 2 && "text-custom-orange")
+              (stepper[0] === 3 && "text-custom-orange flex-wrap w-20")
             }
-            onClick={() => setStepper(2)}
+            onClick={() => setStepper([3, stepper[0]])}
           >
             <span
               className={
                 "flex items-center justify-center w-5 h-5 mr-2 text-xs border  rounded-full shrink-0 " +
-                (stepper === 2 ? "border-custom-orange" : "border-gray-500")
-              }
-            >
-              2
-            </span>
-            <span className="hidden sm:block">Sex</span>
-          </li>
-          <svg
-            aria-hidden="true"
-            className="w-2 h-4 ml-2 sm:ml-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 5l7 7-7 7M5 5l7 7-7 7"
-            ></path>
-          </svg>
-          <li
-            className={
-              "flex items-center cursor-pointer " +
-              (stepper === 3 && "text-custom-orange")
-            }
-            onClick={() => setStepper(3)}
-          >
-            <span
-              className={
-                "flex items-center justify-center w-5 h-5 mr-2 text-xs border  rounded-full shrink-0 " +
-                (stepper === 3 ? "border-custom-orange" : "border-gray-500")
+                (stepper[0] === 3 ? "border-custom-orange" : "border-gray-500")
               }
             >
               3
             </span>
             <span className="hidden sm:block">Height</span>
+            <div
+              className={
+                stepper[0] === 3 &&
+                (stepper[1] < 3
+                  ? "ml-5 flex items-center justify-center w-8 animate-lswipe pb-1 bg-orange-400"
+                  : "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400")
+              }
+            ></div>
           </li>
           <svg
             aria-hidden="true"
@@ -247,19 +288,27 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           <li
             className={
               "flex items-center cursor-pointer " +
-              (stepper === 4 && "text-custom-orange")
+              (stepper[0] === 4 && "text-custom-orange flex-wrap w-20")
             }
-            onClick={() => setStepper(4)}
+            onClick={() => setStepper([4, stepper[0]])}
           >
             <span
               className={
                 "flex items-center justify-center w-5 h-5 mr-2 text-xs border  rounded-full shrink-0 " +
-                (stepper === 4 ? "border-custom-orange" : "border-gray-500")
+                (stepper[0] === 4 ? "border-custom-orange" : "border-gray-500")
               }
             >
               4
             </span>
             <span className="hidden sm:block">Activity</span>
+            <div
+              className={
+                stepper[0] === 4 &&
+                (stepper[1] < 4
+                  ? "ml-5 flex items-center justify-center w-8 animate-lswipe pb-1 bg-orange-400"
+                  : "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400")
+              }
+            ></div>
           </li>
           <svg
             aria-hidden="true"
@@ -278,31 +327,39 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           </svg>
           <li
             onClick={() => {
-              setStepper(5);
+              setStepper([5, stepper[0]]);
               CheckValidity(dietInfos);
             }}
             className={
               "flex items-center cursor-pointer " +
-              (stepper === 5 && "text-custom-orange")
+              (stepper[0] === 5 && "text-custom-orange flex-wrap w-20")
             }
           >
             <span
               className={
                 "flex items-center justify-center w-5 h-5 mr-2 text-xs border  rounded-full shrink-0 " +
-                (stepper === 5 ? "border-custom-orange" : "border-gray-500")
+                (stepper[0] === 5 ? "border-custom-orange" : "border-gray-500")
               }
             >
               5
             </span>
             <span className="hidden sm:block">Recap</span>
+            <div
+              className={
+                stepper[0] === 5 &&
+                (stepper[1] < 5
+                  ? "ml-5 flex items-center justify-center w-8 animate-lswipe pb-1 bg-orange-400"
+                  : "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400")
+              }
+            ></div>
           </li>
         </ol>
       </div>
 
-      {/* -----------------------------------------End Stepper---------------------------------------------- */}
+      {/* -----------------------------------------End stepper[0]---------------------------------------------- */}
 
       {/* Age Box  */}
-      {stepper === 1 && (
+      {stepper[0] === 1 && (
         <div className="flex flex-col justify-between items-center h-full">
           <b className="font-logo text-3xl text-center my-12 h-full">
             How old are you?
@@ -320,7 +377,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           <div className="flex justify-evenly items-end w-full my-12 h-full">
             <button className="invisible h-12 sm:mx-8 w-24 xs:w-40"></button>
             <button
-              onClick={() => setStepper(2)}
+              onClick={() => setStepper([2, stepper[0]])}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange bg-custom-orange text-white hover:border-gray-900"
             >
               Next
@@ -330,7 +387,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       )}
 
       {/* Sex Box  */}
-      {stepper === 2 && (
+      {stepper[0] === 2 && (
         <div className="flex flex-col justify-between items-center h-full">
           <b className="flex-1 font-logo text-3xl text-center my-12 h-full">
             What's your sex?
@@ -382,13 +439,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
           <div className="flex flex-1 justify-evenly items-end w-full my-12 h-full">
             <button
-              onClick={() => setStepper(1)}
+              onClick={() => setStepper([1, stepper[0]])}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange  hover:border-gray-900"
             >
               Back
             </button>
             <button
-              onClick={() => setStepper(3)}
+              onClick={() => setStepper([3, stepper[0]])}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange bg-custom-orange text-white  hover:border-gray-900"
             >
               Next
@@ -398,7 +455,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       )}
 
       {/* Height & Weight Box  */}
-      {stepper === 3 && (
+      {stepper[0] === 3 && (
         <div className="flex flex-col justify-between items-center h-full">
           <div className="flex flex-col justify-center items-centr flex-3 h-full">
             {/* Height Input */}
@@ -429,13 +486,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           </div>
           <div className="flex flex-1 justify-evenly items-end w-full my-12 h-full">
             <button
-              onClick={() => setStepper(2)}
+              onClick={() => setStepper([2, stepper[0]])}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
             >
               Back
             </button>
             <button
-              onClick={() => setStepper(4)}
+              onClick={() => setStepper([4, stepper[0]])}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange bg-custom-orange text-white hover:border-gray-900"
             >
               Next
@@ -445,7 +502,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       )}
 
       {/* Activity Box  */}
-      {stepper === 4 && (
+      {stepper[0] === 4 && (
         <div className="flex flex-col justify-around items-center h-full">
           <b className="font-logo text-3xl text-center my-12">
             How is your Activity?
@@ -498,14 +555,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
           <div className="flex justify-evenly items-center w-full my-12">
             <button
-              onClick={() => setStepper(3)}
+              onClick={() => setStepper([3, stepper[0]])}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
             >
               Back
             </button>
             <button
               onClick={() => {
-                setStepper(5);
+                setStepper([5, stepper[0]]);
                 CheckValidity(dietInfos);
               }}
               className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange bg-custom-orange text-white hover:border-gray-900"
@@ -517,7 +574,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       )}
 
       {/* Recap Box  */}
-      {stepper === 5 && (
+      {stepper[0] === 5 && (
         <div className="flex flex-col justify-around items-center h-full">
           <b className="font-logo text-3xl text-center my-12">Recap</b>
 
@@ -711,13 +768,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               </button>
               <button
                 onClick={() => handleApply(dietInfos)}
-                className={`h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900 `+
-                ((ageError ||
-                  sexError ||
-                  heightError ||
-                  weightError ||
-                  activityError) &&
-                  "cursor-not-allowed")
+                className={
+                  `h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900 ` +
+                  ((ageError ||
+                    sexError ||
+                    heightError ||
+                    weightError ||
+                    activityError) &&
+                    "cursor-not-allowed")
                 }
                 disabled={
                   ageError ||

@@ -6,7 +6,8 @@ import Footer from "../components/Footer";
 import HowItsBuilt from "../components/HowItsBuilt";
 import DietInfo from "../components/DietInfo";
 import DailyNutrients from "../components/DailyNutrients";
-
+import isAuthenticated from "./api/Auth";
+import getCookie from "next-cookies";
 function calculateNutrients(age, sex, height, weight, activity) {
   // Calculate BMR : Harris-Benedict Calculator
   var BMR;
@@ -124,7 +125,7 @@ function calculateVitamins(age, sex) {
   };
 }
 
-const Nutrients = ({ user }) => {
+export default function Nutrients({ user }) {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
   const [nutrients, setNutrients] = useState();
   const [vitamins, setVitamins] = useState();
@@ -180,6 +181,13 @@ const Nutrients = ({ user }) => {
       <Footer />
     </div>
   );
-};
+}
 
-export default Nutrients;
+Nutrients.getInitialProps = async (context) => {
+  const { NutriLab } = getCookie(context);
+  const user = isAuthenticated(NutriLab);
+  if (!user) {
+    return { user: false };
+  }
+  return { user: user };
+};

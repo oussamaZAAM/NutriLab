@@ -26,6 +26,9 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         console.log(response.data);
         setAuth(response.data);
         setOpen(false);
+        const dietInfos = await axios.get("/api/profile").then((res) => {
+          localStorage.setItem("dietInfos", JSON.stringify(res.data));
+        });
       })
       .catch((error) => {
         error.response.status === 401

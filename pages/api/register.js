@@ -17,6 +17,16 @@ export default async function register(req, res) {
         password: pass,
       },
     });
+    await prisma.NutriInfo.create({
+      data: {
+        userId: result.id,
+      },
+    });
+    // await prisma.Nutrients.create({
+    //   data: {
+    //     userId: result.id,
+    //   },
+    // });
     const token = jwt.sign(result, process.env.JWT_SECRET);
     const serialised = serialize("NutriLab", token, {
       httpOnly: true,

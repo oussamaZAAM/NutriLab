@@ -30,6 +30,7 @@ export default function Example({ User }) {
       .then(async (response) => {
         console.log(response.data);
         setUser(false);
+        localStorage.removeItem("dietInfos");
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +59,7 @@ export default function Example({ User }) {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 items-center justify-start ml-10 sm:items-stretch sm:justify-between sm:ml-0">
-                  <Link href='/'>
+                  <Link href="/">
                     <div className="flex flex-shrink-0 items-center rounded-full px-3 py-1 bg-custom-orange">
                       <img
                         className="block h-8 w-auto p-1"

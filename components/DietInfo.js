@@ -149,16 +149,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
         <ol className="h-full flex justify-center items-center w-full p-3 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4">
           <div
             className={
-              "flex items-center cursor-pointer " +
-              (stepper[0] === 1 &&
-                "text-custom-orange animate-swipe flex-wrap w-16")
+              "flex items-center justify-center cursor-pointer " +
+              (stepper[0] === 1 && "text-custom-orange animate-swipe relative")
             }
           >
             <li
               className={
                 "flex items-center cursor-pointer " +
-                (stepper[0] === 1 &&
-                  "text-custom-orange animate-swipe flex-wrap w-16")
+                (stepper[0] === 1 && "text-custom-orange animate-swipe")
               }
               onClick={() => setStepper([1, stepper[0]])}
             >
@@ -177,7 +175,9 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
             <div
               className={
                 stepper[0] === 1 &&
-                "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400"
+                " w-8  " +
+                  (stepper[1] !== 1 && "animate-rswiper") +
+                  "  pb-1 bg-orange-400 absolute -bottom-2"
               }
             ></div>
           </div>
@@ -198,14 +198,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           </svg>
           <div
             className={
-              "flex items-center cursor-pointer " +
-              (stepper[0] === 2 && "text-custom-orange flex-wrap w-16")
+              "flex items-center cursor-pointer justify-center " +
+              (stepper[0] === 2 && "text-custom-orange relative")
             }
           >
             <li
               className={
                 "flex items-center cursor-pointer " +
-                (stepper[0] === 2 && "text-custom-orange flex-wrap w-16")
+                (stepper[0] === 2 && "text-custom-orange")
               }
               onClick={() => setStepper([2, stepper[0]])}
             >
@@ -225,8 +225,11 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               className={
                 stepper[0] === 2 &&
                 (stepper[1] < 2
-                  ? "ml-5 flex items-center justify-center w-8 animate-lswipe pb-1 bg-orange-400"
-                  : "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400")
+                  ? " w-8 animate-lswipe pb-1 bg-orange-400 absolute -bottom-2"
+                  : " w-8 " +
+                    (stepper[1] !== 2 &&
+                      " " + (stepper[1] !== 2 && "animate-rswiper") + " ") +
+                    " pb-1 bg-orange-400 absolute -bottom-2")
               }
             ></div>
           </div>
@@ -247,8 +250,8 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           </svg>
           <li
             className={
-              "flex items-center cursor-pointer " +
-              (stepper[0] === 3 && "text-custom-orange flex-wrap w-20")
+              "flex items-center justify-center  cursor-pointer " +
+              (stepper[0] === 3 && "text-custom-orange relative")
             }
             onClick={() => setStepper([3, stepper[0]])}
           >
@@ -265,8 +268,10 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               className={
                 stepper[0] === 3 &&
                 (stepper[1] < 3
-                  ? "ml-5 flex items-center justify-center w-8 animate-lswipe pb-1 bg-orange-400"
-                  : "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400")
+                  ? " w-8 animate-lswipe pb-1 bg-orange-400 absolute -bottom-2"
+                  : " w-8  " +
+                    (stepper[1] !== 3 && "animate-rswiper") +
+                    "  pb-1 bg-orange-400 absolute -bottom-2")
               }
             ></div>
           </li>
@@ -287,8 +292,8 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           </svg>
           <li
             className={
-              "flex items-center cursor-pointer " +
-              (stepper[0] === 4 && "text-custom-orange flex-wrap w-20")
+              "flex items-center cursor-pointer justify-center " +
+              (stepper[0] === 4 && "text-custom-orange relative")
             }
             onClick={() => setStepper([4, stepper[0]])}
           >
@@ -305,8 +310,10 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               className={
                 stepper[0] === 4 &&
                 (stepper[1] < 4
-                  ? "ml-5 flex items-center justify-center w-8 animate-lswipe pb-1 bg-orange-400"
-                  : "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400")
+                  ? "w-8 animate-lswipe pb-1 bg-orange-400 absolute -bottom-2"
+                  : "w-8  " +
+                    (stepper[1] !== 4 && "animate-rswiper") +
+                    "  pb-1 bg-orange-400 absolute -bottom-2")
               }
             ></div>
           </li>
@@ -331,8 +338,8 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               CheckValidity(dietInfos);
             }}
             className={
-              "flex items-center cursor-pointer " +
-              (stepper[0] === 5 && "text-custom-orange flex-wrap w-20")
+              "flex items-center cursor-pointer justify-center " +
+              (stepper[0] === 5 && "text-custom-orange relative")
             }
           >
             <span
@@ -348,8 +355,10 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               className={
                 stepper[0] === 5 &&
                 (stepper[1] < 5
-                  ? "ml-5 flex items-center justify-center w-8 animate-lswipe pb-1 bg-orange-400"
-                  : "ml-5 flex items-center justify-center w-8 animate-rswiper pb-1 bg-orange-400")
+                  ? " w-8 animate-lswipe pb-1 bg-orange-400 absolute -bottom-2"
+                  : " w-8  " +
+                    (stepper[1] !== 5 && "animate-rswiper") +
+                    "  pb-1 bg-orange-400 absolute -bottom-2")
               }
             ></div>
           </li>
@@ -603,7 +612,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   <td className="px-6 py-4">
                     <b
                       className="font-medium text-custom-orange hover:underline cursor-pointer"
-                      onClick={() => setStepper(1)}
+                      onClick={() => setStepper([1, stepper[0]])}
                     >
                       Edit
                     </b>
@@ -631,7 +640,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   <td className="px-6 py-4">
                     <b
                       className="font-medium text-custom-orange hover:underline cursor-pointer"
-                      onClick={() => setStepper(2)}
+                      onClick={() => setStepper([2, stepper[0]])}
                     >
                       Edit
                     </b>
@@ -659,7 +668,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   <td className="px-6 py-4">
                     <b
                       className="font-medium text-custom-orange hover:underline cursor-pointer"
-                      onClick={() => setStepper(3)}
+                      onClick={() => setStepper([3, stepper[0]])}
                     >
                       Edit
                     </b>
@@ -687,7 +696,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   <td className="px-6 py-4">
                     <b
                       className="font-medium text-custom-orange hover:underline cursor-pointer"
-                      onClick={() => setStepper(3)}
+                      onClick={() => setStepper([3, stepper[0]])}
                     >
                       Edit
                     </b>
@@ -713,7 +722,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   <td className="px-6 py-4">
                     <b
                       className="font-medium text-custom-orange hover:underline cursor-pointer"
-                      onClick={() => setStepper(4)}
+                      onClick={() => setStepper([4, stepper[0]])}
                     >
                       Edit
                     </b>
@@ -726,7 +735,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
           {!isInfosApplied ? (
             <div className="flex justify-evenly items-center w-full my-12">
               <button
-                onClick={() => setStepper(4)}
+                onClick={() => setStepper([4, stepper[0]])}
                 className="h-12 sm:mx-8 w-24 xs:w-40 font-bold font-logo text-2xl border-2 border-custom-orange text-custom-orange hover:border-gray-900"
               >
                 Back

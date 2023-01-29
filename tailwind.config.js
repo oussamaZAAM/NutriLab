@@ -17,29 +17,31 @@ module.exports = {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
         },
-        rswipe: {
-          "0%": { transform: "translateX(0px)" },
-          "100%": { transform: "translateX(50px)" },
-        },
+        // rswipe: {
+        //   "0%": { transform: "translateX(0px)" },
+        //   "100%": { transform: "translateX(100px)" },
+        // },
         lswipe: {
-          "0%": { transform: "translateX(-50px)" },
+          "0%": { transform: "translateX(-73px)" },
+          "10%": { transform: "scaleX(2.2) translateX(-27px)" },
+
           "100%": { transform: "translateX(0px)" },
         },
         rswiper: {
-          "0%": { transform: "translateX(50px)" },
+          "0%": { transform: "translateX(100px) scaleX(2.2)" },
           "100%": { transform: "translateX(0px)" },
         },
-        lswiper: {
-          "0%": { transform: "translateX(0px)" },
-          "100%": { transform: "translateX(-50px)" },
-        },
+        // lswiper: {
+        //   "0%": { transform: "translateX(0px)" },
+        //   "100%": { transform: "translateX(-100px)" },
+        // },
       },
       animation: {
         wiggle: "wiggle 200ms ease-in-out",
-        rswipe: "rswipe 400ms ease-out",
+        // rswipe: "rswipe 400ms ease-out",
         lswipe: "lswipe 400ms ease-out",
         rswiper: "rswiper 400ms ease-out",
-        lswiper: "lswiper 400ms ease-out",
+        // lswiper: "lswiper 400ms ease-out",
       },
     },
     fontFamily: {

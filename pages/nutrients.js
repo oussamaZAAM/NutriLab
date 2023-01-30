@@ -132,9 +132,7 @@ export default function Nutrients() {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
   const [nutrients, setNutrients] = useState();
   const [vitamins, setVitamins] = useState();
-  const { user, setUser } = useContext(
-    User_data !== null ? User_data : JSON.parse(localStorage.getItem("user"))
-  );
+  const { user, setUser } = useContext(User_data);
   const applyInfos = async (dietInfos) => {
     const { age, sex, height, weight, activity } = dietInfos;
     await axios.put("/api/profile", dietInfos, {

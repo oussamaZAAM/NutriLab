@@ -8,12 +8,11 @@ import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Link from "next/link";
-export default function Home() {
+export default function Home({ currentUser }) {
   const { user, setUser } = useContext(User_data);
   useEffect(() => {
-    // Perform localStorage action
-    const current_user = localStorage.getItem("user");
-    setUser(current_user);
+    // currentUser === false && localStorage.removeItem("user");
+    // localStorage.removeItem("dietInfos");
   }, [user]);
   return (
     <div>
@@ -206,9 +205,12 @@ export default function Home() {
 }
 Home.getInitialProps = async (context) => {
   const { NutriLab } = getCookie(context);
+  console.log("aya");
   const user = isAuthenticated(NutriLab);
+  console.log(user);
   if (!user) {
-    return { user: false };
+    return { currentUser: false };
   }
-  return { user: user };
+
+  return { currentUser: user };
 };

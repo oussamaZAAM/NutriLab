@@ -21,7 +21,6 @@ export default function Example({ User }) {
   const [open1, setOpen] = useState(false);
   const [user, setUser] = useState(User);
   const [login, setLogin] = useState(true);
-  console.log(login);
   useEffect(() => {
     // Perform localStorage action
     const current_user = localStorage.getItem("user");

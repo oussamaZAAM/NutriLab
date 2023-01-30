@@ -13,7 +13,7 @@ export default function Home({ currentUser }) {
   useEffect(() => {
     // currentUser === false && localStorage.removeItem("user");
     // localStorage.removeItem("dietInfos");
-  }, [user]);
+  }, []);
   return (
     <div>
       <Head>

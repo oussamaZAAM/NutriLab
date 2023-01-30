@@ -1,13 +1,20 @@
 import Navbar from "../components/Navbar";
 import isAuthenticated from "./api/Auth";
 import getCookie from "next-cookies";
-
+import { User_data } from "../context/context";
+import { useContext, useEffect } from "react";
 import styles from "../styles/Home.module.css";
 // import HowItsBuilt from "../components/HowItsBuilt";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Link from "next/link";
-export default function Home({ user }) {
+export default function Home() {
+  const { user, setUser } = useContext(User_data);
+  useEffect(() => {
+    // Perform localStorage action
+    const current_user = localStorage.getItem("user");
+    setUser(current_user);
+  }, [user]);
   return (
     <div>
       <Head>
@@ -46,7 +53,7 @@ export default function Home({ user }) {
                   style={{ backgroundColor: "#DCF8FF" }}
                 >
                   <button className="py-4 px-9 font-extrabold">Start</button>
-                  <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden opacity-0 transition duration-300 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-70"></div>
+                  <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden opacity-0 transition duration-300 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-70"></div>
                 </div>
               </Link>
             </div>

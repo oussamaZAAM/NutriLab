@@ -1,9 +1,13 @@
 import Head from "next/head";
 import { BsGoogle, BsFacebook, BsTwitter } from "react-icons/bs";
 import axios from "axios";
+import { User_data } from "../context/context";
+import { useContext } from "react";
 import { useState } from "react";
 export default function Login({ setLogin, setAuth, setOpen }) {
-  const [user, setUser] = useState({
+  const { setUser } = useContext(User_data);
+
+  const [user, setUser1] = useState({
     email: "",
     password: "",
   });
@@ -26,9 +30,11 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         console.log(response.data);
         setAuth(response.data);
         setOpen(false);
+        localStorage.setItem("user", JSON.stringify(response.data));
         const dietInfos = await axios.get("/api/profile").then((res) => {
           localStorage.setItem("dietInfos", JSON.stringify(res.data));
         });
+        setUser(response.data);
       })
       .catch((error) => {
         error.response.status === 401
@@ -70,7 +76,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
                 type="text"
                 placeholder="Email"
                 value={user.email}
-                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                onChange={(e) => setUser1({ ...user, email: e.target.value })}
                 className={
                   "basis-3/4 w-max px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" +
                   (error.email && "border-3 border-rose-500")
@@ -90,7 +96,9 @@ export default function Login({ setLogin, setAuth, setOpen }) {
                 onFocus={() => setError({ email: "", password: "" })}
                 type="password"
                 placeholder="Password"
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                onChange={(e) =>
+                  setUser1({ ...user, password: e.target.value })
+                }
                 className=" basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
               {error.password && (

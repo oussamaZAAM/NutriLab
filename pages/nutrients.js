@@ -8,6 +8,9 @@ import DietInfo from "../components/DietInfo";
 import DailyNutrients from "../components/DailyNutrients";
 import isAuthenticated from "./api/Auth";
 import getCookie from "next-cookies";
+
+import { User_data } from "../context/context";
+import { useContext } from "react";
 function calculateNutrients(age, sex, height, weight, activity) {
   // Calculate BMR : Harris-Benedict Calculator
   var BMR;
@@ -125,11 +128,13 @@ function calculateVitamins(age, sex) {
   };
 }
 
-export default function Nutrients({ user }) {
+export default function Nutrients() {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
   const [nutrients, setNutrients] = useState();
   const [vitamins, setVitamins] = useState();
-
+  const { user, setUser } = useContext(
+    User_data !== null ? User_data : JSON.parse(localStorage.getItem("user"))
+  );
   const applyInfos = async (dietInfos) => {
     const { age, sex, height, weight, activity } = dietInfos;
     await axios.put("/api/profile", dietInfos, {

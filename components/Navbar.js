@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef, useState, useEffect } from "react";
 import { Disclosure, Menu, Transition, Dialog } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 // import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
@@ -21,16 +21,20 @@ export default function Example({ User }) {
   const [open1, setOpen] = useState(false);
   const [user, setUser] = useState(User);
   const [login, setLogin] = useState(User === false ? true : false);
-
+  useEffect(() => {
+    // Perform localStorage action
+    const current_user = localStorage.getItem("user");
+    setUser(current_user);
+  }, [user]);
   const cancelButtonRef = useRef(null);
 
   const handleLogout = async (e) => {
     await axios
       .get("/api/logout")
       .then(async (response) => {
-        console.log(response.data);
         setUser(false);
         localStorage.removeItem("dietInfos");
+        localStorage.removeItem("user");
       })
       .catch((error) => {
         console.log(error);

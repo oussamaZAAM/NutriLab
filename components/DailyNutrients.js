@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 function decimalNumber (number) {
     return number.toString().split(".")[0]
@@ -95,6 +96,15 @@ const DailyNutrients = ({nutrients, vitamins}) => {
           </div>
         </div>
       </div>
+      <Link href="/food">
+        <div
+          className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs  rounded-2xl mt-6 "
+          style={{ backgroundColor: "#DCF8FF" }}
+        >
+          <button className="py-4 px-9 font-extrabold">What Should I Eat?</button>
+          <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden opacity-0 transition duration-300 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-70"></div>
+        </div>
+      </Link>
     </div>
   );
 };

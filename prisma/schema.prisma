@@ -34,14 +34,15 @@ model NutriInfo {
 }
 
 model Nutrients {
-  id       Int  @id @default(autoincrement())
-  calories Int?
-  protein  Int?
-  carbs    Int?
-  fat      Int?
-  salt     Int?
-  sugar    Int?
-  fiber    Int?
-  user     User @relation(fields: [userId], references: [id])
-  userId   Int  @unique
+  id        Int  @id @default(autoincrement())
+  kCalories Int?
+  proteins  Int?
+  carbs     Int?
+  fats      Int?
+  salt      Int?
+  sugar     Int?
+  iron      Int?
+  fiber     Int?
+  user      User @relation(fields: [userId], references: [id])
+  userId    Int  @unique
 }

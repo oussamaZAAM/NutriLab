@@ -1,7 +1,7 @@
 import prisma from "./prisma";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
-export default async function profile(req, res) {
+export default async function nutrients(req, res) {
   if (req.method === "PUT") {
     const data = req.body;
     const { cookies } = req;
@@ -9,7 +9,7 @@ export default async function profile(req, res) {
     console.log(data);
     const userr = jwt.verify(token, process.env.JWT_SECRET);
     try {
-      const user = await prisma.NutriInfo.update({
+      const user = await prisma.Nutrients.update({
         where: {
           userId: userr.id,
         },
@@ -27,7 +27,7 @@ export default async function profile(req, res) {
     const token = cookies.NutriLab;
     const userr = jwt.verify(token, process.env.JWT_SECRET);
     try {
-      const user = await prisma.NutriInfo.findUnique({
+      const user = await prisma.Nutrients.findUnique({
         where: {
           userId: userr.id,
         },

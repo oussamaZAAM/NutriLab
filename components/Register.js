@@ -21,7 +21,7 @@ export default function Register({ setLogin, setAuth, setOpen }) {
   const router = useRouter();
   const handleSubmit = async (e) => {
     console.log(user);
-    event.preventDefault();
+    e.preventDefault();
     user.password === "" && setError({ rePass: "Enter an Password" });
     user.email === "" && setError({ email: "Enter an Email" });
     user.name === "" && setError({ name: "Enter a name" });

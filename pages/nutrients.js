@@ -135,11 +135,12 @@ export default function Nutrients() {
   const { user, setUser } = useContext(User_data);
   const applyInfos = async (dietInfos) => {
     const { age, sex, height, weight, activity } = dietInfos;
-    await axios.put("/api/profile", dietInfos, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    user &&
+      (await axios.put("/api/profile", dietInfos, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }));
     //Calculate Nutrients
     setNutrients(calculateNutrients(age, sex, height, weight, activity));
 

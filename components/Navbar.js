@@ -38,7 +38,7 @@ export default function Example({ User }) {
         localStorage.removeItem("user");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
 

@@ -5,10 +5,8 @@ import { serialize } from "cookie";
 import bcrypt from "bcrypt";
 export default async function register(req, res) {
   const user = req.body;
-  console.log(user);
   const SALT_ROUNDS = 12;
   const pass = await bcrypt.hash(user.password, SALT_ROUNDS);
-  console.log(pass);
   try {
     const result = await prisma.User.create({
       data: {
@@ -38,11 +36,9 @@ export default async function register(req, res) {
     res.setHeader("Set-Cookie", serialised);
     res.json(token);
   } catch (e) {
-    console.log(e);
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       // The .code property can be accessed in a type-safe manner
       if (e.code === "P2002") {
-        console.log("Email already registered");
         res.json({ error: "Email already registered" });
       } else {
         res.json(e);

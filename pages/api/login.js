@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 export default async function login(req, res) {
   const data = req.body;
-  console.log(data);
   try {
     const user = await prisma.User.findUnique({
       where: {
@@ -19,7 +18,6 @@ export default async function login(req, res) {
     }
     // const refreshPayload = { user: user, jti: uuidv4() };
     const token = jwt.sign(user, process.env.JWT_SECRET);
-    console.log(token);
     const serialised = serialize("NutriLab", token, {
       httpOnly: true,
       secure: process.env.MODE_ENV !== "dev",

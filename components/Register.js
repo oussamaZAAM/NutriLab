@@ -20,7 +20,6 @@ export default function Register({ setLogin, setAuth, setOpen }) {
 
   const router = useRouter();
   const handleSubmit = async (e) => {
-    console.log(user);
     e.preventDefault();
     user.password === "" && setError({ rePass: "Enter an Password" });
     user.email === "" && setError({ email: "Enter an Email" });
@@ -32,7 +31,6 @@ export default function Register({ setLogin, setAuth, setOpen }) {
           email: user.email,
           password: user.password,
         };
-        console.log(data);
         await axios
           .post("/api/register", data, {
             headers: {
@@ -40,12 +38,10 @@ export default function Register({ setLogin, setAuth, setOpen }) {
             },
           })
           .then(async (response) => {
-            console.log(response.data);
             setAuth(response.data);
             setOpen(false);
           })
           .catch((error) => {
-            console.log(error);
             setError({ email: "This email already exists" });
           });
       } else {

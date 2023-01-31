@@ -24,7 +24,7 @@ export default async function login(req, res) {
       httpOnly: true,
       secure: process.env.MODE_ENV !== "dev",
       sameSite: "strict",
-      maxAge: 60 * 60,
+      maxAge: 60 * 60 * 24 * 14,
       path: "/",
     });
     res.setHeader("Set-Cookie", serialised);

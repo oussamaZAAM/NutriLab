@@ -20,7 +20,7 @@ export default function Register({ setLogin, setAuth, setOpen }) {
 
   const router = useRouter();
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    event.preventDefault();
     user.password === "" && setError({ rePass: "Enter an Password" });
     user.email === "" && setError({ email: "Enter an Email" });
     user.name === "" && setError({ name: "Enter a name" });
@@ -40,6 +40,11 @@ export default function Register({ setLogin, setAuth, setOpen }) {
           .then(async (response) => {
             setAuth(response.data);
             setOpen(false);
+            localStorage.setItem("user", JSON.stringify(response.data));
+            const dietInfos = await axios.get("/api/profile").then((res) => {
+              localStorage.setItem("dietInfos", JSON.stringify(res.data));
+            });
+            setUser(response.data);
           })
           .catch((error) => {
             setError({ email: "This email already exists" });

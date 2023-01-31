@@ -16,7 +16,6 @@ export default async function profile(req, res) {
       });
 
       // const token = jwt.sign(user, process.env.JWT_SECRET);
-      // console.log(token);
       // const serialised = serialize("NutriLab", token, {
       //   httpOnly: true,
       //   secure: process.env.MODE_ENV !== "dev",

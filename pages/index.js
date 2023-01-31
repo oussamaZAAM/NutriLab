@@ -205,9 +205,7 @@ export default function Home({ currentUser }) {
 }
 Home.getInitialProps = async (context) => {
   const { NutriLab } = getCookie(context);
-  console.log("aya");
   const user = isAuthenticated(NutriLab);
-  console.log(user);
   if (!user) {
     return { currentUser: false };
   }

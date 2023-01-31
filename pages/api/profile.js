@@ -6,7 +6,6 @@ export default async function profile(req, res) {
     const data = req.body;
     const { cookies } = req;
     const token = cookies.NutriLab;
-    console.log(data);
     const userr = jwt.verify(token, process.env.JWT_SECRET);
     try {
       const user = await prisma.NutriInfo.update({

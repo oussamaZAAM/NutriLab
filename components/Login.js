@@ -27,7 +27,6 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         },
       })
       .then(async (response) => {
-        console.log(response.data);
         setAuth(response.data);
         setOpen(false);
         localStorage.setItem("user", JSON.stringify(response.data));

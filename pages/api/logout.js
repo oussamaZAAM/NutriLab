@@ -1,7 +1,6 @@
 import { serialize } from "cookie";
 
 function logout(req, res) {
-  console.log("ayou");
   const { cookies } = req;
   const jwt = cookies.NutriLab;
   !jwt && res.json({ message: "Already logged out" });

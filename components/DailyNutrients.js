@@ -4,7 +4,6 @@ function decimalNumber (number) {
 }
 
 const DailyNutrients = ({nutrients, vitamins}) => {
-  console.log(vitamins)
   
     const {kCalories, proteins, fats, carbs, fiber, sugar, salt} = nutrients;
 

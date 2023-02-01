@@ -4,6 +4,7 @@ import getCookie from "next-cookies";
 import { User_data } from "../context/context";
 import { useContext, useEffect } from "react";
 import styles from "../styles/Home.module.css";
+import { MdDoubleArrow } from 'react-icons/md'
 // import HowItsBuilt from "../components/HowItsBuilt";
 import Footer from "../components/Footer";
 import Head from "next/head";
@@ -84,6 +85,9 @@ export default function Home({ currentUser }) {
                   Donec ut neque lorem. Sed ac aliquam erat. Vestibulum neque
                   magna, congue a volutpat at, porttitor at ligula.
                 </p>
+                <Link href='/nutrients' >
+                  <MdDoubleArrow className='cursor-pointer m-4 hover:fill-custom-orange transition duration-300' size={50} />
+                </Link>
               </div>
               <div
                 className={
@@ -113,6 +117,9 @@ export default function Home({ currentUser }) {
                   Neque lorem. Sed ac aliquam erat. Vestibulum neque magna,
                   congue a
                 </p>
+                <Link href='/food' >
+                  <MdDoubleArrow className='cursor-pointer m-4 hover:fill-custom-orange transition duration-300' size={50} />
+                </Link>
               </div>
             </div>
 

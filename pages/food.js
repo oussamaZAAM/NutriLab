@@ -187,9 +187,9 @@ const Food = ({ user, food }) => {
             {addedFood && <div
               id='addedFood'
               className={
-                "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 "+
-                (addedFood.removingFade ? 'transition duration-300 scale-y-0 scale-x-100 opacity-0' : 'transition duration-500 opacity-100')+
-                (addedFood.addingFade ? 'transition duration-300 translate-y-6 opacity-0' : 'transition duration-500 opacity-100')+
+                "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 transition duration-500 "+
+                (addedFood.removingFade ? 'transition duration-300 scale-y-0 scale-x-100 opacity-0' : ' opacity-100')+
+                (addedFood.addingFade ? 'transition duration-300 translate-y-6 opacity-0' : ' opacity-100')+
                 ' '+styles.dropshadow
               }
             >

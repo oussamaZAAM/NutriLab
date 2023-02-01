@@ -1,12 +1,14 @@
 import Link from "next/link";
 
 function decimalNumber (number) {
-    return number.toString().split(".")[0]
+    return number.toString().split(".")[0] || number
 }
 
 const DailyNutrients = ({nutrients, vitamins}) => {
   
     const {kCalories, proteins, fats, carbs, fiber, sugar, salt} = nutrients;
+
+    console.log(nutrients)
 
   return (
     <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | mx-4">
@@ -37,7 +39,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Carbs</b>
-            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(carbs[0])+' g - '+decimalNumber(carbs[1])} g</p>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(carbs)} g</p>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -48,7 +50,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Proteins</b>
-            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(proteins[0])+' g - '+decimalNumber(proteins[1])} g</p>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(proteins)} g</p>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
@@ -59,7 +61,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
               />
             </a>
             <b className="font-bold text-lg md:text-2xl">Fats</b>
-            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(fats[0])+' g - '+decimalNumber(fats[1])} g</p>
+            <p className="font-bold text-xs md:text-xl text-custom-orange">{decimalNumber(fats)} g</p>
           </div>
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">

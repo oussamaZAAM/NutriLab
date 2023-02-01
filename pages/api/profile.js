@@ -15,7 +15,6 @@ export default async function profile(req, res) {
         data: data,
       });
 
-      console.log(user);
       res.status(200).json(user);
     } catch (e) {
       res.status(401).json({ message: "Wrong Info" });

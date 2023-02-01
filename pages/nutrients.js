@@ -40,11 +40,14 @@ function calculateNutrients(age, sex, height, weight, activity) {
   }
 
   // Calculate Proteins
-  var proteins = [(kCalories * 0.1) / 4, (kCalories * 0.3) / 4];
+  // var proteins = [(kCalories * 0.1) / 4, (kCalories * 0.3) / 4];
+  var proteins = (kCalories * 0.2) / 4;
   // Calculate Fats
-  var fats = [(kCalories * 0.2) / 9, (kCalories * 0.35) / 9];
+  // var fats = [(kCalories * 0.2) / 9, (kCalories * 0.35) / 9];
+  var fats = (kCalories * 0.275) / 9;
   // Calculate Carbs
-  var carbs = [(kCalories * 0.45) / 4, (kCalories * 0.65) / 4];
+  // var carbs = [(kCalories * 0.45) / 4, (kCalories * 0.65) / 4];
+  var carbs = (kCalories * 0.55) / 4;
   // Calculate Iron
   var iron;
   if (sex === "female") {

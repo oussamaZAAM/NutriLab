@@ -6,7 +6,6 @@ import { useContext } from "react";
 import { useState } from "react";
 export default function Login({ setLogin, setAuth, setOpen }) {
   const { setUser } = useContext(User_data);
-
   const [user, setUser1] = useState({
     email: "",
     password: "",
@@ -31,7 +30,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         setOpen(false);
         localStorage.setItem("user", JSON.stringify(response.data));
         const dietInfos = await axios.get("/api/profile").then((res) => {
-          const localData = {...res.data, state: "logged", age: "", sex: "", weight: "", height: "", activity: "", plan: ""}
+          const localData = {...res.data, age: "", sex: "", weight: "", height: "", activity: "", plan: ""}
           localStorage.setItem("dietInfos", JSON.stringify(localData));
         });
         setUser(response.data);

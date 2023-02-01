@@ -137,6 +137,7 @@ export default function Nutrients() {
   const [nutrients, setNutrients] = useState();
   const [vitamins, setVitamins] = useState();
   const { user, setUser } = useContext(User_data);
+  console.log(user)
   const applyInfos = async (dietInfos) => {
     const { age, sex, height, weight, activity, plan } = dietInfos;
     // localStorage.setItem("dietInfos", JSON.stringify(dietInfos));

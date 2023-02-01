@@ -26,7 +26,6 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
   const [stepper, setStepper] = useState([1, 1]);
   const [dietInfos, setDietInfos] = useState(
     data || {
-      state: "not_logged",
       age: "",
       sex: "",
       height: "",

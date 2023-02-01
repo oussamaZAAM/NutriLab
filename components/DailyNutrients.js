@@ -6,9 +6,8 @@ function decimalNumber (number) {
 
 const DailyNutrients = ({nutrients, vitamins}) => {
   
-    const {kCalories, proteins, fats, carbs, fiber, sugar, salt} = nutrients;
+  const {kCalories, proteins, fats, carbs, fiber, sugar, salt} = nutrients;
 
-    console.log(nutrients)
 
   return (
     <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | mx-4">

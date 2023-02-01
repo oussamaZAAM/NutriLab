@@ -5,7 +5,13 @@ import styles from "../styles/Home.module.css";
 
 // Irrelevent Fcts
 function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  return (string.charAt(0).toUpperCase() + string.slice(1));
+}
+
+function sliceUnderscore(string) {
+  const splitted = string.split("_");
+  const capitalized = splitted.map((string) => capitalizeFirstLetter(string));
+  return capitalized.join(" ");
 }
 
 // ------------------------------------------------------------------------------------------
@@ -20,11 +26,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
   const [stepper, setStepper] = useState([1, 1]);
   const [dietInfos, setDietInfos] = useState(
     data || {
+      state: "not_logged",
       age: "",
       sex: "",
       height: "",
       weight: "",
       activity: "",
+      plan: ""
     }
   );
 
@@ -34,6 +42,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
   const [heightError, setHeightError] = useState(1);
   const [weightError, setWeightError] = useState(1);
   const [activityError, setActivityError] = useState(1);
+  const [planError, setPlanError] = useState(1);
 
   // Function
   const handleChange = (event) => {
@@ -68,12 +77,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
     setHeightError(1);
     setWeightError(1);
     setActivityError(1);
+    setPlanError(1);
     flushInfos();
   };
 
   // ----------- Handeling Errors---------------------
   const CheckValidity = (data) => {
-    const { age, sex, height, weight, activity } = data;
+    const { age, sex, height, weight, activity, plan } = data;
 
     // Check Age
     if (age < 18 || age > 120) {
@@ -102,39 +112,28 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
     // Check Activity
     if (
       activity !== "sedentary" &&
-      activity !== "light" &&
-      activity !== "active" &&
-      activity !== "very" &&
-      activity !== "super"
+      activity !== "lightly_active" &&
+      activity !== "moderately_active" &&
+      activity !== "very_active" &&
+      activity !== "super_active"
     ) {
       setActivityError(1);
     } else {
       setActivityError(0);
     }
+    // Check Plan
+    if (
+      plan !== "lose_weight" &&
+      plan !== "maintain" &&
+      plan !== "build_muscle"
+    ) {
+      setPlanError(1);
+    } else {
+      setPlanError(0);
+    }
   };
 
   // ---------------------------------------------
-
-  var myActivity = "";
-  switch (dietInfos.activity) {
-    case "sedentary":
-      myActivity = "Sedentary";
-      break;
-    case "light":
-      myActivity = "Lighty Active";
-      break;
-    case "active":
-      myActivity = "Active";
-      break;
-    case "very":
-      myActivity = "Very Active";
-      break;
-    case "super":
-      myActivity = "Super Active";
-      break;
-    case "none":
-      myActivity = "No Entry";
-  }
 
   return (
     <div
@@ -518,12 +517,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       {/* Activity Box  */}
       {stepper[0] === 4 && (
         <div className="flex flex-col justify-around items-center h-full">
-          <b className="font-logo text-3xl text-center my-12">
-            How is your Activity?
-          </b>
+          <div className="flex-3 flex flex-col justify-between items-center h-full">
 
-          <div className="flex-2 flex justify-center items-center h-full">
-            <div className="relative h-16 w-60 sm:w-72 min-w-[200px]">
+            {/* Activity */}
+            <b className="font-logo text-2xl text-center my-6">
+              How is your Activity?
+            </b>
+            <div className="relative h-12 w-60 sm:w-72 min-w-[200px]">
               <select
                 name="activity"
                 value={dietInfos.activity}
@@ -540,14 +540,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                                 empty:!bg-red-500 
                                 focus:border-2 focus:border-custom-orange focus:border-t-transparent focus:outline-0 
                                 disabled:border-0 disabled:bg-blue-gray-50
-            "
-              >
+            ">
                 <option value="none">-</option>
                 <option value="sedentary">Sedentary</option>
-                <option value="light">Lightly Active</option>
-                <option value="active">Moderately Active</option>
-                <option value="very">Very Active</option>
-                <option value="super">Super Active</option>
+                <option value="lightly_active">Lightly Active</option>
+                <option value="moderately_active">Moderately Active</option>
+                <option value="very_active">Very Active</option>
+                <option value="super_active">Super Active</option>
               </select>
               <label
                 className="
@@ -565,6 +564,51 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                 Select your Activity
               </label>
             </div>
+
+            {/* Plan  */}
+            <b className="font-logo text-2xl text-center my-6">
+              What's your Plan?
+            </b>
+            <div className="relative h-16 w-60 sm:w-72 min-w-[200px]">
+              <select
+                name="plan"
+                value={dietInfos.plan}
+                onChange={handleChange}
+                className="
+                                peer 
+                                h-full w-full
+                                px-3 py-2.5 
+                                rounded-lg border border-blue-gray-200 border-t-transparent outline outline-0 
+                                bg-transparent 
+                                font-sans font-normal text-blue-gray-700 text-sm 
+                                transition-all 
+                                placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 
+                                empty:!bg-red-500 
+                                focus:border-2 focus:border-custom-orange focus:border-t-transparent focus:outline-0 
+                                disabled:border-0 disabled:bg-blue-gray-50
+            ">
+                <option value="none">-</option>
+                <option value="lose_weight">Lose Weight</option>
+                <option value="maintain">Maintain</option>
+                <option value="build_muscle">Build Muscle</option>
+              </select>
+              <label
+                className="
+                                before:content[' '] after:content[' '] pointer-events-none absolute select-none 
+                                left-0 -top-1.5 
+                                flex h-full w-full 
+                                text-[11px] font-normal text-blue-gray-400 leading-tight
+                                transition-all 
+                                before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all 
+                                after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all 
+                                peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent 
+                                peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-custom-orange peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-custom-orange peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-custom-orange 
+                                peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
+              >
+                Select your Plan
+              </label>
+            </div>
+            
           </div>
 
           <div className="flex justify-evenly items-center w-full my-12">
@@ -589,8 +633,8 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
       {/* Recap Box  */}
       {stepper[0] === 5 && (
-        <div className="flex flex-col justify-around items-center h-full">
-          <b className="font-logo text-3xl text-center my-12">Recap</b>
+        <div className="flex flex-col justify-between items-center h-full">
+          <b className="font-logo text-3xl text-center my-6 z-10">Recap</b>
 
           <div
             className="flex-2 flex justify-center items-center"
@@ -613,7 +657,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   >
                     Age
                   </th>
-                  <td className="px-6 py-4">{dietInfos.age || "No Entry"}</td>
+                  <td className="px-6 py-4 truncate">{dietInfos.age || "No Entry"}</td>
                   <td className="px-6 py-4">
                     <b
                       className="font-medium text-custom-orange hover:underline cursor-pointer"
@@ -639,7 +683,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   >
                     Sex
                   </th>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 truncate">
                     {capitalizeFirstLetter(dietInfos.sex) || "No Entry"}
                   </td>
                   <td className="px-6 py-4">
@@ -667,7 +711,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   >
                     Height
                   </th>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 truncate">
                     {dietInfos.height || "No Entry"}
                   </td>
                   <td className="px-6 py-4">
@@ -695,7 +739,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   >
                     Weight
                   </th>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 truncate">
                     {dietInfos.weight || "No Entry"}
                   </td>
                   <td className="px-6 py-4">
@@ -710,7 +754,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
                 <tr
                   className={
-                    "bg-white " +
+                    "border-b bg-white " +
                     (activityError && "animate-wiggle border-b border-red-500")
                   }
                 >
@@ -723,11 +767,37 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   >
                     Activity
                   </th>
-                  <td className="px-6 py-4">{myActivity || "No Entry"}</td>
+                  <td className="px-6 py-4 truncate">{sliceUnderscore(dietInfos.activity) || "No Entry"}</td>
                   <td className="px-6 py-4">
                     <b
                       className="font-medium text-custom-orange hover:underline cursor-pointer"
-                      onClick={() => setStepper([4, stepper[0]])}
+                      onClick={() => setStepper([4, stepper[0]])} // Weird Problem when going from 5 to 4 in mobile !!
+                    >
+                      Edit
+                    </b>
+                  </td>
+                </tr>
+                
+                <tr
+                  className={
+                    "bg-gray-50 " +
+                    (planError && "animate-wiggle border-b border-red-500")
+                  }
+                >
+                  <th
+                    scope="row"
+                    className={
+                      "text-center px-6 py-4 text-gray-900 whitespace-nowrap " +
+                      (planError && "text-red-500 font-black")
+                    }
+                  >
+                    Plan
+                  </th>
+                  <td className="px-6 py-4 truncate">{sliceUnderscore(dietInfos.plan) || "No Entry"}</td>
+                  <td className="px-6 py-4">
+                    <b
+                      className="font-medium text-custom-orange hover:underline cursor-pointer"
+                      onClick={() => setStepper([4, stepper[0]])} // Weird Problem when going from 5 to 4 in mobile !!
                     >
                       Edit
                     </b>
@@ -758,7 +828,8 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                     sexError ||
                     heightError ||
                     weightError ||
-                    activityError) &&
+                    activityError ||
+                    planError) &&
                     "cursor-not-allowed")
                 }
                 disabled={
@@ -766,7 +837,8 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   sexError ||
                   heightError ||
                   weightError ||
-                  activityError
+                  activityError ||
+                  planError
                 }
               >
                 Apply

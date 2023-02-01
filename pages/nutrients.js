@@ -21,21 +21,22 @@ function calculateNutrients(age, sex, height, weight, activity) {
     BMR = 655.1 + 9.563 * weight + 1.85 * height - 4.676 * age;
   }
 
+
   // Calculate Calories
   var kCalories;
   if (activity === "sedentary") {
     kCalories = 1.2 * BMR;
   }
-  if (activity === "light") {
+  if (activity === "lightly_active") {
     kCalories = 1.375 * BMR;
   }
-  if (activity === "active") {
+  if (activity === "moderately_active") {
     kCalories = 1.55 * BMR;
   }
-  if (activity === "very") {
+  if (activity === "very_active") {
     kCalories = 1.725 * BMR;
   }
-  if (activity === "super") {
+  if (activity === "super_active") {
     kCalories = 1.9 * BMR;
   }
 
@@ -137,7 +138,7 @@ export default function Nutrients() {
   const [vitamins, setVitamins] = useState();
   const { user, setUser } = useContext(User_data);
   const applyInfos = async (dietInfos) => {
-    const { age, sex, height, weight, activity } = dietInfos;
+    const { age, sex, height, weight, activity, plan } = dietInfos;
     // localStorage.setItem("dietInfos", JSON.stringify(dietInfos));
     user &&
       (await axios.put("/api/profile", dietInfos, {
@@ -145,12 +146,12 @@ export default function Nutrients() {
           "Content-Type": "application/json",
         },
       }));
-    const nutris = calculateNutrients(age, sex, height, weight, activity);
+    const nutris = calculateNutrients(age, sex, height, weight, activity, plan);
     //Calculate Nutrients
     setNutrients(nutris);
     // user && (await axios.put("/api/nutri", nutris));
     //Calculate Vitamins
-    setVitamins(calculateVitamins(age, sex, height, weight, activity));
+    setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
 
     setIsInfosApplied(true);
   };

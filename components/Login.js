@@ -14,7 +14,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
   const [error, setError] = useState({ email: "", password: "" });
 
   const handleSubmit = async (e) => {
-    event.preventDefault();
+    e.preventDefault();
 
     const data = {
       email: user.email,
@@ -31,7 +31,8 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         setOpen(false);
         localStorage.setItem("user", JSON.stringify(response.data));
         const dietInfos = await axios.get("/api/profile").then((res) => {
-          localStorage.setItem("dietInfos", JSON.stringify(res.data));
+          const localData = {...res.data, state: "logged", age: "", sex: "", weight: "", height: "", activity: "", plan: ""}
+          localStorage.setItem("dietInfos", JSON.stringify(localData));
         });
         setUser(response.data);
       })

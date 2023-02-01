@@ -42,7 +42,8 @@ export default function Register({ setLogin, setAuth, setOpen }) {
             setOpen(false);
             localStorage.setItem("user", JSON.stringify(response.data));
             const dietInfos = await axios.get("/api/profile").then((res) => {
-              localStorage.setItem("dietInfos", JSON.stringify(res.data));
+              const localData = {...res.data, state: "logged", age: "", sex: "", weight: "", height: "", activity: "", plan: ""}
+              localStorage.setItem("dietInfos", JSON.stringify(localData));
             });
             setUser(response.data);
           })

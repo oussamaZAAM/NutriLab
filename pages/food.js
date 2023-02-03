@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import server from '/config'
+import server from "/config";
 
 import {
   MdOutlineAddCircle,
@@ -18,14 +18,14 @@ const Food = ({ user, food }) => {
 
   //Functions
   const cancelPendingFood = () => {
-    setAddedFood({...addedFood, removingFade: true});
-    setTimeout(()=>setAddedFood(), 250);
-  }
+    setAddedFood({ ...addedFood, removingFade: true });
+    setTimeout(() => setAddedFood(), 250);
+  };
 
   const addPendingFood = () => {
-    if (addedFood.size>0) {
-      setAddedFood({...addedFood, addingFade: true});
-      setTimeout(()=>{
+    if (addedFood.size > 0) {
+      setAddedFood({ ...addedFood, addingFade: true });
+      setTimeout(() => {
         // setEatenFoodList(prevList => {
         //   prevList.unshift(addedFood);
         //   return prevList;
@@ -35,85 +35,92 @@ const Food = ({ user, food }) => {
       }, 250);
     } else {
       setWiggle(true);
-      setTimeout(()=>{
-        setWiggle(false)
-      }, 1000)
+      setTimeout(() => {
+        setWiggle(false);
+      }, 1000);
     }
-  }
+  };
 
   const deleteFood = (index) => {
     // setEatenFoodList(prevList => {
     //   prevList[index].removingFade = true;
     //   return prevList;
     // })
-    setEatenFoodList(prevList => {
+    setEatenFoodList((prevList) => {
       const newList = [];
-      for (let i=0 ; i<prevList.length ; i++) {
-        if (i === index){
+      for (let i = 0; i < prevList.length; i++) {
+        if (i === index) {
           const editedFood = prevList[i];
           editedFood.removingFade = true;
-          newList.push(editedFood)
+          newList.push(editedFood);
         } else {
-          newList.push(prevList[i])
+          newList.push(prevList[i]);
         }
       }
       return newList;
-    })
-    setTimeout(()=>{
-      setEatenFoodList(prevList => {
-        const newList = prevList.filter(food => prevList.indexOf(food) !== index);
+    });
+    setTimeout(() => {
+      setEatenFoodList((prevList) => {
+        const newList = prevList.filter(
+          (food) => prevList.indexOf(food) !== index
+        );
         return newList;
-      })
-    }, 250)
-  }
+      });
+    }, 250);
+  };
 
   // Mapping over the list of Searched Food
   const searchedFood = food.map((food) => {
     return (
-      <a href="#addedFood" className="w-full">
+      <a href="#addedFood" className="w-full" key={food.name}>
         <p
-          key={food.id}
           className="
                       font-paragraph font-bold text-ms indent-4
                       p-2 w-full
                       border-b-2 border-x-2 rounded-lg
                       hover:bg-gray-100 hover:animate-pulse cursor-pointer
                     "
-          onClick={()=>setAddedFood({...food, addingFade: false, removingFade: false})}
+          onClick={() =>
+            setAddedFood({ ...food, addingFade: false, removingFade: false })
+          }
         >
           {food.name}
         </p>
       </a>
-    )
-  })
+    );
+  });
 
-  // Mapping over the List of Eaten Food 
+  // Mapping over the List of Eaten Food
   const eatenFood = eatenFoodList.map((food, index) => {
     return (
       <div
-        key={food.id}
+        key={food.name}
         className={
-          "flex flex-col xs:flex-row justify-end items-center w-full "+(food.removingFade ? 'transition duration-300 scale-y-0 scale-x-100 opacity-0' : 'transition duration-500 opacity-100')+' '+
+          "flex flex-col xs:flex-row justify-end items-center w-full " +
+          (food.removingFade
+            ? "transition duration-300 scale-y-0 scale-x-100 opacity-0"
+            : "transition duration-500 opacity-100") +
+          " " +
           styles.dropshadow
         }
       >
-        <img
+        {/* <img
           src={food.img}
           alt="omurice"
           className="h-16 w-16 my-2 mx-2 md:mx-4"
-        />
+        /> */}
 
         <div className="flex flex-col justify-center items-start w-full xs:ml-12">
           <b className="font-logo font-bold text-xl text-center xs:text-left truncate text-custom-orange w-full my-4">
             {food.name}
           </b>
           <div className="flex flex-col self-center items-start xs:w-full">
-            <p className="font-paragraph text-xs">
+            {/* <p className="font-paragraph text-xs">
               Category:{" "}
               <span className="font-paragraph font-bold text-xs">
                 {food.category}
               </span>
-            </p>
+            </p> */}
             <p className="font-paragraph text-xs">
               How Much:{" "}
               <span className="font-paragraph font-bold text-xs">
@@ -124,10 +131,7 @@ const Food = ({ user, food }) => {
         </div>
 
         <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
-          <button 
-            className="my-2 md:mx-2"
-            onClick={()=>deleteFood(index)}
-          >
+          <button className="my-2 md:mx-2" onClick={() => deleteFood(index)}>
             <MdOutlineRemoveCircle
               className=" hover:fill-black transition duration-500"
               size={50}
@@ -136,10 +140,10 @@ const Food = ({ user, food }) => {
           </button>
         </div>
       </div>
-    )
-  })
+    );
+  });
 
-// ---------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------
 
   return (
     <div>
@@ -184,88 +188,98 @@ const Food = ({ user, food }) => {
             </div>
 
             {/* Adding Field */}
-            {addedFood && <div
-              id='addedFood'
-              className={
-                "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 transition duration-500 "+
-                (addedFood.removingFade ? 'transition duration-300 scale-y-0 scale-x-100 opacity-0' : ' opacity-100')+
-                (addedFood.addingFade ? 'transition duration-300 translate-y-6 opacity-0' : ' opacity-100')+
-                ' '+styles.dropshadow
-              }
-            >
-              <img
-                src={addedFood.img}
-                alt="beef"
-                className="h-20 w-20 my-4 mx-4 md:mx-8"
-              />
+            {addedFood && (
+              <div
+                id="addedFood"
+                className={
+                  "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 transition duration-500 " +
+                  (addedFood.removingFade
+                    ? "transition duration-300 scale-y-0 scale-x-100 opacity-0"
+                    : " opacity-100") +
+                  (addedFood.addingFade
+                    ? "transition duration-300 translate-y-6 opacity-0"
+                    : " opacity-100") +
+                  " " +
+                  styles.dropshadow
+                }
+              >
+                {/* <img
+                  src={addedFood.img}
+                  alt="beef"
+                  className="h-20 w-20 my-4 mx-4 md:mx-8"
+                /> */}
 
-              <div className="flex flex-col justify-center items-start w-full">
-                <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
-                  {addedFood.name}
-                </b>
-                <div className="flex flex-col self-center items-start xs:w-full">
-                  <p className="font-paragraph text-xs">
-                    Category:{" "}
-                    <span className="font-paragraph font-bold text-xs">
-                      {addedFood.category}
-                    </span>
-                  </p>
-                  <div className="flex justify-start items-center">
-                    <p className="font-paragraph text-xs">
-                      How much did you eat:{" "}
-                    </p>
-                    <input
-                      type="number"
-                      className={`text-gray-900 text-sm indent-2
+                <div className="flex flex-col justify-center items-start w-full">
+                  <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
+                    {addedFood.name}
+                  </b>
+                  <div className="flex flex-col self-center items-start xs:w-full">
+                    {/* <p className="font-paragraph text-xs">
+                      Category:{" "}
+                      <span className="font-paragraph font-bold text-xs">
+                        {addedFood.category}
+                      </span>
+                    </p> */}
+                    <div className="flex justify-start items-center">
+                      <p className="font-paragraph text-xs">
+                        How much did you eat:{" "}
+                      </p>
+                      <input
+                        type="number"
+                        className={
+                          `text-gray-900 text-sm indent-2
                                 bg-gray-50 border border-gray-300 rounded-lg focus:ring-custom-orange focus:border-custom-orange
-                                block w-20 ml-2 `+(wiggle ? 'border-red-500 animate-wiggle': 'border-gray-300')}
-                      placeholder="In grams"
-                      value={addedFood.size || ''}
-                      onChange={(e)=>setAddedFood({...addedFood, size: e.target.value})}
-                    />
+                                block w-20 ml-2 ` +
+                          (wiggle
+                            ? "border-red-500 animate-wiggle"
+                            : "border-gray-300")
+                        }
+                        placeholder="In grams"
+                        value={addedFood.size || ""}
+                        onChange={(e) =>
+                          setAddedFood({ ...addedFood, size: e.target.value })
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
-                <button 
-                  className="my-2 md:mx-2"
-                  onClick={addPendingFood}
-                >
-                  <MdOutlineAddCircle
-                    className=" hover:fill-black transition duration-500"
-                    size={50}
-                    color={"#FF9351"}
-                  />
-                </button>
-                <button 
-                  className="my-2 md:mx-2"
-                  onClick={cancelPendingFood}
-                >
-                  <MdOutlineCancel
-                    className=" hover:fill-black transition duration-500"
-                    size={45}
-                    color={"#FF9351"}
-                  />
-                </button>
+                <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
+                  <button className="my-2 md:mx-2" onClick={addPendingFood}>
+                    <MdOutlineAddCircle
+                      className=" hover:fill-black transition duration-500"
+                      size={50}
+                      color={"#FF9351"}
+                    />
+                  </button>
+                  <button className="my-2 md:mx-2" onClick={cancelPendingFood}>
+                    <MdOutlineCancel
+                      className=" hover:fill-black transition duration-500"
+                      size={45}
+                      color={"#FF9351"}
+                    />
+                  </button>
+                </div>
               </div>
-            </div>}
+            )}
 
-            <div className={`
-                            w-full border-b-2 border-custom-orange my-4 w-11/12 `+
-                            (eatenFoodList.length ? 'transition duration-300 scale-x-100' : 'transition duration-300 scale-x-0')
-                            }></div>
+            <div
+              className={
+                `
+                            w-full border-b-2 border-custom-orange my-4 w-11/12 ` +
+                (eatenFoodList.length
+                  ? "transition duration-300 scale-x-100"
+                  : "transition duration-300 scale-x-0")
+              }
+            ></div>
 
             <div className="flex justify-center items-center rounded-2 dropshadow my-4 w-11/12">
               <div className="grid grid-cols-2 xs:flex xs:flex-col justify-center items-center gap-2 w-full">
-
                 {eatenFood}
-
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

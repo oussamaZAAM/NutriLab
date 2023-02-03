@@ -192,7 +192,7 @@ const Food = ({ user, food }) => {
             </div>
 
             {/* Adding Field */}
-            {addedFood.name !== undefined && (
+            {addedFood !== undefined && addedFood.name !== undefined && (
               <div
                 id="addedFood"
                 className={

@@ -11,6 +11,7 @@ import getCookie from "next-cookies";
 
 import { User_data } from "../context/context";
 import { useContext } from "react";
+
 function calculateNutrients(age, sex, height, weight, activity) {
   // Calculate BMR : Harris-Benedict Calculator
   var BMR;
@@ -72,14 +73,14 @@ function calculateNutrients(age, sex, height, weight, activity) {
   var salt = 6;
 
   return {
-    kCalories: kCalories,
-    proteins: proteins,
-    fats: fats,
-    carbs: carbs,
-    iron: iron,
-    fiber: fiber,
-    sugar: sugar,
-    salt: salt,
+    kCalories: Math.round(kCalories),
+    proteins: Math.round(proteins),
+    fats: Math.round(fats),
+    carbs: Math.round(carbs),
+    iron: Math.round(iron),
+    fiber: Math.round(fiber),
+    sugar: Math.round(sugar),
+    salt: Math.round(salt),
   };
 }
 
@@ -148,7 +149,7 @@ export default function Nutrients() {
     const nutris = calculateNutrients(age, sex, height, weight, activity, plan);
     //Calculate Nutrients
     setNutrients(nutris);
-    // user && (await axios.put("/api/nutri", nutris));
+    user && (await axios.put("/api/nutri", nutris));
     //Calculate Vitamins
     setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
 

@@ -29,6 +29,7 @@ model NutriInfo {
   weight   String?
   sex      String?
   activity String?
+  plan     String?
   user     User    @relation(fields: [userId], references: [id])
   userId   Int     @unique
 }

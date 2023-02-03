@@ -21,7 +21,6 @@ function calculateNutrients(age, sex, height, weight, activity) {
     BMR = 655.1 + 9.563 * weight + 1.85 * height - 4.676 * age;
   }
 
-
   // Calculate Calories
   var kCalories;
   if (activity === "sedentary") {
@@ -137,7 +136,6 @@ export default function Nutrients() {
   const [nutrients, setNutrients] = useState();
   const [vitamins, setVitamins] = useState();
   const { user, setUser } = useContext(User_data);
-  console.log(user)
   const applyInfos = async (dietInfos) => {
     const { age, sex, height, weight, activity, plan } = dietInfos;
     // localStorage.setItem("dietInfos", JSON.stringify(dietInfos));

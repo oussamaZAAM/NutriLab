@@ -13,7 +13,8 @@ import styles from "../styles/Home.module.css";
 
 const Food = ({ user, food }) => {
   const [wiggle, setWiggle] = useState(false);
-  const [addedFood, setAddedFood] = useState();
+  const [addedFood, setAddedFood] = useState({});
+  const [searchedWord, setSearchedWord] = useState("");
   const [eatenFoodList, setEatenFoodList] = useState([]);
 
   //Functions
@@ -40,7 +41,6 @@ const Food = ({ user, food }) => {
       }, 1000);
     }
   };
-
   const deleteFood = (index) => {
     // setEatenFoodList(prevList => {
     //   prevList[index].removingFade = true;
@@ -71,23 +71,25 @@ const Food = ({ user, food }) => {
 
   // Mapping over the list of Searched Food
   const searchedFood = food.map((food) => {
-    return (
-      <a href="#addedFood" className="w-full" key={food.name}>
-        <p
-          className="
+    if (searchedWord === "" || food.name.toLowerCase().includes(searchedWord)) {
+      return (
+        <a href="#addedFood" className="w-full" key={food.name}>
+          <p
+            className="
                       font-paragraph font-bold text-ms indent-4
                       p-2 w-full
                       border-b-2 border-x-2 rounded-lg
                       hover:bg-gray-100 hover:animate-pulse cursor-pointer
                     "
-          onClick={() =>
-            setAddedFood({ ...food, addingFade: false, removingFade: false })
-          }
-        >
-          {food.name}
-        </p>
-      </a>
-    );
+            onClick={() =>
+              setAddedFood({ ...food, addingFade: false, removingFade: false })
+            }
+          >
+            {food.name}
+          </p>
+        </a>
+      );
+    }
   });
 
   // Mapping over the List of Eaten Food
@@ -178,17 +180,19 @@ const Food = ({ user, food }) => {
             <div className="flex flex-col justify-center items-center my-6 w-8/12">
               <input
                 type="text"
+                onChange={(e) => setSearchedWord(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm indent-2 rounded-lg focus:ring-custom-orange focus:border-custom-orange block w-full p-2.5"
                 placeholder="Search ingredients to add"
               />
-
-              <div className="flex flex-col justify-center items-start w-full">
-                {searchedFood}
+              <div className="overflow-y-auto h-64">
+                <div className="flex flex-col justify-center items-start w-full">
+                  {searchedFood}
+                </div>
               </div>
             </div>
 
             {/* Adding Field */}
-            {addedFood && (
+            {addedFood.name !== undefined && (
               <div
                 id="addedFood"
                 className={

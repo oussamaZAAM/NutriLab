@@ -106,14 +106,8 @@ const Food = ({ user, food }) => {
           styles.dropshadow
         }
       >
-        {/* <img
-          src={food.img}
-          alt="omurice"
-          className="h-16 w-16 my-2 mx-2 md:mx-4"
-        /> */}
-
-        <div className="flex flex-col justify-center items-start w-full xs:ml-12">
-          <b className="font-logo font-bold text-xl text-center xs:text-left truncate text-custom-orange w-full my-4">
+        <div className="flex flex-col justify-center items-start w-full truncate xs:ml-12">
+          <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4 cursor-pointer">
             {food.name}
           </b>
           <div className="flex flex-col self-center items-start xs:w-full">

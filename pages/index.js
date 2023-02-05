@@ -41,11 +41,14 @@ export default function Home({ currentUser }) {
               </a>
             </div>
             <p className="text-md text-left font-paragraph indent-2">
-              Proin id cursus sem. Suspendisse eu ligula a tellus euismod
-              cursus. Donec ut neque lorem. Sed ac aliquam erat. Vestibulum
-              neque magna, congue a volutpat at, porttitor at ligula. Donec ut
-              neque lorem. Sed ac aliquam erat. Vestibulum neque magna, congue a
-              volutpat at, porttitor at ligula.
+              NutriLab uses science to help you find your optimized combination
+              of food that will make you meet your daily needs of nutrients
+              based on your body, activity, plan and food preferences.
+            </p>
+            <p className="text-md text-left font-paragraph indent-2">
+              <b className="underline">Measure your daily need of nutrients</b>,{" "}
+              <b className="underline">Balance your food</b> and{" "}
+              <b className="underline">let us help you find today's meal</b>.
             </p>
             <div className="flex justify-end items-center w-full">
               <Link href="/nutrients">
@@ -83,12 +86,12 @@ export default function Home({ currentUser }) {
                   Customized Nutrients
                 </b>
                 <p className="font-paragraph m-4">
-                  Donec ut neque lorem. Sed ac aliquam erat. Vestibulum neque
-                  magna, congue a volutpat at, porttitor at ligula.
+                  Measure your daily needed nutrients based on your age, sex,
+                  height, weight, activity level and your personal plan.
                 </p>
                 <Link href="/nutrients">
                   <MdDoubleArrow
-                    className="cursor-pointer m-4 hover:fill-custom-orange transition duration-300"
+                    className="cursor-pointer mx-4 lg:m-4 hover:fill-custom-orange transition duration-300"
                     size={50}
                   />
                 </Link>
@@ -118,12 +121,13 @@ export default function Home({ currentUser }) {
                   Food Generated
                 </b>
                 <p className="font-paragraph m-4">
-                  Neque lorem. Sed ac aliquam erat. Vestibulum neque magna,
-                  congue a
+                  Based on your daily intake of food, we will provide you the
+                  best combination of food to meet your daily needs of
+                  nutrients.
                 </p>
                 <Link href="/food">
                   <MdDoubleArrow
-                    className="cursor-pointer m-4 hover:fill-custom-orange transition duration-300"
+                    className="cursor-pointer mx-4 lg:m-4 hover:fill-custom-orange transition duration-300"
                     size={50}
                   />
                 </Link>
@@ -141,7 +145,7 @@ export default function Home({ currentUser }) {
                   Suggested Meals
                 </b>
                 <p className="font-paragraph m-4">
-                  Volutpat at, porttitor at ligula.
+                  Using the balanced combination of food generated, we can help you find today's meal.
                 </p>
               </div>
               <div
@@ -174,8 +178,7 @@ export default function Home({ currentUser }) {
                   />
                 </a>
                 <p className="text-center font-paragraph max-w-xs">
-                  Vestibulum neque magna, congue a volutpat at, porttitor at
-                  ligula.
+                  Helps you measure your calories and nutrients needed.
                 </p>
               </div>
               <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
@@ -187,9 +190,8 @@ export default function Home({ currentUser }) {
                   />
                 </a>
                 <p className="text-center font-paragraph max-w-xs">
-                  Donec ut neque lorem. Sed ac aliquam erat. Vestibulum neque
-                  magna, congue a volutpat at, porttitor at ligula. Donec ut
-                  neque lorem
+                  Helps you find the most balanced combination of food based on
+                  your preferences.
                 </p>
               </div>
               <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
@@ -201,9 +203,8 @@ export default function Home({ currentUser }) {
                   />
                 </a>
                 <p className="text-center font-paragraph max-w-xs">
-                  Donec ut neque lorem. Sed ac aliquam erat. Vestibulum neque
-                  magna, congue a volutpat at, porttitor at ligula. Donec ut
-                  neque lorem
+                  Suggests for you the possible meals based on the generated
+                  combination of balanced food.
                 </p>
               </div>
             </div>

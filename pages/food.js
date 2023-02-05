@@ -74,7 +74,7 @@ const Food = ({ user, food }) => {
     if (searchedWord === "" || food.name.toLowerCase().includes(searchedWord)) {
       return (
         <a href="#addedFood" className="w-full" key={food.name}>
-          <p
+          {/* <p
             className="
                       font-paragraph font-bold text-ms indent-4
                       p-2 w-full
@@ -85,8 +85,60 @@ const Food = ({ user, food }) => {
               setAddedFood({ ...food, addingFade: false, removingFade: false })
             }
           >
-            {food.name}
-          </p>
+              {searchedWord !== '' 
+              ?
+                (<span>food.name</span>)
+                +food.name.split(new RegExp(searchedWord, 'i') )[1] 
+              : food.name}
+          </p> */}
+          {searchedWord !== '' 
+              ? <div className="
+                                indent-4 w-full
+                                border-b-2 border-x-2 rounded-lg p-2 
+                                hover:bg-gray-100 hover:animate-pulse cursor-pointer">
+                <span
+                  className="
+                            font-paragraph font-bold text-ms 
+                          "
+                  onClick={() =>
+                    setAddedFood({ ...food, addingFade: false, removingFade: false })
+                  }
+                >
+                  {food.name.split(new RegExp(searchedWord, 'i') )[0]}
+                </span>
+                <span 
+                  className="
+                            font-paragraph font-black text-ms text-custom-orange
+                          "
+                  onClick={() =>
+                    setAddedFood({ ...food, addingFade: false, removingFade: false })
+                  }>
+                  {searchedWord}</span>
+                <span
+                  className="
+                            font-paragraph font-bold text-ms
+                          "
+                  onClick={() =>
+                    setAddedFood({ ...food, addingFade: false, removingFade: false })
+                  }
+                >
+                  {food.name.split(new RegExp(searchedWord, 'i') )[1]}
+                </span>
+              </div>
+              : <p
+                  className="
+                            font-paragraph font-bold text-ms indent-4
+                            p-2 w-full
+                            border-b-2 border-x-2 rounded-lg
+                            hover:bg-gray-100 hover:animate-pulse cursor-pointer
+                          "
+                  onClick={() =>
+                    setAddedFood({ ...food, addingFade: false, removingFade: false })
+                  }
+                >
+                  {food.name}
+                </p>
+            }
         </a>
       );
     }

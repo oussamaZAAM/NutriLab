@@ -347,7 +347,7 @@ export const getStaticProps = async (context) => {
   const food = await res.data;
 
   const { NutriLab } = getCookie(context);
-  const user = isAuthenticated(NutriLab);
+  var user = isAuthenticated(NutriLab);
   if (!user) {
     user = false;
     return {

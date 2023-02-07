@@ -354,16 +354,14 @@ export const getStaticProps = async (context) => {
       props: {
         food,
         user
-      },
-      fallback: false
+      }
     }
   }
   return {
     props: {
       food, 
       user
-    },
-    fallback: false
+    }
   };
 
   // const res = await fetch(`${server}/api/food`);

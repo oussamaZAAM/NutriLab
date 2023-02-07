@@ -68,6 +68,7 @@ export default function Example({ User }) {
                   <Link href="/">
                     <div className="flex flex-shrink-0 items-center rounded-full px-3 py-1 bg-custom-orange">
                       <Image
+                        fill
                         className="block h-8 w-auto p-1"
                         src="https://i.ibb.co/Z8KdKVg/orange-slice-1.png"
                         alt="logo"
@@ -181,6 +182,7 @@ export default function Example({ User }) {
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only">Open user menu</span>
                         <Image
+                          fill
                           className="h-8 w-8 rounded-full"
                           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                           alt=""

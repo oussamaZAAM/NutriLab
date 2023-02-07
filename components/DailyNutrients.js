@@ -20,6 +20,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
           <div className="flex flex-col justify-around items-center | h-36 w-32 | bg-custom-orange rounded my-8">
             <a href="https://imgbb.com/">
               <Image
+                fill
                 className="h-16 w-16 object-cover rounded-full"
                 src="https://i.ibb.co/SV0pn7f/calories.png"
                 alt="calories"
@@ -33,6 +34,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
               <Image
+                fill
                 className="h-12 md:h-16 w-12 md:w-16 object-cover rounded-full"
                 src="https://i.ibb.co/tpN0zCw/carbs.png"
                 alt="carbs"
@@ -44,6 +46,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
               <Image
+                fill
                 className="h-12 md:h-16 w-12 md:w-16 object-cover rounded-full"
                 src="https://i.ibb.co/F3Ljsys/proteins.png"
                 alt="proteins"
@@ -55,6 +58,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
               <Image
+                fill
                 className="h-12 md:h-16 w-12 md:w-16 object-cover rounded-full"
                 src="https://i.ibb.co/R7qRDJx/trans-fats-free.png"
                 alt="Fats"
@@ -66,6 +70,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
               <Image
+                fill
                 className="h-12 md:h-16 w-12 md:w-16 object-cover rounded-full"
                 src="https://i.ibb.co/v4r03Nb/sugar.png"
                 alt="Sugar"
@@ -77,6 +82,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
               <Image
+                fill
                 className="h-12 md:h-16 w-12 md:w-16 object-cover rounded-full"
                 src="https://i.ibb.co/Br75fFj/salt.png"
                 alt="Salt"
@@ -88,6 +94,7 @@ const DailyNutrients = ({nutrients, vitamins}) => {
           <div className="flex flex-col justify-around items-center | h-24 md:h-36 w-20 md:w-32 my-3 | bg-white rounded">
             <a href="https://ibb.co/ZzwQSTR">
               <Image
+                fill
                 className="h-12 md:h-16 w-12 md:w-16 object-cover rounded-full"
                 src="https://i.ibb.co/frvhL9R/fiber.png"
                 alt="Fiber"

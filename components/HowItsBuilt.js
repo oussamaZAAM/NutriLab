@@ -26,7 +26,7 @@ const HowItsBuilt = () => {
           at ligula. Donec ut neque lorem
         </p>
         <div className="flex justify-center items-center rounded-2xl">
-            <Image src="https://i.ibb.co/QJPrPDC/healthy.jpg" alt="healthy" />
+            <Image fill src="https://i.ibb.co/QJPrPDC/healthy.jpg" alt="healthy" />
         </div>
       </div>
     </div>

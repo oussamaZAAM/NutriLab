@@ -35,6 +35,7 @@ export default function Home({ currentUser }) {
             <div className="flex sm:hidden flex-1 justify-center items-center">
               <a href="https://ibb.co/xCyZnfh">
                 <Image
+                  fill
                   className="rounded-lg object-cover h-80 w-96"
                   src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                   alt="science1"
@@ -66,6 +67,7 @@ export default function Home({ currentUser }) {
           <div className="hidden sm:flex flex-1 justify-center items-center my-28 mx-12">
             <a href="https://ibb.co/xCyZnfh">
               <Image
+                fill
                 className="rounded-lg object-cover h-64 md:h-80 w-72 md:w-96"
                 src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                 alt="science1"
@@ -173,6 +175,7 @@ export default function Home({ currentUser }) {
               <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
                 <a href="https://imgbb.com/">
                   <Image
+                    fill
                     className="w-32 h-32 rounded-xl drop-shadow-md my-8"
                     src="https://i.ibb.co/0c2vhFr/nutrients.png"
                     alt="nutrients"
@@ -185,6 +188,7 @@ export default function Home({ currentUser }) {
               <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
                 <a href="https://imgbb.com/">
                   <Image
+                    fill
                     className="w-32 h-32 rounded-xl drop-shadow-md my-8"
                     src="https://i.ibb.co/pJKG4T7/balanced-diet.png"
                     alt="balanced-diet"
@@ -198,6 +202,7 @@ export default function Home({ currentUser }) {
               <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
                 <a href="https://imgbb.com/">
                   <Image
+                    fill
                     className="w-32 h-32 rounded-xl drop-shadow-md my-8"
                     src="https://i.ibb.co/s5dkt00/recommended-food.png"
                     alt="recommended-food"

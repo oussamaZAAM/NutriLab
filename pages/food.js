@@ -12,6 +12,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
+import axios from "axios";
 
 const Food = ({ user, food }) => {
   const [wiggle, setWiggle] = useState(false);
@@ -351,8 +352,8 @@ export default Food;
 // };
 
 Food.getInitialProps = async (context) => {
-  const res = await fetch(`${process.env.SERVER}/api/food`);
-  const food = await res.json();
+  const res = await axios.get(`${process.env.SERVER}/api/food`);
+  const food = await res.data;
 
   const { NutriLab } = getCookie(context);
   const user = isAuthenticated(NutriLab);

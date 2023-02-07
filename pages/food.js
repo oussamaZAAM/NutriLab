@@ -351,7 +351,7 @@ export default Food;
 // };
 
 Food.getInitialProps = async (context) => {
-  const res = await fetch(`${server}/api/food`);
+  const res = await fetch(`${process.env.SERVER}/api/food`);
   const food = await res.json();
 
   const { NutriLab } = getCookie(context);

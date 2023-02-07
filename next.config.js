@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ['i.ibb.co', 'images.unsplash.com'],
   },
+  env: {
+    SERVER: process.env.SERVER,
+  },
 }
 
 module.exports = nextConfig

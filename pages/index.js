@@ -38,6 +38,7 @@ export default function Home({ currentUser }) {
                 <Image
                   width={1000}
                   height={1000}
+                  priority
                   className="rounded-lg object-cover h-80 w-96"
                   src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                   alt="science1"

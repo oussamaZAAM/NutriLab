@@ -21,8 +21,9 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start w-75 p-4">
           <div className="flex flex-1 flex-col justify-start items-start h-32 my-4 xs:mx-8">
             <div className="flex mb-2">
-                <img
-                    fill
+                <Image
+                    width={1000}
+                    height={1000}
                     className="block h-8 w-auto mx-2"
                     src="https://i.ibb.co/Z8KdKVg/orange-slice-1.png"
                     alt="Your Company"

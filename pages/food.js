@@ -253,7 +253,7 @@ const Food = ({ user, food }) => {
                   styles.dropshadow
                 }
               >
-                {/* <img
+                {/* <Image
                   fill
                   src={addedFood.img}
                   alt="beef"

@@ -341,26 +341,49 @@ const Food = ({ user, food }) => {
 
 export default Food;
 
-// export const getStaticProps = async () => {
-//   const res = await fetch(`${server}/api/food`);
-//   const food = await res.json();
-//   return {
-//     props: {
-//       food,
-//     },
-//   };
-// };
-
-Food.getInitialProps = async (context) => {
-  const url = process.env.VERCEL_ENV === 'production' ? '' : process.env.SERVER;
-  console.log(url)
+export const getStaticProps = async (context) => {
+  const url = (process.env.VERCEL_ENV === 'production' ? '' : process.env.SERVER);
   const res = await axios.get(url+'/api/food');
   const food = await res.data;
 
   const { NutriLab } = getCookie(context);
   const user = isAuthenticated(NutriLab);
-  if (!user) {
-    return { user: false, food: food };
-  }
-  return { user: user, food: food };
+  // if (!user) {
+  //   user = false;
+  //   return {
+  //     props: {
+  //       food,
+  //       user
+  //     }
+  //   }
+  // }
+  return {
+    props: {
+      food, 
+      user
+    }
+  };
+
+  // const res = await fetch(`${server}/api/food`);
+  // const food = await res.json();
+  // return {
+  //   props: {
+  //     food,
+  //   },
+  // };
 };
+
+// Food.getInitialProps = async (context) => {
+
+//   const url = (process.env.VERCEL_ENV === 'production' ? '' : process.env.SERVER);
+//   const res = await axios.get(url+'/api/food');
+//   const food = await res.data;
+
+//   const { NutriLab } = getCookie(context);
+//   const user = isAuthenticated(NutriLab);
+//   if (!user) {
+//     return { user: false, food: food };
+//   }
+//   return { user: user, food: food };
+// };
+

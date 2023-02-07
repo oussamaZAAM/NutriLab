@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import server from "/config";
 import getCookie from "next-cookies";
-import isAuthenticated from "./api/Auth";
+import isAuthenticated from "./api/Auth"; 
 
 import {
   MdOutlineAddCircle,
@@ -340,16 +340,24 @@ const Food = ({ user, food }) => {
 
 export default Food;
 
-export const getStaticProps = async (context) => {
+// export const getStaticProps = async () => {
+//   const res = await fetch(`${server}/api/food`);
+//   const food = await res.json();
+//   return {
+//     props: {
+//       food,
+//     },
+//   };
+// };
+
+Food.getInitialProps = async (context) => {
   const res = await fetch(`${server}/api/food`);
   const food = await res.json();
 
   const { NutriLab } = getCookie(context);
   const user = isAuthenticated(NutriLab);
-  return {
-    props: {
-      food,
-      user
-    },
-  };
+  if (!user) {
+    return { user: false, food: food };
+  }
+  return { user: user, food: food };
 };

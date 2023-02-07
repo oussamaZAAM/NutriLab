@@ -5,7 +5,7 @@ const nextConfig = {
     domains: ['i.ibb.co', 'images.unsplash.com'],
   },
   env: {
-    SERVER: process.env.SERVER,
+    VERCEL_URL: process.env.VERCEL_URL,
   },
 }
 

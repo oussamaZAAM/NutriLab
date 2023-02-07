@@ -348,15 +348,15 @@ export const getStaticProps = async (context) => {
 
   const { NutriLab } = getCookie(context);
   const user = isAuthenticated(NutriLab);
-  // if (!user) {
-  //   user = false;
-  //   return {
-  //     props: {
-  //       food,
-  //       user
-  //     }
-  //   }
-  // }
+  if (!user) {
+    user = false;
+    return {
+      props: {
+        food,
+        user
+      }
+    }
+  }
   return {
     props: {
       food, 

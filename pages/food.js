@@ -352,7 +352,7 @@ export default Food;
 // };
 
 Food.getInitialProps = async (context) => {
-  const res = await axios.get('https://nutrilab.vercel.app/api/food');
+  const res = await axios.get(process.env.SERVER+'/api/food');
   const food = await res.data;
 
   const { NutriLab } = getCookie(context);

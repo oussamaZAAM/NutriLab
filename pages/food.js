@@ -73,7 +73,7 @@ const Food = ({ user, food }) => {
   };
 
   // Mapping over the list of Searched Food
-  const searchedFood = food && food.map((food) => {
+  const searchedFood = (!food ? null : food.map((food) => {
     if (searchedWord === "" || food.name.toLowerCase().includes(searchedWord)) {
       return (
         <a href="#addedFood" className="w-full" key={food.name}>
@@ -145,7 +145,7 @@ const Food = ({ user, food }) => {
         </a>
       );
     }
-  });
+  }));
 
   // Mapping over the List of Eaten Food
   const eatenFood = eatenFoodList.map((food, index) => {
@@ -204,7 +204,7 @@ const Food = ({ user, food }) => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
 
-      <Navbar User={user && user} />
+      <Navbar User={user ? user : null} />
 
       <div className="grid grid-cols-8 justify-items-center">
         <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | max-w-5xl mx-4">
@@ -354,14 +354,16 @@ export const getStaticProps = async (context) => {
       props: {
         food,
         user
-      }
+      },
+      fallback: false
     }
   }
   return {
     props: {
       food, 
       user
-    }
+    },
+    fallback: false
   };
 
   // const res = await fetch(`${server}/api/food`);

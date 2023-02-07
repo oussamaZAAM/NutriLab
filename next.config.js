@@ -7,6 +7,14 @@ const nextConfig = {
   env: {
     SERVER: process.env.SERVER,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://nutrilab.vercel.app/:path*',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

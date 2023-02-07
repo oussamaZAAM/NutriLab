@@ -73,7 +73,7 @@ const Food = ({ user, food }) => {
   };
 
   // Mapping over the list of Searched Food
-  const searchedFood = food.map((food) => {
+  const searchedFood = food && food.map((food) => {
     if (searchedWord === "" || food.name.toLowerCase().includes(searchedWord)) {
       return (
         <a href="#addedFood" className="w-full" key={food.name}>
@@ -204,7 +204,7 @@ const Food = ({ user, food }) => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
 
-      <Navbar User={user} />
+      <Navbar User={user && user} />
 
       <div className="grid grid-cols-8 justify-items-center">
         <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | max-w-5xl mx-4">

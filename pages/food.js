@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import server from "/config";
 import getCookie from "next-cookies";
 import isAuthenticated from "./api/Auth"; 
@@ -13,12 +13,15 @@ import {
 import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
+import { User_data } from "../context/context";
 
-const Food = ({ user, food }) => {
+const Food = ({ food }) => {
   const [wiggle, setWiggle] = useState(false);
   const [addedFood, setAddedFood] = useState({});
   const [searchedWord, setSearchedWord] = useState("");
   const [eatenFoodList, setEatenFoodList] = useState([]);
+
+  const { user, setUser } = useContext(User_data);
 
   //Functions
   const cancelPendingFood = () => {
@@ -204,7 +207,7 @@ const Food = ({ user, food }) => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
 
-      <Navbar User={user ? user : null} />
+      <Navbar User={user} />
 
       <div className="grid grid-cols-8 justify-items-center">
         <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | max-w-5xl mx-4">
@@ -341,36 +344,16 @@ const Food = ({ user, food }) => {
 
 export default Food;
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async () => {
   const url = (process.env.VERCEL_ENV === 'production' ? '' : process.env.SERVER);
   const res = await axios.get(url+'/api/food');
   const food = await res.data;
 
-  const { NutriLab } = getCookie(context);
-  var user = isAuthenticated(NutriLab);
-  // if (!user) {
-  //   user = false;
-  //   return {
-  //     props: {
-  //       food,
-  //       user
-  //     }
-  //   }
-  // }
   return {
     props: {
-      food, 
-      user
+      food
     }
   };
-
-  // const res = await fetch(`${server}/api/food`);
-  // const food = await res.json();
-  // return {
-  //   props: {
-  //     food,
-  //   },
-  // };
 };
 
 // Food.getInitialProps = async (context) => {

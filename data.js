@@ -1307,7 +1307,7 @@ export const food = [
     Fiber: 4.38,
     Carbs: 7.59,
     Sugar: 0,
-    name: "Mushroom, lion's mane",
+    name: "Mushroom, lion&apos;s mane",
   },
   {
     Salt: 1.13,

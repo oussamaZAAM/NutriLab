@@ -402,7 +402,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
       {stepper[0] === 2 && (
         <div className="flex flex-col justify-between items-center h-full">
           <b className="flex-1 font-logo text-3xl text-center my-12 h-full">
-            What's your sex?
+            What&apos;s your sex?
           </b>
 
           <div className="flex flex-wrap items-center flex-2 h-full">
@@ -566,7 +566,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
             {/* Plan  */}
             <b className="font-logo text-2xl text-center my-6">
-              What's your Plan?
+              What&apos;s your Plan?
             </b>
             <div className="relative h-16 w-60 sm:w-72 min-w-[200px]">
               <select

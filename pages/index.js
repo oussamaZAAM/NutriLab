@@ -9,6 +9,7 @@ import { MdDoubleArrow } from "react-icons/md";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 export default function Home({ currentUser }) {
   const { user, setUser } = useContext(User_data);
 
@@ -33,7 +34,7 @@ export default function Home({ currentUser }) {
             </h1>
             <div className="flex sm:hidden flex-1 justify-center items-center">
               <a href="https://ibb.co/xCyZnfh">
-                <img
+                <Image
                   className="rounded-lg object-cover h-80 w-96"
                   src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                   alt="science1"
@@ -48,7 +49,7 @@ export default function Home({ currentUser }) {
             <p className="text-md text-left font-paragraph indent-2">
               <b className="underline">Measure your daily need of nutrients</b>,{" "}
               <b className="underline">Balance your food</b> and{" "}
-              <b className="underline">let us help you find today's meal</b>.
+              <b className="underline">let us help you find today&apos;s meal</b>.
             </p>
             <div className="flex justify-end items-center w-full">
               <Link href="/nutrients">
@@ -64,7 +65,7 @@ export default function Home({ currentUser }) {
           </div>
           <div className="hidden sm:flex flex-1 justify-center items-center my-28 mx-12">
             <a href="https://ibb.co/xCyZnfh">
-              <img
+              <Image
                 className="rounded-lg object-cover h-64 md:h-80 w-72 md:w-96"
                 src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                 alt="science1"
@@ -145,7 +146,7 @@ export default function Home({ currentUser }) {
                   Suggested Meals
                 </b>
                 <p className="font-paragraph m-4">
-                  Using the balanced combination of food generated, we can help you find today's meal.
+                  Using the balanced combination of food generated, we can help you find today&apos;s meal.
                 </p>
               </div>
               <div
@@ -171,7 +172,7 @@ export default function Home({ currentUser }) {
             <div className="flex flex-col sm:flex-row justify-center items-center">
               <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
                 <a href="https://imgbb.com/">
-                  <img
+                  <Image
                     className="w-32 h-32 rounded-xl drop-shadow-md my-8"
                     src="https://i.ibb.co/0c2vhFr/nutrients.png"
                     alt="nutrients"
@@ -183,7 +184,7 @@ export default function Home({ currentUser }) {
               </div>
               <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
                 <a href="https://imgbb.com/">
-                  <img
+                  <Image
                     className="w-32 h-32 rounded-xl drop-shadow-md my-8"
                     src="https://i.ibb.co/pJKG4T7/balanced-diet.png"
                     alt="balanced-diet"
@@ -196,7 +197,7 @@ export default function Home({ currentUser }) {
               </div>
               <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
                 <a href="https://imgbb.com/">
-                  <img
+                  <Image
                     className="w-32 h-32 rounded-xl drop-shadow-md my-8"
                     src="https://i.ibb.co/s5dkt00/recommended-food.png"
                     alt="recommended-food"

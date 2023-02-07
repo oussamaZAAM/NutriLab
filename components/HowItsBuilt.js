@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 const HowItsBuilt = () => {
@@ -10,7 +11,7 @@ const HowItsBuilt = () => {
         }
       >
         <b className="text-4xl font-title text-center my-16">
-          How It's Built
+          How It&apos;s Built
         </b>
         <p className="font-paragraph text-center mx-4 xs:mx-16 mb-16">
           Donec ut neque lorem. Sed ac aliquam erat. Vestibulum neque magna,
@@ -25,7 +26,7 @@ const HowItsBuilt = () => {
           at ligula. Donec ut neque lorem
         </p>
         <div className="flex justify-center items-center rounded-2xl">
-            <a href="https://ibb.co/mR969NX"><img src="https://i.ibb.co/QJPrPDC/healthy.jpg" alt="healthy" /></a>
+            <Image src="https://i.ibb.co/QJPrPDC/healthy.jpg" alt="healthy" />
         </div>
       </div>
     </div>

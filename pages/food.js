@@ -253,7 +253,7 @@ const Food = ({ user, food }) => {
                   styles.dropshadow
                 }
               >
-                {/* <img
+                {/* <Image
                   src={addedFood.img}
                   alt="beef"
                   className="h-20 w-20 my-4 mx-4 md:mx-8"

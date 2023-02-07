@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+
 export default function Home({ currentUser }) {
   const { user, setUser } = useContext(User_data);
 

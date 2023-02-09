@@ -213,7 +213,13 @@ export default function Nutrients() {
   // Next is SSR so we should ... , Force a render with useEffect
   const [localNutris, setLocalNutris] = useState(false);
   //Rendered Once to fetch initial localstorage data
-  useEffect(()=> {setLocalNutris(JSON.parse(window.localStorage.getItem("nutris")))}, [])
+  useEffect(() => {
+    const item = JSON.parse(window.localStorage.getItem("nutris"));
+    setLocalNutris(item);
+    if (item) {
+      setIsInfosApplied(true)
+    }
+  }, []);
 
   const applyInfos = async (dietInfos) => {
     const { age, sex, height, weight, activity, plan } = dietInfos;
@@ -230,8 +236,7 @@ export default function Nutrients() {
     user && (await axios.put("/api/nutri", nutris));
     //Calculate Vitamins
     setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
-
-    setIsInfosApplied(true);
+    setIsInfosApplied(true)
   };
 
   return (
@@ -260,7 +265,10 @@ export default function Nutrients() {
 
       <div className="grid grid-cols-8">
         {localNutris ? (
-          <DailyNutrients nutrients={nutrients || localNutris} vitamins={vitamins} />
+          <DailyNutrients
+            nutrients={nutrients || localNutris}
+            vitamins={vitamins}
+          />
         ) : (
           isInfosApplied && (
             <DailyNutrients nutrients={nutrients} vitamins={vitamins} />

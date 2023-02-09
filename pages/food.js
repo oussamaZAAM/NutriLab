@@ -344,7 +344,7 @@ const Food = ({ food }) => {
 
 export default Food;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const url = (process.env.VERCEL_ENV === 'production' ? '' : process.env.SERVER);
   const res = await axios.get(url+'/api/food');
   const food = await res.data;
@@ -355,6 +355,8 @@ export const getStaticProps = async () => {
     }
   };
 };
+
+// ----------------------Production---------------------
 
 // Food.getInitialProps = async (context) => {
 

@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useContext, useState } from "react";
 import server from "/config";
 import getCookie from "next-cookies";
-import isAuthenticated from "./api/Auth"; 
+import isAuthenticated from "./api/Auth";
 
 import {
   MdOutlineAddCircle,
@@ -14,6 +14,7 @@ import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
 import { User_data } from "../context/context";
+import { BsCheckLg } from "react-icons/bs";
 
 const Food = ({ food }) => {
   const [wiggle, setWiggle] = useState(false);
@@ -75,80 +76,68 @@ const Food = ({ food }) => {
     }, 250);
   };
 
+  console.log(eatenFoodList)
+
   // Mapping over the list of Searched Food
-  const searchedFood = (!food ? null : food.map((food) => {
-    if (searchedWord === "" || food.name.toLowerCase().includes(searchedWord)) {
-      return (
-        <a href="#addedFood" className="w-full" key={food.name}>
-          {/* <p
-            className="
-                      font-paragraph font-bold text-ms indent-4
-                      p-2 w-full
-                      border-b-2 border-x-2 rounded-lg
-                      hover:bg-gray-100 hover:animate-pulse cursor-pointer
-                    "
-            onClick={() =>
-              setAddedFood({ ...food, addingFade: false, removingFade: false })
-            }
-          >
-              {searchedWord !== '' 
-              ?
-                (<span>food.name</span>)
-                +food.name.split(new RegExp(searchedWord, 'i') )[1] 
-              : food.name}
-          </p> */}
-          {searchedWord !== '' 
-              ? <div className="
-                                indent-4 w-full
-                                border-b-2 border-x-2 rounded-lg p-2 
-                                hover:bg-gray-100 hover:animate-pulse cursor-pointer">
-                <span
-                  className="
-                            font-paragraph font-bold text-ms 
-                          "
-                  onClick={() =>
-                    setAddedFood({ ...food, addingFade: false, removingFade: false })
-                  }
+  const searchedFood = !food
+    ? null
+    : food.map((food) => {
+        if (
+          searchedWord === "" ||
+          food.name.toLowerCase().includes(searchedWord)
+        ) {
+          return (
+            <a href="#addedFood" className="w-full" key={food.name}>
+              {searchedWord !== "" ? (
+                <div
+                  className="indent-4 w-full
+                              border-b-2 border-x-2 rounded-lg p-2 
+                              hover:bg-gray-100 hover:animate-pulse cursor-pointer"
+                  onClick={() => {
+                    if (eatenFoodList.length===0 || eatenFoodList.some((thisFood) => thisFood.name !== food.name)) {
+                      setAddedFood({
+                        ...food,
+                        addingFade: false,
+                        removingFade: false,
+                      });
+                    }
+                  }}
                 >
-                  {food.name.split(new RegExp(searchedWord, 'i') )[0]}
-                </span>
-                <span 
-                  className="
-                            font-paragraph font-black text-ms text-custom-orange
-                          "
-                  onClick={() =>
-                    setAddedFood({ ...food, addingFade: false, removingFade: false })
-                  }>
-                  {searchedWord}</span>
-                <span
-                  className="
-                            font-paragraph font-bold text-ms
-                          "
-                  onClick={() =>
-                    setAddedFood({ ...food, addingFade: false, removingFade: false })
-                  }
-                >
-                  {food.name.split(new RegExp(searchedWord, 'i') )[1]}
-                </span>
-              </div>
-              : <p
+                  <span className="font-paragraph font-bold text-ms ">
+                    {food.name.split(new RegExp(searchedWord, "i"))[0]}
+                  </span>
+                  <span className="font-paragraph font-black text-ms text-custom-orange">
+                    {searchedWord}
+                  </span>
+                  <span className="font-paragraph font-bold text-ms">
+                    {food.name.split(new RegExp(searchedWord, "i"))[1]}
+                  </span>
+                </div>
+              ) : (
+                <p
                   className="
                             font-paragraph font-bold text-ms indent-4
                             p-2 w-full
                             border-b-2 border-x-2 rounded-lg
                             hover:bg-gray-100 hover:animate-pulse cursor-pointer
                           "
-                  onClick={() =>
-                    setAddedFood({ ...food, addingFade: false, removingFade: false })
-                  }
+                  onClick={() =>{
+                    if (eatenFoodList.length===0 || eatenFoodList.some((thisFood) => thisFood.name !== food.name)) {
+                      setAddedFood({
+                        ...food,
+                        addingFade: false,
+                        removingFade: false,
+                      });
+                    }
+                  }}
                 >
                   {food.name}
                 </p>
-            }
-        </a>
-      );
-    }
-  }));
+              )}
+            </a>
+          );
+        }
+      });
 
   // Mapping over the List of Eaten Food
   const eatenFood = eatenFoodList.map((food, index) => {
@@ -344,15 +333,15 @@ const Food = ({ food }) => {
 
 export default Food;
 
-export const getServerSideProps = async () => {
-  const url = (process.env.VERCEL_ENV === 'production' ? '' : process.env.SERVER);
-  const res = await axios.get(url+'/api/food');
+export const getStaticProps = async () => {
+  const url = process.env.VERCEL_ENV === "production" ? "" : process.env.SERVER;
+  const res = await axios.get(url + "/api/food");
   const food = await res.data;
 
   return {
     props: {
-      food
-    }
+      food,
+    },
   };
 };
 
@@ -371,4 +360,3 @@ export const getServerSideProps = async () => {
 //   }
 //   return { user: user, food: food };
 // };
-

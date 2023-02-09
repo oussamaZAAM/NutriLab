@@ -12,7 +12,7 @@ import getCookie from "next-cookies";
 import { User_data } from "../context/context";
 import { useContext } from "react";
 
-function calculateNutrients(age, sex, height, weight, activity) {
+function calculateNutrients(age, sex, height, weight, activity, plan) {
   // Calculate BMR : Harris-Benedict Calculator
   var BMR;
   if (sex === "male") {
@@ -40,15 +40,88 @@ function calculateNutrients(age, sex, height, weight, activity) {
     kCalories = 1.9 * BMR;
   }
 
+  if (plan === "lose_weight") {
+    kCalories -= 500;
+  }
+  if (plan === "build_muscle") {
+    kCalories += 500;
+  }
+
+
   // Calculate Proteins
-  // var proteins = [(kCalories * 0.1) / 4, (kCalories * 0.3) / 4];
-  var proteins = (kCalories * 0.2) / 4;
+  var proteins;
+  if (plan === "maintain") {
+    if (activity === "sedentary" || activity==="lightly_active") {
+      proteins = 0.8 * weight;
+    }
+    if (activity === "moderately_active") {
+      proteins = 0.9 * weight;
+    }
+    if (activity === "very_active" || activity==="super_active") {
+      proteins = 1.0 * weight;
+    }
+  }
+
+  if (plan === "lose_weight") {
+    if (activity === "sedentary") {
+      proteins = 1.2 * weight;
+    }
+    if (activity==="lightly_active") {
+      proteins = 1.3 * weight;
+    }
+    if (activity === "moderately_active") {
+      proteins = 1.4 * weight;
+    }
+    if (activity === "very_active") {
+      proteins = 1.5 * weight;
+    }
+    if (activity==="super_active") {
+      proteins = 1.6 * weight;
+    }
+  }
+
+  if (plan === "build_muscle") {
+    if (activity === "sedentary") {
+      proteins = 1.6 * weight;
+    }
+    if (activity==="lightly_active") {
+      proteins = 1.7 * weight;
+    }
+    if (activity === "moderately_active") {
+      proteins = 1.8 * weight;
+    }
+    if (activity === "very_active") {
+      proteins = 1.9 * weight;
+    }
+    if (activity==="super_active") {
+      proteins = 2.0 * weight;
+    }
+  }
+
   // Calculate Fats
-  // var fats = [(kCalories * 0.2) / 9, (kCalories * 0.35) / 9];
-  var fats = (kCalories * 0.275) / 9;
+  var fats;
+  if (plan === "maintain") {
+    fats = (kCalories * 0.275) / 9;
+  }
+  if (plan === "lose_weight") {
+    fats = 0.75 * weight;
+  }
+  if (plan === "build_muscle") {
+    fats = 1.0 * weight;
+  }
+
   // Calculate Carbs
-  // var carbs = [(kCalories * 0.45) / 4, (kCalories * 0.65) / 4];
-  var carbs = (kCalories * 0.55) / 4;
+  var carbs;
+  if (plan === "lose_weight") {
+    carbs = (kCalories * 0.45) / 4;
+  }
+  if (plan === "maintain") {
+    carbs = (kCalories * 0.55) / 4;
+  }
+  if (plan === "build_muscle") {
+    carbs = (kCalories * 0.65) / 4;
+  }
+
   // Calculate Iron
   var iron;
   if (sex === "female") {

@@ -76,7 +76,25 @@ const Food = ({ food }) => {
     }, 250);
   };
 
-  console.log(eatenFoodList)
+  //Handle Searching food with emphasizing the input
+  const formatSearchWord = (food, searchedWord) => {
+    const splitted = food.name.split(new RegExp(searchedWord, "i"));
+    console.log(splitted)
+    const styled = splitted.map((word) => {
+      return (
+        <>
+          <span className="font-paragraph font-bold text-ms ">
+            {word}
+          </span>
+          <span className="font-paragraph font-black text-ms text-custom-orange">
+            {searchedWord}
+          </span>
+        </>
+      )
+    });
+    styled.pop();
+    return styled;
+  }
 
   // Mapping over the list of Searched Food
   const searchedFood = !food
@@ -103,14 +121,9 @@ const Food = ({ food }) => {
                     }
                   }}
                 >
-                  <span className="font-paragraph font-bold text-ms ">
-                    {food.name.split(new RegExp(searchedWord, "i"))[0]}
-                  </span>
-                  <span className="font-paragraph font-black text-ms text-custom-orange">
-                    {searchedWord}
-                  </span>
+                  {formatSearchWord(food, searchedWord)}
                   <span className="font-paragraph font-bold text-ms">
-                    {food.name.split(new RegExp(searchedWord, "i"))[1]}
+                    {food.name.split(new RegExp(searchedWord, "i"))[food.name.split(new RegExp(searchedWord, "i")).length-1]}
                   </span>
                 </div>
               ) : (

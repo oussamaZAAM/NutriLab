@@ -64,12 +64,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
   const resetInfos = () => {
     localStorage.removeItem("dietInfos");
+    localStorage.removeItem("nutris");
     setDietInfos({
       age: "",
       sex: "",
       height: "",
       weight: "",
       activity: "",
+      plan: ""
     });
     setAgeError(1);
     setSexError(1);
@@ -859,7 +861,8 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                     sexError ||
                     heightError ||
                     weightError ||
-                    activityError) &&
+                    activityError ||
+                    planError) &&
                     "cursor-not-allowed")
                 }
                 disabled={
@@ -867,7 +870,8 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                   sexError ||
                   heightError ||
                   weightError ||
-                  activityError
+                  activityError ||
+                  planError
                 }
               >
                 Re-Calculate

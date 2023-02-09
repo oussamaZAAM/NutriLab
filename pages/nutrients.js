@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -47,17 +47,16 @@ function calculateNutrients(age, sex, height, weight, activity, plan) {
     kCalories += 500;
   }
 
-
   // Calculate Proteins
   var proteins;
   if (plan === "maintain") {
-    if (activity === "sedentary" || activity==="lightly_active") {
+    if (activity === "sedentary" || activity === "lightly_active") {
       proteins = 0.8 * weight;
     }
     if (activity === "moderately_active") {
       proteins = 0.9 * weight;
     }
-    if (activity === "very_active" || activity==="super_active") {
+    if (activity === "very_active" || activity === "super_active") {
       proteins = 1.0 * weight;
     }
   }
@@ -66,7 +65,7 @@ function calculateNutrients(age, sex, height, weight, activity, plan) {
     if (activity === "sedentary") {
       proteins = 1.2 * weight;
     }
-    if (activity==="lightly_active") {
+    if (activity === "lightly_active") {
       proteins = 1.3 * weight;
     }
     if (activity === "moderately_active") {
@@ -75,7 +74,7 @@ function calculateNutrients(age, sex, height, weight, activity, plan) {
     if (activity === "very_active") {
       proteins = 1.5 * weight;
     }
-    if (activity==="super_active") {
+    if (activity === "super_active") {
       proteins = 1.6 * weight;
     }
   }
@@ -84,7 +83,7 @@ function calculateNutrients(age, sex, height, weight, activity, plan) {
     if (activity === "sedentary") {
       proteins = 1.6 * weight;
     }
-    if (activity==="lightly_active") {
+    if (activity === "lightly_active") {
       proteins = 1.7 * weight;
     }
     if (activity === "moderately_active") {
@@ -93,7 +92,7 @@ function calculateNutrients(age, sex, height, weight, activity, plan) {
     if (activity === "very_active") {
       proteins = 1.9 * weight;
     }
-    if (activity==="super_active") {
+    if (activity === "super_active") {
       proteins = 2.0 * weight;
     }
   }
@@ -210,9 +209,14 @@ export default function Nutrients() {
   const [nutrients, setNutrients] = useState();
   const [vitamins, setVitamins] = useState();
   const { user, setUser } = useContext(User_data);
+
+  // Next is SSR so we should ... , Force a render with useEffect
+  const [localNutris, setLocalNutris] = useState(false);
+  //Rendered Once to fetch initial localstorage data
+  useEffect(()=> {setLocalNutris(JSON.parse(window.localStorage.getItem("nutris")))}, [])
+
   const applyInfos = async (dietInfos) => {
     const { age, sex, height, weight, activity, plan } = dietInfos;
-    // localStorage.setItem("dietInfos", JSON.stringify(dietInfos));
     user &&
       (await axios.put("/api/profile", dietInfos, {
         headers: {
@@ -222,6 +226,7 @@ export default function Nutrients() {
     const nutris = calculateNutrients(age, sex, height, weight, activity, plan);
     //Calculate Nutrients
     setNutrients(nutris);
+    localStorage.setItem("nutris", JSON.stringify(nutris));
     user && (await axios.put("/api/nutri", nutris));
     //Calculate Vitamins
     setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
@@ -254,8 +259,12 @@ export default function Nutrients() {
       </div>
 
       <div className="grid grid-cols-8">
-        {isInfosApplied && (
-          <DailyNutrients nutrients={nutrients} vitamins={vitamins} />
+        {localNutris ? (
+          <DailyNutrients nutrients={nutrients || localNutris} vitamins={vitamins} />
+        ) : (
+          isInfosApplied && (
+            <DailyNutrients nutrients={nutrients} vitamins={vitamins} />
+          )
         )}
       </div>
 

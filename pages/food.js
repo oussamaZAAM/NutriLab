@@ -9,12 +9,12 @@ import {
   MdOutlineCancel,
   MdOutlineRemoveCircle,
 } from "react-icons/md";
+import { RiEditFill } from "react-icons/ri"
 
 import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
 import { User_data } from "../context/context";
-import { BsCheckLg } from "react-icons/bs";
 
 const Food = ({ food }) => {
   const [wiggle, setWiggle] = useState(false);
@@ -79,7 +79,6 @@ const Food = ({ food }) => {
   //Handle Searching food with emphasizing the input
   const formatSearchWord = (food, searchedWord) => {
     const splitted = food.name.split(new RegExp(searchedWord, "i"));
-    console.log(splitted)
     const styled = splitted.map((word) => {
       return (
         <>
@@ -153,6 +152,7 @@ const Food = ({ food }) => {
       });
 
   // Mapping over the List of Eaten Food
+  console.log(eatenFoodList)
   const eatenFood = eatenFoodList.map((food, index) => {
     return (
       <div
@@ -170,18 +170,51 @@ const Food = ({ food }) => {
           <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4 cursor-pointer">
             {food.name}
           </b>
-          <div className="flex flex-col self-center items-start xs:w-full">
+          <div className="flex flex-col self-center items-start xs:w-full my-1">
             {/* <p className="font-paragraph text-xs">
               Category:{" "}
               <span className="font-paragraph font-bold text-xs">
                 {food.category}
               </span>
             </p> */}
-            <p className="font-paragraph text-xs">
+            <p className="font-paragraph text-xs flex justify-center items-center">
               How Much:{" "}
-              <span className="font-paragraph font-bold text-xs">
+              {/* <span className="font-paragraph font-bold text-xs">
                 {food.size} g
-              </span>
+              </span> */}
+              <div className={`flex justify-start items-center
+                text-gray-900 text-sm indent-2
+                bg-gray-50 border border-gray-300 rounded-lg group outline outline-1 group-focus:outline-4
+                block w-20 ml-2 `+
+                (wiggle
+                  ? "border-red-500 animate-wiggle"
+                  : "border-gray-300")
+              }>
+                <input
+                  type="number"
+                  className={`
+                      text-gray-900 text-sm indent-2
+                      bg-gray-50 outline-none
+                      block w-12 ml-2`}
+                  value={food.size || ""}
+                  onChange={(e) =>
+                    setEatenFoodList((prevList) => {
+                      const newList = [];
+                      for (let i = 0; i < prevList.length; i++) {
+                        if (i === index) {
+                          const editedFood = prevList[i];
+                          editedFood.size = e.target.value;
+                          newList.push(editedFood);
+                        } else {
+                          newList.push(prevList[i]);
+                        }
+                      }
+                      return newList;
+                    })
+                  }
+                />
+                <span>{" "}g</span>
+                      </div>
             </p>
           </div>
         </div>
@@ -272,7 +305,7 @@ const Food = ({ food }) => {
                   <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
                     {addedFood.name}
                   </b>
-                  <div className="flex flex-col self-center items-start xs:w-full">
+                  <div className="flex flex-col self-center items-start xs:w-full my-1">
                     {/* <p className="font-paragraph text-xs">
                       Category:{" "}
                       <span className="font-paragraph font-bold text-xs">
@@ -283,22 +316,27 @@ const Food = ({ food }) => {
                       <p className="font-paragraph text-xs">
                         How much did you eat:{" "}
                       </p>
-                      <input
-                        type="number"
-                        className={
-                          `text-gray-900 text-sm indent-2
-                                bg-gray-50 border border-gray-300 rounded-lg focus:ring-custom-orange focus:border-custom-orange
-                                block w-20 ml-2 ` +
-                          (wiggle
-                            ? "border-red-500 animate-wiggle"
-                            : "border-gray-300")
-                        }
-                        placeholder="In grams"
-                        value={addedFood.size || ""}
-                        onChange={(e) =>
-                          setAddedFood({ ...addedFood, size: e.target.value })
-                        }
-                      />
+                      <div className={`flex justify-start items-center
+                                 text-gray-900 text-sm indent-2
+                                  bg-gray-50 border border-gray-300 rounded-lg group outline outline-1 group-focus:outline-4
+                                  block w-20 ml-2 `+
+                                  (wiggle
+                                    ? "border-red-500 animate-wiggle"
+                                    : "border-gray-300")
+                                }>
+                        <input
+                          type="number"
+                          className=
+                            {`text-gray-900 text-sm indent-2
+                            bg-gray-50 outline-none
+                            block w-12 ml-2`}
+                          value={addedFood.size || ""}
+                          onChange={(e) =>
+                            setAddedFood({ ...addedFood, size: e.target.value, edit: false })
+                          }
+                        />
+                        <span>{" "}g</span>
+                      </div>
                     </div>
                   </div>
                 </div>

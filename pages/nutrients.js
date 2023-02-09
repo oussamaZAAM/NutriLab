@@ -264,7 +264,7 @@ export default function Nutrients() {
       </div>
 
       <div className="grid grid-cols-8">
-        {localNutris ? (
+        {(localNutris && isInfosApplied) ? (
           <DailyNutrients
             nutrients={nutrients || localNutris}
             vitamins={vitamins}

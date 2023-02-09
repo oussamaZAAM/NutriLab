@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import server from "/config";
 import getCookie from "next-cookies";
 import isAuthenticated from "./api/Auth";
@@ -9,12 +9,25 @@ import {
   MdOutlineCancel,
   MdOutlineRemoveCircle,
 } from "react-icons/md";
-import { RiEditFill } from "react-icons/ri"
+
+import { RiEditLine, RiEditFill } from "react-icons/ri";
 
 import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
 import { User_data } from "../context/context";
+import Link from "next/link";
+
+// Irrelevent Fcts
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function sliceUnderscore(string) {
+  const splitted = string.split("_");
+  const capitalized = splitted.map((string) => capitalizeFirstLetter(string));
+  return capitalized.join(" ");
+}
 
 const Food = ({ food }) => {
   const [wiggle, setWiggle] = useState(false);
@@ -23,6 +36,14 @@ const Food = ({ food }) => {
   const [eatenFoodList, setEatenFoodList] = useState([]);
 
   const { user, setUser } = useContext(User_data);
+
+  // Next is SSR so we should ... , Force a render with useEffect
+  const [localNutris, setLocalNutris] = useState(false);
+  const [localInfos, setLocalInfos] = useState(false);
+  useEffect(() => {
+    setLocalNutris(JSON.parse(window.localStorage.getItem("nutris")));
+    setLocalInfos(JSON.parse(window.localStorage.getItem("dietInfos")));
+  }, []);
 
   //Functions
   const cancelPendingFood = () => {
@@ -82,18 +103,16 @@ const Food = ({ food }) => {
     const styled = splitted.map((word) => {
       return (
         <>
-          <span className="font-paragraph font-bold text-ms ">
-            {word}
-          </span>
+          <span className="font-paragraph font-bold text-ms ">{word}</span>
           <span className="font-paragraph font-black text-ms text-custom-orange">
             {searchedWord}
           </span>
         </>
-      )
+      );
     });
     styled.pop();
     return styled;
-  }
+  };
 
   // Mapping over the list of Searched Food
   const searchedFood = !food
@@ -111,7 +130,12 @@ const Food = ({ food }) => {
                               border-b-2 border-x-2 rounded-lg p-2 
                               hover:bg-gray-100 hover:animate-pulse cursor-pointer"
                   onClick={() => {
-                    if (eatenFoodList.length===0 || eatenFoodList.some((thisFood) => thisFood.name !== food.name)) {
+                    if (
+                      eatenFoodList.length === 0 ||
+                      eatenFoodList.some(
+                        (thisFood) => thisFood.name !== food.name
+                      )
+                    ) {
                       setAddedFood({
                         ...food,
                         addingFade: false,
@@ -122,7 +146,12 @@ const Food = ({ food }) => {
                 >
                   {formatSearchWord(food, searchedWord)}
                   <span className="font-paragraph font-bold text-ms">
-                    {food.name.split(new RegExp(searchedWord, "i"))[food.name.split(new RegExp(searchedWord, "i")).length-1]}
+                    {
+                      food.name.split(new RegExp(searchedWord, "i"))[
+                        food.name.split(new RegExp(searchedWord, "i")).length -
+                          1
+                      ]
+                    }
                   </span>
                 </div>
               ) : (
@@ -133,8 +162,13 @@ const Food = ({ food }) => {
                             border-b-2 border-x-2 rounded-lg
                             hover:bg-gray-100 hover:animate-pulse cursor-pointer
                           "
-                  onClick={() =>{
-                    if (eatenFoodList.length===0 || eatenFoodList.some((thisFood) => thisFood.name !== food.name)) {
+                  onClick={() => {
+                    if (
+                      eatenFoodList.length === 0 ||
+                      eatenFoodList.some(
+                        (thisFood) => thisFood.name !== food.name
+                      )
+                    ) {
                       setAddedFood({
                         ...food,
                         addingFade: false,
@@ -152,7 +186,6 @@ const Food = ({ food }) => {
       });
 
   // Mapping over the List of Eaten Food
-  console.log(eatenFoodList)
   const eatenFood = eatenFoodList.map((food, index) => {
     return (
       <div
@@ -177,19 +210,17 @@ const Food = ({ food }) => {
                 {food.category}
               </span>
             </p> */}
-            <p className="font-paragraph text-xs flex justify-center items-center">
+            <div className="font-paragraph text-xs flex justify-center items-center">
               How Much:{" "}
               {/* <span className="font-paragraph font-bold text-xs">
                 {food.size} g
               </span> */}
-              <div className={`flex justify-start items-center
+              <div
+                className={`flex justify-start items-center
                 text-gray-900 text-sm indent-2
                 bg-gray-50 border border-gray-300 rounded-lg group outline outline-1 group-focus:outline-4
-                block w-20 ml-2 `+
-                (wiggle
-                  ? "border-red-500 animate-wiggle"
-                  : "border-gray-300")
-              }>
+                block w-20 ml-2`}
+              >
                 <input
                   type="number"
                   className={`
@@ -213,9 +244,9 @@ const Food = ({ food }) => {
                     })
                   }
                 />
-                <span>{" "}g</span>
-                      </div>
-            </p>
+                <span> g</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -316,26 +347,32 @@ const Food = ({ food }) => {
                       <p className="font-paragraph text-xs">
                         How much did you eat:{" "}
                       </p>
-                      <div className={`flex justify-start items-center
+                      <div
+                        className={
+                          `flex justify-start items-center
                                  text-gray-900 text-sm indent-2
                                   bg-gray-50 border border-gray-300 rounded-lg group outline outline-1 group-focus:outline-4
-                                  block w-20 ml-2 `+
-                                  (wiggle
-                                    ? "border-red-500 animate-wiggle"
-                                    : "border-gray-300")
-                                }>
+                                  block w-20 ml-2 ` +
+                          (wiggle
+                            ? "border-red-500 animate-wiggle"
+                            : "border-gray-300")
+                        }
+                      >
                         <input
                           type="number"
-                          className=
-                            {`text-gray-900 text-sm indent-2
+                          className={`text-gray-900 text-sm indent-2
                             bg-gray-50 outline-none
                             block w-12 ml-2`}
                           value={addedFood.size || ""}
                           onChange={(e) =>
-                            setAddedFood({ ...addedFood, size: e.target.value, edit: false })
+                            setAddedFood({
+                              ...addedFood,
+                              size: e.target.value,
+                              edit: false,
+                            })
                           }
                         />
-                        <span>{" "}g</span>
+                        <span> g</span>
                       </div>
                     </div>
                   </div>
@@ -376,6 +413,177 @@ const Food = ({ food }) => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Check Your Informations  */}
+        <div
+          className="
+                        flex flex-col justify-center items-center
+                        sm:col-start-2 col-span-8 sm:col-span-6
+                        border-2 border-custom-orange rounded
+                        w-full my-16"
+        >
+          <h3 className="font-title text-3xl xs:text-4xl sm:text-5xl text-center | w-full my-16">
+            Check Your Informations
+          </h3>
+          <div className="flex justify-between items-center">
+            <h4 className="font-title text-2xl xs:text-3xl sm:text-4xl text-center | w-full">
+              Your Input Infos
+            </h4>
+            <Link href="/nutrients">
+              <RiEditFill
+                size={25}
+                className="hover:fill-custom-orange transition duration-300 ml-2"
+              />
+            </Link>
+          </div>
+          {localInfos ? (
+            <div className="flex-2 flex justify-center items-center border rounded my-4">
+              <table className="w-full text-sm text-left text-gray-500">
+                <tbody>
+                  <tr className="bg-white border-b">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 text-gray-900 whitespace-nowrap"
+                    >
+                      Age
+                    </th>
+                    <td className="px-6 py-4 truncate">
+                      {localInfos.age || "No Entry"}
+                    </td>
+                  </tr>
+
+                  <tr className="border-b bg-gray-50">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 text-gray-900 whitespace-nowrap"
+                    >
+                      Sex
+                    </th>
+                    <td className="px-6 py-4 truncate">
+                      {capitalizeFirstLetter(localInfos.sex) || "No Entry"}
+                    </td>
+                  </tr>
+
+                  <tr className="bg-white border-b">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 text-gray-900 whitespace-nowrap"
+                    >
+                      Height
+                    </th>
+                    <td className="px-6 py-4 truncate">
+                      {localInfos.height || "No Entry"}
+                    </td>
+                  </tr>
+
+                  <tr className="border-b bg-gray-50">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 text-gray-900 whitespace-nowrap"
+                    >
+                      Weight
+                    </th>
+                    <td className="px-6 py-4 truncate">
+                      {localInfos.weight || "No Entry"}
+                    </td>
+                  </tr>
+
+                  <tr className="border-b bg-white">
+                    <th
+                      scope="row"
+                      className="text-center px-6 py-4 text-gray-900 whitespace-nowrap"
+                    >
+                      Activity
+                    </th>
+                    <td className="px-6 py-4 truncate">
+                      {sliceUnderscore(localInfos.activity) || "No Entry"}
+                    </td>
+                  </tr>
+
+                  <tr className="bg-gray-50">
+                    <th
+                      scope="row"
+                      className="text-center px-6 py-4 text-gray-900 whitespace-nowrap"
+                    >
+                      Plan
+                    </th>
+                    <td className="px-6 py-4 truncate">
+                      {sliceUnderscore(localInfos.plan) || "No Entry"}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="flex justify-center items-center border rounded my-8">
+              <span>
+                <b className="font-paragraph font-medium text-sm">
+                  It seems you have yet to tell us about you,{" "}
+                </b>
+                <Link href="/nutrients">
+                  <b className="font-paragraph font-black text-sm hover:underline">
+                    click here
+                  </b>
+                </Link>
+              </span>
+            </div>
+          )}
+
+          <div className="flex justify-between items-center">
+            <h4 className="font-title text-2xl xs:text-3xl sm:text-4xl text-center | w-full">
+              Your generated Infos
+            </h4>
+            <Link href="/nutrients">
+              <RiEditFill
+                size={25}
+                className="hover:fill-custom-orange transition duration-300 ml-2"
+              />
+            </Link>
+          </div>
+
+          {localNutris ? (
+            <div className="flex my-8 overflow-x-auto no-scrollwbar w-11/12">
+              <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase">
+                  <tr>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">Calories</th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">Carbs</th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">Proteins</th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">Fats</th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">Sugar</th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">Salt</th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">Fiber</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-gray-200 dark:border-gray-700">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">{localNutris.kCalories} kCal</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{localNutris.carbs} g</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">{localNutris.proteins} g</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{localNutris.fats} g</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">{localNutris.sugar} g</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{localNutris.salt} g</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">{localNutris.fiber} g</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="flex justify-center items-center border rounded my-8">
+              <span>
+                <b className="font-paragraph font-medium text-sm">
+                  It seems you have yet to generate your daily nutrients about
+                  you,{" "}
+                </b>
+                <Link href="/nutrients">
+                  <b className="font-paragraph font-black text-sm hover:underline">
+                    click apply your infos
+                  </b>
+                </Link>
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -595,3 +595,17 @@ export const getStaticProps = async () => {
     },
   };
 };
+
+// ----------------------Production---------------------
+
+// export const getServerSideProps = async () => {
+//   const url = process.env.VERCEL_ENV === "production" ? "" : process.env.SERVER;
+//   const res = await axios.get(url + "/api/food");
+//   const food = await res.data;
+
+//   return {
+//     props: {
+//       food,
+//     },
+//   };
+// };

@@ -5,13 +5,17 @@ import styles from "../styles/Home.module.css";
 
 // Irrelevent Fcts
 function capitalizeFirstLetter(string) {
-  return (string.charAt(0).toUpperCase() + string.slice(1));
+  if (typeof string === 'string' || string instanceof String) {
+    return (string.charAt(0).toUpperCase() + string.slice(1));
+  }
 }
 
 function sliceUnderscore(string) {
-  const splitted = string.split("_");
-  const capitalized = splitted.map((string) => capitalizeFirstLetter(string));
-  return capitalized.join(" ");
+  if (typeof string === 'string' || string instanceof String) {
+    const splitted = string.split("_");
+    const capitalized = splitted.map((string) => capitalizeFirstLetter(string));
+    return capitalized.join(" ");
+  }
 }
 
 // ------------------------------------------------------------------------------------------

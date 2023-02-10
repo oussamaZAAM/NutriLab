@@ -97,8 +97,6 @@ const Food = ({ food }) => {
     }, 250);
   };
 
-  console.log(eatenFoodList)
-
   //Handle Searching food with emphasizing the input
   const formatSearchWord = (food, searchedWord) => {
     const splitted = food.name.split(new RegExp(searchedWord, "i"));
@@ -346,15 +344,13 @@ const Food = ({ food }) => {
                       <p className="font-paragraph text-xs">
                         How much did you eat:{" "}
                       </p>
-                      <div
-                        className={
-                          `flex justify-start items-center
-                                 text-gray-900 text-sm indent-2
-                                  bg-gray-50 border rounded-lg group outline outline-1 group-focus:outline-4
-                                  block w-20 ml-2 ` +
-                          (wiggle && "outline-red-500 animate-wiggle")
-                        }
-                      >
+                      <div className={
+                                `flex justify-start items-center
+                                text-gray-900 text-sm indent-2
+                                bg-gray-50 border rounded-lg group outline outline-1 group-focus:outline-4
+                                block w-20 ml-2 ` +
+                                (wiggle && "outline-red-500 animate-wiggle")
+                      }>
                         <input
                           type="number"
                           className={`text-gray-900 text-sm indent-2
@@ -588,7 +584,7 @@ const Food = ({ food }) => {
 
 export default Food;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const url = process.env.VERCEL_ENV === "production" ? "" : process.env.SERVER;
   const res = await axios.get(url + "/api/food");
   const food = await res.data;

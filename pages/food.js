@@ -585,8 +585,8 @@ const Food = ({ food }) => {
 export default Food;
 
 export const getStaticProps = async () => {
-  // const url = process.env.VERCEL_ENV === "production" ? "" : process.env.SERVER;
-  const res = await axios.get("https://nutrilab.vercel.app/api/food");
+  const url = process.env.VERCEL_ENV === "production" ? "https://nutrilab.vercel.app/api/food" : "http://localhost:3000/api/food";
+  const res = await axios.get(url);
   const food = await res.data;
 
   return {

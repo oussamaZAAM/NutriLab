@@ -97,6 +97,8 @@ const Food = ({ food }) => {
     }, 250);
   };
 
+  console.log(eatenFoodList)
+
   //Handle Searching food with emphasizing the input
   const formatSearchWord = (food, searchedWord) => {
     const splitted = food.name.split(new RegExp(searchedWord, "i"));
@@ -132,7 +134,7 @@ const Food = ({ food }) => {
                   onClick={() => {
                     if (
                       eatenFoodList.length === 0 ||
-                      eatenFoodList.some(
+                      eatenFoodList.every(
                         (thisFood) => thisFood.name !== food.name
                       )
                     ) {
@@ -147,10 +149,7 @@ const Food = ({ food }) => {
                   {formatSearchWord(food, searchedWord)}
                   <span className="font-paragraph font-bold text-ms">
                     {
-                      food.name.split(new RegExp(searchedWord, "i"))[
-                        food.name.split(new RegExp(searchedWord, "i")).length -
-                          1
-                      ]
+                      food.name.split(new RegExp(searchedWord, "i"))[food.name.split(new RegExp(searchedWord, "i")).length -1]
                     }
                   </span>
                 </div>
@@ -351,11 +350,9 @@ const Food = ({ food }) => {
                         className={
                           `flex justify-start items-center
                                  text-gray-900 text-sm indent-2
-                                  bg-gray-50 border border-gray-300 rounded-lg group outline outline-1 group-focus:outline-4
+                                  bg-gray-50 border rounded-lg group outline outline-1 group-focus:outline-4
                                   block w-20 ml-2 ` +
-                          (wiggle
-                            ? "border-red-500 animate-wiggle"
-                            : "border-gray-300")
+                          (wiggle && "outline-red-500 animate-wiggle")
                         }
                       >
                         <input
@@ -522,7 +519,7 @@ const Food = ({ food }) => {
                   It seems you have yet to tell us about you,{" "}
                 </b>
                 <Link href="/nutrients">
-                  <b className="font-paragraph font-black text-sm hover:underline">
+                  <b className="font-paragraph font-black text-sm hover:underline hover:text-custom-orange transition duration-300">
                     click here
                   </b>
                 </Link>
@@ -573,12 +570,11 @@ const Food = ({ food }) => {
             <div className="flex justify-center items-center border rounded my-8">
               <span>
                 <b className="font-paragraph font-medium text-sm">
-                  It seems you have yet to generate your daily nutrients about
-                  you,{" "}
+                  You haven't yet generated your daily nutrients ,{" "}
                 </b>
                 <Link href="/nutrients">
-                  <b className="font-paragraph font-black text-sm hover:underline">
-                    click apply your infos
+                  <b className="font-paragraph font-black text-sm hover:underline hover:text-custom-orange transition duration-300">
+                    click to apply your infos
                   </b>
                 </Link>
               </span>

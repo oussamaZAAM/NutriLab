@@ -114,8 +114,6 @@ const Food = ({ food }) => {
     return styled;
   };
 
-  console.log(process.env.VERCEL_ENV)
-
   // Mapping over the list of Searched Food
   const searchedFood = !food
     ? null
@@ -586,12 +584,10 @@ const Food = ({ food }) => {
 
 export default Food;
 
-export const getServerSideProps = async () => {
-  const url = process.env.VERCEL_ENV === "production" ? "" : process.env.SERVER;
-  const res = await axios.get(url + "/api/food");
+export const getStaticProps = async () => {
+  // const url = process.env.VERCEL_ENV === "production" ? "" : process.env.SERVER;
+  const res = await axios.get("https://nutrilab.vercel.app/api/food");
   const food = await res.data;
-  
-  console.log(process.env.VERCEL_ENV)
 
   return {
     props: {
@@ -602,16 +598,14 @@ export const getServerSideProps = async () => {
 
 // ----------------------Production---------------------
 
-// Food.getInitialProps = async (context) => {
-
-//   const url = (process.env.VERCEL_ENV === 'production' ? '' : process.env.SERVER);
-//   const res = await axios.get(url+'/api/food');
+// export const getServerSideProps = async () => {
+//   const url = process.env.VERCEL_ENV === "production" ? "" : process.env.SERVER;
+//   const res = await axios.get(url + "/api/food");
 //   const food = await res.data;
 
-//   const { NutriLab } = getCookie(context);
-//   const user = isAuthenticated(NutriLab);
-//   if (!user) {
-//     return { user: false, food: food };
-//   }
-//   return { user: user, food: food };
+//   return {
+//     props: {
+//       food,
+//     },
+//   };
 // };

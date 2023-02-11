@@ -23,7 +23,7 @@ This App will give you as well the ability to choose your preferred food, elimin
 
 ## Food Page
 <p align="center">
-  <img src="https://i.ibb.co/3vMcM0n/image.png" />
+  <img src="https://i.ibb.co/LZzC5xN/image-2023-02-11-153011099.png" />
 </p>
 
 

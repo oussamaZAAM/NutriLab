@@ -201,9 +201,9 @@ const Food = ({ food }) => {
             <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4 cursor-pointer">
               {food.name}
             </b>
-            <Link href={'/food/'+(food.name.split(',').join('').split(' ').join('-').toLowerCase())}>
+            <a target="_blank" href={'/food/'+(food.name.split(',').join('').split(' ').join('-').toLowerCase())}>
               <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
-            </Link>
+            </a>
           </div>
           <div className="flex flex-col self-center items-start xs:w-full my-1">
             {/* <p className="font-paragraph text-xs">
@@ -339,9 +339,9 @@ const Food = ({ food }) => {
                     <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
                       {addedFood.name}
                     </b>
-                    <Link href={'/food/'+(addedFood.name.split(' ').join('').split(',').join('-').toLowerCase())}>
+                    <a target="_blank" href={'/food/'+(addedFood.name.split(' ').join('').split(',').join('-').toLowerCase())}>
                       <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
-                    </Link>
+                    </a>
                   </div>
                   <div className="flex flex-col self-center items-start xs:w-full my-1">
                     {/* <p className="font-paragraph text-xs">

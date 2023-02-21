@@ -27,7 +27,7 @@ const foodInfos = ({ foodData }) => {
           </Link>
         </div>
         <div className="grid grid-cols-12 w-full">
-          <div className="flex flex-col sm:col-start-5 sm:col-span-4">
+          <div className="flex flex-col col-span-12 xs:col-start-3 xs:col-span-8 sm:col-start-4 sm:col-span-6 xl:col-start-5 xl:col-span-4">
             <div className="flex flex-col justify-center items-center mt- rounded-xl bg-custom-orange">
               <h1 className="text-center text-3xl text-black font-medium font-title m-4">
                 {foodData.name}

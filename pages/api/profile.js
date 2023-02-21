@@ -18,7 +18,7 @@ export default async function profile(req, res) {
           height: data.height,
           weight: data.weight,
           activity: data.activity,
-          plan: data.plan, //Plan attribute not known by prisma even after migration ?
+          // plan: data.plan, //Plan attribute not known by prisma even after migration ?
         },
       });
 

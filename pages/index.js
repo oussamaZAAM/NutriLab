@@ -39,6 +39,7 @@ export default function Home({ currentUser }) {
                   width={1000}
                   height={1000}
                   priority
+                  as='image'
                   className="rounded-lg object-cover h-80 w-96"
                   src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                   alt="science1"
@@ -72,6 +73,8 @@ export default function Home({ currentUser }) {
               <Image
                 width={1000}
                 height={1000}
+                priority
+                as='image'
                 className="rounded-lg object-cover h-64 md:h-80 w-72 md:w-96"
                 src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                 alt="science1"

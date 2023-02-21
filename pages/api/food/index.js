@@ -1,4 +1,4 @@
-import { food } from '/data'
+import { food } from '/data';
 import NextCors from 'nextjs-cors';
 
 export default async function handler(req, res) {

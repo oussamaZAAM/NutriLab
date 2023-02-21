@@ -4,13 +4,14 @@ import { serialize } from "cookie";
 export default async function profile(req, res) {
   if (req.method === "PUT") {
     const data = req.body;
-    const { cookies } = req;
-    const token = cookies.NutriLab;
-    const userr = jwt.verify(token, process.env.JWT_SECRET);
+    // const { cookies } = req;
+    // const token = cookies.NutriLab;
+    // const userr = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(data);
     try {
       const user = await prisma.NutriInfo.update({
         where: {
-          userId: userr.id,
+          userId: data.id,
         },
         data: data,
       });

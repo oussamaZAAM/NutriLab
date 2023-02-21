@@ -1,19 +1,23 @@
 import prisma from "./prisma";
 import jwt from "jsonwebtoken";
-import { serialize } from "cookie";
+import { getServerSession } from "next-auth/next";
+
+import { authOptions } from "./auth/[...nextauth]";
 export default async function profile(req, res) {
+  const session = await getServerSession(req, res, authOptions);
   if (req.method === "PUT") {
     const data = req.body;
     // const { cookies } = req;
     // const token = cookies.NutriLab;
     // const userr = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(data);
+    data.userId = session.user.id;
     try {
-      const user = await prisma.NutriInfo.update({
+      const user = await prisma.NutriInfo.upsert({
         where: {
-          userId: data.id,
+          userId: data.userId,
         },
-        data: data,
+        update: data,
+        create: data,
       });
 
       res.status(200).json(user);

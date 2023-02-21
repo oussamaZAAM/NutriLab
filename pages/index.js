@@ -14,10 +14,6 @@ import Image from "next/image";
 export default function Home() {
   const { user, setUser } = useContext(User_data);
   console.log(user);
-  useEffect(() => {
-    // currentUser === false && localStorage.removeItem("user");
-    // localStorage.removeItem("dietInfos");
-  }, []);
   return (
     <div>
       <Head>

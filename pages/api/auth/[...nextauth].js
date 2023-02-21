@@ -3,6 +3,8 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../prisma";
 export const authOptions = {
+  secret: process.env.AUTH_SECRET,
+
   callbacks: {
     session: async ({ session, token }) => {
       if (session?.user) {

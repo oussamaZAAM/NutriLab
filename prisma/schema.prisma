@@ -17,6 +17,7 @@ model User {
   weight    String?
   sex       String?
   activity  String?
+  plan      String?
   Nutrients Nutrients?
   NutriInfo NutriInfo?
 }

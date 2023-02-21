@@ -12,7 +12,14 @@ export default async function profile(req, res) {
         where: {
           userId: userr.id,
         },
-        data: data,
+        data: {
+          age: data.age,
+          sex: data.sex,
+          height: data.height,
+          weight: data.weight,
+          activity: data.activity,
+          plan: data.plan, //Plan attribute not known by prisma even after migration ?
+        },
       });
 
       res.status(200).json(user);

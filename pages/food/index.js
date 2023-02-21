@@ -34,10 +34,11 @@ const Food = ({ food }) => {
   const [addedFood, setAddedFood] = useState({});
   const [searchedWord, setSearchedWord] = useState("");
   const [eatenFoodList, setEatenFoodList] = useState([]);
+  const [isAlgorithmEnabled, setIsAlgorithmEnabled] = useState(false);
 
   const { user, setUser } = useContext(User_data);
 
-  // Next is SSR so we should ... , Force a render with useEffect
+  // Next is SSR, so we should ... , Force a render with useEffect
   const [localNutris, setLocalNutris] = useState(false);
   const [localInfos, setLocalInfos] = useState(false);
   useEffect(() => {
@@ -147,7 +148,10 @@ const Food = ({ food }) => {
                   {formatSearchWord(food, searchedWord)}
                   <span className="font-paragraph font-bold text-ms">
                     {
-                      food.name.split(new RegExp(searchedWord, "i"))[food.name.split(new RegExp(searchedWord, "i")).length -1]
+                      food.name.split(new RegExp(searchedWord, "i"))[
+                        food.name.split(new RegExp(searchedWord, "i")).length -
+                          1
+                      ]
                     }
                   </span>
                 </div>
@@ -201,7 +205,13 @@ const Food = ({ food }) => {
             <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4">
               {food.name}
             </b>
-            <a target="_blank" href={'/food/'+(food.name.split(',').join('').split(' ').join('-').toLowerCase())}>
+            <a
+              target="_blank"
+              href={
+                "/food/" +
+                food.name.split(",").join("").split(" ").join("-").toLowerCase()
+              }
+            >
               <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
             </a>
           </div>
@@ -262,6 +272,48 @@ const Food = ({ food }) => {
           </button>
         </div>
       </div>
+    );
+  });
+
+  const laboTable1 = eatenFoodList.map((food) => {
+    return (
+      <tr key={food.name} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th
+          scope="row"
+          class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+        >
+          {food.name}
+        </th>
+        <td class="px-3 py-4 underline font-black text-lg">{food.size}g</td>
+      </tr>
+    );
+  });
+
+  const laboTable2 = eatenFoodList.map((food) => {
+    return (
+      <tr key={food.name} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th
+          scope="row"
+          class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+        >
+          {food.name}
+        </th>
+        <td class="px-3 py-4 underline font-black text-lg">{food.size}g</td>
+      </tr>
+    );
+  });
+
+  const laboTable3 = eatenFoodList.map((food) => {
+    return (
+      <tr key={food.name} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th
+          scope="row"
+          class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+        >
+          {food.name}
+        </th>
+        <td class="px-3 py-4 underline font-black text-lg">{food.size}g</td>
+      </tr>
     );
   });
 
@@ -327,19 +379,26 @@ const Food = ({ food }) => {
                   styles.dropshadow
                 }
               >
-                {/* <Image
-                  fill
-                  src={addedFood.img}
-                  alt="beef"
-                  className="h-20 w-20 my-4 mx-4 md:mx-8"
-                /> */}
 
                 <div className="flex flex-col justify-center items-start w-full truncate xs:ml-8">
                   <div className="flex justify-center items-center">
                     <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4">
                       {addedFood.name}
                     </b>
-                    <a target="_blank" href={'/food/'+(addedFood.name.split(',').join('').split('%').join('percent').split(' ').join('-').toLowerCase())}>
+                    <a
+                      target="_blank"
+                      href={
+                        "/food/" +
+                        addedFood.name
+                          .split(",")
+                          .join("")
+                          .split("%")
+                          .join("percent")
+                          .split(" ")
+                          .join("-")
+                          .toLowerCase()
+                      }
+                    >
                       <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
                     </a>
                   </div>
@@ -354,13 +413,15 @@ const Food = ({ food }) => {
                       <p className="font-paragraph text-xs">
                         How much did you eat:{" "}
                       </p>
-                      <div className={
-                                `flex justify-start items-center
-                                text-gray-900 text-sm indent-2
-                                bg-gray-50 border rounded-lg group outline outline-1 group-focus:outline-4
-                                block w-20 ml-2 ` +
-                                (wiggle && "outline-red-500 animate-wiggle")
-                      }>
+                      <div
+                        className={
+                          `flex justify-start items-center
+                            text-gray-900 text-sm indent-2
+                            bg-gray-50 border rounded-lg group outline outline-1 group-focus:outline-4
+                            block w-20 ml-2 ` +
+                          (wiggle && "outline-red-500 animate-wiggle")
+                        }
+                      >
                         <input
                           type="number"
                           className={`text-gray-900 text-sm indent-2
@@ -403,7 +464,7 @@ const Food = ({ food }) => {
             <div
               className={
                 `
-                            w-full border-b-2 border-custom-orange my-4 w-11/12 ` +
+                w-full border-b-2 border-custom-orange my-4 w-11/12 ` +
                 (eatenFoodList.length
                   ? "transition duration-300 scale-x-100"
                   : "transition duration-300 scale-x-0")
@@ -415,6 +476,23 @@ const Food = ({ food }) => {
                 {eatenFood}
               </div>
             </div>
+
+            {eatenFoodList.length !== 0 && (
+              <div className="flex justify-center items-center w-full">
+                <a href="#algorithm">
+                  <div
+                    className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs  rounded-2xl "
+                    style={{ backgroundColor: "#DCF8FF" }}
+                    onClick={() => setIsAlgorithmEnabled(true)}
+                  >
+                    <button className="py-4 px-9 font-extrabold">
+                      Proceed
+                    </button>
+                    <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden opacity-0 transition duration-300 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-70"></div>
+                  </div>
+                </a>
+              </div>
+            )}
           </div>
         </div>
 
@@ -550,24 +628,52 @@ const Food = ({ food }) => {
               <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase">
                   <tr>
-                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">Calories</th>
-                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">Carbs</th>
-                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">Proteins</th>
-                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">Fats</th>
-                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">Sugar</th>
-                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">Salt</th>
-                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">Fiber</th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">
+                      Calories
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">
+                      Carbs
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">
+                      Proteins
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">
+                      Fats
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">
+                      Sugar
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-800">
+                      Salt
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-white bg-gray-700">
+                      Fiber
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="border-b border-gray-200 dark:border-gray-700">
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">{localNutris.kCalories} kCal</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{localNutris.carbs} g</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">{localNutris.proteins} g</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{localNutris.fats} g</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">{localNutris.sugar} g</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{localNutris.salt} g</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">{localNutris.fiber} g</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                      {localNutris.kCalories} kCal
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                      {localNutris.carbs} g
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                      {localNutris.proteins} g
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                      {localNutris.fats} g
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                      {localNutris.sugar} g
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                      {localNutris.salt} g
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                      {localNutris.fiber} g
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -587,6 +693,73 @@ const Food = ({ food }) => {
             </div>
           )}
         </div>
+
+        {/* Food Algorithm  */}
+        {isAlgorithmEnabled && (
+          <div
+            id="algorithm"
+            className="
+                        flex flex-col justify-center items-center
+                        sm:col-start-2 col-span-8 sm:col-span-6
+                        border-2 border-custom-orange rounded
+                        w-full mb-16"
+          >
+            <h3 className="font-title text-3xl xs:text-4xl sm:text-5xl text-center | w-full my-16">
+              Your Labo
+            </h3>
+            <div className="flex items-stretch justify-between w-full mb-4">
+              <div className="flex-1 border-2 border-custom-orange flex flex-col justify-start items-center w-full mx-2">
+                <p className="font-paragraph font-bold text-xl text-black my-4">
+                  Previous Diet
+                </p>
+
+                <div className="border-b-2 border-custom-orange w-full"></div>
+
+                <table class="w-full text-sm text-left text-black dark:text-white font-logo">
+                  <tbody>{laboTable1}</tbody>
+                </table>
+              </div>
+
+              <div
+                className="
+                          border-2 border-custom-orange 
+                          flex-1 flex flex-col justify-start items-center 
+                          w-full mx-2
+                          bg-gradient-to-r from-gradient1 to-gradient2
+            "
+              >
+                <p className="font-paragraph font-bold text-xl text-white my-4">
+                  Changes Made
+                </p>
+
+                <div className="border-b-2 border-custom-orange w-full"></div>
+
+                <table class="w-full text-sm text-left text-black dark:text-white font-logo">
+                  <tbody>{laboTable2}</tbody>
+                </table>
+              </div>
+
+              <div
+                className="
+                          border-2 border-custom-orange 
+                          flex-1 flex flex-col justify-start items-center 
+                          w-full mx-2
+                          bg-gradient-to-r from-gradient1 to-gradient2
+            "
+              >
+                <p className="font-paragraph font-bold text-xl text-white my-4">
+                  New Diet
+                </p>
+
+                <div className="border-b-2 border-custom-orange w-full"></div>
+
+                <table class="w-full text-sm text-left text-black dark:text-white font-logo">
+                  <tbody>{laboTable3}</tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -595,7 +768,10 @@ const Food = ({ food }) => {
 export default Food;
 
 export const getStaticProps = async () => {
-  const url = process.env.VERCEL_ENV === "production" ? "https://nutrilab.vercel.app/api/food" : "http://localhost:3000/api/food";
+  const url =
+    process.env.VERCEL_ENV === "production"
+      ? "https://nutrilab.vercel.app/api/food"
+      : "http://localhost:3000/api/food";
   const res = await axios.get(url);
   const food = await res.data;
 

@@ -44,6 +44,7 @@ model User {
   sessions      Session[]
   age           String?
   height        String?
+  plan          String?
   weight        String?
   sex           String?
   activity      String?

@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
 import server from "/config";
-import getCookie from "next-cookies";
 import isAuthenticated from "./api/Auth";
 
 import {
@@ -10,7 +9,8 @@ import {
   MdOutlineRemoveCircle,
 } from "react-icons/md";
 
-import { RiEditLine, RiEditFill } from "react-icons/ri";
+import { RiEditFill } from "react-icons/ri";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
@@ -196,10 +196,15 @@ const Food = ({ food }) => {
           styles.dropshadow
         }
       >
-        <div className="flex flex-col justify-center items-start w-full truncate xs:ml-12">
-          <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4 cursor-pointer">
-            {food.name}
-          </b>
+        <div className="flex flex-col justify-center items-start w-full truncate xs:ml-8">
+          <div className="flex items-center justify-center">
+            <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4 cursor-pointer">
+              {food.name}
+            </b>
+            <Link href={'/food/'+(food.name.split(',').join('').split(' ').join('-').toLowerCase())}>
+              <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
+            </Link>
+          </div>
           <div className="flex flex-col self-center items-start xs:w-full my-1">
             {/* <p className="font-paragraph text-xs">
               Category:{" "}
@@ -329,10 +334,15 @@ const Food = ({ food }) => {
                   className="h-20 w-20 my-4 mx-4 md:mx-8"
                 /> */}
 
-                <div className="flex flex-col justify-center items-start w-full">
-                  <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
-                    {addedFood.name}
-                  </b>
+                <div className="flex flex-col justify-center items-start w-full truncate xs:ml-8">
+                  <div className="flex justify-center items-center">
+                    <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
+                      {addedFood.name}
+                    </b>
+                    <Link href={'/food/'+(addedFood.name.split(' ').join('').split(',').join('-').toLowerCase())}>
+                      <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
+                    </Link>
+                  </div>
                   <div className="flex flex-col self-center items-start xs:w-full my-1">
                     {/* <p className="font-paragraph text-xs">
                       Category:{" "}

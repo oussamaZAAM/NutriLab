@@ -198,7 +198,7 @@ const Food = ({ food }) => {
       >
         <div className="flex flex-col justify-center items-start w-full truncate xs:ml-8">
           <div className="flex items-center justify-center">
-            <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4 cursor-pointer">
+            <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4">
               {food.name}
             </b>
             <a target="_blank" href={'/food/'+(food.name.split(',').join('').split(' ').join('-').toLowerCase())}>
@@ -336,10 +336,10 @@ const Food = ({ food }) => {
 
                 <div className="flex flex-col justify-center items-start w-full truncate xs:ml-8">
                   <div className="flex justify-center items-center">
-                    <b className="font-logo font-bold text-xl text-center xs:text-left text-custom-orange w-full my-4">
+                    <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4">
                       {addedFood.name}
                     </b>
-                    <a target="_blank" href={'/food/'+(addedFood.name.split(' ').join('').split(',').join('-').toLowerCase())}>
+                    <a target="_blank" href={'/food/'+(addedFood.name.split(',').join('').split(' ').join('-').toLowerCase())}>
                       <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
                     </a>
                   </div>

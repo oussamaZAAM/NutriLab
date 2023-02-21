@@ -5,6 +5,8 @@ export default function Handler({ query: { id } }, res) {
         const lowerCase = food.name.toLowerCase();
         const formattedComma = lowerCase.split(',').join('');
         const formattedSpace = formattedComma.split(' ').join('-');
+        console.log(formattedSpace)
+        console.log(id)
         return formattedSpace === id;
     });
     if (filtered.length > 0) {

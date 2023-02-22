@@ -11,13 +11,9 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Home({ currentUser }) {
+export default function Home() {
   const { user, setUser } = useContext(User_data);
-
-  useEffect(() => {
-    // currentUser === false && localStorage.removeItem("user");
-    // localStorage.removeItem("dietInfos");
-  }, []);
+  console.log(user);
   return (
     <div>
       <Head>
@@ -54,7 +50,10 @@ export default function Home({ currentUser }) {
             <p className="text-md text-left font-paragraph indent-2">
               <b className="underline">Measure your daily need of nutrients</b>,{" "}
               <b className="underline">Balance your food</b> and{" "}
-              <b className="underline">let us help you find today&apos;s meal</b>.
+              <b className="underline">
+                let us help you find today&apos;s meal
+              </b>
+              .
             </p>
             <div className="flex justify-end items-center w-full">
               <Link href="/nutrients">
@@ -155,7 +154,8 @@ export default function Home({ currentUser }) {
                   Suggested Meals
                 </b>
                 <p className="font-paragraph m-4">
-                  Using the balanced combination of food generated, we can help you find today&apos;s meal.
+                  Using the balanced combination of food generated, we can help
+                  you find today&apos;s meal.
                 </p>
               </div>
               <div

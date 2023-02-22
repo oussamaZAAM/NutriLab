@@ -1,15 +1,16 @@
 import "/styles/globals.css";
 import Context from "../context/context";
-import React, { useState, useEffect } from "react";
-export default function App({ Component, pageProps }) {
-  const [user, setUser] = useState(null);
+import { SessionProvider } from "next-auth/react";
 
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")));
-  }, []);
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <Context currentUser={user}>
-      <Component {...pageProps} />
-    </Context>
+    <SessionProvider session={session}>
+      <Context>
+        <Component {...pageProps} />
+      </Context>
+    </SessionProvider>
   );
 }

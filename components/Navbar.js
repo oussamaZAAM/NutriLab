@@ -1,6 +1,8 @@
 import { Fragment, useRef, useState, useEffect } from "react";
 import { Disclosure, Menu, Transition, Dialog } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useSession, signIn, signOut } from "next-auth/react";
+
 // import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import Login from "./Login";
 import Register from "./Register";
@@ -19,6 +21,8 @@ function classNames(...classes) {
 }
 
 export default function Example({ User }) {
+  const { data: session } = useSession();
+
   const [open1, setOpen] = useState(false);
   const [user, setUser] = useState(User);
   const [login, setLogin] = useState(true);
@@ -31,16 +35,17 @@ export default function Example({ User }) {
   const cancelButtonRef = useRef(null);
 
   const handleLogout = async (e) => {
-    await axios
-      .get("/api/logout")
-      .then(async (response) => {
-        setUser(false);
-        localStorage.removeItem("dietInfos");
-        localStorage.removeItem("user");
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    signOut();
+    // await axios
+    //   .get("/api/logout")
+    //   .then(async (response) => {
+    //     setUser(false);
+    //     localStorage.removeItem("dietInfos");
+    //     localStorage.removeItem("user");
+    //   })
+    //   .catch((error) => {
+    //     alert(error);
+    //   });
   };
 
   return (
@@ -105,19 +110,19 @@ export default function Example({ User }) {
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button> */}
+                  {/* <button onClick={() => (session ? signOut() : signIn())}> */}
                   <button
-                    onClick={() => (user ? handleLogout() : setOpen(true))}
+                    onClick={() => (session ? handleLogout() : setOpen(true))}
                   >
                     <p
                       className={
                         "text-black hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       }
                     >
-                      {/* <LoginBtn /> */}
-                      {user ? "Log out" : "Login"}
+                      {session ? "Log out" : "Login"}
                     </p>
                   </button>
-                  {!user && (
+                  {!session && (
                     <Transition.Root show={open1} as={Fragment}>
                       <Dialog
                         as="div"

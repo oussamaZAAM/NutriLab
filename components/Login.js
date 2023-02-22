@@ -4,6 +4,8 @@ import axios from "axios";
 import { User_data } from "../context/context";
 import { useContext } from "react";
 import { useState } from "react";
+import { useSession, signIn } from "next-auth/react";
+
 export default function Login({ setLogin, setAuth, setOpen }) {
   const { setUser } = useContext(User_data);
   const [user, setUser1] = useState({
@@ -30,7 +32,15 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         setOpen(false);
         localStorage.setItem("user", JSON.stringify(response.data));
         const dietInfos = await axios.get("/api/profile").then((res) => {
-          const localData = {...res.data, age: "", sex: "", weight: "", height: "", activity: "", plan: ""}
+          const localData = {
+            ...res.data,
+            age: "",
+            sex: "",
+            weight: "",
+            height: "",
+            activity: "",
+            plan: "",
+          };
           localStorage.setItem("dietInfos", JSON.stringify(localData));
         });
         setUser(response.data);
@@ -50,7 +60,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
       </Head>
       <div className="px-8 py-6 text-left bg-white shadow-lg ">
         <div className="flex justify-around">
-          <button>
+          <button onClick={() => signIn("google")}>
             <BsGoogle size="3rem" color="blue" />
           </button>
           <button>

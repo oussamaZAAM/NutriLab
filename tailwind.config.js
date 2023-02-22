@@ -17,10 +17,6 @@ module.exports = {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
         },
-        // rswipe: {
-        //   "0%": { transform: "translateX(0px)" },
-        //   "100%": { transform: "translateX(100px)" },
-        // },
         lswipe: {
           "0%": { transform: "translateX(-73px)" },
           "10%": { transform: "scaleX(2.2) translateX(-27px)" },
@@ -31,10 +27,6 @@ module.exports = {
           "0%": { transform: "translateX(100px) scaleX(2.2)" },
           "100%": { transform: "translateX(0px)" },
         },
-        // lswiper: {
-        //   "0%": { transform: "translateX(0px)" },
-        //   "100%": { transform: "translateX(-100px)" },
-        // },
       },
       animation: {
         wiggle: "wiggle 200ms ease-in-out",

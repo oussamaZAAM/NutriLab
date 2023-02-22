@@ -1,11 +1,14 @@
 import { createContext, useState, useEffect } from "react";
-
+import { useSession } from "next-auth/react";
 export const User_data = createContext(null);
-function Context({ children, currentUser }) {
-  const [user, setUser] = useState(currentUser);
+
+function Context({ children }) {
+  const { data: session } = useSession();
+
+  const [user, setUser] = useState(session);
   useEffect(() => {
-    setUser(currentUser);
-  }, [currentUser]);
+    setUser(session);
+  }, [session]);
   return (
     <User_data.Provider value={{ user, setUser }}>
       {children}

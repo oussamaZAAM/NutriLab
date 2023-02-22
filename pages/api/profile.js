@@ -1,25 +1,23 @@
 import prisma from "./prisma";
 import jwt from "jsonwebtoken";
-import { serialize } from "cookie";
+import { getServerSession } from "next-auth/next";
+
+import { authOptions } from "./auth/[...nextauth]";
 export default async function profile(req, res) {
+  const session = await getServerSession(req, res, authOptions);
   if (req.method === "PUT") {
     const data = req.body;
-    const { cookies } = req;
-    const token = cookies.NutriLab;
-    const userr = jwt.verify(token, process.env.JWT_SECRET);
+    // const { cookies } = req;
+    // const token = cookies.NutriLab;
+    // const userr = jwt.verify(token, process.env.JWT_SECRET);
+    data.userId = session.user.id;
     try {
-      const user = await prisma.NutriInfo.update({
+      const user = await prisma.NutriInfo.upsert({
         where: {
-          userId: userr.id,
+          userId: data.userId,
         },
-        data: {
-          age: data.age,
-          sex: data.sex,
-          height: data.height,
-          weight: data.weight,
-          activity: data.activity,
-          // plan: data.plan, //Plan attribute not known by prisma even after migration ?
-        },
+        update: data,
+        create: data,
       });
 
       res.status(200).json(user);

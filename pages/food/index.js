@@ -124,7 +124,7 @@ const Food = ({ food }) => {
           food.name.toLowerCase().includes(searchedWord)
         ) {
           return (
-            <a href="#addedFood" className="w-full" key={food.name}>
+            <div className="w-full" key={food.name}>
               {searchedWord !== "" ? (
                 <div
                   className="indent-4 w-full
@@ -157,12 +157,12 @@ const Food = ({ food }) => {
                 </div>
               ) : (
                 <p
-                  className="
+                  className={`
                             font-paragraph font-bold text-ms indent-4
                             p-2 w-full
                             border-b-2 border-x-2 rounded-lg
-                            hover:bg-gray-100 hover:animate-pulse cursor-pointer
-                          "
+                            hover:bg-gray-100 cursor-pointer 
+                          `+(eatenFoodList.some((thisFood) => thisFood.name === food.name) && 'bg-red-200 hover:bg-red-400')}
                   onClick={() => {
                     if (
                       eatenFoodList.length === 0 ||
@@ -181,7 +181,7 @@ const Food = ({ food }) => {
                   {food.name}
                 </p>
               )}
-            </a>
+            </div>
           );
         }
       });

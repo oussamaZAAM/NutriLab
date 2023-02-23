@@ -59,16 +59,16 @@ export default function Login({ setLogin, setAuth, setOpen }) {
       <div className="px-8 py-6 text-left bg-white shadow-lg ">
         <div className="flex justify-around">
           <button onClick={() => signIn("google")}>
-            <BsGoogle size="3rem" color="blue" />
+            <BsGoogle size="3rem" color="orange" />
           </button>
           <button>
-            <BsFacebook size="3rem" color="blue" />
+            <BsFacebook size="3rem" color="orange" />
           </button>
           <button>
-            <BsTwitter size="3rem" color="blue" />
+            <BsTwitter size="3rem" color="orange" />
           </button>
         </div>
-        <div className="bg-blue-600 w-full h-1 mt-7 mb-3"></div>
+        <div className="bg-orange-400 w-full h-1 mt-7 mb-3"></div>
         <h3 className="text-2xl font-bold text-center">Welcome back!</h3>
         <form action="">
           <div className="mt-4">
@@ -121,7 +121,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
             <div className="flex">
               <button
                 onClick={handleSubmit}
-                className="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
+                className="w-full px-6 py-2 mt-4 text-white bg-orange-400 rounded-lg hover:bg-orange-600"
               >
                 Login to Account
               </button>
@@ -129,7 +129,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
             <div className="mt-6 text-grey-dark">
               Don&apos;t have an account?
               <button
-                className="text-blue-600 hover:underline"
+                className="text-orange-600 hover:underline"
                 onClick={() => setLogin(false)}
               >
                 Sign up

@@ -42,7 +42,15 @@ export default function Register({ setLogin, setAuth, setOpen }) {
             setOpen(false);
             localStorage.setItem("user", JSON.stringify(response.data));
             const dietInfos = await axios.get("/api/profile").then((res) => {
-              const localData = {...res.data, age: "", sex: "", weight: "", height: "", activity: "", plan: ""}
+              const localData = {
+                ...res.data,
+                age: "",
+                sex: "",
+                weight: "",
+                height: "",
+                activity: "",
+                plan: "",
+              };
               localStorage.setItem("dietInfos", JSON.stringify(localData));
             });
             setUser(response.data);
@@ -67,16 +75,16 @@ export default function Register({ setLogin, setAuth, setOpen }) {
         <div className="px-8 py-6 text-left bg-white shadow-lg">
           <div className="flex justify-around">
             <button>
-              <BsGoogle size="3rem" color="blue" />
+              <BsGoogle size="3rem" color="orange" />
             </button>
             <button>
-              <BsFacebook size="3rem" color="blue" />
+              <BsFacebook size="3rem" color="orange" />
             </button>
             <button>
-              <BsTwitter size="3rem" color="blue" />
+              <BsTwitter size="3rem" color="orange" />
             </button>
           </div>
-          <div className="bg-blue-600 w-full h-1 mt-7 mb-3"></div>
+          <div className="bg-orange-400 w-full h-1 mt-7 mb-3"></div>
           <h3 className="text-2xl font-bold text-center">Join us</h3>
           <form action="">
             <div className="mt-4">
@@ -182,7 +190,7 @@ export default function Register({ setLogin, setAuth, setOpen }) {
               <div className="flex">
                 <button
                   onClick={handleSubmit}
-                  className="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
+                  className="w-full px-6 py-2 mt-4 text-white bg-orange-400 rounded-lg hover:bg-orange-600"
                 >
                   Create Account
                 </button>
@@ -190,7 +198,7 @@ export default function Register({ setLogin, setAuth, setOpen }) {
               <div className="mt-6 text-grey-dark">
                 Already have an account?
                 <button
-                  className="text-blue-600 hover:underline"
+                  className="text-orange-600 hover:underline"
                   onClick={() => setLogin(true)}
                 >
                   Log in

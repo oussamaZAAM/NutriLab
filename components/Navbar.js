@@ -31,28 +31,27 @@ export default function Example({ User }) {
   useEffect(() => {
     // Perform localStorage action
     async function handleUser() {
-      await axios.get("/api/user").then((user) => setUser(user.data));
+      await axios
+        .get("/api/user")
+        .then((user) => setUser(user.data))
+        .catch((err) => setUser(undefined));
     }
     handleUser();
-    const current_user = localStorage.getItem("user");
-    current_user === null ? setLogin(true) : setLogin(false);
   }, []);
   const cancelButtonRef = useRef(null);
-  console.log(user);
   const handleLogout = async (e) => {
-    signOut();
-    // await axios
-    //   .get("/api/logout")
-    //   .then(async (response) => {
-    //     setUser(false);
-    //     localStorage.removeItem("dietInfos");
-    //     localStorage.removeItem("user");
-    //   })
-    //   .catch((error) => {
-    //     alert(error);
-    //   });
+    session && signOut();
+    user &&
+      (await axios
+        .get("/api/logout")
+        .then(async (response) => {
+          setUser(undefined);
+        })
+        .catch((error) => {
+          alert(error);
+        }));
+    setLogin(true);
   };
-
   return (
     <div className="grid grid-cols-8 border-b-4 border-custom-orange">
       <Disclosure
@@ -129,67 +128,66 @@ export default function Example({ User }) {
                       {session || user ? "Log out" : "Login"}
                     </p>
                   </button>
-                  {!session ||
-                    (user && (
-                      <Transition.Root show={open1} as={Fragment}>
-                        <Dialog
-                          as="div"
-                          className="relative z-10"
-                          initialFocus={cancelButtonRef}
-                          onClose={() => {
-                            setOpen();
-                            setTimeout(() => {
-                              setLogin(true);
-                            }, 200);
-                          }}
+                  {!user && (
+                    <Transition.Root show={open1} as={Fragment}>
+                      <Dialog
+                        as="div"
+                        className="relative z-10"
+                        initialFocus={cancelButtonRef}
+                        onClose={() => {
+                          setOpen();
+                          setTimeout(() => {
+                            setLogin(true);
+                          }, 200);
+                        }}
+                      >
+                        <Transition.Child
+                          as={Fragment}
+                          enter="ease-out duration-300"
+                          enterFrom="opacity-0"
+                          enterTo="opacity-100"
+                          leave="ease-in duration-200"
+                          leaveFrom="opacity-100"
+                          leaveTo="opacity-0"
                         >
-                          <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-                          </Transition.Child>
-                          <div className="fixed inset-0 z-10 overflow-y-auto">
-                            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                              <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 translate-y-0 sm:-translate-y-60 sm:translate-x-60 sm:scale-50"
-                                enterTo="opacity-100 translate-y-0 sm:translate-x-0 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                              >
-                                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                                  {login ? (
-                                    <div>
-                                      <Login
-                                        setLogin={setLogin}
-                                        setAuth={setUser}
-                                        setOpen={setOpen}
-                                      />
-                                    </div>
-                                  ) : (
-                                    <div>
-                                      <Register
-                                        setLogin={setLogin}
-                                        setAuth={setUser}
-                                        setOpen={setOpen}
-                                      />
-                                    </div>
-                                  )}
-                                </Dialog.Panel>
-                              </Transition.Child>
-                            </div>
+                          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                        </Transition.Child>
+                        <div className="fixed inset-0 z-10 overflow-y-auto">
+                          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                            <Transition.Child
+                              as={Fragment}
+                              enter="ease-out duration-300"
+                              enterFrom="opacity-0 translate-y-0 sm:-translate-y-60 sm:translate-x-60 sm:scale-50"
+                              enterTo="opacity-100 translate-y-0 sm:translate-x-0 scale-100"
+                              leave="ease-in duration-200"
+                              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                            >
+                              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                {login ? (
+                                  <div>
+                                    <Login
+                                      setLogin={setLogin}
+                                      setAuth={setUser}
+                                      setOpen={setOpen}
+                                    />
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <Register
+                                      setLogin={setLogin}
+                                      setAuth={setUser}
+                                      setOpen={setOpen}
+                                    />
+                                  </div>
+                                )}
+                              </Dialog.Panel>
+                            </Transition.Child>
                           </div>
-                        </Dialog>
-                      </Transition.Root>
-                    ))}
+                        </div>
+                      </Dialog>
+                    </Transition.Root>
+                  )}
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>

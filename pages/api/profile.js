@@ -7,10 +7,14 @@ export default async function profile(req, res) {
   const session = await getServerSession(req, res, authOptions);
   if (req.method === "PUT") {
     const data = req.body;
-    // const { cookies } = req;
-    // const token = cookies.NutriLab;
-    // const userr = jwt.verify(token, process.env.JWT_SECRET);
-    data.userId = session.user.id;
+    if (session) {
+      data.userId = session.user.id;
+    } else {
+      const { cookies } = req;
+      const token = cookies.NutriLab;
+      const userr = jwt.verify(token, process.env.JWT_SECRET);
+      data.userId = userr.id;
+    }
     try {
       const user = await prisma.NutriInfo.upsert({
         where: {

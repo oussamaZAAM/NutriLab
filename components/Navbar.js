@@ -1,7 +1,8 @@
-import { Fragment, useRef, useState, useEffect } from "react";
+import { Fragment, useRef, useState, useEffect, useContext } from "react";
 import { Disclosure, Menu, Transition, Dialog } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { User_data } from "../context/context";
 
 // import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import Login from "./Login";
@@ -21,33 +22,36 @@ function classNames(...classes) {
 }
 
 export default function Example({ User }) {
+  const { user, setUser } = useContext(User_data);
+
   const { data: session } = useSession();
 
   const [open1, setOpen] = useState(false);
-  const [user, setUser] = useState(User);
   const [login, setLogin] = useState(true);
   useEffect(() => {
     // Perform localStorage action
-    const current_user = localStorage.getItem("user");
-    setUser(current_user);
-    current_user === null ? setLogin(true) : setLogin(false);
-  }, [user]);
+    async function handleUser() {
+      await axios
+        .get("/api/user")
+        .then((user) => setUser(user.data))
+        .catch((err) => setUser(undefined));
+    }
+    handleUser();
+  }, []);
   const cancelButtonRef = useRef(null);
-
   const handleLogout = async (e) => {
-    signOut();
-    // await axios
-    //   .get("/api/logout")
-    //   .then(async (response) => {
-    //     setUser(false);
-    //     localStorage.removeItem("dietInfos");
-    //     localStorage.removeItem("user");
-    //   })
-    //   .catch((error) => {
-    //     alert(error);
-    //   });
+    session && signOut();
+    user &&
+      (await axios
+        .get("/api/logout")
+        .then(async (response) => {
+          setUser(undefined);
+        })
+        .catch((error) => {
+          alert(error);
+        }));
+    setLogin(true);
   };
-
   return (
     <div className="grid grid-cols-8 border-b-4 border-custom-orange">
       <Disclosure
@@ -112,17 +116,19 @@ export default function Example({ User }) {
                   </button> */}
                   {/* <button onClick={() => (session ? signOut() : signIn())}> */}
                   <button
-                    onClick={() => (session ? handleLogout() : setOpen(true))}
+                    onClick={() =>
+                      session || user ? handleLogout() : setOpen(true)
+                    }
                   >
                     <p
                       className={
                         "text-black hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       }
                     >
-                      {session ? "Log out" : "Login"}
+                      {session || user ? "Log out" : "Login"}
                     </p>
                   </button>
-                  {!session && (
+                  {!user && (
                     <Transition.Root show={open1} as={Fragment}>
                       <Dialog
                         as="div"

@@ -7,6 +7,7 @@ export default async function register(req, res) {
   const user = req.body;
   const SALT_ROUNDS = 12;
   const pass = await bcrypt.hash(user.password, SALT_ROUNDS);
+  console.log("ayoub");
   try {
     const result = await prisma.User.create({
       data: {

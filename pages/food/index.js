@@ -207,6 +207,7 @@ const Food = ({ food }) => {
             </b>
             <a
               target="_blank"
+              rel="noreferrer"
               href={
                 "/food/" +
                 food.name.split(",").join("").split(" ").join("-").toLowerCase()
@@ -387,6 +388,7 @@ const Food = ({ food }) => {
                     </b>
                     <a
                       target="_blank"
+                      rel="noreferrer"
                       href={
                         "/food/" +
                         addedFood.name

@@ -6,7 +6,7 @@ function logout(req, res) {
   !jwt && res.json({ message: "Already logged out" });
   const serialised = serialize("NutriLab", null, {
     httpOnly: true,
-    secure: process.env.MODE_ENV !== "dev",
+    secure: process.env.VERCEL_ENV !== "development",
     sameSite: "strict",
     maxAge: -1,
     path: "/",

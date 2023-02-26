@@ -20,7 +20,7 @@ export default async function login(req, res) {
     const token = jwt.sign(user, process.env.JWT_SECRET);
     const serialised = serialize("NutriLab", token, {
       httpOnly: true,
-      secure: process.env.MODE_ENV !== "dev",
+      secure: process.env.VERCEL_ENV !== "development",
       sameSite: "strict",
       maxAge: 60 * 60 * 24 * 14,
       path: "/",

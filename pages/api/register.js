@@ -7,7 +7,6 @@ export default async function register(req, res) {
   const user = req.body;
   const SALT_ROUNDS = 12;
   const pass = await bcrypt.hash(user.password, SALT_ROUNDS);
-  console.log("ayoub");
   try {
     const result = await prisma.User.create({
       data: {
@@ -29,7 +28,7 @@ export default async function register(req, res) {
     const token = jwt.sign(result, process.env.JWT_SECRET);
     const serialised = serialize("NutriLab", token, {
       httpOnly: true,
-      secure: process.env.MODE_ENV !== "dev",
+      secure: process.env.VERCEL_ENV !== "development",
       sameSite: "strict",
       maxAge: 60 * 60 * 24 * 30,
       path: "/",

@@ -121,7 +121,7 @@ export default foodInfos;
 
 export const getStaticProps = async (context) => {
   const res = await fetch(
-    `${process.env.SERVER}/api/food/${context.params.id}`
+    `${process.env.VERCEL_URL}/api/food/${context.params.id}`
     );
     
   const foodData = await res.json();
@@ -140,7 +140,7 @@ export const getStaticPaths = async () => {
   // const res = await axios.get(url);
   // const food = await res.data;
   const res = await fetch(
-      `${process.env.SERVER}/api/food`
+      `${process.env.VERCEL_URL}/api/food`
   );
   const foods = await res.json();
 
@@ -162,16 +162,3 @@ export const getStaticPaths = async () => {
       fallback: false
   }
 }
-
-// export const getServerSideProps = async (context) => {
-//   const res = await fetch(
-//     `${process.env.SERVER}/api/food/${context.params.id}`
-//   );
-//   const foodData = await res.json();
-
-//   return {
-//     props: {
-//       foodData,
-//     },
-//   };
-// };

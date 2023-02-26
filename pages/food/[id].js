@@ -138,8 +138,8 @@ export const getStaticProps = async (context) => {
 export const getStaticPaths = async () => {
   const url =
     process.env.VERCEL_ENV === "production"
-      ? `https://nutrilab.vercel.app/api/food/${context.params.id}`
-      : `http://localhost:3000/api/food/${context.params.id}`;
+      ? `https://nutrilab.vercel.app/api/food`
+      : `http://localhost:3000/api/food`;
   const res = await fetch(url);
   const foods = await res.json();
   

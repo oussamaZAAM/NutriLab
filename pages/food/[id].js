@@ -136,20 +136,13 @@ export const getStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
-  // const url =
-  //   process.env.VERCEL_ENV === "production"
-  //     ? "https://nutrilab.vercel.app/api/food"
-  //     : "http://localhost:3000/api/food";
-  // const res = await axios.get(url);
-  // const food = await res.data;
-  const res = await fetch(
-      `${process.env.VERCEL_URL}/api/food`
-  );
+  const url =
+    process.env.VERCEL_ENV === "production"
+      ? `https://nutrilab.vercel.app/api/food/${context.params.id}`
+      : `http://localhost:3000/api/food/${context.params.id}`;
+  const res = await fetch(url);
   const foods = await res.json();
-
-// console.log(foods)
-
-  // const ids = foods.map((food) => food.name.toLowerCase.split(',').join('').split('%').join('percent').split(' ').join('-'));
+  
   const names = foods.map((food) => food.name);
   const ids = names.map((name)=>{
     const lowerCase = name.toLowerCase();

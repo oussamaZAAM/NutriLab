@@ -120,9 +120,12 @@ const foodInfos = ({ foodData }) => {
 export default foodInfos;
 
 export const getStaticProps = async (context) => {
-  const res = await fetch(
-    `${process.env.VERCEL_URL}/api/food/${context.params.id}`
-    );
+  const url =
+    process.env.VERCEL_ENV === "production"
+      ? `https://nutrilab.vercel.app/api/food/${context.params.id}`
+      : `http://localhost:3000/api/food/${context.params.id}`;
+
+  const res = await fetch(url);
     
   const foodData = await res.json();
   return {

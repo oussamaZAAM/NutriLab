@@ -396,6 +396,8 @@ const Food = ({ food }) => {
                           .join("")
                           .split("%")
                           .join("percent")
+                          .split("/")
+                          .join("per")
                           .split(" ")
                           .join("-")
                           .toLowerCase()

@@ -5,7 +5,8 @@ export default function Handler({ query: { id } }, res) {
         const lowerCase = food.name.toLowerCase();
         const deleteComma = lowerCase.split(',').join('');
         const deletePercent = deleteComma.split('%').join('percent');
-        const formattedURL = deletePercent.split(' ').join('-');
+        const deleteSlash = deletePercent.split('/').join('per');
+        const formattedURL = deleteSlash.split(' ').join('-');
         return formattedURL === id;
     });
     if (filtered.length > 0) {

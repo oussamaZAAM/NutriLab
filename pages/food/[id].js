@@ -148,7 +148,8 @@ export const getStaticPaths = async () => {
     const lowerCase = name.toLowerCase();
     const deleteComma = lowerCase.split(',').join('');
     const deletePercent = deleteComma.split('%').join('percent');
-    const formattedURL = deletePercent.split(' ').join('-');
+    const deleteSlash = deletePercent.split('/').join('per');
+    const formattedURL = deleteSlash.split(' ').join('-');
     return formattedURL;
   })
   const paths = ids.map((id) => ({params: {id: id.toString()}}));

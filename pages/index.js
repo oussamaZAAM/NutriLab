@@ -86,37 +86,53 @@ export default function Home() {
               width={125}
               height={125}
               src="/icons/diet.png"
-              className="absolute top-0 left-20 opacity-[0.44] rotate-[28deg]"
+              className="
+                          animate-rotate_normal 
+                          absolute top-0 left-20 opacity-[0.44] rotate-[28deg]"
           />
-          <Image
-              width={125}
-              height={125}
-              src="/icons/plan.png"
-              className="absolute top-80 -left-10 opacity-[0.44] rotate-0"
-          />
+          <div className="
+                          animate-rotate_normal
+                          absolute top-80 -left-10 w-32 h-32">
+            <Image
+                width={125}
+                height={125}
+                src="/icons/plan.png"
+                className="
+                          animate-rotate_reverse
+                          absolute top-10 opacity-[0.44] rotate-0"
+            />
+          </div>
           <Image
               width={125}
               height={125}
               src="/icons/order-food.png"
-              className="absolute top-72 right-28 opacity-[0.44] rotate-[33deg]"
+              className="
+                        animate-translate_right
+                        absolute top-72 right-28 opacity-[0.44] rotate-[33deg]"
           />
           <Image
               width={125}
               height={125}
               src="/icons/meal.png"
-              className="absolute bottom-44 left-10 opacity-[0.44] rotate-0"
+              className="
+                        animate-rotate2_reverse 
+                        absolute bottom-44 left-10 opacity-[0.44] rotate-0"
           />
           <Image
               width={125}
               height={125}
               src="/icons/balanced-diet.png"
-              className="absolute -bottom-24 right-[448px] opacity-[0.44] rotate-0"
+              className="
+                        animate-translate_bottom
+                        absolute -bottom-8 right-[448px] opacity-[0.44] rotate-0"
           />
           <Image
               width={125}
               height={125}
               src="/icons/healthy-food.png"
-              className="absolute bottom-44 right-12 opacity-[0.44] rotate-[14deg]"
+              className="
+                        animate-rotate2 
+                        absolute bottom-44 right-12 opacity-[0.44] rotate-[14deg]"
           />
           <div className="z-10 flex flex-col justify-center items-center | xm:col-start-2 col-span-8 xm:col-span-6 | space-y-8">
             <div

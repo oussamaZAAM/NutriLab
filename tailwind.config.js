@@ -17,6 +17,38 @@ module.exports = {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
         },
+        rotate_normal:{
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" }
+        },
+        rotate_reverse:{
+          "0%": { transform: "rotate(360deg)" },
+          "100%": { transform: "rotate(0deg)" }
+        },
+        rotate2:{
+          "0%": { transform: "rotate(0deg)" },
+          "25%": { transform: "rotate(60deg)" },
+          "50%": { transform: "rotate(120deg)" },
+          "75%": { transform: "rotate(180deg)" },
+          "100%": { transform: "rotate(360deg)" }
+        },
+        rotate2_reverse:{
+          "0%": { transform: "rotate(360deg)" },
+          "25%": { transform: "rotate(180deg)" },
+          "50%": { transform: "rotate(120deg)" },
+          "75%": { transform: "rotate(60deg)" },
+          "100%": { transform: "rotate(0deg)" }
+        },
+        translate_right:{
+          "0%": { transform: "translateX(0px) rotate(33deg)" },
+          "95%": { transform: "translateX(50px) rotate(33deg)" },
+          "100%": { transform: "translateX(0px) rotate(33deg)" }
+        },
+        translate_bottom:{
+          "0%": { transform: "translateY(0px)" },
+          "95%": { transform: "translateY(100px)" },
+          "100%": { transform: "translateY(0px)" }
+        },
         lswipe: {
           "0%": { transform: "translateX(-73px)" },
           "10%": { transform: "scaleX(2.2) translateX(-27px)" },
@@ -30,10 +62,14 @@ module.exports = {
       },
       animation: {
         wiggle: "wiggle 200ms ease-in-out",
-        // rswipe: "rswipe 400ms ease-out",
+        rotate_normal: "rotate_normal 10000ms linear infinite",
+        rotate_reverse: "rotate_reverse 10000ms linear infinite",
+        rotate2: "rotate2 10000ms linear infinite",
+        rotate2_reverse: "rotate2_reverse 10000ms linear infinite",
+        translate_right: "translate_right 5000ms linear infinite",
+        translate_bottom: "translate_bottom 3000ms linear infinite",
         lswipe: "lswipe 400ms ease-out",
         rswiper: "rswiper 400ms ease-out",
-        // lswiper: "lswiper 400ms ease-out",
       },
     },
     fontFamily: {

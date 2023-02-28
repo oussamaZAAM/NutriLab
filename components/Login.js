@@ -115,9 +115,6 @@ export default function Login({ setLogin, setAuth, setOpen }) {
               )}
             </div>
 
-            {/* <span className="text-xs text-red-400">
-                Password must be same!
-              </span> */}
             <div className="flex">
               <button
                 onClick={handleSubmit}

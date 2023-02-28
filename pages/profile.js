@@ -7,6 +7,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdPassword } from "react-icons/md";
 
 import Navbar from "../components/Navbar";
+import ProfilePage from "../components/ProfilePage";
 import { User_data } from "../context/context";
 
 const Profile = () => {
@@ -27,8 +28,8 @@ const Profile = () => {
         <div className="col-span-3 flex flex-col justify-start items-center min-h-screen bg-[#4B4B4B]">
             <div className="flex justify-center items-center bg-[#191919] h-32 w-full space-x-6">
                 <Image 
-                    width={75}
-                    height={75}
+                    width={100}
+                    height={100}
                     className="rounded-full w-20 h-20 object-center object-cover"
                     src="/test.jpg"
                 />
@@ -84,8 +85,8 @@ const Profile = () => {
             </div>
         </div>
 
-        <div className="col-start-4 col-span-9 flex flex-col justify-start items-center">
-
+        <div className="col-start-4 col-span-9 flex flex-col justify-start items-center bg-gradient-to-b from-gradient1 via-gradient2 to-transparent w-full h-full">
+            <ProfilePage />
         </div>
       </div>
     </>

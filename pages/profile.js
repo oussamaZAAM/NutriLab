@@ -56,7 +56,7 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="flex h-9 w-10/12 space-x-2 group">
-                    <div className="self-center border-r-4 border-custom-orange h-5/6 w-2 transition scale-y-0 scale-y-100"></div>
+                    <div className="self-center border-r-4 border-custom-orange h-5/6 w-2 transition scale-y-0"></div>
                     <div className="
                                     flex justify-start items-center
                                     h-full w-full
@@ -69,7 +69,7 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="flex h-9 w-10/12 space-x-2 group">
-                    <div className="self-center border-r-4 border-custom-orange h-5/6 w-2 transition scale-y-0 scale-y-100"></div>
+                    <div className="self-center border-r-4 border-custom-orange h-5/6 w-2 transition scale-y-0"></div>
                     <div className="
                                     flex justify-start items-center
                                     h-full w-full

@@ -81,8 +81,44 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-8 my-40">
-          <div className="flex flex-col justify-center items-center | xm:col-start-2 col-span-8 xm:col-span-6 | space-y-8">
+        <div className="relative grid grid-cols-8 my-40">
+          <Image
+              width={125}
+              height={125}
+              src="/icons/diet.png"
+              className="absolute top-0 left-20 opacity-[0.44] rotate-[28deg]"
+          />
+          <Image
+              width={125}
+              height={125}
+              src="/icons/plan.png"
+              className="absolute top-80 -left-10 opacity-[0.44] rotate-0"
+          />
+          <Image
+              width={125}
+              height={125}
+              src="/icons/order-food.png"
+              className="absolute top-72 right-28 opacity-[0.44] rotate-[33deg]"
+          />
+          <Image
+              width={125}
+              height={125}
+              src="/icons/meal.png"
+              className="absolute bottom-44 left-10 opacity-[0.44] rotate-0"
+          />
+          <Image
+              width={125}
+              height={125}
+              src="/icons/balanced-diet.png"
+              className="absolute -bottom-24 right-[448px] opacity-[0.44] rotate-0"
+          />
+          <Image
+              width={125}
+              height={125}
+              src="/icons/healthy-food.png"
+              className="absolute bottom-44 right-12 opacity-[0.44] rotate-[14deg]"
+          />
+          <div className="z-10 flex flex-col justify-center items-center | xm:col-start-2 col-span-8 xm:col-span-6 | space-y-8">
             <div
               className={
                 "flex justify-center items-center h-80 max-w-6xl w-full rounded-2xl " +

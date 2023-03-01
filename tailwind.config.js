@@ -39,6 +39,13 @@ module.exports = {
           "75%": { transform: "rotate(60deg)" },
           "100%": { transform: "rotate(0deg)" }
         },
+        rotate3:{
+          "0%": { transform: "rotate(0deg)" },
+          "20%": { transform: "rotate(270deg)" },
+          "50%": { transform: "rotate(90deg)" },
+          "70%": { transform: "rotate(270deg)" },
+          "100%": { transform: "rotate(360deg)" }
+        },
         translate_right:{
           "0%": { transform: "translateX(0px) rotate(33deg)" },
           "95%": { transform: "translateX(50px) rotate(33deg)" },
@@ -66,6 +73,7 @@ module.exports = {
         rotate_reverse: "rotate_reverse 10000ms linear infinite",
         rotate2: "rotate2 10000ms linear infinite",
         rotate2_reverse: "rotate2_reverse 10000ms linear infinite",
+        rotate3: "rotate3 10000ms cubic-bezier(.32,.79,.41,.82) infinite",
         translate_right: "translate_right 5000ms linear infinite",
         translate_bottom: "translate_bottom 3000ms linear infinite",
         lswipe: "lswipe 400ms ease-out",

@@ -88,17 +88,17 @@ export default function Home() {
               src="/icons/diet.png"
               className="
                           animate-rotate_normal 
-                          absolute top-0 left-20 opacity-[0.44] rotate-[28deg]"
+                          absolute -top-20 md:top-0 left-20 opacity-[0.44] rotate-[28deg]"
           />
           <div className="
-                          animate-rotate_normal
+                          hidden md:block md:animate-rotate_normal
                           absolute top-80 -left-10 w-32 h-32">
             <Image
                 width={125}
                 height={125}
                 src="/icons/plan.png"
                 className="
-                          animate-rotate_reverse
+                          hidden md:block md:animate-rotate_reverse
                           absolute top-10 opacity-[0.44] rotate-0"
             />
           </div>
@@ -116,7 +116,7 @@ export default function Home() {
               src="/icons/meal.png"
               className="
                         animate-rotate2_reverse 
-                        absolute bottom-44 left-10 opacity-[0.44] rotate-0"
+                        absolute bottom-64 md:bottom-44 left-10 opacity-[0.44] rotate-0"
           />
           <Image
               width={125}
@@ -124,14 +124,14 @@ export default function Home() {
               src="/icons/balanced-diet.png"
               className="
                         animate-translate_bottom
-                        absolute -bottom-8 right-[448px] opacity-[0.44] rotate-0"
+                        absolute -bottom-8 right-1/3 opacity-[0.44] rotate-0"
           />
           <Image
               width={125}
               height={125}
               src="/icons/healthy-food.png"
               className="
-                        animate-rotate2 
+                        hidden md:block md:animate-rotate3 
                         absolute bottom-44 right-12 opacity-[0.44] rotate-[14deg]"
           />
           <div className="z-10 flex flex-col justify-center items-center | xm:col-start-2 col-span-8 xm:col-span-6 | space-y-8">

@@ -1,7 +1,5 @@
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
-import server from "/config";
-import isAuthenticated from "/pages/api/Auth";
 
 import {
   MdOutlineAddCircle,
@@ -114,6 +112,20 @@ const Food = ({ food }) => {
     styled.pop();
     return styled;
   };
+
+  //Handle API changes
+  const [algoData, setAlgoData] = useState({});
+  const enableAlgorithm = async() => {
+    // const res = await axios.get('https://nutrilab-api.up.railway.app/demo/data', [2000, 25, 108 , 555 ,22,6,22]);
+    // setAlgoData({
+    //     "_Oil, coconut": "0.014",
+    //     "_Sugars, granulated": "0.00714",
+    //     "_Sesame butter, creamy": "0.0054",
+    // })
+    const res = await axios.get('http://localhost:8000/polls/getFood', {});
+    setAlgoData(res.data)
+    setIsAlgorithmEnabled(true);
+  }
 
   // Mapping over the list of Searched Food
   const searchedFood = !food
@@ -304,16 +316,19 @@ const Food = ({ food }) => {
     );
   });
 
-  const laboTable3 = eatenFoodList.map((food) => {
+  // const laboTable3 = treatedFoodList.map((food) => {
+  const laboTable3 = (Object.keys(algoData).length !== 0) && 
+  Object.keys(algoData).map((food) => {
+    console.log(food)
     return (
       <tr key={food.name} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
         <th
           scope="row"
           class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
         >
-          {food.name}
+          {food.slice(1)}
         </th>
-        <td class="px-3 py-4 underline font-black text-lg">{food.size}g</td>
+        <td class="px-3 py-4 underline font-black text-lg">{algoData[food]}g</td>
       </tr>
     );
   });
@@ -487,7 +502,7 @@ const Food = ({ food }) => {
                   <div
                     className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs  rounded-2xl "
                     style={{ backgroundColor: "#DCF8FF" }}
-                    onClick={() => setIsAlgorithmEnabled(true)}
+                    onClick={enableAlgorithm}
                   >
                     <button className="py-4 px-9 font-extrabold">
                       Proceed
@@ -636,22 +651,22 @@ const Food = ({ food }) => {
                       Calories
                     </th>
                     <th scope="col" class="px-6 py-3 text-white bg-gray-800">
-                      Carbs
+                      Proteins
                     </th>
                     <th scope="col" class="px-6 py-3 text-white bg-gray-700">
-                      Proteins
+                      Carbs
                     </th>
                     <th scope="col" class="px-6 py-3 text-white bg-gray-800">
                       Fats
                     </th>
                     <th scope="col" class="px-6 py-3 text-white bg-gray-700">
-                      Sugar
+                      Fiber
                     </th>
                     <th scope="col" class="px-6 py-3 text-white bg-gray-800">
                       Salt
                     </th>
                     <th scope="col" class="px-6 py-3 text-white bg-gray-700">
-                      Fiber
+                      Sugar
                     </th>
                   </tr>
                 </thead>
@@ -661,22 +676,22 @@ const Food = ({ food }) => {
                       {localNutris.kCalories} kCal
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                      {localNutris.carbs} g
+                      {localNutris.proteins} g
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
-                      {localNutris.proteins} g
+                      {localNutris.carbs} g
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                       {localNutris.fats} g
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
-                      {localNutris.sugar} g
+                      {localNutris.fiber} g
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                       {localNutris.salt} g
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
-                      {localNutris.fiber} g
+                      {localNutris.sugar} g
                     </td>
                   </tr>
                 </tbody>

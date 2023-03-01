@@ -117,16 +117,16 @@ const Food = ({ food }) => {
   const [algoData, setAlgoData] = useState({});
   const enableAlgorithm = async () => {
     // const res = await axios.get('https://nutrilab-api.up.railway.app/demo/data', [2000, 25, 108 , 555 ,22,6,22]);
-    setAlgoData({
-        "_Oil, coconut": "0.014",
-        "_Sugars, granulated": "0.00714",
-        "_Sesame butter, creamy,Sesame butter, creamySesame butter, creamySesame butter, creamy": "0.0054",
-    })
-    // const res = await axios.post(
-    //   "http://127.0.0.1:8000/polls/getFood/",
-    //   [1000, 100, 100, 100, 100, 100, 100]
-    // );
-    // setAlgoData(res.data);
+    // setAlgoData({
+    //     "_Oil, coconut": "0.014",
+    //     "_Sugars, granulated": "0.00714",
+    //     "_Sesame butter, creamy,Sesame butter, creamySesame butter, creamySesame butter, creamy": "0.0054",
+    // })
+    const res = await axios.post(
+      "http://127.0.0.1:8000/polls/getFood/",
+      [1000, 100, 100, 100, 100, 100, 100]
+    );
+    setAlgoData(res.data);
     setIsAlgorithmEnabled(true);
   };
 

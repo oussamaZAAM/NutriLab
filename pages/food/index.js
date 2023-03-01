@@ -315,23 +315,27 @@ const Food = ({ food }) => {
     );
   });
 
-  const laboTable2 = eatenFoodList.map((food) => {
-    return (
-      <tr
-        key={food.name}
-        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-      >
-        <th
-          scope="row"
-          class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+  const laboTable2 =
+    Object.keys(algoData).length !== 0 &&
+    Object.keys(algoData).map((food) => {
+      console.log(food);
+      return (
+        <tr
+          key={food.name}
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
         >
-          {food.name}
-        </th>
-        <td class="px-3 py-4 underline font-black text-lg">{food.size}g</td>
-      </tr>
-    );
-  });
-
+          <th
+            scope="row"
+            class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+          >
+            {food.slice(1)}
+          </th>
+          <td class="px-3 py-4 underline font-black text-lg">
+            {100 * algoData[food]} g
+          </td>
+        </tr>
+      );
+    });
   // const laboTable3 = treatedFoodList.map((food) => {
   const laboTable3 =
     Object.keys(algoData).length !== 0 &&
@@ -349,7 +353,7 @@ const Food = ({ food }) => {
             {food.slice(1)}
           </th>
           <td class="px-3 py-4 underline font-black text-lg">
-            {algoData[food]}g
+            {100 * algoData[food]} g
           </td>
         </tr>
       );

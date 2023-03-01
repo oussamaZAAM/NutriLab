@@ -130,7 +130,7 @@ const Food = ({ food }) => {
     : food.map((food) => {
         if (
           searchedWord === "" ||
-          food.name.toLowerCase().includes(searchedWord)
+          food.name.toLowerCase().includes(searchedWord.toLowerCase())
         ) {
           return (
             <div className="w-full" key={food.name}>

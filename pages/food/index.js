@@ -116,12 +116,6 @@ const Food = ({ food }) => {
   //Handle API changes
   const [algoData, setAlgoData] = useState({});
   const enableAlgorithm = async () => {
-    // const res = await axios.get('https://nutrilab-api.up.railway.app/demo/data', [2000, 25, 108 , 555 ,22,6,22]);
-    // setAlgoData({
-    //     "_Oil, coconut": "0.014",
-    //     "_Sugars, granulated": "0.00714",
-    //     "_Sesame butter, creamy": "0.0054",
-    // })
     const res = await axios.post(
       "http://127.0.0.1:8000/polls/getFood/",
       [1000, 100, 100, 100, 100, 100, 100]
@@ -348,11 +342,11 @@ const Food = ({ food }) => {
         >
           <th
             scope="row"
-            class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+            class="text-green-500 px-6 py-4 font-bold  whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
           >
             {food.slice(1)}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg">
+          <td class="px-3 py-4 underline font-black text-lg text-green-500">
             {100 * algoData[food]} g
           </td>
         </tr>
@@ -798,6 +792,7 @@ const Food = ({ food }) => {
                 <div className="border-b-2 border-custom-orange w-full"></div>
 
                 <table class="w-full text-sm text-left text-black dark:text-white font-logo">
+                  <tbody>{laboTable1}</tbody>
                   <tbody>{laboTable3}</tbody>
                 </table>
               </div>

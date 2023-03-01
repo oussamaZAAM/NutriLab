@@ -324,11 +324,11 @@ const Food = ({ food }) => {
             scope="row"
             class="px-6 py-4 font-bold text-gray-900 dark:text-white truncate whitespace-normal sm:whitespace-normal"
           >
-            {food.slice(1)}
+            {food.slice(1).split("_").join(" ")}
           </th>
           <td class="px-3 py-4 underline font-black text-lg truncate whitespace-nowrap">
             {/* {100 * algoData[food]} g */}
-            {(Math.round(100 * algoData[food] * 100) / 100).toFixed(3)} g
+            {(Math.round(100 * algoData[food] * 100) / 100).toFixed(2)}g
           </td>
         </tr>
       );
@@ -347,10 +347,10 @@ const Food = ({ food }) => {
             scope="row"
             class="text-green-500 px-6 py-4 font-bold  whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
           >
-            {food.slice(1)}
+            {food.slice(1).split("_").join(" ")}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
-            {(Math.round(100 * algoData[food] * 100) / 100).toFixed(3)} g
+          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal text-green-500">
+            +{(Math.round(100 * algoData[food] * 100) / 100).toFixed(2)}g
           </td>
         </tr>
       );
@@ -464,6 +464,12 @@ const Food = ({ food }) => {
                         }
                       >
                         <input
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              addPendingFood();
+                            }
+                          }}
+                          autoFocus
                           type="number"
                           className={`text-gray-900 text-sm indent-2
                             bg-gray-50 outline-none

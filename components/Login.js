@@ -61,7 +61,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
           <button onClick={() => signIn("google")}>
             <BsGoogle size="3rem" color="orange" />
           </button>
-          <button>
+          <button onClick={() => signIn("facebook")}>
             <BsFacebook size="3rem" color="orange" />
           </button>
           <button>

@@ -120,7 +120,7 @@ const Food = ({ food }) => {
     setAlgoData({
         "_Oil, coconut": "0.014",
         "_Sugars, granulated": "0.00714",
-        "_Sesame butter, creamy": "0.0054",
+        "_Sesame butter, creamy,Sesame butter, creamySesame butter, creamySesame butter, creamy": "0.0054",
     })
     // const res = await axios.post(
     //   "http://127.0.0.1:8000/polls/getFood/",
@@ -326,11 +326,11 @@ const Food = ({ food }) => {
         >
           <th
             scope="row"
-            class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+            class="px-6 py-4 font-bold text-gray-900 dark:text-white truncate whitespace-normal sm:whitespace-normal"
           >
             {food.slice(1)}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
+          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-nowrap">
             {/* {100 * algoData[food]} g */}
             {(Math.round((100 * algoData[food]) * 100) / 100).toFixed(3)} g
           </td>
@@ -349,11 +349,11 @@ const Food = ({ food }) => {
         >
           <th
             scope="row"
-            class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+            class="px-6 py-4 font-bold text-gray-900 dark:text-white truncate whitespace-normal sm:whitespace-normal"
           >
             {food.slice(1)}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
+          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-nowrap">
             {(Math.round((100 * algoData[food]) * 100) / 100).toFixed(3)} g
           </td>
         </tr>

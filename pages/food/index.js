@@ -115,17 +115,20 @@ const Food = ({ food }) => {
 
   //Handle API changes
   const [algoData, setAlgoData] = useState({});
-  const enableAlgorithm = async() => {
+  const enableAlgorithm = async () => {
     // const res = await axios.get('https://nutrilab-api.up.railway.app/demo/data', [2000, 25, 108 , 555 ,22,6,22]);
     // setAlgoData({
     //     "_Oil, coconut": "0.014",
     //     "_Sugars, granulated": "0.00714",
     //     "_Sesame butter, creamy": "0.0054",
     // })
-    const res = await axios.get('http://localhost:8000/polls/getFood', {});
-    setAlgoData(res.data)
+    const res = await axios.post(
+      "http://127.0.0.1:8000/polls/getFood/",
+      [1000, 100, 100, 100, 100, 100, 100]
+    );
+    setAlgoData(res.data);
     setIsAlgorithmEnabled(true);
-  }
+  };
 
   // Mapping over the list of Searched Food
   const searchedFood = !food
@@ -169,12 +172,19 @@ const Food = ({ food }) => {
                 </div>
               ) : (
                 <p
-                  className={`
+                  className={
+                    `
                               font-paragraph font-bold text-ms indent-4
                               p-2 w-full
                               border-b-2 border-x-2 rounded-lg
                               hover:bg-gray-100
-                            `+(eatenFoodList.some((thisFood) => thisFood.name === food.name) ? 'bg-orange-100 hover:bg-orange-100 cursor-not-allowed' : 'cursor-pointer')}
+                            ` +
+                    (eatenFoodList.some(
+                      (thisFood) => thisFood.name === food.name
+                    )
+                      ? "bg-orange-100 hover:bg-orange-100 cursor-not-allowed"
+                      : "cursor-pointer")
+                  }
                   onClick={() => {
                     if (
                       eatenFoodList.length === 0 ||
@@ -290,7 +300,10 @@ const Food = ({ food }) => {
 
   const laboTable1 = eatenFoodList.map((food) => {
     return (
-      <tr key={food.name} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <tr
+        key={food.name}
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+      >
         <th
           scope="row"
           class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
@@ -304,7 +317,10 @@ const Food = ({ food }) => {
 
   const laboTable2 = eatenFoodList.map((food) => {
     return (
-      <tr key={food.name} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <tr
+        key={food.name}
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+      >
         <th
           scope="row"
           class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
@@ -317,21 +333,27 @@ const Food = ({ food }) => {
   });
 
   // const laboTable3 = treatedFoodList.map((food) => {
-  const laboTable3 = (Object.keys(algoData).length !== 0) && 
-  Object.keys(algoData).map((food) => {
-    console.log(food)
-    return (
-      <tr key={food.name} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        <th
-          scope="row"
-          class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+  const laboTable3 =
+    Object.keys(algoData).length !== 0 &&
+    Object.keys(algoData).map((food) => {
+      console.log(food);
+      return (
+        <tr
+          key={food.name}
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
         >
-          {food.slice(1)}
-        </th>
-        <td class="px-3 py-4 underline font-black text-lg">{algoData[food]}g</td>
-      </tr>
-    );
-  });
+          <th
+            scope="row"
+            class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+          >
+            {food.slice(1)}
+          </th>
+          <td class="px-3 py-4 underline font-black text-lg">
+            {algoData[food]}g
+          </td>
+        </tr>
+      );
+    });
 
   // ---------------------------------------------------------------------------------------------------------------
 
@@ -395,7 +417,6 @@ const Food = ({ food }) => {
                   styles.dropshadow
                 }
               >
-
                 <div className="flex flex-col justify-center items-start w-full truncate xs:ml-8">
                   <div className="flex justify-center items-center">
                     <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4">

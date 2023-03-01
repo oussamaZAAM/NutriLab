@@ -136,9 +136,16 @@ const Food = ({ food }) => {
             <div className="w-full" key={food.name}>
               {searchedWord !== "" ? (
                 <div
-                  className="indent-4 w-full
+                  className={
+                    `indent-4 w-full
                               border-b-2 border-x-2 rounded-lg p-2 
-                              hover:bg-gray-100 hover:animate-pulse cursor-pointer"
+                              hover:bg-gray-100 cursor-pointer` +
+                    (eatenFoodList.some(
+                      (thisFood) => thisFood.name === food.name
+                    )
+                      ? " bg-orange-100 hover:bg-orange-100 cursor-not-allowed"
+                      : " cursor-pointer")
+                  }
                   onClick={() => {
                     if (
                       eatenFoodList.length === 0 ||

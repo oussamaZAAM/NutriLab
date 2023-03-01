@@ -117,13 +117,13 @@ const Food = ({ food }) => {
   const [algoData, setAlgoData] = useState({});
   const enableAlgorithm = async() => {
     // const res = await axios.get('https://nutrilab-api.up.railway.app/demo/data', [2000, 25, 108 , 555 ,22,6,22]);
-    // setAlgoData({
-    //     "_Oil, coconut": "0.014",
-    //     "_Sugars, granulated": "0.00714",
-    //     "_Sesame butter, creamy": "0.0054",
-    // })
-    const res = await axios.get('http://localhost:8000/polls/getFood', {});
-    setAlgoData(res.data)
+    setAlgoData({
+        "_Oil, coconut": "0.014",
+        "_Sugars, granulated": "0.00714",
+        "_Sesame butter, creamy, Sesame butter, creamy, Sesame butter, creamy": "0.0054",
+    })
+    // const res = await axios.get('http://localhost:8000/polls/getFood', {});
+    // setAlgoData(res.data)
     setIsAlgorithmEnabled(true);
   }
 
@@ -744,12 +744,14 @@ const Food = ({ food }) => {
                           border-2 border-custom-orange 
                           flex-1 flex flex-col justify-start items-center 
                           w-full mx-2
-                          bg-gradient-to-r from-gradient1 to-gradient2
+                          
             "
               >
-                <p className="font-paragraph font-bold text-xl text-white my-4">
-                  Changes Made
-                </p>
+                <div className="bg-gradient-to-r from-gradient1 to-gradient2 w-full text-center">
+                  <p className="font-paragraph font-bold text-xl text-white my-4">
+                    Changes Made
+                  </p>
+                </div>
 
                 <div className="border-b-2 border-custom-orange w-full"></div>
 
@@ -763,12 +765,14 @@ const Food = ({ food }) => {
                           border-2 border-custom-orange 
                           flex-1 flex flex-col justify-start items-center 
                           w-full mx-2
-                          bg-gradient-to-r from-gradient1 to-gradient2
+                          
             "
               >
-                <p className="font-paragraph font-bold text-xl text-white my-4">
-                  New Diet
-                </p>
+                <div className="bg-gradient-to-r from-gradient1 to-gradient2 w-full text-center">
+                  <p className="font-paragraph font-bold text-xl text-white my-4">
+                    New Diet
+                  </p>
+                </div>
 
                 <div className="border-b-2 border-custom-orange w-full"></div>
 

@@ -322,11 +322,11 @@ const Food = ({ food }) => {
         >
           <th
             scope="row"
-            class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+            class="px-6 py-4 font-bold text-gray-900 dark:text-white truncate whitespace-normal sm:whitespace-normal"
           >
             {food.slice(1)}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
+          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-nowrap">
             {/* {100 * algoData[food]} g */}
             {(Math.round(100 * algoData[food] * 100) / 100).toFixed(3)} g
           </td>

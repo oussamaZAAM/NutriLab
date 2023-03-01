@@ -304,7 +304,9 @@ const Food = ({ food }) => {
         >
           {food.name}
         </th>
-        <td class="px-3 py-4 underline font-black text-lg">{food.size}g</td>
+        <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
+          {food.size}g
+        </td>
       </tr>
     );
   });
@@ -324,8 +326,9 @@ const Food = ({ food }) => {
           >
             {food.slice(1)}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg">
-            {100 * algoData[food]} g
+          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
+            {/* {100 * algoData[food]} g */}
+            {(Math.round(100 * algoData[food] * 100) / 100).toFixed(3)} g
           </td>
         </tr>
       );
@@ -346,8 +349,8 @@ const Food = ({ food }) => {
           >
             {food.slice(1)}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg text-green-500">
-            {100 * algoData[food]} g
+          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
+            {(Math.round(100 * algoData[food] * 100) / 100).toFixed(3)} g
           </td>
         </tr>
       );
@@ -763,12 +766,14 @@ const Food = ({ food }) => {
                           border-2 border-custom-orange 
                           flex-1 flex flex-col justify-start items-center 
                           w-full mx-2
-                          bg-gradient-to-r from-gradient1 to-gradient2
+                          
             "
               >
-                <p className="font-paragraph font-bold text-xl text-white my-4">
-                  Changes Made
-                </p>
+                <div className="bg-gradient-to-r from-gradient1 to-gradient2 w-full text-center">
+                  <p className="font-paragraph font-bold text-xl text-white my-4">
+                    Changes Made
+                  </p>
+                </div>
 
                 <div className="border-b-2 border-custom-orange w-full"></div>
 
@@ -782,12 +787,14 @@ const Food = ({ food }) => {
                           border-2 border-custom-orange 
                           flex-1 flex flex-col justify-start items-center 
                           w-full mx-2
-                          bg-gradient-to-r from-gradient1 to-gradient2
+                          
             "
               >
-                <p className="font-paragraph font-bold text-xl text-white my-4">
-                  New Diet
-                </p>
+                <div className="bg-gradient-to-r from-gradient1 to-gradient2 w-full text-center">
+                  <p className="font-paragraph font-bold text-xl text-white my-4">
+                    New Diet
+                  </p>
+                </div>
 
                 <div className="border-b-2 border-custom-orange w-full"></div>
 

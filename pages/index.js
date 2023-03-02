@@ -1,5 +1,4 @@
 import Navbar from "../components/Navbar";
-import isAuthenticated from "./api/Auth";
 import getCookie from "next-cookies";
 import { User_data } from "../context/context";
 import { useContext, useEffect } from "react";
@@ -295,12 +294,3 @@ export default function Home() {
     </div>
   );
 }
-Home.getInitialProps = async (context) => {
-  const { NutriLab } = getCookie(context);
-  const user = isAuthenticated(NutriLab);
-  if (!user) {
-    return { currentUser: false };
-  }
-
-  return { currentUser: user };
-};

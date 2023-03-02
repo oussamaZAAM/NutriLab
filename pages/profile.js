@@ -61,17 +61,17 @@ const Profile = () => {
                 </div>
                 <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(2)}>
                     <div className={"self-center border-r-4 border-custom-orange h-5/6 w-2 transition origin-center ease-[cubic-bezier(1,-0.4,1,.65)] "+(page===2 ? 'scale-y-100' : 'scale-y-0')}></div>
-                    <a href="#dietInformations">
-                        <div className="
-                                        flex justify-start items-center
-                                        h-full w-full
-                                        cursor-pointer hover:bg-[#635953]
-                                        rounded-lg
-                                        "
-                        >
-                            <IoMdInformationCircleOutline className="h-6 w-6 fill-[#C8C8C8] mx-4" />
-                            <p className="text-sm font-logo text-[#C8C8C8]">Diet informations</p>
-                        </div>
+                    <a 
+                        href="#dietInformations" 
+                        className="
+                                    flex justify-start items-center
+                                    h-full w-full
+                                    cursor-pointer hover:bg-[#635953]
+                                    rounded-lg
+                                    "
+                    >
+                        <IoMdInformationCircleOutline className="h-6 w-6 fill-[#C8C8C8] mx-4" />
+                        <p className="text-sm font-logo text-[#C8C8C8]">Diet informations</p>
                     </a>
                 </div>
                 <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(3)}>

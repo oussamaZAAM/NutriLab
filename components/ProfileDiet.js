@@ -48,9 +48,10 @@ const ProfileDiet = () => {
           <input
             id="age"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
+            placeholder=" "
             name='age'
             value={dietInfos.age}
-            onChange={handleNumberChange}
+            onChange={handleNumberChange} 
           />
           <label
             htmlFor="age"
@@ -122,6 +123,7 @@ const ProfileDiet = () => {
           <input
             id="height"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
+            placeholder=" "
             name='height'
             value={dietInfos.height}
             onChange={handleNumberChange}
@@ -139,6 +141,7 @@ const ProfileDiet = () => {
           <input
             id="weight"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
+            placeholder=" "
             name='weight'
             value={dietInfos.weight}
             onChange={handleNumberChange}

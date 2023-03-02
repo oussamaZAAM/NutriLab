@@ -9,7 +9,7 @@ const DailyNutrients = ({ nutrients, vitamins }) => {
   const { kCalories, proteins, fats, carbs, fiber, sugar, salt } = nutrients;
 
   return (
-    <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | mx-4">
+    <div id="DailyNutrients" className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | mx-4">
       <h1 className="font-title text-5xl text-center | w-full my-16">
         Nutrients you need a Day
       </h1>

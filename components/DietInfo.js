@@ -846,34 +846,36 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               >
                 Back
               </button>
-              <button
-                onClick={() => handleApply(dietInfos)}
-                className={
-                  `
-                        h-12 sm:mx-8 w-24 xs:w-40
-                        font-bold font-logo text-2xl
-                        border-2 border-custom-orange hover:border-gray-900
-                        bg-custom-orange text-white 
-                        ` +
-                  ((ageError ||
+              <a href="#DailyNutrients">
+                <button
+                  onClick={() => handleApply(dietInfos)}
+                  className={
+                    `
+                          h-12 sm:mx-8 w-24 xs:w-40
+                          font-bold font-logo text-2xl
+                          border-2 border-custom-orange hover:border-gray-900
+                          bg-custom-orange text-white
+                          ` +
+                    ((ageError ||
+                      sexError ||
+                      heightError ||
+                      weightError ||
+                      activityError ||
+                      planError) &&
+                      "cursor-not-allowed")
+                  }
+                  disabled={
+                    ageError ||
                     sexError ||
                     heightError ||
                     weightError ||
                     activityError ||
-                    planError) &&
-                    "cursor-not-allowed")
-                }
-                disabled={
-                  ageError ||
-                  sexError ||
-                  heightError ||
-                  weightError ||
-                  activityError ||
-                  planError
-                }
-              >
-                Apply
-              </button>
+                    planError
+                  }
+                >
+                  Apply
+                </button>
+              </a>
             </div>
           ) : (
             <div className="flex justify-evenly items-center w-full my-12">
@@ -883,29 +885,31 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               >
                 Reset
               </button>
-              <button
-                onClick={() => handleApply(dietInfos)}
-                className={
-                  `h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900 ` +
-                  ((ageError ||
+              <a href="#DailyNutrients">
+                <button
+                  onClick={() => handleApply(dietInfos)}
+                  className={
+                    `h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900 ` +
+                    ((ageError ||
+                      sexError ||
+                      heightError ||
+                      weightError ||
+                      activityError ||
+                      planError) &&
+                      "cursor-not-allowed")
+                  }
+                  disabled={
+                    ageError ||
                     sexError ||
                     heightError ||
                     weightError ||
                     activityError ||
-                    planError) &&
-                    "cursor-not-allowed")
-                }
-                disabled={
-                  ageError ||
-                  sexError ||
-                  heightError ||
-                  weightError ||
-                  activityError ||
-                  planError
-                }
-              >
-                Re-Calculate
-              </button>
+                    planError
+                  }
+                >
+                  Re-Calculate
+                </button>
+              </a>
             </div>
           )}
         </div>

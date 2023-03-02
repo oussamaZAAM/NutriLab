@@ -36,6 +36,7 @@ export default function Example() {
     }
     handleUser();
   }, [setUser]);
+
   const cancelButtonRef = useRef(null);
   const handleLogout = async (e) => {
     session && signOut();

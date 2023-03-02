@@ -62,17 +62,17 @@ const Profile = () => {
                 </div>
                 <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(2)}>
                     <div className={"self-center border-r-4 border-custom-orange h-5/6 w-2 transition origin-center ease-[cubic-bezier(1,-0.4,1,.65)] "+(page===2 ? 'scale-y-100' : 'scale-y-0')}></div>
-                    <a href="#dietInformations">
-                        <div className="
-                                        flex justify-start items-center
-                                        h-full w-full
-                                        cursor-pointer hover:bg-[#635953]
-                                        rounded-lg
-                                        "
-                        >
-                            <IoMdInformationCircleOutline className="h-6 w-6 fill-[#C8C8C8] mx-4" />
-                            <p className="text-sm font-logo text-[#C8C8C8]">Diet informations</p>
-                        </div>
+                    <a 
+                        href="#dietInformations" 
+                        className="
+                                    flex justify-start items-center
+                                    h-full w-full
+                                    cursor-pointer hover:bg-[#635953]
+                                    rounded-lg
+                                    "
+                    >
+                        <IoMdInformationCircleOutline className="h-6 w-6 fill-[#C8C8C8] mx-4" />
+                        <p className="text-sm font-logo text-[#C8C8C8]">Diet informations</p>
                     </a>
                 </div>
                 <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(3)}>
@@ -92,9 +92,20 @@ const Profile = () => {
         </div>
 
         <div className="col-start-4 col-span-9 flex flex-col justify-start items-center bg-[#4B4B4B] w-full h-full">
-            {page === 1 && <ProfilePage />}
-            {page === 2 && <ProfileDiet />}
-            {page === 3 && <ProfilePassword />}
+            <div className="flex flex-col items-center justify-start md:w-1/2">
+                <div className="flex items-center justify-center my-16">
+                <Image
+                    width={500}
+                    height={500}
+                    className="h-64 w-64 rounded-full object-cover object-center"
+                    src="/test.png"
+                    alt="Profile"
+                />
+                </div>
+                {page === 1 && <ProfilePage />}
+                {page === 2 && <ProfileDiet />}
+                {page === 3 && <ProfilePassword />}
+            </div>
         </div>
       </div>
     </>

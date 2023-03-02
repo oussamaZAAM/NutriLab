@@ -25,23 +25,21 @@ export default function Example() {
   const { user, setUser } = useContext(User_data);
 
   const { data: session } = useSession();
-
   const [open1, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
   useEffect(() => {
-    
     async function handleUser() {
       await axios
-        .post("/api/user", {})
-        .then((user) => setUser(user.data))
+        .get("/api/user")
+        .then((input) => setUser(input.data))
         .catch((err) => setUser(undefined));
     }
     handleUser();
-  }, []);
+  }, [setUser]);
   const cancelButtonRef = useRef(null);
   const handleLogout = async (e) => {
     session && signOut();
-    (user && user !== 'Not Logged In') &&
+    user &&
       (await axios
         .get("/api/logout")
         .then(async (response) => {
@@ -56,7 +54,7 @@ export default function Example() {
     <div className="grid grid-cols-8 border-b-4 border-custom-orange">
       <Disclosure
         as="nav"
-        className="col-start-0 lg:col-start-2 col-span-8 lg:col-span-6 bg-white"
+        className="col-start-0 col-span-8 bg-white lg:col-span-6 lg:col-start-2"
       >
         {({ open }) => (
           <>
@@ -64,7 +62,7 @@ export default function Example() {
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-black bg-white hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-black hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -73,9 +71,9 @@ export default function Example() {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-start ml-10 sm:items-stretch sm:justify-between sm:ml-0">
+                <div className="ml-10 flex flex-1 items-center justify-start sm:ml-0 sm:items-stretch sm:justify-between">
                   <Link href="/">
-                    <div className="flex flex-shrink-0 items-center rounded-full px-3 py-1 bg-custom-orange">
+                    <div className="flex flex-shrink-0 items-center rounded-full bg-custom-orange px-3 py-1">
                       <Image
                         width={1000}
                         height={1000}
@@ -86,8 +84,8 @@ export default function Example() {
                       <h1 className="font-bold text-white">NutriLab</h1>
                     </div>
                   </Link>
-                  <div className="justify-center items-center hidden sm:ml-6 sm:flex">
-                    <div className="flex justify-center items-center space-x-4">
+                  <div className="hidden items-center justify-center sm:ml-6 sm:flex">
+                    <div className="flex items-center justify-center space-x-4">
                       {navigation.map((item) => (
                         <a
                           key={item.name}
@@ -95,8 +93,8 @@ export default function Example() {
                           className={classNames(
                             item.current
                               ? "bg-gray-900 text-white"
-                              : "text-black hover:bg-gray-700 hover:text-white hover:scale-x-110 duration-200",
-                            "px-3 py-2 rounded-md text-sm font-medium truncate"
+                              : "text-black duration-200 hover:scale-x-110 hover:bg-gray-700 hover:text-white",
+                            "truncate rounded-md px-3 py-2 text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -107,14 +105,14 @@ export default function Example() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  {!(session || (user && user !== 'Not Logged In')) && (
+                  {!(session || user) && (
                     <button onClick={() => setOpen(true)}>
-                      <p className="text-black hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                      <p className="rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-gray-900 hover:text-white">
                         Login
                       </p>
                     </button>
                   )}
-                  {(!user || user === 'Not Logged In') && (
+                  {!user && (
                     <Transition.Root show={open1} as={Fragment}>
                       <Dialog
                         as="div"
@@ -180,22 +178,24 @@ export default function Example() {
                       <div>
                         <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="sr-only">Open user menu</span>
-                          {session &&
-                          <Image
-                            width={50}
-                            height={50}
-                            className="h-8 w-8 rounded-full"
-                            src={session.user.image}
-                            alt=""
-                          />}
-                          {(user && user !== 'Not Logged In') &&
-                          <Image
-                            width={50}
-                            height={50}
-                            className="h-8 w-8 rounded-full"
-                            src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
-                            alt=""
-                          />}
+                          {session && (
+                            <Image
+                              width={50}
+                              height={50}
+                              className="h-8 w-8 rounded-full"
+                              src={session.user.image}
+                              alt=""
+                            />
+                          )}
+                          {user && (
+                            <Image
+                              width={50}
+                              height={50}
+                              className="h-8 w-8 rounded-full"
+                              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
+                              alt=""
+                            />
+                          )}
                         </Menu.Button>
                       </div>
                       <Transition
@@ -214,7 +214,7 @@ export default function Example() {
                                 href="/profile"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:rounded-md"
+                                  "block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:rounded-md"
                                 )}
                               >
                                 Your Profile
@@ -227,22 +227,22 @@ export default function Example() {
                                 href="#"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:rounded-md"
+                                  "block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:rounded-md"
                                 )}
                               >
                                 Settings
                               </Link>
                             )}
                           </Menu.Item>
-                          <div className="flex justify-center w-full">
-                            <div className="border-b border-gray-300 w-11/12"></div>
+                          <div className="flex w-full justify-center">
+                            <div className="w-11/12 border-b border-gray-300"></div>
                           </div>
                           <Menu.Item>
                             {({ active }) => (
                               <div
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700 hover:text-red-500 cursor-pointer hover:rounded-md hover:bg-red-100"
+                                  "block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:rounded-md hover:bg-red-100 hover:text-red-500"
                                 )}
                                 onClick={handleLogout}
                               >
@@ -268,7 +268,7 @@ export default function Example() {
                       item.current
                         ? "bg-gray-900 text-white"
                         : "text-black hover:bg-gray-700 hover:text-white",
-                      "block px-3 py-2 rounded-md text-base font-medium"
+                      "block rounded-md px-3 py-2 text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}
                   >

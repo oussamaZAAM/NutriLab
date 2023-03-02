@@ -30,16 +30,8 @@ export default function Login({ setLogin, setAuth, setOpen }) {
       .then(async (response) => {
         setAuth(response.data);
         setOpen(false);
-        const dietInfos = await axios.get("/api/profile").then((res) => {
-          const localData = {
-            ...res.data,
-            age: "",
-            sex: "",
-            weight: "",
-            height: "",
-            activity: "",
-            plan: "",
-          };
+        await axios.get("/api/nutriInfo").then((res) => {
+          localStorage.setItem("dietInfos", JSON.stringify(res.data));
         });
         setUser(response.data);
       })

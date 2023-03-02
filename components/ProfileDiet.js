@@ -43,7 +43,14 @@ const ProfileDiet = () => {
                 />
                 <label
                   htmlFor="male"
-                  className="inline-flex items-center justify-evenly w-full py-5 px-2 text-gray-500 bg-white peer-checked:border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-500 peer-checked:text-blue-500 hover:text-gray-600 hover:bg-gray-100"
+                  className="
+                              inline-flex items-center justify-evenly w-full py-5 px-2 
+                              text-gray-500 bg-white hover:text-gray-600 hover:bg-gray-100
+                              peer-checked:border-2 border-gray-200 
+                              rounded-lg 
+                              cursor-pointer 
+                              peer-checked:border-blue-500 peer-checked:text-blue-500 
+                            "
                 >
                   <IoMdMale size={35} className="w-1/3" />
                   <div className="block">
@@ -62,7 +69,14 @@ const ProfileDiet = () => {
                 />
                 <label
                   htmlFor="female"
-                  className="inline-flex items-center justify-evenly w-full py-5 px-2 text-gray-500 bg-white peer-checked:border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-pink-500 peer-checked:text-pink-500 hover:text-gray-600 hover:bg-gray-100"
+                  className="
+                              inline-flex items-center justify-evenly w-full py-5 px-2 
+                              text-gray-500 bg-white hover:text-gray-600 hover:bg-gray-100
+                              peer-checked:border-2 border-gray-200 
+                              rounded-lg 
+                              cursor-pointer 
+                              peer-checked:border-pink-500 peer-checked:text-pink-500 
+                            "
                 >
                   <IoMdFemale size={35} className="w-1/3" />
                   <div className="block">
@@ -87,24 +101,17 @@ const ProfileDiet = () => {
 
         {/* Activity  */}
         <div className="w-full md:w-2/3 my-2 relative">
-            <label htmlFor="activity" className="
-                                                absolute top-2 left-1 z-10
-                                                text-sm text-white dark:text-gray-400 
-                                                duration-300 transform -translate-y-4 scale-75 origin-[0]
-                                                bg-[#4B4B4B] dark:bg-gray-900 px-2 
-                                                peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 
-                                                "
-            >Activity</label>
             <select id="activity" className="
-                                            peer 
-                                            hover:cursor-pointer 
-                                            px-2.5 pb-2.5 pt-4 w-full 
-                                            text-sm text-white 
-                                            bg-transparent rounded-lg border-2 border-gray-300 
-                                            appearance-none 
-                                            dark:text-white dark:border-gray-600 dark:focus:border-custom-orange 
-                                            focus:outline-none focus:ring-0 focus:border-custom-orange peer
-            ">
+                                              peer 
+                                              hover:cursor-pointer 
+                                              px-2.5 pb-2.5 pt-4 w-full 
+                                              text-sm text-white 
+                                              bg-transparent rounded-lg border-2 border-gray-300 
+                                              appearance-none 
+                                              dark:text-white dark:border-gray-600 dark:focus:border-custom-orange 
+                                              focus:outline-none focus:ring-0 focus:border-custom-orange
+                                            "
+            >
                 <option className="text-black" value="none" selected>-</option>
                 <option className="text-black" value="sedentary">Sedentary</option>
                 <option className="text-black" value="lightly_active">Lightly Active</option>
@@ -112,18 +119,20 @@ const ProfileDiet = () => {
                 <option className="text-black" value="very_active">Very Active</option>
                 <option className="text-black" value="super_active">Super Active</option>
             </select>
+            <label htmlFor="activity" className="
+                                                  absolute top-2 left-1 z-10
+                                                  text-sm text-white dark:text-gray-400 
+                                                  duration-300 transform -translate-y-4 scale-75 origin-[0]
+                                                  bg-[#4B4B4B] dark:bg-gray-900 px-2 
+                                                  peer-focus:text-custom-orange
+                                                  peer-focus:px-2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 
+                                                  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 
+                                                "
+            >Activity</label>
         </div>
 
         {/* Plan  */}
         <div className="w-full md:w-2/3 my-2 relative">
-            <label htmlFor="plan" className="
-                                            absolute top-2 left-1 z-10
-                                            text-sm text-white dark:text-gray-400
-                                            duration-300 transform -translate-y-4 scale-75 origin-[0]
-                                            bg-[#4B4B4B] dark:bg-gray-900 px-2
-                                            peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4
-                                            "
-            >Plan</label>
             <select id="plan" className="
                                             peer
                                             hover:cursor-pointer 
@@ -133,12 +142,21 @@ const ProfileDiet = () => {
                                             appearance-none 
                                             dark:text-white dark:border-gray-600 dark:focus:border-custom-orange 
                                             focus:outline-none focus:ring-0 focus:border-custom-orange peer
-            ">
+                                        "
+            >
                 <option className="text-black" value="none" selected>-</option>
                 <option className="text-black" value="lose_weight">Lose Weight</option>
                 <option className="text-black" value="maintain">Maintain</option>
                 <option className="text-black" value="build_muscle">Build Muscle</option>
             </select>
+            <label htmlFor="plan" className="
+                                              absolute top-2 left-1 z-10
+                                              text-sm text-white dark:text-gray-400
+                                              duration-300 transform -translate-y-4 scale-75 origin-[0]
+                                              bg-[#4B4B4B] dark:bg-gray-900 px-2
+                                              peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4
+                                            "
+            >Plan</label>
         </div>
 
         {/* Submit  */}

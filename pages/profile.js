@@ -29,7 +29,7 @@ const Profile = () => {
       {/* Profile Page  */}
       <div className="grid grid-cols-12">
         <div className="col-span-3 flex flex-col justify-start items-center min-h-screen bg-[#4B4B4B] border-r-4 border-custom-orange">
-            <div className="flex justify-center items-center bg-[#191919] h-32 w-full space-x-6">
+            <div className="flex justify-center items-center bg-[#191919] py-4 w-full space-x-6">
                 <Image 
                     width={100}
                     height={100}

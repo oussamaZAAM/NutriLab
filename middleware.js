@@ -24,14 +24,18 @@ export async function verify(token, secret) {
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
   let cookie = request.cookies.get("NutriLab")?.value;
-  const userr = await verify(cookie, process.env.JWT_SECRET);
-  console.log(userr);
-  // return new NextResponse(
-  //   JSON.stringify({ success: false, message: "authentication failed" }),
-  //   { status: 401, headers: { "content-type": "application/json" } }
-  // );
-  if (userr) {
-    return NextResponse.next();
+  if (cookie) {
+    const user = await verify(cookie, process.env.JWT_SECRET);
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("userId", user.id);
+    return (
+      user &&
+      NextResponse.next({
+        request: {
+          headers: requestHeaders,
+        },
+      })
+    );
   } else {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -39,5 +43,12 @@ export async function middleware(request) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/nutrients",
+  matcher: [
+    "/nutrients",
+    "/profile",
+    "/foodProcess",
+    "/api/user",
+    "/api/profile",
+    "/api/nutri",
+  ],
 };

@@ -17,7 +17,7 @@ export default async function login(req, res) {
       return res.status(400).json({ message: "Invalid password" });
     }
     // const refreshPayload = { user: user, jti: uuidv4() };
-    const token = jwt.sign(user, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
     const serialised = serialize("NutriLab", token, {
       httpOnly: true,
       secure: process.env.VERCEL_ENV !== "development",
@@ -27,7 +27,7 @@ export default async function login(req, res) {
     });
     res.setHeader("Set-Cookie", serialised);
 
-    res.status(200).json(token);
+    res.status(200).json("Logged In");
   } catch (e) {
     res.status(401).json({ message: "Wrong Email" });
   }

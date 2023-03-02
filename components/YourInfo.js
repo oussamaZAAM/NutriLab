@@ -144,53 +144,53 @@ export default function YourInfo({ localInfos, localNutris }) {
 
       {localNutris ? (
         <div className="flex my-8 overflow-x-auto no-scrollwbar w-11/12">
-          <table class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase">
+          <table className="w-full text-sm text-left text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase">
               <tr>
-                <th scope="col" class="px-6 py-3 text-white bg-gray-700">
+                <th scope="col" className="px-6 py-3 text-white bg-gray-700">
                   Calories
                 </th>
-                <th scope="col" class="px-6 py-3 text-white bg-gray-800">
+                <th scope="col" className="px-6 py-3 text-white bg-gray-800">
                   Proteins
                 </th>
-                <th scope="col" class="px-6 py-3 text-white bg-gray-700">
+                <th scope="col" className="px-6 py-3 text-white bg-gray-700">
                   Carbs
                 </th>
-                <th scope="col" class="px-6 py-3 text-white bg-gray-800">
+                <th scope="col" className="px-6 py-3 text-white bg-gray-800">
                   Fats
                 </th>
-                <th scope="col" class="px-6 py-3 text-white bg-gray-700">
+                <th scope="col" className="px-6 py-3 text-white bg-gray-700">
                   Fiber
                 </th>
-                <th scope="col" class="px-6 py-3 text-white bg-gray-800">
+                <th scope="col" className="px-6 py-3 text-white bg-gray-800">
                   Salt
                 </th>
-                <th scope="col" class="px-6 py-3 text-white bg-gray-700">
+                <th scope="col" className="px-6 py-3 text-white bg-gray-700">
                   Sugar
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+              <tr className="border-b border-gray-200 dark:border-gray-700">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
                   {localNutris.kCalories} kCal
                 </td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                   {localNutris.proteins} g
                 </td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
                   {localNutris.carbs} g
                 </td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                   {localNutris.fats} g
                 </td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
                   {localNutris.fiber} g
                 </td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                   {localNutris.salt} g
                 </td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
                   {localNutris.sugar} g
                 </td>
               </tr>

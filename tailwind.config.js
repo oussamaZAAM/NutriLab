@@ -17,44 +17,44 @@ module.exports = {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
         },
-        rotate_normal:{
+        rotate_normal: {
           "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" }
+          "100%": { transform: "rotate(360deg)" },
         },
-        rotate_reverse:{
+        rotate_reverse: {
           "0%": { transform: "rotate(360deg)" },
-          "100%": { transform: "rotate(0deg)" }
+          "100%": { transform: "rotate(0deg)" },
         },
-        rotate2:{
+        rotate2: {
           "0%": { transform: "rotate(0deg)" },
           "25%": { transform: "rotate(60deg)" },
           "50%": { transform: "rotate(120deg)" },
           "75%": { transform: "rotate(180deg)" },
-          "100%": { transform: "rotate(360deg)" }
+          "100%": { transform: "rotate(360deg)" },
         },
-        rotate2_reverse:{
+        rotate2_reverse: {
           "0%": { transform: "rotate(360deg)" },
           "25%": { transform: "rotate(180deg)" },
           "50%": { transform: "rotate(120deg)" },
           "75%": { transform: "rotate(60deg)" },
-          "100%": { transform: "rotate(0deg)" }
+          "100%": { transform: "rotate(0deg)" },
         },
-        rotate3:{
+        rotate3: {
           "0%": { transform: "rotate(0deg)" },
           "20%": { transform: "rotate(270deg)" },
           "50%": { transform: "rotate(90deg)" },
           "70%": { transform: "rotate(270deg)" },
-          "100%": { transform: "rotate(360deg)" }
+          "100%": { transform: "rotate(360deg)" },
         },
-        translate_right:{
+        translate_right: {
           "0%": { transform: "translateX(0px) rotate(33deg)" },
           "95%": { transform: "translateX(50px) rotate(33deg)" },
-          "100%": { transform: "translateX(0px) rotate(33deg)" }
+          "100%": { transform: "translateX(0px) rotate(33deg)" },
         },
-        translate_bottom:{
+        translate_bottom: {
           "0%": { transform: "translateY(0px)" },
           "95%": { transform: "translateY(100px)" },
-          "100%": { transform: "translateY(0px)" }
+          "100%": { transform: "translateY(0px)" },
         },
         lswipe: {
           "0%": { transform: "translateX(-73px)" },
@@ -108,5 +108,5 @@ module.exports = {
     },
   },
   plugins: [],
-  darkMode: 'class',
+  darkMode: "className",
 };

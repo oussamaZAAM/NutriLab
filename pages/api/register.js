@@ -8,7 +8,6 @@ export default async function register(req, res) {
   const SALT_ROUNDS = parseInt(process.env.SALT);
   const pass = await bcrypt.hash(user.password, SALT_ROUNDS);
   try {
-    console.log(user);
     const result = await prisma.User.create({
       data: {
         name: user.name,
@@ -26,7 +25,7 @@ export default async function register(req, res) {
         userId: result.id,
       },
     });
-    const token = jwt.sign(result, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: result.id }, process.env.JWT_SECRET);
     const serialised = serialize("NutriLab", token, {
       httpOnly: true,
       secure: process.env.VERCEL_ENV !== "development",
@@ -35,7 +34,7 @@ export default async function register(req, res) {
       path: "/",
     });
     res.setHeader("Set-Cookie", serialised);
-    res.json(token);
+    res.json("Well Registered");
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       // The .code property can be accessed in a type-safe manner

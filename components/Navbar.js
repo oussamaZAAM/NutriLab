@@ -25,8 +25,6 @@ export default function Example() {
   const { user, setUser } = useContext(User_data);
 
   const { data: session } = useSession();
-  console.log(user);
-  console.log(session);
 
   const [open1, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
@@ -34,7 +32,7 @@ export default function Example() {
     // Perform localStorage action
     async function handleUser() {
       await axios
-        .get("/api/user")
+        .post("/api/user", {})
         .then((user) => setUser(user.data))
         .catch((err) => setUser(undefined));
     }

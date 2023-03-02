@@ -29,15 +29,15 @@ const Food = ({ food }) => {
     return (
       <tr
         key={food.name}
-        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
       >
         <th
           scope="row"
-          class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+          className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
         >
           {food.name}
         </th>
-        <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
+        <td className="px-3 py-4 underline font-black text-lg truncate whitespace-normal">
           {food.size}g
         </td>
       </tr>
@@ -47,19 +47,18 @@ const Food = ({ food }) => {
   const laboTable2 =
     Object.keys(algoData).length !== 0 &&
     Object.keys(algoData).map((food) => {
-      console.log(food);
       return (
         <tr
           key={food.name}
-          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
         >
           <th
             scope="row"
-            class="px-6 py-4 font-bold text-gray-900 dark:text-white truncate whitespace-normal sm:whitespace-normal"
+            className="px-6 py-4 font-bold text-gray-900 dark:text-white truncate whitespace-normal sm:whitespace-normal"
           >
             {food.slice(1).split("_").join(" ")}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-nowrap">
+          <td className="px-3 py-4 underline font-black text-lg truncate whitespace-nowrap">
             {/* {100 * algoData[food]} g */}
             {(Math.round(100 * algoData[food] * 100) / 100).toFixed(2)}g
           </td>
@@ -70,19 +69,18 @@ const Food = ({ food }) => {
   const laboTable3 =
     Object.keys(algoData).length !== 0 &&
     Object.keys(algoData).map((food) => {
-      console.log(food);
       return (
         <tr
           key={food.name}
-          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
         >
           <th
             scope="row"
-            class="text-green-500 px-6 py-4 font-bold  whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
+            className="text-green-500 px-6 py-4 font-bold  whitespace-nowrap dark:text-white truncate hover:whitespace-normal sm:whitespace-normal"
           >
             {food.slice(1).split("_").join(" ")}
           </th>
-          <td class="px-3 py-4 underline font-black text-lg truncate whitespace-normal text-green-500">
+          <td className="px-3 py-4 underline font-black text-lg truncate whitespace-normal text-green-500">
             +{(Math.round(100 * algoData[food] * 100) / 100).toFixed(2)}g
           </td>
         </tr>
@@ -129,7 +127,7 @@ const Food = ({ food }) => {
 
               <div className="border-b-2 border-custom-orange w-full"></div>
 
-              <table class="w-full text-sm text-left text-black dark:text-white font-logo">
+              <table className="w-full text-sm text-left text-black dark:text-white font-logo">
                 <tbody>{laboTable1}</tbody>
               </table>
             </div>
@@ -150,7 +148,7 @@ const Food = ({ food }) => {
 
               <div className="border-b-2 border-custom-orange w-full"></div>
 
-              <table class="w-full text-sm text-left text-black dark:text-white font-logo">
+              <table className="w-full text-sm text-left text-black dark:text-white font-logo">
                 <tbody>{laboTable2}</tbody>
               </table>
             </div>
@@ -171,7 +169,7 @@ const Food = ({ food }) => {
 
               <div className="border-b-2 border-custom-orange w-full"></div>
 
-              <table class="w-full text-sm text-left text-black dark:text-white font-logo">
+              <table className="w-full text-sm text-left text-black dark:text-white font-logo">
                 <tbody>{laboTable1}</tbody>
                 <tbody>{laboTable3}</tbody>
               </table>

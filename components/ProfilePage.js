@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import Head from "next/head";
 import Image from "next/image";
 
-const ProfilePage = () => {
+const ProfilePage = ({profileData}) => {
   const validate = values => {
     const errors = {};
 
@@ -23,8 +23,8 @@ const ProfilePage = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: "KaikiMAX",
-      email: "zaam.oussama@gmail.com",
+      username: profileData.username,
+      email: profileData.email,
     },
     validate,
     onSubmit: (values) => {

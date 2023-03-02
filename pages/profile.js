@@ -88,42 +88,67 @@ const Profile = () => {
                                     justify-start rounded-lg
                                     hover:bg-[#635953]
                                     "
-                    >
-                        <BiUserCircle className="h-6 w-6 fill-[#C8C8C8] mx-4" />
-                        <p className="text-sm font-logo text-[#C8C8C8]">Profile page</p>
-                    </div>
-                </div>
-                <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(2)}>
-                    <div className={"self-center border-r-4 border-custom-orange h-5/6 w-2 transition origin-center ease-[cubic-bezier(1,-0.4,1,.65)] "+(page===2 ? 'scale-y-100' : 'scale-y-0')}></div>
-                    <a 
-                        href="#dietInformations" 
-                        className="
-                                    flex justify-start items-center
-                                    h-full w-full
-                                    cursor-pointer hover:bg-[#635953]
-                                    rounded-lg
-                                    "
-                    >
-                        <IoMdInformationCircleOutline className="h-6 w-6 fill-[#C8C8C8] mx-4" />
-                        <p className="text-sm font-logo text-[#C8C8C8]">Diet informations</p>
-                    </a>
-                </div>
-                <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(3)}>
-                    <div className={"self-center border-r-4 border-custom-orange h-5/6 w-2 transition duration-100 origin-top ease-[cubic-bezier(1,0,1,0)] "+(page===3 ? '-translate-y-0 opacity-100' : '-translate-y-10 opacity-0')}></div>
-                    <div className="
-                                    flex justify-start items-center
-                                    h-full w-full
-                                    cursor-pointer hover:bg-[#635953]
-                                    rounded-lg
-                                    "
-                    >
-                        <MdPassword className="h-6 w-6 fill-[#C8C8C8] mx-4" />
-                        <p className="text-sm font-logo text-[#C8C8C8]">Change password</p>
-                    </div>
-                </div>
+              >
+                <BiUserCircle className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="font-logo text-sm text-[#C8C8C8]">Profile page</p>
+              </div>
             </div>
+            <div
+              className="group flex h-9 w-10/12 space-x-2"
+              onClick={() => setPage(2)}
+            >
+              <div
+                className={
+                  "h-5/6 w-2 origin-center self-center border-r-4 border-custom-orange transition ease-[cubic-bezier(1,-0.4,1,.65)] " +
+                  (page === 2 ? "scale-y-100" : "scale-y-0")
+                }
+              ></div>
+              <a
+                href="#dietInformations"
+                className="
+                                    flex h-full w-full
+                                    cursor-pointer items-center
+                                    justify-start rounded-lg
+                                    hover:bg-[#635953]
+                                    "
+              >
+                <IoMdInformationCircleOutline className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="font-logo text-sm text-[#C8C8C8]">
+                  Diet informations
+                </p>
+              </a>
+            </div>
+            <div
+              className="group flex h-9 w-10/12 space-x-2"
+              onClick={() => setPage(3)}
+            >
+              <div
+                className={
+                  "h-5/6 w-2 origin-top self-center border-r-4 border-custom-orange transition duration-100 ease-[cubic-bezier(1,0,1,0)] " +
+                  (page === 3
+                    ? "-translate-y-0 opacity-100"
+                    : "-translate-y-10 opacity-0")
+                }
+              ></div>
+              <div
+                className="
+                                    flex h-full w-full
+                                    cursor-pointer items-center
+                                    justify-start rounded-lg
+                                    hover:bg-[#635953]
+                                    "
+              >
+                <MdPassword className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="font-logo text-sm text-[#C8C8C8]">
+                  Change password
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
+        <div className="col-span-9 col-start-4 flex h-full w-full flex-col items-center justify-start bg-[#4B4B4B]">
+          <div className="flex flex-col items-center justify-start md:w-1/2">
             <div className="my-16 flex items-center justify-center">
               <Image
                 width={500}

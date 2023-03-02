@@ -59,13 +59,12 @@ const Food = ({ food }) => {
             {food.slice(1).split("_").join(" ")}
           </th>
           <td className="px-3 py-4 underline font-black text-lg truncate whitespace-nowrap">
-            {/* {100 * algoData[food]} g */}
             {(Math.round(100 * algoData[food] * 100) / 100).toFixed(2)}g
           </td>
         </tr>
       );
     });
-  // const laboTable3 = treatedFoodList.map((food) => {
+
   const laboTable3 =
     Object.keys(algoData).length !== 0 &&
     Object.keys(algoData).map((food) => {
@@ -86,6 +85,36 @@ const Food = ({ food }) => {
         </tr>
       );
     });
+
+    function sumObjectsByKey(object1, object2) {
+        const sum = {
+          Calories: object1.Calories + (object2.Calories*parseInt(object2.size))/100,
+          Protein: object1.Protein + (object2.Protein*parseInt(object2.size))/100,
+          Carbs: object1.Carbs + (object2.Carbs*parseInt(object2.size))/100,
+          Fat: object1.Fat + (object2.Fat*parseInt(object2.size))/100,
+          Fiber: object1.Fiber + (object2.Fiber*parseInt(object2.size))/100,
+          Salt: object1.Salt + (object2.Salt*parseInt(object2.size))/100,
+          Sugar: object1.Sugar + (object2.Suga*parseInt(object2.size))/100
+        }
+        return sum;
+    }
+    const sumNutrients = () => {
+      var nutrients = {
+        Calories: 0,
+        Protein: 0,
+        Carbs: 0,
+        Fat: 0,
+        Fiber: 0,
+        Salt: 0,
+        Sugar: 0
+      }
+      for (let i = 0; i <eatenFoodList.length; i++) {
+        nutrients = sumObjectsByKey(nutrients, eatenFoodList[i])
+      }
+      return nutrients;
+    }
+
+    console.log(sumNutrients())
 
   // ---------------------------------------------------------------------------------------------------------------
 

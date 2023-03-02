@@ -12,7 +12,7 @@ export default function AddDailyFood({
   setEatenFoodList,
   eatenFoodList,
   setAlgoData,
-  setIsAlgorithmEnabled,
+  setIsAlgorithmEnabled
 }) {
   const [wiggle, setWiggle] = useState(false);
   const [addedFood, setAddedFood] = useState({});

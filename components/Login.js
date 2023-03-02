@@ -58,14 +58,14 @@ export default function Login({ setLogin, setAuth, setOpen }) {
       </Head>
       <div className="px-8 py-6 text-left bg-white shadow-lg ">
         <div className="flex justify-around">
-          <button onClick={() => signIn("google")}>
-            <BsGoogle size="3rem" color="orange" />
+          <button className="hover:scale-125 transition duration-300 ease-out" onClick={() => signIn("google")}>
+            <BsGoogle className="fill-orange-400 hover:fill-orange-600 h-12 w-12" />
           </button>
-          <button>
-            <BsFacebook size="3rem" color="orange" />
+          <button className="hover:scale-125 transition duration-300 ease-out" onClick={() => signIn("facebook")}>
+            <BsFacebook className="fill-orange-400 hover:fill-orange-600 h-12 w-12" />
           </button>
-          <button>
-            <BsTwitter size="3rem" color="orange" />
+          <button className="hover:scale-125 transition duration-300 ease-out">
+            <BsTwitter className="fill-orange-400 hover:fill-orange-600 h-12 w-12" />
           </button>
         </div>
         <div className="bg-orange-400 w-full h-1 mt-7 mb-3"></div>

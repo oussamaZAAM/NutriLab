@@ -31,7 +31,7 @@ export default function Example() {
     async function handleUser() {
       await axios
         .get("/api/user")
-        .then((input) => setUser(input.data))
+        .then((input) => setUser(input.data.id ? input.data : undefined))
         .catch((err) => setUser(undefined));
     }
     handleUser();

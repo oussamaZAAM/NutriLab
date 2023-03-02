@@ -378,7 +378,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
       {/* Age Box  */}
       {stepper[0] === 1 && (
-        <div className="flex flex-col justify-between items-center h-full">
+        <div 
+          tabIndex={0} 
+          onKeyDown={(e)=>{
+            if (e.key === 'Enter') setStepper([2, stepper[0]])
+          }} 
+          className="flex flex-col justify-between items-center h-full"
+        >
           <b className="font-logo text-3xl text-center my-12 h-full">
             How old are you?
           </b>
@@ -390,6 +396,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               value={dietInfos.age}
               onChange={handleChange}
               className="block max-w-xs w-3/4 xs:w-full p-4 text-gray-900 text-5xl xs:text-7xl text-center border border-custom-orange rounded-lg bg-white sm:text-md focus:ring-white focus:border-custom-orange"
+              autoFocus
             />
           </div>
           <div className="flex justify-evenly items-end w-full my-12 h-full">
@@ -406,7 +413,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
       {/* Sex Box  */}
       {stepper[0] === 2 && (
-        <div className="flex flex-col justify-between items-center h-full">
+        <div 
+          tabIndex={0} 
+          onKeyDown={(e)=>{
+            if (e.key === 'Enter') setStepper([3, stepper[0]])
+          }} 
+          className="flex flex-col justify-between items-center h-full"
+        >
           <b className="flex-1 font-logo text-3xl text-center my-12 h-full">
             What&apos;s your sex?
           </b>
@@ -474,7 +487,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
       {/* Height & Weight Box  */}
       {stepper[0] === 3 && (
-        <div className="flex flex-col justify-between items-center h-full">
+        <div 
+          tabIndex={0} 
+          onKeyDown={(e)=>{
+            if (e.key === 'Enter') setStepper([4, stepper[0]])
+          }} 
+          className="flex flex-col justify-between items-center h-full"
+        >
           <div className="flex flex-col justify-center items-centr flex-3 h-full">
             {/* Height Input */}
             <b className="font-logo text-2xl text-center my-4 ">Height</b>
@@ -486,6 +505,7 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
                 value={dietInfos.height}
                 onChange={handleChange}
                 className="block max-w-xs w-3/4 xs:w-full p-4 text-gray-900 text-xl xs:text-3xl text-center border border-custom-orange rounded-lg bg-white sm:text-md focus:ring-white focus:border-custom-orange"
+                autoFocus
               />
             </div>
 
@@ -521,7 +541,13 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
 
       {/* Activity Box  */}
       {stepper[0] === 4 && (
-        <div className="flex flex-col justify-around items-center h-full">
+        <div 
+          tabIndex={0} 
+          onKeyDown={(e)=>{
+            if (e.key === 'Enter') setStepper([5, stepper[0]])
+          }} 
+          className="flex flex-col justify-around items-center h-full"
+        >
           <div className="flex-3 flex flex-col justify-between items-center h-full">
 
             {/* Activity */}
@@ -820,34 +846,36 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               >
                 Back
               </button>
-              <button
-                onClick={() => handleApply(dietInfos)}
-                className={
-                  `
-                        h-12 sm:mx-8 w-24 xs:w-40
-                        font-bold font-logo text-2xl
-                        border-2 border-custom-orange hover:border-gray-900
-                        bg-custom-orange text-white 
-                        ` +
-                  ((ageError ||
+              <a href="#DailyNutrients">
+                <button
+                  onClick={() => handleApply(dietInfos)}
+                  className={
+                    `
+                          h-12 sm:mx-8 w-24 xs:w-40
+                          font-bold font-logo text-2xl
+                          border-2 border-custom-orange hover:border-gray-900
+                          bg-custom-orange text-white
+                          ` +
+                    ((ageError ||
+                      sexError ||
+                      heightError ||
+                      weightError ||
+                      activityError ||
+                      planError) &&
+                      "cursor-not-allowed")
+                  }
+                  disabled={
+                    ageError ||
                     sexError ||
                     heightError ||
                     weightError ||
                     activityError ||
-                    planError) &&
-                    "cursor-not-allowed")
-                }
-                disabled={
-                  ageError ||
-                  sexError ||
-                  heightError ||
-                  weightError ||
-                  activityError ||
-                  planError
-                }
-              >
-                Apply
-              </button>
+                    planError
+                  }
+                >
+                  Apply
+                </button>
+              </a>
             </div>
           ) : (
             <div className="flex justify-evenly items-center w-full my-12">
@@ -857,29 +885,31 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
               >
                 Reset
               </button>
-              <button
-                onClick={() => handleApply(dietInfos)}
-                className={
-                  `h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900 ` +
-                  ((ageError ||
+              <a href="#DailyNutrients">
+                <button
+                  onClick={() => handleApply(dietInfos)}
+                  className={
+                    `h-12 sm:mx-8 w-32 truncate xs:w-48 font-bold font-logo text-2xl border-2 bg-custom-orange text-white hover:border-gray-900 ` +
+                    ((ageError ||
+                      sexError ||
+                      heightError ||
+                      weightError ||
+                      activityError ||
+                      planError) &&
+                      "cursor-not-allowed")
+                  }
+                  disabled={
+                    ageError ||
                     sexError ||
                     heightError ||
                     weightError ||
                     activityError ||
-                    planError) &&
-                    "cursor-not-allowed")
-                }
-                disabled={
-                  ageError ||
-                  sexError ||
-                  heightError ||
-                  weightError ||
-                  activityError ||
-                  planError
-                }
-              >
-                Re-Calculate
-              </button>
+                    planError
+                  }
+                >
+                  Re-Calculate
+                </button>
+              </a>
             </div>
           )}
         </div>

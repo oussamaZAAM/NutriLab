@@ -220,7 +220,7 @@ export default function AddDailyFood({
                 className={`flex justify-start items-center
             text-gray-900 text-sm indent-2
             bg-gray-50 border border-gray-300 rounded-lg group outline outline-1 group-focus:outline-4
-            block w-20 ml-2`}
+            w-20 ml-2`}
               >
                 <input
                   type="number"
@@ -408,7 +408,7 @@ export default function AddDailyFood({
           <div
             className={
               `
-                w-full border-b-2 border-custom-orange my-4 w-11/12 ` +
+               border-b-2 border-custom-orange my-4 w-11/12 ` +
               (eatenFoodList.length
                 ? "transition duration-300 scale-x-100"
                 : "transition duration-300 scale-x-0")

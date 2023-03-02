@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['i.ibb.co', 'images.unsplash.com'],
+    domains: ['i.ibb.co', 'upload.wikimedia.org', 'lh3.googleusercontent.com'],
   },
   env: {
     VERCEL_ENV: process.env.VERCEL_ENV,

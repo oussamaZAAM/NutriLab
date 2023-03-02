@@ -193,7 +193,7 @@ export default function Home() {
                   best combination of food to meet your daily needs of
                   nutrients.
                 </p>
-                <Link href="/food">
+                <Link href="/foodProcess">
                   <MdDoubleArrow
                     className="cursor-pointer mx-4 lg:m-4 hover:fill-custom-orange transition duration-300"
                     size={50}

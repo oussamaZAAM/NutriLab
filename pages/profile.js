@@ -133,8 +133,38 @@ const Profile = () => {
                 alt="Profile"
               />
             </div>
+            {profile ? (
+              <>
+                {page === 1 && (
+                  <ProfilePage
+                    profileData={{
+                      email: profile.email,
+                      username: profile.name,
+                    }}
+                  />
+                )}
+                {page === 2 && (
+                  <ProfileDiet
+                    dietData={{
+                      age: profile.age,
+                      sex: profile.sex,
+                      height: profile.height,
+                      weight: profile.weight,
+                      activity: profile.activity,
+                      plan: profile.plan
+                    }}
+                  />
+                )}
                 {page === 3 && <ProfilePassword />}
-            </div>
+              </>
+            ) : (
+              <div class="flex animate-pulse flex-col items-start justify-center">
+                <div class="dark:bg-gray-700 my-2 h-12 w-[280px] rounded-lg bg-gray-200"></div>
+                <div class="dark:bg-gray-700 my-2 h-12 w-[280px] rounded-lg bg-gray-200"></div>
+                <div class="dark:bg-gray-700 my-6 h-12 w-[69px] rounded-lg bg-gray-200"></div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

@@ -83,54 +83,62 @@ export default function Home() {
 
         <div className="relative grid grid-cols-8 my-40">
           <Image
-              width={125}
-              height={125}
-              src="/icons/diet.png"
-              className="
+            width={125}
+            height={125}
+            src="/icons/diet.png"
+            alt="decor"
+            className="
                           animate-rotate_normal 
                           absolute top-0 left-20 opacity-[0.44] rotate-[28deg]"
           />
-          <div className="
+          <div
+            className="
                           animate-rotate_normal
-                          absolute top-80 -left-10 w-32 h-32">
+                          absolute top-80 -left-10 w-32 h-32"
+          >
             <Image
-                width={125}
-                height={125}
-                src="/icons/plan.png"
-                className="
+              width={125}
+              height={125}
+              src="/icons/plan.png"
+              alt="decor"
+              className="
                           animate-rotate_reverse
                           absolute top-10 opacity-[0.44] rotate-0"
             />
           </div>
           <Image
-              width={125}
-              height={125}
-              src="/icons/order-food.png"
-              className="
+            width={125}
+            height={125}
+            src="/icons/order-food.png"
+            alt="decor"
+            className="
                         animate-translate_right
                         absolute top-72 right-28 opacity-[0.44] rotate-[33deg]"
           />
           <Image
-              width={125}
-              height={125}
-              src="/icons/meal.png"
-              className="
+            width={125}
+            height={125}
+            src="/icons/meal.png"
+            alt="decor"
+            className="
                         animate-rotate2_reverse 
                         absolute bottom-44 left-10 opacity-[0.44] rotate-0"
           />
           <Image
-              width={125}
-              height={125}
-              src="/icons/balanced-diet.png"
-              className="
+            width={125}
+            height={125}
+            src="/icons/balanced-diet.png"
+            alt="decor"
+            className="
                         animate-translate_bottom
                         absolute -bottom-8 right-[448px] opacity-[0.44] rotate-0"
           />
           <Image
-              width={125}
-              height={125}
-              src="/icons/healthy-food.png"
-              className="
+            width={125}
+            height={125}
+            src="/icons/healthy-food.png"
+            alt="decor"
+            className="
                         animate-rotate2 
                         absolute bottom-44 right-12 opacity-[0.44] rotate-[14deg]"
           />

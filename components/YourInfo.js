@@ -14,37 +14,37 @@ export default function YourInfo({ localInfos, localNutris }) {
   return (
     <div
       className="
-                    flex flex-col justify-center items-center
-                    sm:col-start-2 col-span-8 sm:col-span-6
-                    border-2 border-custom-orange rounded
-                    w-full my-16"
+                    col-span-8 my-16 flex w-full
+                    flex-col items-center justify-center
+                    rounded border-2 border-custom-orange
+                    sm:col-span-6 sm:col-start-2"
     >
-      <h3 className="font-title text-3xl xs:text-4xl sm:text-5xl text-center | w-full my-16">
+      <h3 className="| my-16 w-full text-center font-title text-3xl xs:text-4xl sm:text-5xl">
         Check Your Informations
       </h3>
-      <div className="flex justify-between items-center">
-        <h4 className="font-title text-2xl xs:text-3xl sm:text-4xl text-center | w-full">
+      <div className="flex items-center justify-between">
+        <h4 className="| w-full text-center font-title text-2xl xs:text-3xl sm:text-4xl">
           Your Input Infos
         </h4>
         <Link href="/nutrients">
           <RiEditFill
             size={25}
-            className="hover:fill-custom-orange transition duration-300 ml-2"
+            className="ml-2 transition duration-300 hover:fill-custom-orange"
           />
         </Link>
       </div>
       {localInfos ? (
-        <div className="flex-2 flex justify-center items-center border rounded my-4">
-          <table className="w-full text-sm text-left text-gray-500">
+        <div className="flex-2 my-4 flex items-center justify-center rounded border">
+          <table className="w-full text-left text-sm text-gray-500">
             <tbody>
-              <tr className="bg-white border-b">
+              <tr className="border-b bg-white">
                 <th
                   scope="row"
-                  className="px-6 py-4 text-gray-900 whitespace-nowrap"
+                  className="whitespace-nowrap px-6 py-4 text-gray-900"
                 >
                   Age
                 </th>
-                <td className="px-6 py-4 truncate">
+                <td className="truncate px-6 py-4">
                   {localInfos.age || "No Entry"}
                 </td>
               </tr>
@@ -52,24 +52,24 @@ export default function YourInfo({ localInfos, localNutris }) {
               <tr className="border-b bg-gray-50">
                 <th
                   scope="row"
-                  className="px-6 py-4 text-gray-900 whitespace-nowrap"
+                  className="whitespace-nowrap px-6 py-4 text-gray-900"
                 >
                   Sex
                 </th>
-                <td className="px-6 py-4 truncate">
+                <td className="truncate px-6 py-4">
                   {(localInfos.sex && capitalizeFirstLetter(localInfos.sex)) ||
                     "No Entry"}
                 </td>
               </tr>
 
-              <tr className="bg-white border-b">
+              <tr className="border-b bg-white">
                 <th
                   scope="row"
-                  className="px-6 py-4 text-gray-900 whitespace-nowrap"
+                  className="whitespace-nowrap px-6 py-4 text-gray-900"
                 >
                   Height
                 </th>
-                <td className="px-6 py-4 truncate">
+                <td className="truncate px-6 py-4">
                   {localInfos.height || "No Entry"}
                 </td>
               </tr>
@@ -77,11 +77,11 @@ export default function YourInfo({ localInfos, localNutris }) {
               <tr className="border-b bg-gray-50">
                 <th
                   scope="row"
-                  className="px-6 py-4 text-gray-900 whitespace-nowrap"
+                  className="whitespace-nowrap px-6 py-4 text-gray-900"
                 >
                   Weight
                 </th>
-                <td className="px-6 py-4 truncate">
+                <td className="truncate px-6 py-4">
                   {localInfos.weight || "No Entry"}
                 </td>
               </tr>
@@ -89,11 +89,11 @@ export default function YourInfo({ localInfos, localNutris }) {
               <tr className="border-b bg-white">
                 <th
                   scope="row"
-                  className="text-center px-6 py-4 text-gray-900 whitespace-nowrap"
+                  className="whitespace-nowrap px-6 py-4 text-center text-gray-900"
                 >
                   Activity
                 </th>
-                <td className="px-6 py-4 truncate">
+                <td className="truncate px-6 py-4">
                   {(localInfos.activity &&
                     sliceUnderscore(localInfos.activity)) ||
                     "No Entry"}
@@ -103,11 +103,11 @@ export default function YourInfo({ localInfos, localNutris }) {
               <tr className="bg-gray-50">
                 <th
                   scope="row"
-                  className="text-center px-6 py-4 text-gray-900 whitespace-nowrap"
+                  className="whitespace-nowrap px-6 py-4 text-center text-gray-900"
                 >
                   Plan
                 </th>
-                <td className="px-6 py-4 truncate">
+                <td className="truncate px-6 py-4">
                   {(localInfos.plan && sliceUnderscore(localInfos.plan)) ||
                     "No Entry"}
                 </td>
@@ -116,13 +116,13 @@ export default function YourInfo({ localInfos, localNutris }) {
           </table>
         </div>
       ) : (
-        <div className="flex justify-center items-center border rounded my-8">
+        <div className="my-8 flex items-center justify-center rounded border">
           <span>
-            <b className="font-paragraph font-medium text-sm">
+            <b className="font-paragraph text-sm font-medium">
               It seems you have yet to tell us about you,{" "}
             </b>
             <Link href="/nutrients">
-              <b className="font-paragraph font-black text-sm hover:underline hover:text-custom-orange transition duration-300">
+              <b className="font-paragraph text-sm font-black transition duration-300 hover:text-custom-orange hover:underline">
                 click here
               </b>
             </Link>
@@ -130,67 +130,67 @@ export default function YourInfo({ localInfos, localNutris }) {
         </div>
       )}
 
-      <div className="flex justify-between items-center">
-        <h4 className="font-title text-2xl xs:text-3xl sm:text-4xl text-center | w-full">
+      <div className="flex items-center justify-between">
+        <h4 className="| w-full text-center font-title text-2xl xs:text-3xl sm:text-4xl">
           Your generated Infos
         </h4>
         <Link href="/nutrients">
           <RiEditFill
             size={25}
-            className="hover:fill-custom-orange transition duration-300 ml-2"
+            className="ml-2 transition duration-300 hover:fill-custom-orange"
           />
         </Link>
       </div>
 
       {localNutris ? (
-        <div className="flex my-8 overflow-x-auto no-scrollwbar w-11/12">
-          <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase">
+        <div className="no-scrollwbar my-8 flex w-11/12 overflow-x-auto">
+          <table className="w-full text-left text-sm text-gray-500">
+            <thead className="text-xs uppercase text-gray-700">
               <tr>
-                <th scope="col" className="px-6 py-3 text-white bg-gray-700">
+                <th scope="col" className="bg-gray-700 px-6 py-3 text-white">
                   Calories
                 </th>
-                <th scope="col" className="px-6 py-3 text-white bg-gray-800">
+                <th scope="col" className="bg-gray-800 px-6 py-3 text-white">
                   Proteins
                 </th>
-                <th scope="col" className="px-6 py-3 text-white bg-gray-700">
+                <th scope="col" className="bg-gray-700 px-6 py-3 text-white">
                   Carbs
                 </th>
-                <th scope="col" className="px-6 py-3 text-white bg-gray-800">
+                <th scope="col" className="bg-gray-800 px-6 py-3 text-white">
                   Fats
                 </th>
-                <th scope="col" className="px-6 py-3 text-white bg-gray-700">
+                <th scope="col" className="bg-gray-700 px-6 py-3 text-white">
                   Fiber
                 </th>
-                <th scope="col" className="px-6 py-3 text-white bg-gray-800">
+                <th scope="col" className="bg-gray-800 px-6 py-3 text-white">
                   Salt
                 </th>
-                <th scope="col" className="px-6 py-3 text-white bg-gray-700">
+                <th scope="col" className="bg-gray-700 px-6 py-3 text-white">
                   Sugar
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-gray-200 dark:border-gray-700">
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+              <tr className="dark:border-gray-700 border-b border-gray-200">
+                <td className="whitespace-nowrap bg-gray-100 px-6 py-4 font-medium text-gray-900">
                   {localNutris.kCalories} kCal
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                   {localNutris.proteins} g
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                <td className="whitespace-nowrap bg-gray-100 px-6 py-4 font-medium text-gray-900">
                   {localNutris.carbs} g
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                   {localNutris.fats} g
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                <td className="whitespace-nowrap bg-gray-100 px-6 py-4 font-medium text-gray-900">
                   {localNutris.fiber} g
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                   {localNutris.salt} g
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-100">
+                <td className="whitespace-nowrap bg-gray-100 px-6 py-4 font-medium text-gray-900">
                   {localNutris.sugar} g
                 </td>
               </tr>
@@ -198,13 +198,13 @@ export default function YourInfo({ localInfos, localNutris }) {
           </table>
         </div>
       ) : (
-        <div className="flex justify-center items-center border rounded my-8">
+        <div className="my-8 flex items-center justify-center rounded border">
           <span>
-            <b className="font-paragraph font-medium text-sm">
+            <b className="font-paragraph text-sm font-medium">
               You haven't yet generated your daily nutrients ,{" "}
             </b>
             <Link href="/nutrients">
-              <b className="font-paragraph font-black text-sm hover:underline hover:text-custom-orange transition duration-300">
+              <b className="font-paragraph text-sm font-black transition duration-300 hover:text-custom-orange hover:underline">
                 click to apply your infos
               </b>
             </Link>

@@ -117,7 +117,7 @@ const Food = ({ food }) => {
         <h3 className="| my-16 w-full text-center font-title text-3xl xs:text-4xl sm:text-5xl">
           Your Labo
         </h3>
-        <div className="mb-4 flex w-full items-stretch justify-between">
+        <div className="mb-4 flex w-full items-stretch justify-between xl:w-3/4">
           <div className="mx-2 flex h-96 w-full flex-1 flex-col items-center justify-start border-2 border-custom-orange">
             <p className="my-4 font-paragraph text-xl font-bold text-black">
               Previous Diet

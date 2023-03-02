@@ -6,8 +6,6 @@ import Footer from "../components/Footer";
 import HowItsBuilt from "../components/HowItsBuilt";
 import DietInfo from "../components/DietInfo";
 import DailyNutrients from "../components/DailyNutrients";
-import isAuthenticated from "./api/Auth";
-import getCookie from "next-cookies";
 
 import { User_data } from "../context/context";
 import { useContext } from "react";

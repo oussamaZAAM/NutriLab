@@ -16,23 +16,21 @@ const ProfileDiet = () => {
 
     // Check on inputted numbers to not include 'e', '-', '+' and '.'
     const handleNumberChange = (e) => {
-      const add = e.target.value.slice(-1);
+      const last = e.target.value.slice(-1);
       const rest = e.target.value.slice(0, -1);
-      if (add === '0' || 
-          add === '1' || 
-          add === '2' || 
-          add === '3' || 
-          add === '4' || 
-          add === '5' || 
-          add === '6' || 
-          add === '7' || 
-          add === '8' ||  
-          add === '9'
-      ) {
+      if (last === '0' || last === '1' || last === '2' || last === '3' || last === '4' || last === '5' || last === '6' || last === '7' || last === '8' ||  last === '9') {
         setDietInfos({...dietInfos, [e.target.name]: e.target.value});
       } else {
         setDietInfos({...dietInfos, [e.target.name]: rest});
       }
+    }
+
+    const handleSex = (sex) => {
+      setDietInfos({ ...dietInfos, sex: sex });
+    }
+
+    const handleChange = (event) => {
+      setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
     }
 
     console.log(dietInfos)
@@ -79,21 +77,20 @@ const ProfileDiet = () => {
                 type="radio"
                 id="male"
                 name="sex"
-                //   value={dietInfos.sex}
-                //   onChange={() => handleSex("male")}
+                value={dietInfos.sex}
+                onChange={() => handleSex("male")}
                 className="hidden peer"
                 required
               />
               <label
                 htmlFor="male"
-                className="
+                className={`
                               inline-flex items-center justify-evenly w-full py-5 px-2 
-                              text-gray-500 bg-white hover:text-gray-600 hover:bg-gray-100
-                              peer-checked:border-2 border-gray-200 
+                              text-gray-500 bg-white hover:bg-gray-100
+                              border-gray-200 
                               rounded-lg 
-                              cursor-pointer 
-                              peer-checked:border-blue-500 peer-checked:text-blue-500 
-                            "
+                              cursor-pointer `+
+                          (dietInfos.sex === 'male' && 'border-2 border-blue-500 text-blue-500 hover:text-blue-600')}
               >
                 <IoMdMale size={35} className="w-1/3" />
                 <div className="block">
@@ -106,20 +103,19 @@ const ProfileDiet = () => {
                 type="radio"
                 id="female"
                 name="sex"
-                //   value={dietInfos.sex}
-                //   onChange={() => handleSex("female")}
+                value={dietInfos.sex}
+                onChange={() => handleSex("female")}
                 className="hidden peer"
               />
               <label
                 htmlFor="female"
-                className="
+                className={`
                               inline-flex items-center justify-evenly w-full py-5 px-2 
-                              text-gray-500 bg-white hover:text-gray-600 hover:bg-gray-100
-                              peer-checked:border-2 border-gray-200 
+                              text-gray-500 bg-white hover:bg-gray-100
+                              border-gray-200 
                               rounded-lg 
-                              cursor-pointer 
-                              peer-checked:border-pink-500 peer-checked:text-pink-500 
-                            "
+                              cursor-pointer `+
+                          (dietInfos.sex === 'female' && 'border-2 border-pink-500 text-pink-500 hover:text-pink-600')}
               >
                 <IoMdFemale size={35} className="w-1/3" />
                 <div className="block">
@@ -168,16 +164,19 @@ const ProfileDiet = () => {
         <div className="w-full md:w-2/3 my-2 relative">
           <select
             id="activity"
+            name="activity"
+            value={dietInfos.activity}
+            onChange={handleChange}
             className="
-                                              peer 
-                                              hover:cursor-pointer 
-                                              px-2.5 pb-2.5 pt-4 w-full 
-                                              text-sm text-white 
-                                              bg-transparent rounded-lg border-2 border-gray-300 
-                                              appearance-none 
-                                              dark:text-white dark:border-gray-600 dark:focus:border-custom-orange 
-                                              focus:outline-none focus:ring-0 focus:border-custom-orange
-                                            "
+                        peer 
+                        hover:cursor-pointer 
+                        px-2.5 pb-2.5 pt-4 w-full 
+                        text-sm text-white 
+                        bg-transparent rounded-lg border-2 border-gray-300 
+                        appearance-none 
+                        dark:text-white dark:border-gray-600 dark:focus:border-custom-orange 
+                        focus:outline-none focus:ring-0 focus:border-custom-orange
+                      "
           >
             <option className="text-black" value="none" selected>
               -
@@ -201,14 +200,14 @@ const ProfileDiet = () => {
           <label
             htmlFor="activity"
             className="
-                                                  absolute top-2 left-1 z-10
-                                                  text-sm text-white dark:text-gray-400 
-                                                  duration-300 transform -translate-y-4 scale-75 origin-[0]
-                                                  bg-[#4B4B4B] dark:bg-gray-900 px-2 
-                                                  peer-focus:text-custom-orange
-                                                  peer-focus:px-2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 
-                                                  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 
-                                                "
+                        absolute top-2 left-1 z-10
+                        text-sm text-white dark:text-gray-400 
+                        duration-300 transform -translate-y-4 scale-75 origin-[0]
+                        bg-[#4B4B4B] dark:bg-gray-900 px-2 
+                        peer-focus:text-custom-orange
+                        peer-focus:px-2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 
+                        peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 
+                      "
           >
             Activity
           </label>
@@ -218,6 +217,9 @@ const ProfileDiet = () => {
         <div className="w-full md:w-2/3 my-2 relative">
           <select
             id="plan"
+            name="plan"
+            value={dietInfos.plan}
+            onChange={handleChange}
             className="
                                             peer
                                             hover:cursor-pointer 

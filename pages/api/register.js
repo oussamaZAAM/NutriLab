@@ -8,7 +8,6 @@ export default async function register(req, res) {
   const SALT_ROUNDS = parseInt(process.env.SALT);
   const pass = await bcrypt.hash(user.password, SALT_ROUNDS);
   try {
-    console.log(user);
     const result = await prisma.User.create({
       data: {
         name: user.name,

@@ -38,7 +38,6 @@ export default function Example({ User }) {
     }
     handleUser();
   }, []);
-  console.log(user)
   const cancelButtonRef = useRef(null);
   const handleLogout = async (e) => {
     session && signOut();
@@ -108,14 +107,6 @@ export default function Example({ User }) {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  {/* <button
-                    type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button> */}
-                  {/* <button onClick={() => (session ? signOut() : signIn())}> */}
                   {!(session || (user && user !== 'Not Logged In')) && (
                     <button onClick={() => setOpen(true)}>
                       <p className="text-black hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
@@ -202,7 +193,7 @@ export default function Example({ User }) {
                             width={50}
                             height={50}
                             className="h-8 w-8 rounded-full"
-                            src=""
+                            src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
                             alt=""
                           />}
                         </Menu.Button>

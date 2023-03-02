@@ -58,7 +58,7 @@ const ProfilePassword = () => {
             value={formik.values.oldPassword}
           />
           <label
-            htmlFor="username"
+            htmlFor="oldPassword"
             className={`
                         absolute top-2 left-1 z-10 
                         origin-[0] -translate-y-4 scale-75 transform bg-[#4B4B4B]
@@ -94,7 +94,7 @@ const ProfilePassword = () => {
             value={formik.values.newPassword}
           />
           <label
-            htmlFor="username"
+            htmlFor="newPassword"
             className={`
                         absolute top-2 left-1 z-10 
                         origin-[0] -translate-y-4 scale-75 transform bg-[#4B4B4B]
@@ -130,7 +130,7 @@ const ProfilePassword = () => {
             value={formik.values.confirmPassword}
           />
           <label
-            htmlFor="username"
+            htmlFor="confirmPassword"
             className={`
                         absolute top-2 left-1 z-10 
                         origin-[0] -translate-y-4 scale-75 transform bg-[#4B4B4B]
@@ -144,6 +144,25 @@ const ProfilePassword = () => {
           >
             Confirm your Password
           </label>
+        </div>
+
+        {/* Submit Button  */}
+        <div className="my-4 w-full">
+          <button
+            onClick={formik.handleSubmit}
+            type="button"
+            className={`
+                        mr-2 mb-2 rounded-lg border-2 border-[#4B4B4B] 
+                        bg-custom-orange px-5 py-2.5 
+                        text-sm font-medium text-[#4B4B4B] transition 
+                        hover:border-gray-800 hover:text-gray-800 
+                        focus:bg-gradient1 focus:border-black focus:text-black
+                        dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 `+
+                        ((formik.errors.email || formik.errors.username) && 'cursor-not-allowed')}
+            disabled={formik.errors.email || formik.errors.username}
+          >
+            Edit
+          </button>
         </div>
       </div>
     </>

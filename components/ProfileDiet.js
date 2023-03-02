@@ -25,6 +25,7 @@ const ProfileDiet = () => {
       }
     }
 
+    // Handle changes in the dietInfos state
     const handleSex = (sex) => {
       setDietInfos({ ...dietInfos, sex: sex });
     }
@@ -32,8 +33,6 @@ const ProfileDiet = () => {
     const handleChange = (event) => {
       setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
     }
-
-    console.log(dietInfos)
 
   return (
     <>
@@ -49,11 +48,12 @@ const ProfileDiet = () => {
             height={500}
             className="rounded-full w-64 h-64 object-center object-cover"
             src="/test.png"
+            alt="Profile"
           />
         </div>
 
         {/* Age  */}
-        <div className="w-full md:w-2/3 my-2 relative">
+        <div id="dietInformations" className="w-full md:w-2/3 my-2 relative">
           <input
             id="age"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
@@ -258,11 +258,18 @@ const ProfileDiet = () => {
           </label>
         </div>
 
-        {/* Submit  */}
+        {/* Submit Button  */}
         <div className="w-full md:w-2/3 my-4">
-          <button
+        <button
+            // onClick={formik.handleSubmit}
             type="button"
-            className="text-gray-700 hover:text-black border-2 border-[#4B4B4B] bg-custom-orange transition hover:border-black focus:outline-none focus:ring-4 focus:ring-[#FFBB99] font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            className={`
+                        mr-2 mb-2 rounded-lg border-2 border-[#4B4B4B] 
+                        bg-custom-orange px-5 py-2.5 
+                        text-sm font-medium text-[#4B4B4B] transition 
+                        hover:border-gray-800 hover:text-gray-800 
+                        focus:bg-gradient1 focus:border-black focus:text-black
+                        dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 `}
           >
             Edit
           </button>

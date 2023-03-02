@@ -121,6 +121,8 @@ const ProfilePage = () => {
         <div class="w-full md:w-2/3 mb-3 mt-1">
           <p className='text-xs text-red-500'>{formik.errors.email}</p>
         </div>
+
+        {/* Submit Button  */}
         <div className="my-4 w-full md:w-2/3">
           <button
             onClick={formik.handleSubmit}
@@ -128,9 +130,9 @@ const ProfilePage = () => {
             className={`
                         mr-2 mb-2 rounded-lg border-2 border-[#4B4B4B] 
                         bg-custom-orange px-5 py-2.5 
-                        text-sm font-medium text-gray-700 transition 
-                        hover:border-black hover:text-black 
-                        focus:outline-none focus:ring-4 focus:ring-[#FFBB99] 
+                        text-sm font-medium text-[#4B4B4B] transition 
+                        hover:border-gray-800 hover:text-gray-800 
+                        focus:bg-gradient1 focus:border-black focus:text-black
                         dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 `+
                         ((formik.errors.email || formik.errors.username) && 'cursor-not-allowed')}
             disabled={formik.errors.email || formik.errors.username}

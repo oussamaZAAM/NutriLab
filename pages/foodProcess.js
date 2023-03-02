@@ -96,7 +96,7 @@ const Food = ({ food }) => {
       Fat: object1.Fat + (object2.Fat * parseInt(object2.size)) / 100,
       Fiber: object1.Fiber + (object2.Fiber * parseInt(object2.size)) / 100,
       Salt: object1.Salt + (object2.Salt * parseInt(object2.size)) / 100,
-      Sugar: object1.Sugar + (object2.Suga * parseInt(object2.size)) / 100,
+      Sugar: object1.Sugar + (object2.Sugar * parseInt(object2.size)) / 100,
     };
     return sum;
   }

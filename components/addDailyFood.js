@@ -12,7 +12,8 @@ export default function AddDailyFood({
   setEatenFoodList,
   eatenFoodList,
   setAlgoData,
-  setIsAlgorithmEnabled
+  setIsAlgorithmEnabled,
+  sumNutrients,
 }) {
   const [wiggle, setWiggle] = useState(false);
   const [addedFood, setAddedFood] = useState({});
@@ -82,9 +83,11 @@ export default function AddDailyFood({
     return styled;
   };
   const enableAlgorithm = async () => {
+    const nutrients = sumNutrients();
+    console.log(nutrients);
     const res = await axios.post(
       "http://127.0.0.1:8000/polls/getFood/",
-      [1000, 100, 100, 100, 100, 100, 100]
+      nutrients
     );
     setAlgoData(res.data);
     setIsAlgorithmEnabled(true);

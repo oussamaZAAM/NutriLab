@@ -5,7 +5,7 @@ import { serialize } from "cookie";
 import bcrypt from "bcrypt";
 export default async function register(req, res) {
   const user = req.body;
-  const SALT_ROUNDS = 12;
+  const SALT_ROUNDS = parseInt(process.env.SALT);
   const pass = await bcrypt.hash(user.password, SALT_ROUNDS);
   try {
     const result = await prisma.User.create({

@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../prisma";
+// import prisma from "../../../lib/prismadb";
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 

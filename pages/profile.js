@@ -91,9 +91,20 @@ const Profile = () => {
         </div>
 
         <div className="col-start-4 col-span-9 flex flex-col justify-start items-center bg-[#4B4B4B] w-full h-full">
-            {page === 1 && <ProfilePage />}
-            {page === 2 && <ProfileDiet />}
-            {page === 3 && <ProfilePassword />}
+            <div className="flex flex-col items-center justify-start md:w-1/2">
+                <div className="flex items-center justify-center my-16">
+                <Image
+                    width={500}
+                    height={500}
+                    className="h-64 w-64 rounded-full object-cover object-center"
+                    src="/test.png"
+                    alt="Profile"
+                />
+                </div>
+                {page === 1 && <ProfilePage />}
+                {page === 2 && <ProfileDiet />}
+                {page === 3 && <ProfilePassword />}
+            </div>
         </div>
       </div>
     </>

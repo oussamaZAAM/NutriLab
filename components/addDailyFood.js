@@ -12,7 +12,8 @@ export default function AddDailyFood({
   setEatenFoodList,
   eatenFoodList,
   setAlgoData,
-  setIsAlgorithmEnabled
+  setIsAlgorithmEnabled,
+  sumNutrients,
 }) {
   const [wiggle, setWiggle] = useState(false);
   const [addedFood, setAddedFood] = useState({});
@@ -81,10 +82,26 @@ export default function AddDailyFood({
     styled.pop();
     return styled;
   };
+  function addValuesOfTwoObjects(obj1, obj2) {
+    const obj3 = {};
+
+    obj3["Calories"] = obj1["kCalories"] - obj2["Calories"];
+    obj3["Protein"] = obj1["proteins"] - obj2["Protein"];
+    obj3["Carbs"] = obj1["carbs"] - obj2["Carbs"];
+    obj3["Fat"] = obj1["fats"] - obj2["Fat"];
+    obj3["Fiber"] = obj1["fiber"] - obj2["Fiber"];
+    obj3["Salt"] = obj1["salt"] - obj2["Salt"];
+    obj3["Sugar"] = obj1["sugar"] - obj2["Sugar"];
+
+    return obj3;
+  }
   const enableAlgorithm = async () => {
+    const nutrients = sumNutrients();
+    const nutriRes = await axios.get("/api/nutri");
+    const neededNutri = addValuesOfTwoObjects(nutriRes.data, nutrients);
     const res = await axios.post(
       "http://127.0.0.1:8000/polls/getFood/",
-      [1000, 100, 100, 100, 100, 100, 100]
+      neededNutri
     );
     setAlgoData(res.data);
     setIsAlgorithmEnabled(true);

@@ -71,8 +71,8 @@ export default function AddDailyFood({
     const styled = splitted.map((word) => {
       return (
         <>
-          <span className="font-paragraph font-bold text-ms ">{word}</span>
-          <span className="font-paragraph font-black text-ms text-custom-orange">
+          <span className="text-ms font-paragraph font-bold ">{word}</span>
+          <span className="text-ms font-paragraph font-black text-custom-orange">
             {searchedWord}
           </span>
         </>
@@ -102,13 +102,13 @@ export default function AddDailyFood({
               {searchedWord !== "" ? (
                 <div
                   className={
-                    `indent-4 w-full
-                          border-b-2 border-x-2 rounded-lg p-2 
-                          hover:bg-gray-100 cursor-pointer` +
+                    `w-full cursor-pointer
+                          rounded-lg border-x-2 border-b-2 p-2 
+                          indent-4 hover:bg-gray-100` +
                     (eatenFoodList.some(
                       (thisFood) => thisFood.name === food.name
                     )
-                      ? " bg-orange-100 hover:bg-orange-100 cursor-not-allowed"
+                      ? " cursor-not-allowed bg-orange-100 hover:bg-orange-100"
                       : " cursor-pointer")
                   }
                   onClick={() => {
@@ -127,7 +127,7 @@ export default function AddDailyFood({
                   }}
                 >
                   {formatSearchWord(food, searchedWord)}
-                  <span className="font-paragraph font-bold text-ms">
+                  <span className="text-ms font-paragraph font-bold">
                     {
                       food.name.split(new RegExp(searchedWord, "i"))[
                         food.name.split(new RegExp(searchedWord, "i")).length -
@@ -140,15 +140,15 @@ export default function AddDailyFood({
                 <p
                   className={
                     `
-                          font-paragraph font-bold text-ms indent-4
-                          p-2 w-full
-                          border-b-2 border-x-2 rounded-lg
+                          text-ms w-full rounded-lg border-x-2
+                          border-b-2 p-2
+                          indent-4 font-paragraph font-bold
                           hover:bg-gray-100
                         ` +
                     (eatenFoodList.some(
                       (thisFood) => thisFood.name === food.name
                     )
-                      ? "bg-orange-100 hover:bg-orange-100 cursor-not-allowed"
+                      ? "cursor-not-allowed bg-orange-100 hover:bg-orange-100"
                       : "cursor-pointer")
                   }
                   onClick={() => {
@@ -180,17 +180,17 @@ export default function AddDailyFood({
       <div
         key={food.name}
         className={
-          "flex flex-col xs:flex-row justify-end items-center w-full " +
+          "flex w-full flex-col items-center justify-end xs:flex-row " +
           (food.removingFade
-            ? "transition duration-300 scale-y-0 scale-x-100 opacity-0"
-            : "transition duration-500 opacity-100") +
+            ? "scale-y-0 scale-x-100 opacity-0 transition duration-300"
+            : "opacity-100 transition duration-500") +
           " " +
           styles.dropshadow
         }
       >
-        <div className="flex flex-col justify-center items-start w-full truncate xs:ml-8">
+        <div className="flex w-full flex-col items-start justify-center truncate xs:ml-8">
           <div className="flex items-center justify-center">
-            <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4">
+            <b className="my-4 w-full truncate text-center font-logo text-xl font-bold text-custom-orange hover:whitespace-normal xs:text-left sm:whitespace-normal">
               {food.name}
             </b>
             <a
@@ -201,33 +201,33 @@ export default function AddDailyFood({
                 food.name.split(",").join("").split(" ").join("-").toLowerCase()
               }
             >
-              <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
+              <FaExternalLinkAlt className="mx-4 h-3 w-3 transition duration-300 hover:fill-custom-orange" />
             </a>
           </div>
-          <div className="flex flex-col self-center items-start xs:w-full my-1">
+          <div className="my-1 flex flex-col items-start self-center xs:w-full">
             {/* <p className="font-paragraph text-xs">
           Category:{" "}
           <span className="font-paragraph font-bold text-xs">
             {food.category}
           </span>
         </p> */}
-            <div className="font-paragraph text-xs flex justify-center items-center">
+            <div className="flex items-center justify-center font-paragraph text-xs">
               How Much:{" "}
               {/* <span className="font-paragraph font-bold text-xs">
             {food.size} g
           </span> */}
               <div
-                className={`flex justify-start items-center
-            text-gray-900 text-sm indent-2
-            bg-gray-50 border border-gray-300 rounded-lg group outline outline-1 group-focus:outline-4
-            w-20 ml-2`}
+                className={`group ml-2 flex
+            w-20 items-center justify-start
+            rounded-lg border border-gray-300 bg-gray-50 indent-2 text-sm text-gray-900 outline
+            outline-1 group-focus:outline-4`}
               >
                 <input
                   type="number"
                   className={`
-                  text-gray-900 text-sm indent-2
-                  bg-gray-50 outline-none
-                  block w-12 ml-2`}
+                  ml-2 block w-12
+                  bg-gray-50 indent-2
+                  text-sm text-gray-900 outline-none`}
                   value={food.size || ""}
                   onChange={(e) =>
                     setEatenFoodList((prevList) => {
@@ -251,10 +251,10 @@ export default function AddDailyFood({
           </div>
         </div>
 
-        <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
+        <div className="flex flex-row-reverse items-center justify-center xs:flex-row">
           <button className="my-2 md:mx-2" onClick={() => deleteFood(index)}>
             <MdOutlineRemoveCircle
-              className=" hover:fill-black transition duration-500"
+              className=" transition duration-500 hover:fill-black"
               size={50}
               color={"#FF9351"}
             />
@@ -266,34 +266,34 @@ export default function AddDailyFood({
 
   return (
     <div className="grid grid-cols-8 justify-items-center">
-      <div className="flex flex-col justify-center items-center | sm:col-start-2 col-span-8 sm:col-span-6 | max-w-5xl mx-4">
-        <h1 className="font-title text-4xl xs:text-5xl sm:text-6xl text-center | w-full my-16">
+      <div className="| | col-span-8 mx-4 flex max-w-5xl flex-col items-center justify-center sm:col-span-6 sm:col-start-2">
+        <h1 className="| my-16 w-full text-center font-title text-4xl xs:text-5xl sm:text-6xl">
           Tell us what you ate Today
         </h1>
       </div>
 
       <div
         className="
-                        flex justify-center items-center
-                        sm:col-start-2 col-span-8 sm:col-span-6
-                        border-2 border-custom-orange rounded
-                        w-full"
+                        col-span-8 flex w-full
+                        items-center justify-center rounded
+                        border-2 border-custom-orange sm:col-span-6
+                        sm:col-start-2"
       >
         <div
           className="
-                        flex flex-col justify-center items-center 
-                        w-full max-w-xl"
+                        flex w-full max-w-xl flex-col 
+                        items-center justify-center"
         >
           {/* Search Box */}
-          <div className="flex flex-col justify-center items-center my-6 w-8/12">
+          <div className="my-6 flex w-8/12 flex-col items-center justify-center">
             <input
               type="text"
               onChange={(e) => setSearchedWord(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm indent-2 rounded-lg focus:ring-custom-orange focus:border-custom-orange block w-full p-2.5"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 indent-2 text-sm text-gray-900 focus:border-custom-orange focus:ring-custom-orange"
               placeholder="Search ingredients to add"
             />
-            <div className="overflow-y-auto h-64">
-              <div className="flex flex-col justify-center items-start w-full">
+            <div className="h-64 overflow-y-auto">
+              <div className="flex w-full flex-col items-start justify-center">
                 {searchedFood}
               </div>
             </div>
@@ -304,20 +304,20 @@ export default function AddDailyFood({
             <div
               id="addedFood"
               className={
-                "flex flex-col xs:flex-row justify-start items-center rounded-2 dropshadow my-4 w-11/12 transition duration-500 " +
+                "rounded-2 dropshadow my-4 flex w-11/12 flex-col items-center justify-start transition duration-500 xs:flex-row " +
                 (addedFood.removingFade
-                  ? "transition duration-300 scale-y-0 scale-x-100 opacity-0"
+                  ? "scale-y-0 scale-x-100 opacity-0 transition duration-300"
                   : " opacity-100") +
                 (addedFood.addingFade
-                  ? "transition duration-300 translate-y-6 opacity-0"
+                  ? "translate-y-6 opacity-0 transition duration-300"
                   : " opacity-100") +
                 " " +
                 styles.dropshadow
               }
             >
-              <div className="flex flex-col justify-center items-start w-full truncate xs:ml-8">
-                <div className="flex justify-center items-center">
-                  <b className="font-logo font-bold text-xl text-center xs:text-left truncate hover:whitespace-normal sm:whitespace-normal text-custom-orange w-full my-4">
+              <div className="flex w-full flex-col items-start justify-center truncate xs:ml-8">
+                <div className="flex items-center justify-center">
+                  <b className="my-4 w-full truncate text-center font-logo text-xl font-bold text-custom-orange hover:whitespace-normal xs:text-left sm:whitespace-normal">
                     {addedFood.name}
                   </b>
                   <a
@@ -337,27 +337,27 @@ export default function AddDailyFood({
                         .toLowerCase()
                     }
                   >
-                    <FaExternalLinkAlt className="mx-4 h-3 w-3 hover:fill-custom-orange transition duration-300" />
+                    <FaExternalLinkAlt className="mx-4 h-3 w-3 transition duration-300 hover:fill-custom-orange" />
                   </a>
                 </div>
-                <div className="flex flex-col self-center items-start xs:w-full my-1">
+                <div className="my-1 flex flex-col items-start self-center xs:w-full">
                   {/* <p className="font-paragraph text-xs">
                       Category:{" "}
                       <span className="font-paragraph font-bold text-xs">
                         {addedFood.category}
                       </span>
                     </p> */}
-                  <div className="flex justify-start items-center">
+                  <div className="flex items-center justify-start">
                     <p className="font-paragraph text-xs">
                       How much did you eat:{" "}
                     </p>
                     <div
                       className={
-                        `flex justify-start items-center
-                            text-gray-900 text-sm indent-2
-                            bg-gray-50 border rounded-lg group outline outline-1 group-focus:outline-4
-                             w-20 ml-2 ` +
-                        (wiggle && "outline-red-500 animate-wiggle")
+                        `group ml-2 flex
+                            w-20 items-center justify-start
+                            rounded-lg border bg-gray-50 indent-2 text-sm text-gray-900 outline
+                             outline-1 group-focus:outline-4 ` +
+                        (wiggle && "animate-wiggle outline-red-500")
                       }
                     >
                       <input
@@ -368,9 +368,9 @@ export default function AddDailyFood({
                         }}
                         autoFocus
                         type="number"
-                        className={`text-gray-900 text-sm indent-2
-                            bg-gray-50 outline-none
-                            block w-12 ml-2`}
+                        className={`ml-2 block w-12
+                            bg-gray-50 indent-2
+                            text-sm text-gray-900 outline-none`}
                         value={addedFood.size || ""}
                         onChange={(e) =>
                           setAddedFood({
@@ -386,17 +386,17 @@ export default function AddDailyFood({
                 </div>
               </div>
 
-              <div className="flex flex-row-reverse xs:flex-row justify-center items-center">
+              <div className="flex flex-row-reverse items-center justify-center xs:flex-row">
                 <button className="my-2 md:mx-2" onClick={addPendingFood}>
                   <MdOutlineAddCircle
-                    className=" hover:fill-black transition duration-500"
+                    className=" transition duration-500 hover:fill-black"
                     size={50}
                     color={"#FF9351"}
                   />
                 </button>
                 <button className="my-2 md:mx-2" onClick={cancelPendingFood}>
                   <MdOutlineCancel
-                    className=" hover:fill-black transition duration-500"
+                    className=" transition duration-500 hover:fill-black"
                     size={45}
                     color={"#FF9351"}
                   />
@@ -408,29 +408,29 @@ export default function AddDailyFood({
           <div
             className={
               `
-               border-b-2 border-custom-orange my-4 w-11/12 ` +
+               my-4 w-11/12 border-b-2 border-custom-orange ` +
               (eatenFoodList.length
-                ? "transition duration-300 scale-x-100"
-                : "transition duration-300 scale-x-0")
+                ? "scale-x-100 transition duration-300"
+                : "scale-x-0 transition duration-300")
             }
           ></div>
 
-          <div className="flex justify-center items-center rounded-2 dropshadow my-4 w-11/12">
-            <div className="grid grid-cols-2 xs:flex xs:flex-col justify-center items-center gap-2 w-full">
+          <div className="rounded-2 dropshadow my-4 flex w-11/12 items-center justify-center">
+            <div className="grid w-full grid-cols-2 items-center justify-center gap-2 xs:flex xs:flex-col">
               {eatenFood}
             </div>
           </div>
 
           {eatenFoodList.length !== 0 && (
-            <div className="flex justify-center items-center w-full">
+            <div className="flex w-full items-center justify-center">
               <a href="#algorithm">
                 <div
-                  className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs  rounded-2xl "
+                  className="relative max-w-xs overflow-hidden rounded-2xl bg-cover  bg-no-repeat "
                   style={{ backgroundColor: "#DCF8FF" }}
                   onClick={enableAlgorithm}
                 >
                   <button className="py-4 px-9 font-extrabold">Proceed</button>
-                  <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden opacity-0 transition duration-300 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-70"></div>
+                  <div className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 transition duration-300 ease-in-out hover:opacity-70"></div>
                 </div>
               </a>
             </div>

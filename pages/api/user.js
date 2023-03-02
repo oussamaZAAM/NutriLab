@@ -5,7 +5,7 @@ export default async function user(req, res) {
   const { cookies } = req;
   const token = cookies.NutriLab;
   if (token === undefined) {
-    res.status(200).json("Not Logged In");
+    res.status(200).json(null);
   } else {
     const userr = jwt.verify(token, process.env.JWT_SECRET);
     try {

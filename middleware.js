@@ -22,18 +22,22 @@ export async function verify(token, secret) {
 }
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request) {
+export async function middleware(request) {
   let cookie = request.cookies.get("NutriLab")?.value;
-  const userr = verify(cookie, process.env.JWT_SECRET);
+  const userr = await verify(cookie, process.env.JWT_SECRET);
   console.log(userr);
-  return new NextResponse(
-    JSON.stringify({ success: false, message: "authentication failed" }),
-    { status: 401, headers: { "content-type": "application/json" } }
-  );
-  // return NextResponse.redirect(new URL("/about-2", request.url));
+  // return new NextResponse(
+  //   JSON.stringify({ success: false, message: "authentication failed" }),
+  //   { status: 401, headers: { "content-type": "application/json" } }
+  // );
+  if (userr) {
+    return NextResponse.next();
+  } else {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/api/nutri",
+  matcher: "/nutrients",
 };

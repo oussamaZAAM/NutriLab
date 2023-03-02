@@ -21,10 +21,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example({ User }) {
+export default function Example() {
   const { user, setUser } = useContext(User_data);
 
   const { data: session } = useSession();
+  console.log(user);
+  console.log(session);
 
   const [open1, setOpen] = useState(false);
   const [login, setLogin] = useState(true);

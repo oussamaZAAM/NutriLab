@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import axios from "axios";
 
 export const User_data = createContext(null);
 

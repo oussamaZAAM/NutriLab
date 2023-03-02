@@ -73,7 +73,6 @@ const ProfilePage = () => {
             Username
           </label>
         </div>
-
         <div class="w-full md:w-2/3 mb-3 mt-1">
           <p className='text-xs text-red-500'>{formik.errors.username}</p>
         </div>

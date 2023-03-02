@@ -40,7 +40,7 @@ const ProfilePage = () => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
       <>
-        <div class="relative mt-2 w-full md:w-2/3">
+        <div className="relative mt-2 w-full md:w-2/3">
           <input
             type="text"
             id="username"
@@ -73,10 +73,10 @@ const ProfilePage = () => {
             Username
           </label>
         </div>
-        <div class="w-full md:w-2/3 mb-3 mt-1">
+        <div className="w-full md:w-2/3 mb-3 mt-1">
           <p className='text-xs text-red-500'>{formik.errors.username}</p>
         </div>
-        <div class="relative mt-2 w-full md:w-2/3">
+        <div className="relative mt-2 w-full md:w-2/3">
           <input
             type="email"
             id="email"
@@ -109,7 +109,7 @@ const ProfilePage = () => {
             E-mail
           </label>
         </div>
-        <div class="w-full md:w-2/3 mb-3 mt-1">
+        <div className="w-full md:w-2/3 mb-3 mt-1">
           <p className='text-xs text-red-500'>{formik.errors.email}</p>
         </div>
 

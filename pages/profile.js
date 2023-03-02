@@ -1,6 +1,7 @@
+import axios from "axios";
 import Head from "next/head";
 import Image from 'next/image';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { BiUserCircle } from "react-icons/bi";
 import { IoMdInformationCircleOutline } from "react-icons/io";
@@ -15,6 +16,15 @@ import { User_data } from "../context/context";
 const Profile = () => {
     const { user, setUser } = useContext(User_data);
     const [page, setPage] = useState(1);
+    const [profile, setProfile] = useState();
+
+    useEffect(()=>{
+        const fetchProfile = async () => {
+            const res = await axios.get('/api/profile');
+            console.log(res)
+        }
+        fetchProfile();
+    }, []);
   return (
     <>
       <Head>
@@ -33,6 +43,7 @@ const Profile = () => {
                 <Image 
                     width={100}
                     height={100}
+                    priority
                     className="rounded-full w-20 h-20 object-center object-cover"
                     src="/test.png"
                     alt="Picture of the author"

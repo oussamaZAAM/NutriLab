@@ -35,6 +35,7 @@ const Profile = () => {
                     height={100}
                     className="rounded-full w-20 h-20 object-center object-cover"
                     src="/test.png"
+                    alt="Picture of the author"
                 />
                 <div className="flex flex-col justify-center items-start">
                     <p className="text-xl text-white font-semibold font-logo">

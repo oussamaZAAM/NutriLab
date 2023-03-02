@@ -10,10 +10,7 @@ export default async function nutrients(req, res) {
     if (session) {
       data.userId = session.user.id;
     } else {
-      const { cookies } = req;
-      const token = cookies.NutriLab;
-      const userr = jwt.verify(token, process.env.JWT_SECRET);
-      data.userId = userr.id;
+      data.userId = req.headers.userid;
     }
 
     try {
@@ -25,20 +22,16 @@ export default async function nutrients(req, res) {
         create: data,
       });
 
-      console.log(user);
       res.status(200).json(user);
     } catch (e) {
       res.status(401).json({ message: "Wrong Info" });
     }
   }
   if (req.method === "GET") {
-    const { cookies } = req;
-    const token = cookies.NutriLab;
-    const userr = jwt.verify(token, process.env.JWT_SECRET);
     try {
       const user = await prisma.Nutrients.findUnique({
         where: {
-          userId: userr.id,
+          userId: req.headers.userid,
         },
       });
       res.status(200).json(user);

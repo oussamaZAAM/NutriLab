@@ -32,7 +32,7 @@ export default function Example() {
     
     async function handleUser() {
       await axios
-        .get("/api/user")
+        .post("/api/user", {})
         .then((user) => setUser(user.data))
         .catch((err) => setUser(undefined));
     }

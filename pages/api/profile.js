@@ -10,10 +10,7 @@ export default async function profile(req, res) {
     if (session) {
       data.userId = session.user.id;
     } else {
-      const { cookies } = req;
-      const token = cookies.NutriLab;
-      const userr = jwt.verify(token, process.env.JWT_SECRET);
-      data.userId = userr.id;
+      data.userId = req.headers.userid;
     }
     try {
       const user = await prisma.NutriInfo.upsert({
@@ -30,13 +27,10 @@ export default async function profile(req, res) {
     }
   }
   if (req.method === "GET") {
-    const { cookies } = req;
-    const token = cookies.NutriLab;
-    const userr = jwt.verify(token, process.env.JWT_SECRET);
     try {
       const user = await prisma.NutriInfo.findUnique({
         where: {
-          userId: userr.id,
+          userId: data.userid,
         },
       });
       res.status(200).json(user);

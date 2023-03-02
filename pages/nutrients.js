@@ -217,7 +217,7 @@ export default function Nutrients() {
     const item = JSON.parse(window.localStorage.getItem("nutris"));
     setLocalNutris(item);
     if (item) {
-      setIsInfosApplied(true)
+      setIsInfosApplied(true);
     }
   }, []);
 
@@ -236,7 +236,7 @@ export default function Nutrients() {
     user && (await axios.put("/api/nutri", nutris));
     //Calculate Vitamins
     setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
-    setIsInfosApplied(true)
+    setIsInfosApplied(true);
   };
 
   return (
@@ -264,7 +264,7 @@ export default function Nutrients() {
       </div>
 
       <div className="grid grid-cols-8">
-        {(localNutris && isInfosApplied) ? (
+        {localNutris && isInfosApplied ? (
           <DailyNutrients
             nutrients={nutrients || localNutris}
             vitamins={vitamins}
@@ -282,12 +282,3 @@ export default function Nutrients() {
     </div>
   );
 }
-
-Nutrients.getInitialProps = async (context) => {
-  const { NutriLab } = getCookie(context);
-  const user = isAuthenticated(NutriLab);
-  if (!user) {
-    return { user: false };
-  }
-  return { user: user };
-};

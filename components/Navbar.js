@@ -3,7 +3,7 @@ import { Disclosure, Menu, Transition, Dialog } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { User_data } from "../context/context";
-
+import { useRouter } from "next/router";
 // import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import Login from "./Login";
 import Register from "./Register";
@@ -23,7 +23,7 @@ function classNames(...classes) {
 
 export default function Example() {
   const { user, setUser } = useContext(User_data);
-
+  const router = useRouter();
   const { data: session } = useSession();
   const [open1, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
@@ -50,6 +50,7 @@ export default function Example() {
           alert(error);
         }));
     setLogin(true);
+    router.reload();
   };
   return (
     <div className="grid grid-cols-8 border-b-4 border-custom-orange">

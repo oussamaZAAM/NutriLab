@@ -28,12 +28,12 @@ export default async function profile(req, res) {
   }
   if (req.method === "GET") {
     try {
-      const user = await prisma.NutriInfo.findUnique({
+      const nutriInfo = await prisma.NutriInfo.findUnique({
         where: {
-          userId: data.userid,
+          userId: req.headers.userid,
         },
       });
-      res.status(200).json(user);
+      res.status(200).json(nutriInfo);
     } catch (e) {
       res.status(401).json({ message: "No Nutri Info" });
     }

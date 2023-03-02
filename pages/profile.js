@@ -25,6 +25,7 @@ const Profile = () => {
     };
     fetchProfile();
   }, []);
+
   return (
     <>
       <Head>
@@ -51,7 +52,7 @@ const Profile = () => {
               />
               <div className="flex flex-col items-start justify-center">
                 <p className="font-logo text-xl font-semibold text-white">
-                  ZAAM
+                  {profile.name}
                 </p>
                 <p className="font-logo text-sm text-white">
                   Your personal account

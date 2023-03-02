@@ -4,14 +4,14 @@ import { useState } from "react";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 
 
-const ProfileDiet = () => {
+const ProfileDiet = ({dietData}) => {
     const [dietInfos, setDietInfos] = useState({
-      age: null,
-      sex: 'male',
-      height: null,
-      weight: null,
-      activity: 'none',
-      plan: 'none'
+      age: dietData.age,
+      sex: dietData.sex,
+      height: dietData.height,
+      weight: dietData.weight,
+      activity: dietData.activity,
+      plan: dietData.plan
     });
 
     // Check on inputted numbers to not include 'e', '-', '+' and '.'

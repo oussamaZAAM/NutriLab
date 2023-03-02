@@ -60,13 +60,13 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            <div class="sticky top-0 left-0 flex w-full items-center justify-center space-x-6 bg-[#191919] py-4">
+            <div className="sticky top-0 left-0 flex w-full items-center justify-center space-x-6 bg-[#191919] py-4">
               <div className="h-20 w-20 animate-pulse rounded-full bg-gray-200"></div>
-              <div class="flex animate-pulse flex-col items-start justify-center">
-                <div class="dark:bg-gray-700 mb-4 h-5 w-40 rounded-full bg-gray-200"></div>
-                <div class="dark:bg-gray-700 mb-2.5 h-3 w-40 max-w-[480px] rounded-full bg-gray-200"></div>
+              <div className="flex animate-pulse flex-col items-start justify-center">
+                <div className="dark:bg-gray-700 mb-4 h-5 w-40 rounded-full bg-gray-200"></div>
+                <div className="dark:bg-gray-700 mb-2.5 h-3 w-40 max-w-[480px] rounded-full bg-gray-200"></div>
               </div>
-              <span class="sr-only">Loading...</span>
+              <span className="sr-only">Loading...</span>
             </div>
           )}
           <div className="sticky top-28 left-0 flex w-full flex-col items-center justify-start space-y-2 py-8">
@@ -184,10 +184,10 @@ const Profile = () => {
                 {page === 3 && <ProfilePassword />}
               </>
             ) : (
-              <div class="flex animate-pulse flex-col items-start justify-center">
-                <div class="dark:bg-gray-700 my-2 h-12 w-[280px] rounded-lg bg-gray-200"></div>
-                <div class="dark:bg-gray-700 my-2 h-12 w-[280px] rounded-lg bg-gray-200"></div>
-                <div class="dark:bg-gray-700 my-6 h-12 w-[69px] rounded-lg bg-gray-200"></div>
+              <div className="flex animate-pulse flex-col items-start justify-center">
+                <div className="dark:bg-gray-700 my-2 h-12 w-[280px] rounded-lg bg-gray-200"></div>
+                <div className="dark:bg-gray-700 my-2 h-12 w-[280px] rounded-lg bg-gray-200"></div>
+                <div className="dark:bg-gray-700 my-6 h-12 w-[69px] rounded-lg bg-gray-200"></div>
               </div>
             )}
           </div>

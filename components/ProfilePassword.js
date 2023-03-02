@@ -30,9 +30,9 @@ const ProfilePassword = () => {
         
       <>
         {/* Old Password */}
-        <div class="relative my-2 w-full">
+        <div className="relative my-2 w-full">
           <input
-            type="text"
+            type="password"
             id="oldPassword"
             className={`
                         peer block w-full 
@@ -66,9 +66,9 @@ const ProfilePassword = () => {
         </div>
 
         {/* New Password */}
-        <div class="relative my-2 w-full">
+        <div className="relative my-2 w-full">
           <input
-            type="text"
+            type="password"
             id="newPassword"
             className={`
                         peer block w-full 
@@ -102,9 +102,9 @@ const ProfilePassword = () => {
         </div>
 
         {/* Confirm Password */}
-        <div class="relative my-2 w-full">
+        <div className="relative my-2 w-full">
           <input
-            type="text"
+            type="password"
             id="confirmPassword"
             className={`
                         peer block w-full 

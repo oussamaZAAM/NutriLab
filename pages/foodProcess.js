@@ -29,15 +29,15 @@ const Food = ({ food }) => {
     return (
       <tr
         key={food.name}
-        class="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
+        className="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
       >
         <th
           scope="row"
-          class="dark:text-white truncate whitespace-nowrap px-6 py-4 font-bold text-gray-900 hover:whitespace-normal sm:whitespace-normal"
+          className="dark:text-white truncate whitespace-nowrap px-6 py-4 font-bold text-gray-900 hover:whitespace-normal sm:whitespace-normal"
         >
           {food.name}
         </th>
-        <td class="truncate whitespace-normal px-3 py-4 text-lg font-black underline">
+        <td className="truncate whitespace-normal px-3 py-4 text-lg font-black underline">
           {food.size}g
         </td>
       </tr>
@@ -50,11 +50,11 @@ const Food = ({ food }) => {
       return (
         <tr
           key={food.name}
-          class="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
+          className="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
         >
           <th
             scope="row"
-            class="dark:text-white truncate whitespace-normal px-6 py-4 font-bold text-gray-900 sm:whitespace-normal"
+            className="dark:text-white truncate whitespace-normal px-6 py-4 font-bold text-gray-900 sm:whitespace-normal"
           >
             {food.slice(1).split("_").join(" ")}
           </th>
@@ -71,15 +71,15 @@ const Food = ({ food }) => {
       return (
         <tr
           key={food.name}
-          class="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
+          className="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
         >
           <th
             scope="row"
-            class="dark:text-white truncate whitespace-nowrap px-6  py-4 font-bold text-green-500 hover:whitespace-normal sm:whitespace-normal"
+            className="dark:text-white truncate whitespace-nowrap px-6  py-4 font-bold text-green-500 hover:whitespace-normal sm:whitespace-normal"
           >
             {food.slice(1).split("_").join(" ")}
           </th>
-          <td class="truncate whitespace-normal px-3 py-4 text-lg font-black text-green-500 underline">
+          <td className="truncate whitespace-normal px-3 py-4 text-lg font-black text-green-500 underline">
             +{(Math.round(100 * algoData[food] * 100) / 100).toFixed(2)}g
           </td>
         </tr>
@@ -155,7 +155,7 @@ const Food = ({ food }) => {
 
             <div className="w-full border-b-2 border-custom-orange"></div>
 
-            <table class="dark:text-white w-full text-left font-logo text-sm text-black">
+            <table className="dark:text-white w-full text-left font-logo text-sm text-black">
               <tbody>{laboTable1}</tbody>
             </table>
           </div>
@@ -174,7 +174,7 @@ const Food = ({ food }) => {
             <div className="w-full border-b-2 border-custom-orange"></div>
 
             {isAlgorithmEnabled && (
-              <table class="dark:text-white w-full text-left font-logo text-sm text-black">
+              <table className="dark:text-white w-full text-left font-logo text-sm text-black">
                 <tbody>{laboTable2}</tbody>
               </table>
             )}
@@ -188,7 +188,7 @@ const Food = ({ food }) => {
 
             <div className="w-full border-b-2 border-custom-orange"></div>
             {isAlgorithmEnabled && (
-              <table class="dark:text-white w-full text-left font-logo text-sm text-black">
+              <table className="dark:text-white w-full text-left font-logo text-sm text-black">
                 <tbody>{laboTable1}</tbody>
                 <tbody>{laboTable3}</tbody>
               </table>

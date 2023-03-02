@@ -194,7 +194,7 @@ export default function Example() {
                               width={50}
                               height={50}
                               className="h-8 w-8 rounded-full"
-                              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
+                              src="/user.png"
                               alt=""
                             />
                           )}

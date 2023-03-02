@@ -1,6 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
-import Image from 'next/image';
+import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 
 import { BiUserCircle } from "react-icons/bi";
@@ -38,24 +38,25 @@ const Profile = () => {
 
       {/* Profile Page  */}
       <div className="grid grid-cols-12">
-        <div className="col-span-3 flex flex-col justify-start items-center min-h-screen bg-[#4B4B4B] border-r-4 border-custom-orange">
-            <div className="sticky top-0 left-0 flex justify-center items-center bg-[#191919] py-4 w-full space-x-6">
-                <Image 
-                    width={100}
-                    height={100}
-                    priority
-                    className="rounded-full w-20 h-20 object-center object-cover"
-                    src="/test.png"
-                    alt="Picture of the author"
-                />
-                <div className="flex flex-col justify-center items-start">
-                    <p className="text-xl text-white font-semibold font-logo">
-                        ZAAM Oussama
-                    </p>
-                    <p className="text-sm text-white font-logo">
-                        Your personal account
-                    </p>
-                </div>
+        <div className="col-span-3 flex min-h-screen flex-col items-center justify-start border-r-4 border-custom-orange bg-[#4B4B4B]">
+          {profile ? (
+            <div className="sticky top-0 left-0 flex w-full items-center justify-center space-x-6 bg-[#191919] py-4">
+              <Image
+                width={100}
+                height={100}
+                priority
+                className="h-20 w-20 rounded-full object-cover object-center"
+                src={(profile && profile.image) || "/user.png"}
+                alt="Profile"
+              />
+              <div className="flex flex-col items-start justify-center">
+                <p className="font-logo text-xl font-semibold text-white">
+                  ZAAM
+                </p>
+                <p className="font-logo text-sm text-white">
+                  Your personal account
+                </p>
+              </div>
             </div>
             <div className="sticky top-28 left-0 flex flex-col justify-start items-center w-full space-y-2 py-8">
                 <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(1)}>
@@ -102,19 +103,15 @@ const Profile = () => {
             </div>
         </div>
 
-        <div className="col-start-4 col-span-9 flex flex-col justify-start items-center bg-[#4B4B4B] w-full h-full">
-            <div className="flex flex-col items-center justify-start md:w-1/2">
-                <div className="flex items-center justify-center my-16">
-                <Image
-                    width={500}
-                    height={500}
-                    className="h-64 w-64 rounded-full object-cover object-center"
-                    src="/test.png"
-                    alt="Profile"
-                />
-                </div>
-                {page === 1 && <ProfilePage />}
-                {page === 2 && <ProfileDiet />}
+            <div className="my-16 flex items-center justify-center">
+              <Image
+                width={500}
+                height={500}
+                className="h-64 w-64 rounded-full object-cover object-center"
+                src={(profile && profile.image) || "/user.png"}
+                alt="Profile"
+              />
+            </div>
                 {page === 3 && <ProfilePassword />}
             </div>
         </div>

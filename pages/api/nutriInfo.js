@@ -7,13 +7,14 @@ export default async function profile(req, res) {
   const session = await getServerSession(req, res, authOptions);
   if (req.method === "PUT") {
     const data = req.body;
+    console.log(data)
     if (session) {
       data.userId = session.user.id;
     } else {
       data.userId = req.headers.userid;
     }
     try {
-      const user = await prisma.NutriInfo.upsert({
+      const nutriInfos = await prisma.NutriInfo.upsert({
         where: {
           userId: data.userId,
         },
@@ -21,8 +22,20 @@ export default async function profile(req, res) {
         create: data,
       });
 
-      res.status(200).json(user);
+      const userData = {...data}
+      delete userData.userId;
+
+      await prisma.User.upsert({
+        where: {
+          id: nutriInfos.userId,
+        },
+        update: userData,
+        create: userData,
+      });
+
+      res.status(200).json(nutriInfos);
     } catch (e) {
+      console.log(e)
       res.status(401).json({ message: "Wrong Info" });
     }
   }

@@ -85,10 +85,10 @@ const Profile = () => {
       <Navbar User={user} />
 
       {/* Profile Page  */}
-      <div className="grid grid-cols-12">
-        <div className="col-span-3 flex min-h-screen flex-col items-center justify-start border-r-4 border-custom-orange bg-[#4B4B4B]">
+      <div className="flex flex-col-reverse md:grid md:grid-cols-12">
+        <div className="col-span-3 flex md:min-h-screen flex-col items-center justify-start border-t-4 md:border-r-4 border-custom-orange bg-profile2">
           {profile ? (
-            <div className="sticky top-0 left-0 flex w-full items-center justify-center space-x-6 bg-[#191919] py-4">
+            <div className="sticky top-0 left-0 hidden md:flex flex-col lg:flex-row w-full items-center justify-center space-x-6 bg-profile1 py-4">
               <Image
                 width={100}
                 height={100}
@@ -107,7 +107,7 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            <div className="sticky top-0 left-0 flex w-full items-center justify-center space-x-6 bg-[#191919] py-4">
+            <div className="sticky top-0 left-0 hidden md:flex flex-col md:flex-row w-full items-center justify-center space-x-6 bg-profile1 py-4">
               <div className="h-20 w-20 animate-pulse rounded-full bg-gray-200"></div>
               <div className="flex animate-pulse flex-col items-start justify-center">
                 <div className="dark:bg-gray-700 mb-4 h-5 w-40 rounded-full bg-gray-200"></div>
@@ -116,86 +116,97 @@ const Profile = () => {
               <span className="sr-only">Loading...</span>
             </div>
           )}
-          <div className="sticky top-28 left-0 flex w-full flex-col items-center justify-start space-y-2 py-8">
+          <div className="fixed bottom-0 z-50 md:sticky md:top-40 lg:top-28 left-0 flex md:flex-col items-center justify-start w-full p-2 md:py-8 bg-profile1 md:bg-transparent">
             <div
-              className="group flex h-9 w-10/12 space-x-2"
+              className="group flex flex-col-reverse md:flex-row h-full md:h-9 w-10/12 md:space-x-2"
               onClick={() => setPage(1)}
             >
               <div
                 className={
-                  "h-5/6 w-2 origin-bottom self-center border-r-4 border-custom-orange transition ease-[cubic-bezier(1,-0.4,1,.65)] " +
+                  "h-2 md:h-5/6 w-5/6 md:w-2 origin-right md:origin-bottom self-center border-b-4 md:border-r-4 md:border-b-0 border-custom-orange transition duration-200 ease-[cubic-bezier(1,-0.4,1,.65)] " +
                   (page === 1
-                    ? "-translate-y-0 opacity-100"
-                    : "translate-y-10 opacity-0")
+                    ? "-translate-x-0 md:translate-x-0 md:-translate-y-0 opacity-100"
+                    : "translate-x-40 md:translate-x-0 md:translate-y-10 opacity-0")
                 }
               ></div>
               <div
                 className="
-                                    flex h-full w-full
-                                    cursor-pointer items-center
-                                    justify-start rounded-lg
-                                    hover:bg-[#635953]
-                                    "
+                            flex flex-col md:flex-row h-full w-full
+                            cursor-pointer items-center
+                            justify-start rounded-lg
+                            hover:bg-profilehover
+                          "
               >
                 <BiUserCircle className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="font-logo text-sm text-[#C8C8C8]">Profile page</p>
+                <p className="font-logo text-sm text-[#C8C8C8] hidden xs:block">
+                  Profile page
+                </p>
+                <p className="font-logo text-sm text-[#C8C8C8] block xs:hidden">
+                  Profile 
+                </p>
               </div>
             </div>
             <div
-              className="group flex h-9 w-10/12 space-x-2"
+              className="group flex flex-col-reverse md:flex-row h-full md:h-9 w-10/12 md:space-x-2"
               onClick={() => setPage(2)}
             >
               <div
                 className={
-                  "h-5/6 w-2 origin-center self-center border-r-4 border-custom-orange transition ease-[cubic-bezier(1,-0.4,1,.65)] " +
-                  (page === 2 ? "scale-y-100" : "scale-y-0")
+                  "h-2 md:h-5/6 w-5/6 md:w-2 origin-center self-center border-b-4 md:border-r-4 md:border-b-0 border-custom-orange transition duration-200 ease-[cubic-bezier(1,-0.4,1,.65)] " +
+                  (page === 2 ? "scale-x-100 md:scale-y-100" : "scale-x-0 md:scale-x-100 md:scale-y-0")
                 }
               ></div>
               <a
                 href="#dietInformations"
                 className="
-                                    flex h-full w-full
+                                    flex flex-col md:flex-row h-full w-full
                                     cursor-pointer items-center
                                     justify-start rounded-lg
-                                    hover:bg-[#635953]
+                                    hover:bg-profilehover
                                     "
               >
                 <IoMdInformationCircleOutline className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="font-logo text-sm text-[#C8C8C8]">
+                <p className="font-logo text-sm text-[#C8C8C8] hidden xs:block">
                   Diet informations
+                </p>
+                <p className="font-logo text-sm text-[#C8C8C8] block xs:hidden">
+                  Diet
                 </p>
               </a>
             </div>
             <div
-              className="group flex h-9 w-10/12 space-x-2"
+              className="group flex flex-col-reverse md:flex-row h-full md:h-9 w-10/12 md:space-x-2"
               onClick={() => setPage(3)}
             >
               <div
                 className={
-                  "h-5/6 w-2 origin-top self-center border-r-4 border-custom-orange transition duration-100 ease-[cubic-bezier(1,0,1,0)] " +
+                  "h-2 md:h-5/6 w-5/6 md:w-2 origin-left md:origin-top self-center border-b-4 md:border-r-4 md:border-b-0 border-custom-orange transition duration-200 ease-[cubic-bezier(1,-0.4,1,.65)] " +
                   (page === 3
-                    ? "-translate-y-0 opacity-100"
-                    : "-translate-y-10 opacity-0")
+                    ? "-translate-x-0 md:translate-x-0 md:-translate-y-0 opacity-100"
+                    : "-translate-x-40 md:translate-x-0 md:-translate-y-10 opacity-0")
                 }
               ></div>
               <div
                 className="
-                                    flex h-full w-full
+                                    flex flex-col md:flex-row h-full w-full
                                     cursor-pointer items-center
                                     justify-start rounded-lg
-                                    hover:bg-[#635953]
+                                    hover:bg-profilehover
                                     "
               >
                 <MdPassword className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="font-logo text-sm text-[#C8C8C8]">
+                <p className="font-logo text-sm text-[#C8C8C8] hidden xs:block">
                   Change password
+                </p>
+                <p className="font-logo text-sm text-[#C8C8C8] block xs:hidden">
+                  Password
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="col-span-9 col-start-4 flex h-full w-full flex-col items-center justify-start bg-[#4B4B4B]">
+        <div className="mb-16 col-span-9 col-start-4 flex h-full w-full flex-col items-center justify-start bg-profile2">
           <div className="flex flex-col items-center justify-start md:w-1/2">
             <div className="my-16 flex items-center justify-center">
               <Image

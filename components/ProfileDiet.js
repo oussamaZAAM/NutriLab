@@ -4,7 +4,7 @@ import { useState } from "react";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 
 
-const ProfileDiet = ({dietData}) => {
+const ProfileDiet = ({dietData, submitDiet, requestState}) => {
     const [dietInfos, setDietInfos] = useState({
       age: dietData.age,
       sex: dietData.sex,
@@ -32,6 +32,11 @@ const ProfileDiet = ({dietData}) => {
 
     const handleChange = (event) => {
       setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
+    }
+
+    const handleSubmit = () => {
+      // TODO: check dietInfos conditions
+      submitDiet(dietInfos);
     }
 
   return (
@@ -252,10 +257,19 @@ const ProfileDiet = ({dietData}) => {
           </label>
         </div>
 
+        {requestState[0] === 0
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+            <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
+        </div>}
+        {requestState[0] === 1
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-green-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+            <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
+        </div>}
+
         {/* Submit Button  */}
         <div className="w-full md:w-2/3 my-4">
         <button
-            // onClick={formik.handleSubmit}
+            onClick={handleSubmit}
             type="button"
             className={`
                         mr-2 mb-2 rounded-lg border-2 border-[#4B4B4B] 

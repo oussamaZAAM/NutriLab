@@ -51,6 +51,7 @@ model User {
   activity      String?
   Nutrients     Nutrients?
   NutriInfo     NutriInfo?
+  Foods         Food[]
 }
 
 model VerificationToken {
@@ -100,4 +101,12 @@ model Nutrients {
   fiber     Int?
   user      User   @relation(fields: [userId], references: [id])
   userId    String @unique
+}
+
+model Food {
+  id     Int     @id @default(autoincrement())
+  name   String
+  weight Int
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 }

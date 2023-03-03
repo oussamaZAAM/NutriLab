@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "production:build": "npx prisma generate && npx prism migrate deploy && next build"
+    "production": "npx prisma generate && npx prism migrate deploy && next build"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",

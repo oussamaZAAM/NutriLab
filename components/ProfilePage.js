@@ -2,14 +2,14 @@ import { useFormik } from "formik";
 import Head from "next/head";
 import Image from "next/image";
 
-const ProfilePage = ({profileData}) => {
+const ProfilePage = ({profileData, submitProfile, emailError}) => {
   const validate = values => {
     const errors = {};
 
-    if (!values.username) {
-      errors.username = 'Required';
-    } else if (values.username.length < 3) {
-      errors.username = 'Must be 3 characters or more';
+    if (!values.name) {
+      errors.name = 'Required';
+    } else if (values.name.length < 3) {
+      errors.name = 'Must be 3 characters or more';
     }
 
     if (!values.email) {
@@ -23,12 +23,12 @@ const ProfilePage = ({profileData}) => {
 
   const formik = useFormik({
     initialValues: {
-      username: profileData.username,
+      name: profileData.name,
       email: profileData.email,
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      submitProfile(values);
     },
   });
 
@@ -43,7 +43,7 @@ const ProfilePage = ({profileData}) => {
         <div className="relative mt-2 w-full md:w-2/3">
           <input
             type="text"
-            id="username"
+            id="name"
             className={`
                         peer block w-full 
                         appearance-none rounded-lg border-2 border-gray-300 bg-transparent 
@@ -51,14 +51,14 @@ const ProfilePage = ({profileData}) => {
                         text-sm text-white 
                         focus:border-custom-orange focus:outline-none focus:ring-0 
                         dark:border-gray-600 dark:text-white dark:focus:border-custom-orange `+
-                        (formik.errors.username && 'border-red-500 focus:border-red-500')}
+                        (formik.errors.name && 'border-red-500 focus:border-red-500')}
             placeholder=" "
-            name="username"
+            name="name"
             onChange={formik.handleChange}
-            value={formik.values.username}
+            value={formik.values.name}
           />
           <label
-            htmlFor="username"
+            htmlFor="name"
             className={`
                         absolute top-2 left-1 z-10 
                         origin-[0] -translate-y-4 scale-75 transform bg-[#4B4B4B]
@@ -68,13 +68,13 @@ const ProfilePage = ({profileData}) => {
                         peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-custom-orange 
                         dark:bg-gray-900 dark:text-gray-400 
                         peer-focus:dark:text-blue-500 `+ 
-                      (formik.errors.username && 'text-red-500 peer-focus:text-red-500')}
+                      (formik.errors.name && 'text-red-500 peer-focus:text-red-500')}
           >
-            Username
+            name
           </label>
         </div>
         <div className="w-full md:w-2/3 mb-3 mt-1">
-          <p className='text-xs text-red-500'>{formik.errors.username}</p>
+          <p className='text-xs text-red-500'>{formik.errors.name}</p>
         </div>
         <div className="relative mt-2 w-full md:w-2/3">
           <input
@@ -113,6 +113,15 @@ const ProfilePage = ({profileData}) => {
           <p className='text-xs text-red-500'>{formik.errors.email}</p>
         </div>
 
+        {emailError && emailError.length < 1
+        && <div id="toast-danger" class="w-full md:w-2/3 flex items-center max-w-xs p-4 mb-4 text-gray-500 bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+            <div class="ml-3 text-sm font-normal text-black">{emailError}</div>
+            <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>}
+
         {/* Submit Button  */}
         <div className="my-4 w-full md:w-2/3">
           <button
@@ -125,8 +134,8 @@ const ProfilePage = ({profileData}) => {
                         hover:border-gray-800 hover:text-gray-800 
                         focus:bg-gradient1 focus:border-black focus:text-black
                         dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 `+
-                        ((formik.errors.email || formik.errors.username) && 'cursor-not-allowed')}
-            disabled={formik.errors.email || formik.errors.username}
+                        ((formik.errors.email || formik.errors.name) && 'cursor-not-allowed')}
+            disabled={formik.errors.email || formik.errors.name}
           >
             Edit
           </button>

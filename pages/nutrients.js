@@ -219,10 +219,10 @@ export default function Nutrients() {
     }
   }, []);
 
-  const applyInfos = async (dietInfos) => {
+  const applyInfos = async (dietInfos) => { 
     const { age, sex, height, weight, activity, plan } = dietInfos;
     user &&
-      (await axios.put("/api/profile", dietInfos, {
+      (await axios.put("/api/nutriInfo", dietInfos, {
         headers: {
           "Content-Type": "application/json",
         },

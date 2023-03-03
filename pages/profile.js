@@ -1,6 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
-import Image from 'next/image';
+import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 
 import { BiUserCircle } from "react-icons/bi";
@@ -14,17 +14,65 @@ import ProfilePassword from "../components/ProfilePassword";
 import { User_data } from "../context/context";
 
 const Profile = () => {
-    const { user, setUser } = useContext(User_data);
-    const [page, setPage] = useState(1);
-    const [profile, setProfile] = useState();
+  const { user, setUser } = useContext(User_data);
+  const [page, setPage] = useState(1);
+  const [profile, setProfile] = useState();
+  const [render, setRender] = useState(false);
+  const [requestState, setRequestState] = useState({
+    profile: [2, ''],
+    diet: [2, ''],
+    password: [2, ''],
+  });
 
-    useEffect(()=>{
-        const fetchProfile = async () => {
-            const res = await axios.get('/api/profile');
-            console.log(res)
-        }
-        fetchProfile();
-    }, []);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const res = await axios.get("/api/profile");
+      setProfile(res.data);
+    };
+    fetchProfile();
+    setRender(false);
+  }, [render]);
+
+  const submitProfile = async (profileData) => {
+    await axios.put('api/profile', {type: 'profile', data: profileData})
+      .then((response)=>{
+        setRender(true);
+        setRequestState({...requestState, profile: [1, response.data.message]});
+      })
+      .catch(err => {
+        setRequestState({...requestState, profile: [0, err.response.data.message]});
+      });
+  }
+
+  const submitDiet = async (dietData) => {
+    await axios.put('api/profile', {type: 'diet', data: dietData})
+      .then((response)=>{
+        setRender(true);
+        setRequestState({...requestState, diet: [1, response.data.message]});
+      })
+      .catch(err => {
+        setRequestState({...requestState, diet: [0, err.response.data.message]});
+      });
+  }
+
+  const submitPassword = async (passwordData) => {
+    await axios.put('api/profile', {type: 'password', data: passwordData})
+      .then((response)=>{
+        setRender(true);
+        setRequestState({...requestState, password: [1, response.data.message]});
+      })
+      .catch(err => {
+        setRequestState({...requestState, password: [0, err.response.data.message]});
+      });
+  }
+
+  setTimeout(()=>{
+    setRequestState({
+      profile: [2, ''],
+      diet: [2, ''],
+      password: [2, '']
+    });
+  }, 3000);
   return (
     <>
       <Head>
@@ -38,85 +86,167 @@ const Profile = () => {
 
       {/* Profile Page  */}
       <div className="grid grid-cols-12">
-        <div className="col-span-3 flex flex-col justify-start items-center min-h-screen bg-[#4B4B4B] border-r-4 border-custom-orange">
-            <div className="sticky top-0 left-0 flex justify-center items-center bg-[#191919] py-4 w-full space-x-6">
-                <Image 
-                    width={100}
-                    height={100}
-                    priority
-                    className="rounded-full w-20 h-20 object-center object-cover"
-                    src="/test.png"
-                    alt="Picture of the author"
-                />
-                <div className="flex flex-col justify-center items-start">
-                    <p className="text-xl text-white font-semibold font-logo">
-                        ZAAM Oussama
-                    </p>
-                    <p className="text-sm text-white font-logo">
-                        Your personal account
-                    </p>
-                </div>
+        <div className="col-span-3 flex min-h-screen flex-col items-center justify-start border-r-4 border-custom-orange bg-[#4B4B4B]">
+          {profile ? (
+            <div className="sticky top-0 left-0 flex w-full items-center justify-center space-x-6 bg-[#191919] py-4">
+              <Image
+                width={100}
+                height={100}
+                priority
+                className="h-20 w-20 rounded-full object-cover object-center"
+                src={(profile && profile.image) || "/user.png"}
+                alt="Profile"
+              />
+              <div className="flex flex-col items-start justify-center">
+                <p className="font-logo text-xl font-semibold text-white">
+                  {profile.name}
+                </p>
+                <p className="font-logo text-sm text-white">
+                  Your personal account
+                </p>
+              </div>
             </div>
-            <div className="sticky top-28 left-0 flex flex-col justify-start items-center w-full space-y-2 py-8">
-                <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(1)}>
-                    <div className={"self-center border-r-4 border-custom-orange h-5/6 w-2 transition origin-bottom ease-[cubic-bezier(1,-0.4,1,.65)] "+(page===1 ? '-translate-y-0 opacity-100' : 'translate-y-10 opacity-0')}></div>
-                    <div className="
-                                    flex justify-start items-center
-                                    h-full w-full
-                                    cursor-pointer hover:bg-[#635953]
-                                    rounded-lg
-                                    "
-                    >
-                        <BiUserCircle className="h-6 w-6 fill-[#C8C8C8] mx-4" />
-                        <p className="text-sm font-logo text-[#C8C8C8]">Profile page</p>
-                    </div>
-                </div>
-                <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(2)}>
-                    <div className={"self-center border-r-4 border-custom-orange h-5/6 w-2 transition origin-center ease-[cubic-bezier(1,-0.4,1,.65)] "+(page===2 ? 'scale-y-100' : 'scale-y-0')}></div>
-                    <a 
-                        href="#dietInformations" 
-                        className="
-                                    flex justify-start items-center
-                                    h-full w-full
-                                    cursor-pointer hover:bg-[#635953]
-                                    rounded-lg
-                                    "
-                    >
-                        <IoMdInformationCircleOutline className="h-6 w-6 fill-[#C8C8C8] mx-4" />
-                        <p className="text-sm font-logo text-[#C8C8C8]">Diet informations</p>
-                    </a>
-                </div>
-                <div className="flex h-9 w-10/12 space-x-2 group" onClick={()=>setPage(3)}>
-                    <div className={"self-center border-r-4 border-custom-orange h-5/6 w-2 transition duration-100 origin-top ease-[cubic-bezier(1,0,1,0)] "+(page===3 ? '-translate-y-0 opacity-100' : '-translate-y-10 opacity-0')}></div>
-                    <div className="
-                                    flex justify-start items-center
-                                    h-full w-full
-                                    cursor-pointer hover:bg-[#635953]
-                                    rounded-lg
-                                    "
-                    >
-                        <MdPassword className="h-6 w-6 fill-[#C8C8C8] mx-4" />
-                        <p className="text-sm font-logo text-[#C8C8C8]">Change password</p>
-                    </div>
-                </div>
+          ) : (
+            <div className="sticky top-0 left-0 flex w-full items-center justify-center space-x-6 bg-[#191919] py-4">
+              <div className="h-20 w-20 animate-pulse rounded-full bg-gray-200"></div>
+              <div className="flex animate-pulse flex-col items-start justify-center">
+                <div className="dark:bg-gray-700 mb-4 h-5 w-40 rounded-full bg-gray-200"></div>
+                <div className="dark:bg-gray-700 mb-2.5 h-3 w-40 max-w-[480px] rounded-full bg-gray-200"></div>
+              </div>
+              <span className="sr-only">Loading...</span>
             </div>
+          )}
+          <div className="sticky top-28 left-0 flex w-full flex-col items-center justify-start space-y-2 py-8">
+            <div
+              className="group flex h-9 w-10/12 space-x-2"
+              onClick={() => setPage(1)}
+            >
+              <div
+                className={
+                  "h-5/6 w-2 origin-bottom self-center border-r-4 border-custom-orange transition ease-[cubic-bezier(1,-0.4,1,.65)] " +
+                  (page === 1
+                    ? "-translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0")
+                }
+              ></div>
+              <div
+                className="
+                                    flex h-full w-full
+                                    cursor-pointer items-center
+                                    justify-start rounded-lg
+                                    hover:bg-[#635953]
+                                    "
+              >
+                <BiUserCircle className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="font-logo text-sm text-[#C8C8C8]">Profile page</p>
+              </div>
+            </div>
+            <div
+              className="group flex h-9 w-10/12 space-x-2"
+              onClick={() => setPage(2)}
+            >
+              <div
+                className={
+                  "h-5/6 w-2 origin-center self-center border-r-4 border-custom-orange transition ease-[cubic-bezier(1,-0.4,1,.65)] " +
+                  (page === 2 ? "scale-y-100" : "scale-y-0")
+                }
+              ></div>
+              <a
+                href="#dietInformations"
+                className="
+                                    flex h-full w-full
+                                    cursor-pointer items-center
+                                    justify-start rounded-lg
+                                    hover:bg-[#635953]
+                                    "
+              >
+                <IoMdInformationCircleOutline className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="font-logo text-sm text-[#C8C8C8]">
+                  Diet informations
+                </p>
+              </a>
+            </div>
+            <div
+              className="group flex h-9 w-10/12 space-x-2"
+              onClick={() => setPage(3)}
+            >
+              <div
+                className={
+                  "h-5/6 w-2 origin-top self-center border-r-4 border-custom-orange transition duration-100 ease-[cubic-bezier(1,0,1,0)] " +
+                  (page === 3
+                    ? "-translate-y-0 opacity-100"
+                    : "-translate-y-10 opacity-0")
+                }
+              ></div>
+              <div
+                className="
+                                    flex h-full w-full
+                                    cursor-pointer items-center
+                                    justify-start rounded-lg
+                                    hover:bg-[#635953]
+                                    "
+              >
+                <MdPassword className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="font-logo text-sm text-[#C8C8C8]">
+                  Change password
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="col-start-4 col-span-9 flex flex-col justify-start items-center bg-[#4B4B4B] w-full h-full">
-            <div className="flex flex-col items-center justify-start md:w-1/2">
-                <div className="flex items-center justify-center my-16">
-                <Image
-                    width={500}
-                    height={500}
-                    className="h-64 w-64 rounded-full object-cover object-center"
-                    src="/test.png"
-                    alt="Profile"
-                />
-                </div>
-                {page === 1 && <ProfilePage />}
-                {page === 2 && <ProfileDiet />}
-                {page === 3 && <ProfilePassword />}
+        <div className="col-span-9 col-start-4 flex h-full w-full flex-col items-center justify-start bg-[#4B4B4B]">
+          <div className="flex flex-col items-center justify-start md:w-1/2">
+            <div className="my-16 flex items-center justify-center">
+              <Image
+                width={500}
+                height={500}
+                className="h-64 w-64 rounded-full object-cover object-center"
+                src={(profile && profile.image) || "/user.png"}
+                alt="Profile"
+              />
             </div>
+            {profile ? (
+              <>
+                {page === 1 && (
+                  <ProfilePage
+                    profileData={{
+                      email: profile.email,
+                      name: profile.name,
+                    }}
+                    submitProfile={submitProfile}
+                    requestState={requestState.profile}
+                  />
+                )}
+                {page === 2 && (
+                  <ProfileDiet
+                    dietData={{
+                      age: profile.age,
+                      sex: profile.sex,
+                      height: profile.height,
+                      weight: profile.weight,
+                      activity: profile.activity,
+                      plan: profile.plan
+                    }}
+                    submitDiet={submitDiet}
+                    requestState={requestState.diet}
+                  />
+                )}
+                {page === 3 && 
+                  (<ProfilePassword 
+                    submitPassword={submitPassword}
+                    requestState={requestState.password}
+                  />
+                )}
+              </>
+            ) : (
+              <div className="flex animate-pulse flex-col items-start justify-center">
+                <div className="dark:bg-gray-700 my-2 h-12 w-[280px] rounded-lg bg-gray-200"></div>
+                <div className="dark:bg-gray-700 my-2 h-12 w-[280px] rounded-lg bg-gray-200"></div>
+                <div className="dark:bg-gray-700 my-6 h-12 w-[69px] rounded-lg bg-gray-200"></div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

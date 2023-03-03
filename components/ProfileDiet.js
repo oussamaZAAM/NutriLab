@@ -4,14 +4,14 @@ import { useState } from "react";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 
 
-const ProfileDiet = () => {
+const ProfileDiet = ({dietData, submitDiet, requestState}) => {
     const [dietInfos, setDietInfos] = useState({
-      age: null,
-      sex: 'male',
-      height: null,
-      weight: null,
-      activity: 'none',
-      plan: 'none'
+      age: dietData.age,
+      sex: dietData.sex,
+      height: dietData.height,
+      weight: dietData.weight,
+      activity: dietData.activity,
+      plan: dietData.plan
     });
 
     // Check on inputted numbers to not include 'e', '-', '+' and '.'
@@ -34,6 +34,11 @@ const ProfileDiet = () => {
       setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
     }
 
+    const handleSubmit = () => {
+      // TODO: check dietInfos conditions
+      submitDiet(dietInfos);
+    }
+
   return (
     <>
       <Head>
@@ -48,9 +53,10 @@ const ProfileDiet = () => {
           <input
             id="age"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
+            placeholder=" "
             name='age'
             value={dietInfos.age}
-            onChange={handleNumberChange}
+            onChange={handleNumberChange} 
           />
           <label
             htmlFor="age"
@@ -122,6 +128,7 @@ const ProfileDiet = () => {
           <input
             id="height"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
+            placeholder=" "
             name='height'
             value={dietInfos.height}
             onChange={handleNumberChange}
@@ -139,6 +146,7 @@ const ProfileDiet = () => {
           <input
             id="weight"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
+            placeholder=" "
             name='weight'
             value={dietInfos.weight}
             onChange={handleNumberChange}
@@ -249,10 +257,19 @@ const ProfileDiet = () => {
           </label>
         </div>
 
+        {requestState[0] === 0
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+            <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
+        </div>}
+        {requestState[0] === 1
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-green-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+            <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
+        </div>}
+
         {/* Submit Button  */}
         <div className="w-full md:w-2/3 my-4">
         <button
-            // onClick={formik.handleSubmit}
+            onClick={handleSubmit}
             type="button"
             className={`
                         mr-2 mb-2 rounded-lg border-2 border-[#4B4B4B] 

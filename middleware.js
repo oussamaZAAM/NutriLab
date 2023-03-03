@@ -47,6 +47,7 @@ export const config = {
     "/profile",
     "/foodProcess",
     "/api/profile",
+    "/api/nutriInfo",
     "/api/nutri",
     "/api/user",
   ],

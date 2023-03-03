@@ -1,15 +1,14 @@
 import { useFormik } from "formik";
 import Head from "next/head";
-import Image from "next/image";
 
-const ProfilePage = () => {
+const ProfilePage = ({profileData, submitProfile, requestState}) => {
   const validate = values => {
     const errors = {};
 
-    if (!values.username) {
-      errors.username = 'Required';
-    } else if (values.username.length < 3) {
-      errors.username = 'Must be 3 characters or more';
+    if (!values.name) {
+      errors.name = 'Required';
+    } else if (values.name.length < 3) {
+      errors.name = 'Must be 3 characters or more';
     }
 
     if (!values.email) {
@@ -23,12 +22,12 @@ const ProfilePage = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: "KaikiMAX",
-      email: "zaam.oussama@gmail.com",
+      name: profileData.name,
+      email: profileData.email,
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      submitProfile(values);
     },
   });
 
@@ -43,7 +42,7 @@ const ProfilePage = () => {
         <div className="relative mt-2 w-full md:w-2/3">
           <input
             type="text"
-            id="username"
+            id="name"
             className={`
                         peer block w-full 
                         appearance-none rounded-lg border-2 border-gray-300 bg-transparent 
@@ -51,14 +50,14 @@ const ProfilePage = () => {
                         text-sm text-white 
                         focus:border-custom-orange focus:outline-none focus:ring-0 
                         dark:border-gray-600 dark:text-white dark:focus:border-custom-orange `+
-                        (formik.errors.username && 'border-red-500 focus:border-red-500')}
+                        (formik.errors.name && 'border-red-500 focus:border-red-500')}
             placeholder=" "
-            name="username"
+            name="name"
             onChange={formik.handleChange}
-            value={formik.values.username}
+            value={formik.values.name}
           />
           <label
-            htmlFor="username"
+            htmlFor="name"
             className={`
                         absolute top-2 left-1 z-10 
                         origin-[0] -translate-y-4 scale-75 transform bg-[#4B4B4B]
@@ -68,13 +67,13 @@ const ProfilePage = () => {
                         peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-custom-orange 
                         dark:bg-gray-900 dark:text-gray-400 
                         peer-focus:dark:text-blue-500 `+ 
-                      (formik.errors.username && 'text-red-500 peer-focus:text-red-500')}
+                      (formik.errors.name && 'text-red-500 peer-focus:text-red-500')}
           >
-            Username
+            name
           </label>
         </div>
         <div className="w-full md:w-2/3 mb-3 mt-1">
-          <p className='text-xs text-red-500'>{formik.errors.username}</p>
+          <p className='text-xs text-red-500'>{formik.errors.name}</p>
         </div>
         <div className="relative mt-2 w-full md:w-2/3">
           <input
@@ -113,6 +112,15 @@ const ProfilePage = () => {
           <p className='text-xs text-red-500'>{formik.errors.email}</p>
         </div>
 
+        {requestState[0] === 0
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+            <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
+        </div>}
+        {requestState[0] === 1
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-green-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+            <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
+        </div>}
+
         {/* Submit Button  */}
         <div className="my-4 w-full md:w-2/3">
           <button
@@ -125,8 +133,8 @@ const ProfilePage = () => {
                         hover:border-gray-800 hover:text-gray-800 
                         focus:bg-gradient1 focus:border-black focus:text-black
                         dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 `+
-                        ((formik.errors.email || formik.errors.username) && 'cursor-not-allowed')}
-            disabled={formik.errors.email || formik.errors.username}
+                        ((formik.errors.email || formik.errors.name) && 'cursor-not-allowed')}
+            disabled={formik.errors.email || formik.errors.name}
           >
             Edit
           </button>

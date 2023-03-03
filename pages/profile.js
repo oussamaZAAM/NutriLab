@@ -27,13 +27,18 @@ const Profile = () => {
     };
     fetchProfile();
     setServer(false);
+    setEmailError();
   }, [server]);
 
   const submitProfile = async (profileData) => {
     await axios.put('api/profile', {type: 'profile', userId: user.id, data: profileData})
-      .then(response => setServer(true))
+      .then(()=>setServer(true))
       .catch(err => setEmailError(err.response.data.message));
   }
+
+  setTimeout(()=>{
+    setEmailError();
+  }, 5000)
   return (
     <>
       <Head>

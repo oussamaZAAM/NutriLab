@@ -53,7 +53,7 @@ export default function Example() {
     router.reload();
   };
   return (
-    <div className="sticky top-0 grid grid-cols-8 border-b-4 border-custom-orange">
+    <div className="sticky top-0 z-50 bg-white grid grid-cols-8 border-b-4 border-custom-orange">
       <Disclosure
         as="nav"
         className="col-start-0 col-span-8 bg-white lg:col-span-6 lg:col-start-2"

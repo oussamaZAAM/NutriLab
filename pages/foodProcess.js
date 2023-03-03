@@ -17,10 +17,33 @@ const Food = ({ food }) => {
 
   const [localNutris, setLocalNutris] = useState({});
   const [localInfos, setLocalInfos] = useState({});
+  
   useEffect(() => {
-    setLocalNutris(JSON.parse(window.localStorage.getItem("nutris")));
-    setLocalInfos(JSON.parse(window.localStorage.getItem("dietInfos")));
-  }, []);
+    // Fetch Data from the server if the user is authenticated
+    const fetchNutriInfo = async () => {
+      await axios.get("/api/nutriInfo").then((res) => {
+        setLocalInfos(res.data);
+      });
+    }
+
+    const fetchNutrients = async () => {
+      await axios.get("/api/nutri").then((res) => {
+        setLocalNutris(res.data);
+      });
+    }
+    // Fetch Data from localStorage if the user is guest
+    const dietInfos = JSON.parse(window.localStorage.getItem("dietInfos"));
+    const nutris = JSON.parse(window.localStorage.getItem("nutris"));
+
+    // Check if the user is authenticated or is a guest
+    if (!user) {
+      setLocalInfos(dietInfos);
+      setLocalNutris(nutris);
+    } else {
+      fetchNutriInfo();
+      fetchNutrients();
+    }
+  }, [user]);
 
   //Handle API changes
   const [algoData, setAlgoData] = useState({});

@@ -51,10 +51,11 @@ export default function Nutrients() {
         setLocalNutris(res.data);
       });
     }
-
-    // Check if the user is authenticated or is a guest
+    // Fetch Data from localStorage if the user is guest
     const dietInfos = JSON.parse(window.localStorage.getItem("dietInfos"));
     const nutris = JSON.parse(window.localStorage.getItem("nutris"));
+
+    // Check if the user is authenticated or is a guest
     if (!user) {
       setLocalInfos(dietInfos);
       setLocalNutris(nutris);
@@ -63,12 +64,11 @@ export default function Nutrients() {
       fetchNutrients();
     }
 
+    // if data is fetched, display the nutrients page 
     if (dietInfos) {
       setIsInfosApplied(true);
     }
   }, [user]);
-
-  console.log(user)
 
   const applyInfos = async (dietInfos) => { 
     const { age, sex, height, weight, activity, plan } = dietInfos;

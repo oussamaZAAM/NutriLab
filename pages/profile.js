@@ -18,7 +18,10 @@ const Profile = () => {
   const [page, setPage] = useState(1);
   const [profile, setProfile] = useState();
   const [server, setServer] = useState(false);
-  const [emailError, setEmailError] = useState();
+  const [requestState, setRequestState] = useState({
+    profile: [2, ''],
+    diet: [2, ''],
+  });
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -27,18 +30,37 @@ const Profile = () => {
     };
     fetchProfile();
     setServer(false);
-    setEmailError();
   }, [server]);
 
   const submitProfile = async (profileData) => {
-    await axios.put('api/profile', {type: 'profile', userId: user.id, data: profileData})
-      .then(()=>setServer(true))
-      .catch(err => setEmailError(err.response.data.message));
+    await axios.put('api/profile', {type: 'profile', data: profileData})
+      .then((response)=>{
+        setServer(true);
+        setRequestState({...requestState, profile: [1, response.data.message]});
+      })
+      .catch(err => {
+        setRequestState({...requestState, profile: [0, err.response.data.message]});
+      });
+  }
+
+  const submitDiet = async (dietInfos) => {
+    await axios.put('api/profile', {type: 'diet', data: dietInfos})
+      .then((response)=>{
+        setServer(true);
+        setRequestState({...requestState, diet: [1, response.data.message]});
+      })
+      .catch(err => {
+        setRequestState({...requestState, diet: [0, err.response.data.message]});
+      });
   }
 
   setTimeout(()=>{
-    setEmailError();
-  }, 5000)
+    setRequestState({
+      profile: [2, ''],
+      diet: [2, ''],
+      password: [2, '']
+    });
+  }, 3000);
   return (
     <>
       <Head>
@@ -181,7 +203,7 @@ const Profile = () => {
                       name: profile.name,
                     }}
                     submitProfile={submitProfile}
-                    emailError={emailError}
+                    requestState={requestState.profile}
                   />
                 )}
                 {page === 2 && (
@@ -194,6 +216,8 @@ const Profile = () => {
                       activity: profile.activity,
                       plan: profile.plan
                     }}
+                    submitDiet={submitDiet}
+                    requestState={requestState.diet}
                   />
                 )}
                 {page === 3 && <ProfilePassword />}

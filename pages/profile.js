@@ -21,6 +21,7 @@ const Profile = () => {
   const [requestState, setRequestState] = useState({
     profile: [2, ''],
     diet: [2, ''],
+    password: [2, ''],
   });
 
   useEffect(() => {
@@ -58,10 +59,10 @@ const Profile = () => {
     await axios.put('api/profile', {type: 'password', data: passwordData})
       .then((response)=>{
         setRender(true);
-        setRequestState({...requestState, diet: [1, response.data.message]});
+        setRequestState({...requestState, password: [1, response.data.message]});
       })
       .catch(err => {
-        setRequestState({...requestState, diet: [0, err.response.data.message]});
+        setRequestState({...requestState, password: [0, err.response.data.message]});
       });
   }
 
@@ -234,6 +235,7 @@ const Profile = () => {
                 {page === 3 && 
                   (<ProfilePassword 
                     submitPassword={submitPassword}
+                    requestState={requestState.password}
                   />
                 )}
               </>

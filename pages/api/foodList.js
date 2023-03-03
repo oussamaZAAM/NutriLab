@@ -1,27 +1,35 @@
 import prisma from "./prisma";
-import jwt from "jsonwebtoken";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth/[...nextauth]";
 
-export default async function nutrients(req, res) {
+export default async function food(req, res) {
   const session = await getServerSession(req, res, authOptions);
-  if (req.method === "PUT") {
-    const data = req.body;
+  if (req.method === "POST") {
+    let data = req.body;
     if (session) {
       data.userId = session.user.id;
     } else {
       data.userId = req.headers.userid;
     }
     try {
-      const user = await prisma.Nutrients.upsert({
-        where: {
+      const foodList = await prisma.FoodList.create({
+        data: {
           userId: data.userId,
         },
-        update: data,
-        create: data,
       });
 
-      res.status(200).json(user);
+      data = data.map((prevObj) => {
+        return {
+          name: prevObj.name,
+          size: parseFloat(prevObj.size),
+          foodListId: foodList.id,
+        };
+      });
+      const uus = await prisma.Food.createMany({
+        data: data,
+      });
+
+      res.status(200).json(uus);
     } catch (e) {
       res.status(401).json({ message: "Wrong Info" });
     }
@@ -33,9 +41,8 @@ export default async function nutrients(req, res) {
     } else {
       userid = req.headers.userid;
     }
-
     try {
-      const user = await prisma.Nutrients.findUnique({
+      const user = await prisma.FoodList.findUnique({
         where: {
           userId: userid,
         },

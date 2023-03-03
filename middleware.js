@@ -50,5 +50,6 @@ export const config = {
     "/api/nutriInfo",
     "/api/nutri",
     "/api/user",
+    "/api/foodList",
   ],
 };

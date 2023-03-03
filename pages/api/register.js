@@ -25,6 +25,7 @@ export default async function register(req, res) {
         userId: result.id,
       },
     });
+
     const token = jwt.sign({ id: result.id }, process.env.JWT_SECRET);
     const serialised = serialize("NutriLab", token, {
       httpOnly: true,

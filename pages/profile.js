@@ -17,6 +17,8 @@ const Profile = () => {
   const { user, setUser } = useContext(User_data);
   const [page, setPage] = useState(1);
   const [profile, setProfile] = useState();
+  const [server, setServer] = useState(false);
+  const [emailError, setEmailError] = useState();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -24,8 +26,14 @@ const Profile = () => {
       setProfile(res.data);
     };
     fetchProfile();
-  }, []);
+    setServer(false);
+  }, [server]);
 
+  const submitProfile = async (profileData) => {
+    await axios.put('api/profile', {type: 'profile', userId: user.id, data: profileData})
+      .then(response => setServer(true))
+      .catch(err => setEmailError(err.response.data.message));
+  }
   return (
     <>
       <Head>
@@ -165,8 +173,10 @@ const Profile = () => {
                   <ProfilePage
                     profileData={{
                       email: profile.email,
-                      username: profile.name,
+                      name: profile.name,
                     }}
+                    submitProfile={submitProfile}
+                    emailError={emailError}
                   />
                 )}
                 {page === 2 && (

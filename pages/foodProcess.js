@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import Navbar from "/components/Navbar";
 import axios from "axios";
 import { User_data } from "/context/context";
-import YourInfo from "/components/YourInfo";
-import AddDailyFood from "/components/AddDailyFood"; 
+// import AddDailyFood from "../components/AddDailyFood";
+import YourInfo from "../components/YourInfo";
 
 const Food = ({ food }) => {
   const [eatenFoodList, setEatenFoodList] = useState([]);
@@ -126,14 +126,14 @@ const Food = ({ food }) => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
       <Navbar User={user} />
-      <AddDailyFood
+      {/* <AddDailyFood
         food={food}
         eatenFoodList={eatenFoodList}
         setEatenFoodList={setEatenFoodList}
         setAlgoData={setAlgoData}
         setIsAlgorithmEnabled={setIsAlgorithmEnabled}
         sumNutrients={sumNutrients}
-      />
+      /> */}
       <YourInfo localInfos={localInfos} localNutris={localNutris} />
       {/* Food Algorithm  */}
       <div

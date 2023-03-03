@@ -1,7 +1,7 @@
 import { RiEditFill } from "react-icons/ri";
 import Link from "next/link";
 
-function YourInfo({ localInfos, localNutris }) {
+export default function YourInfo({ localInfos, localNutris }) {
   function capitalizeFirstLetter(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
@@ -214,5 +214,3 @@ function YourInfo({ localInfos, localNutris }) {
     </div>
   );
 }
-
-export default YourInfo;

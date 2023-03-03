@@ -7,7 +7,8 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { useState } from "react";
 import styles from "/styles/Home.module.css";
 import axios from "axios";
-function AddDailyFood({
+
+export default function AddDailyFood({
   food,
   setEatenFoodList,
   eatenFoodList,
@@ -457,5 +458,3 @@ function AddDailyFood({
     </div>
   );
 }
-
-export default AddDailyFood;

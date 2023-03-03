@@ -2,9 +2,25 @@ import { useFormik } from "formik";
 import Head from "next/head";
 import Image from "next/image";
 
-const ProfilePassword = () => {
+const ProfilePassword = ({submitPassword}) => {
   const validate = values => {
     const errors = {};
+    if (!values.oldPassword) {
+      errors.oldPassword = 'Required';
+    } else if (values.oldPassword.length < 6) {
+      errors.oldPassword = 'Must be 6 characters or more';
+    }
+    
+    if (!values.newPassword) {
+      errors.newPassword = 'Required';
+    } else if (values.newPassword.length < 6) {
+      errors.newPassword = 'Must be 6 characters or more';
+    }
+    if (!values.confirmPassword) {
+      errors.confirmPassword = 'Required';
+    } else if (values.confirmPassword !== values.newPassword) {
+      errors.confirmPassword = 'Password do not match';
+    }
     return errors;
   }
 
@@ -16,7 +32,7 @@ const ProfilePassword = () => {
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      submitPassword(values);
     },
   });
 
@@ -64,6 +80,9 @@ const ProfilePassword = () => {
             Current Password
           </label>
         </div>
+        <div className="w-full mb-3 mt-1">
+          <p className='text-xs text-red-500'>{formik.errors.oldPassword}</p>
+        </div>
 
         {/* New Password */}
         <div className="relative my-2 w-full">
@@ -100,6 +119,9 @@ const ProfilePassword = () => {
             New Password
           </label>
         </div>
+        <div className="w-full mb-3 mt-1">
+          <p className='text-xs text-red-500'>{formik.errors.newPassword}</p>
+        </div>
 
         {/* Confirm Password */}
         <div className="relative my-2 w-full">
@@ -135,6 +157,9 @@ const ProfilePassword = () => {
           >
             Confirm your Password
           </label>
+        </div>
+        <div className="w-full mb-3 mt-1">
+          <p className='text-xs text-red-500'>{formik.errors.confirmPassword}</p>
         </div>
 
         {/* Submit Button  */}

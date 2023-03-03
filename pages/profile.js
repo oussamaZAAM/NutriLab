@@ -17,7 +17,7 @@ const Profile = () => {
   const { user, setUser } = useContext(User_data);
   const [page, setPage] = useState(1);
   const [profile, setProfile] = useState();
-  const [server, setServer] = useState(false);
+  const [render, setRender] = useState(false);
   const [requestState, setRequestState] = useState({
     profile: [2, ''],
     diet: [2, ''],
@@ -29,13 +29,13 @@ const Profile = () => {
       setProfile(res.data);
     };
     fetchProfile();
-    setServer(false);
-  }, [server]);
+    setRender(false);
+  }, [render]);
 
   const submitProfile = async (profileData) => {
     await axios.put('api/profile', {type: 'profile', data: profileData})
       .then((response)=>{
-        setServer(true);
+        setRender(true);
         setRequestState({...requestState, profile: [1, response.data.message]});
       })
       .catch(err => {
@@ -43,10 +43,21 @@ const Profile = () => {
       });
   }
 
-  const submitDiet = async (dietInfos) => {
-    await axios.put('api/profile', {type: 'diet', data: dietInfos})
+  const submitDiet = async (dietData) => {
+    await axios.put('api/profile', {type: 'diet', data: dietData})
       .then((response)=>{
-        setServer(true);
+        setRender(true);
+        setRequestState({...requestState, diet: [1, response.data.message]});
+      })
+      .catch(err => {
+        setRequestState({...requestState, diet: [0, err.response.data.message]});
+      });
+  }
+
+  const submitPassword = async (passwordData) => {
+    await axios.put('api/profile', {type: 'password', data: passwordData})
+      .then((response)=>{
+        setRender(true);
         setRequestState({...requestState, diet: [1, response.data.message]});
       })
       .catch(err => {
@@ -220,7 +231,11 @@ const Profile = () => {
                     requestState={requestState.diet}
                   />
                 )}
-                {page === 3 && <ProfilePassword />}
+                {page === 3 && 
+                  (<ProfilePassword 
+                    submitPassword={submitPassword}
+                  />
+                )}
               </>
             ) : (
               <div className="flex animate-pulse flex-col items-start justify-center">

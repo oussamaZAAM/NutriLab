@@ -8,9 +8,9 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdPassword } from "react-icons/md";
 
 import Navbar from "../components/Navbar";
-import ProfileDiet from "../components/ProfileDiet";
-import ProfilePage from "../components/ProfilePage";
-import ProfilePassword from "../components/ProfilePassword";
+import ProfileDiet from "../components/Profile/ProfileDiet";
+import ProfilePage from "../components/Profile/ProfilePage";
+import ProfilePassword from "../components/Profile/ProfilePassword";
 import { User_data } from "../context/context";
 
 const Profile = () => {

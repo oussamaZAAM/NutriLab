@@ -30,9 +30,9 @@ export default function Login({ setLogin, setAuth, setOpen }) {
       .then(async (response) => {
         setAuth(response.data);
         setOpen(false);
-        await axios.get("/api/nutriInfo").then((res) => {
-          localStorage.setItem("dietInfos", JSON.stringify(res.data));
-        });
+        // await axios.get("/api/nutriInfo").then((res) => {
+        //   localStorage.setItem("dietInfos", JSON.stringify(res.data));
+        // });
 
         setUser(response.data);
       })

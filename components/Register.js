@@ -40,18 +40,18 @@ export default function Register({ setLogin, setAuth, setOpen }) {
           .then(async (response) => {
             setAuth(response.data);
             setOpen(false);
-            await axios.get("/api/nutriInfo").then((res) => {
-              const localData = {
-                ...res.data,
-                age: "",
-                sex: "",
-                weight: "",
-                height: "",
-                activity: "",
-                plan: "",
-              };
-              localStorage.setItem("dietInfos", JSON.stringify(localData));
-            });
+            // await axios.get("/api/nutriInfo").then((res) => {
+            //   const localData = {
+            //     ...res.data,
+            //     age: "",
+            //     sex: "",
+            //     weight: "",
+            //     height: "",
+            //     activity: "",
+            //     plan: "",
+            //   };
+            //   localStorage.setItem("dietInfos", JSON.stringify(localData));
+            // });
             setUser(response.data);
           })
           .catch((error) => {

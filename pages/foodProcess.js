@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
-
+ 
 import Navbar from "/components/Navbar";
 import axios from "axios";
 import { User_data } from "/context/context";
-import AddDailyFood from "../components/AddDailyFood";
+import AddDailyFood from "../components/AddDailyFoods";
 import YourInfo from "../components/YourInfo";
 
 const Food = ({ food }) => {

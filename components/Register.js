@@ -71,24 +71,30 @@ export default function Register({ setLogin, setAuth, setOpen }) {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
       <div>
-        <div className="px-8 py-6 text-left bg-white shadow-lg">
+        <div className="bg-white px-8 py-6 text-left shadow-lg">
           <div className="flex justify-around">
-            <button>
-              <BsGoogle size="3rem" color="orange" />
+            <button
+              className="transition duration-300 ease-out hover:scale-125"
+              onClick={() => signIn("google")}
+            >
+              <BsGoogle className="h-12 w-12 fill-orange-400 hover:fill-orange-600" />
             </button>
-            <button>
-              <BsFacebook size="3rem" color="orange" />
+            <button
+              className="transition duration-300 ease-out hover:scale-125"
+              onClick={() => signIn("facebook")}
+            >
+              <BsFacebook className="h-12 w-12 fill-orange-400 hover:fill-orange-600" />
             </button>
-            <button>
-              <BsTwitter size="3rem" color="orange" />
+            <button className="transition duration-300 ease-out hover:scale-125">
+              <BsTwitter className="h-12 w-12 fill-orange-400 hover:fill-orange-600" />
             </button>
           </div>
-          <div className="bg-orange-400 w-full h-1 mt-7 mb-3"></div>
-          <h3 className="text-2xl font-bold text-center">Join us</h3>
+          <div className="mt-7 mb-3 h-1 w-full bg-orange-400"></div>
+          <h3 className="text-center text-2xl font-bold">Join us</h3>
           <form action="">
             <div className="mt-4">
-              <div className="flex flex-row relative">
-                <div className=" basis-1/4 flex items-center">
+              <div className="relative flex flex-row">
+                <div className=" flex basis-1/4 items-center">
                   <label className="text-center" htmlFor="Name">
                     Name
                   </label>
@@ -107,16 +113,16 @@ export default function Register({ setLogin, setAuth, setOpen }) {
                   onChange={(e) => setUser({ ...user, name: e.target.value })}
                   placeholder="Name"
                   className={
-                    "basis-3/4 w-max px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" +
+                    "mt-2 w-max basis-3/4 rounded-md border px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600" +
                     (error.name && "border-3 border-rose-500")
                   }
                 />
-                <p className="text-rose-500 absolute left-20 -top-3 sm:-top-4 sm:left-32 text-xs sm:text-sm">
+                <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
                   {error.name}
                 </p>
               </div>
-              <div className="mt-4 flex flex-row relative">
-                <div className=" basis-1/4 flex items-center">
+              <div className="relative mt-4 flex flex-row">
+                <div className=" flex basis-1/4 items-center">
                   <label className=" text-center" htmlFor="Email">
                     Email
                   </label>
@@ -135,17 +141,17 @@ export default function Register({ setLogin, setAuth, setOpen }) {
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
                   placeholder="Email"
                   className={
-                    "basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" +
+                    "mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600" +
                     (error.email && "border-3 border-rose-500")
                   }
                 />
-                <p className="text-rose-500 absolute left-20 -top-3 sm:-top-4 sm:left-32 text-xs sm:text-sm">
+                <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
                   {error.email}
                 </p>
               </div>
 
-              <div className="mt-4 flex flex-row relative">
-                <div className=" basis-1/4 flex items-center">
+              <div className="relative mt-4 flex flex-row">
+                <div className=" flex basis-1/4 items-center">
                   <label className=" text-center">Password</label>
                 </div>
                 <input
@@ -163,12 +169,12 @@ export default function Register({ setLogin, setAuth, setOpen }) {
                   }
                   placeholder="Password"
                   className={
-                    " basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 hover:ring-blue-600" +
+                    " mt-2 w-full basis-3/4 rounded-md border px-4 py-2 hover:ring-blue-600 focus:outline-none focus:ring-1" +
                     (error.rePass && "border-3 border-rose-500")
                   }
                 />
 
-                <p className="text-rose-500 absolute left-20 -top-3 sm:-top-4 sm:left-32 text-xs sm:text-sm">
+                <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
                   {error.rePass}
                 </p>
               </div>
@@ -180,7 +186,7 @@ export default function Register({ setLogin, setAuth, setOpen }) {
                   type="password"
                   onChange={(e) => setUser({ ...user, rePass: e.target.value })}
                   placeholder="Password"
-                  className="basis-3/4 w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
               {/* <span className="text-xs text-red-400">
@@ -189,12 +195,12 @@ export default function Register({ setLogin, setAuth, setOpen }) {
               <div className="flex">
                 <button
                   onClick={handleSubmit}
-                  className="w-full px-6 py-2 mt-4 text-white bg-orange-400 rounded-lg hover:bg-orange-600"
+                  className="mt-4 w-full rounded-lg bg-orange-400 px-6 py-2 text-white hover:bg-orange-600"
                 >
                   Create Account
                 </button>
               </div>
-              <div className="mt-6 text-grey-dark">
+              <div className="text-grey-dark mt-6">
                 Already have an account?
                 <button
                   className="text-orange-600 hover:underline"

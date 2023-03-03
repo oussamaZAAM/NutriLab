@@ -104,9 +104,9 @@ model Nutrients {
 }
 
 model Food {
-  id     Int    @id @default(autoincrement())
-  name   String
-  weight Int
+  id   Int    @id @default(autoincrement())
+  name String
+  size Float
 
   FoodList   FoodList? @relation(fields: [foodListId], references: [id])
   foodListId Int?

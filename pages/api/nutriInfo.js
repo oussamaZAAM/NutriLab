@@ -7,7 +7,6 @@ export default async function profile(req, res) {
   const session = await getServerSession(req, res, authOptions);
   if (req.method === "PUT") {
     const data = req.body;
-    console.log(data)
     if (session) {
       data.userId = session.user.id;
     } else {
@@ -22,7 +21,7 @@ export default async function profile(req, res) {
         create: data,
       });
 
-      const userData = {...data}
+      const userData = { ...data };
       delete userData.userId;
 
       await prisma.User.upsert({
@@ -35,15 +34,21 @@ export default async function profile(req, res) {
 
       res.status(200).json(nutriInfos);
     } catch (e) {
-      console.log(e)
+      console.log(e);
       res.status(401).json({ message: "Wrong Info" });
     }
   }
   if (req.method === "GET") {
+    let userid;
+    if (session) {
+      userid = session.user.id;
+    } else {
+      userid = req.headers.userid;
+    }
     try {
       const nutriInfo = await prisma.NutriInfo.findUnique({
         where: {
-          userId: req.headers.userid,
+          userId: userid,
         },
       });
       res.status(200).json(nutriInfo);

@@ -2,7 +2,6 @@ import prisma from "./prisma";
 import bcrypt from "bcrypt";
 
 export default async function profile(req, res) {
-
   if (req.method === "GET") {
     try {
       const profile = await prisma.User.findUnique({

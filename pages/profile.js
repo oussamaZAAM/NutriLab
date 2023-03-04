@@ -86,9 +86,9 @@ const Profile = () => {
 
       {/* Profile Page  */}
       <div className="flex flex-col-reverse md:grid md:grid-cols-12">
-        <div className="col-span-3 flex md:min-h-screen flex-col items-center justify-start border-t-4 md:border-r-4 border-custom-orange bg-profile2">
+        <div className="col-span-3 flex md:min-h-screen flex-col items-center justify-start border-t-4 md:border-r-4 md:border-t-0 border-custom-orange bg-profile2">
           {profile ? (
-            <div className="sticky top-0 left-0 hidden md:flex flex-col lg:flex-row w-full items-center justify-center space-x-6 bg-profile1 py-4">
+            <div className="sticky top-[68px] left-0 hidden md:flex flex-col lg:flex-row w-full items-center justify-center space-x-6 bg-profile1 py-4">
               <Image
                 width={100}
                 height={100}
@@ -107,7 +107,7 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            <div className="sticky top-0 left-0 hidden md:flex flex-col md:flex-row w-full items-center justify-center space-x-6 bg-profile1 py-4">
+            <div className="sticky top-[68px] left-0 hidden md:flex flex-col md:flex-row w-full items-center justify-center space-x-6 bg-profile1 py-4">
               <div className="h-20 w-20 animate-pulse rounded-full bg-gray-200"></div>
               <div className="flex animate-pulse flex-col items-start justify-center">
                 <div className="dark:bg-gray-700 mb-4 h-5 w-40 rounded-full bg-gray-200"></div>
@@ -116,7 +116,7 @@ const Profile = () => {
               <span className="sr-only">Loading...</span>
             </div>
           )}
-          <div className="fixed bottom-0 z-50 md:sticky md:top-40 lg:top-28 left-0 flex md:flex-col items-center justify-start w-full p-2 md:py-8 bg-profile1 md:bg-transparent">
+          <div className="fixed bottom-0 z-50 md:sticky md:top-[228px] lg:top-[180px] left-0 flex md:flex-col items-center justify-start w-full p-2 md:py-8 bg-profile1 md:bg-transparent">
             <div
               className="group flex flex-col-reverse md:flex-row h-full md:h-9 w-10/12 md:space-x-2"
               onClick={() => setPage(1)}

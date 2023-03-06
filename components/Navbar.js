@@ -30,6 +30,8 @@ export default function Example() {
     if (router.query.requestLogin) {
       if (router.query.requestLogin === "1") {
         setOpen(true);
+        console.log(router.asPath)
+        router.replace('/?path='+router.query.path, '', { shallow: true });
       }
       // router.push('/')
     }

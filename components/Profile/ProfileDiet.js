@@ -60,7 +60,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
           />
           <label
             htmlFor="age"
-            className="absolute hover:cursor-text text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#4B4B4B] dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+            className="absolute hover:cursor-text text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-profile2 dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
           >
             Age
           </label>
@@ -135,7 +135,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
           />
           <label
             htmlFor="height"
-            className="absolute hover:cursor-text text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#4B4B4B] dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+            className="absolute hover:cursor-text text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-profile2 dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
           >
             Height
           </label>
@@ -153,7 +153,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
           />
           <label
             htmlFor="weight"
-            className="absolute hover:cursor-text text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#4B4B4B] dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+            className="absolute hover:cursor-text text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-profile2 dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
           >
             Weight
           </label>
@@ -202,7 +202,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
                         absolute top-2 left-1 z-10
                         text-sm text-white dark:text-gray-400 
                         duration-300 transform -translate-y-4 scale-75 origin-[0]
-                        bg-[#4B4B4B] dark:bg-gray-900 px-2 
+                        bg-profile2 dark:bg-gray-900 px-2 
                         peer-focus:text-custom-orange
                         peer-focus:px-2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 
                         peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 
@@ -249,7 +249,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
                                               absolute top-2 left-1 z-10
                                               text-sm text-white dark:text-gray-400
                                               duration-300 transform -translate-y-4 scale-75 origin-[0]
-                                              bg-[#4B4B4B] dark:bg-gray-900 px-2
+                                              bg-profile2 dark:bg-gray-900 px-2
                                               peer-focus:px-2 peer-focus:text-custom-orange peer-focus:dark:text-custom-orange peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4
                                             "
           >

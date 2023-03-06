@@ -9,198 +9,8 @@ import DailyNutrients from "../components/DailyNutrients";
 
 import { User_data } from "../context/context";
 import { useContext } from "react";
-
-function calculateNutrients(age, sex, height, weight, activity, plan) {
-  // Calculate BMR : Harris-Benedict Calculator
-  var BMR;
-  if (sex === "male") {
-    BMR = 66.5 + 13.75 * weight + 5.003 * height - 6.75 * age;
-  }
-  if (sex === "female") {
-    BMR = 655.1 + 9.563 * weight + 1.85 * height - 4.676 * age;
-  }
-
-  // Calculate Calories
-  var kCalories;
-  if (activity === "sedentary") {
-    kCalories = 1.2 * BMR;
-  }
-  if (activity === "lightly_active") {
-    kCalories = 1.375 * BMR;
-  }
-  if (activity === "moderately_active") {
-    kCalories = 1.55 * BMR;
-  }
-  if (activity === "very_active") {
-    kCalories = 1.725 * BMR;
-  }
-  if (activity === "super_active") {
-    kCalories = 1.9 * BMR;
-  }
-
-  if (plan === "lose_weight") {
-    kCalories -= 500;
-  }
-  if (plan === "build_muscle") {
-    kCalories += 500;
-  }
-
-  // Calculate Proteins
-  var proteins;
-  if (plan === "maintain") {
-    if (activity === "sedentary" || activity === "lightly_active") {
-      proteins = 0.8 * weight;
-    }
-    if (activity === "moderately_active") {
-      proteins = 0.9 * weight;
-    }
-    if (activity === "very_active" || activity === "super_active") {
-      proteins = 1.0 * weight;
-    }
-  }
-
-  if (plan === "lose_weight") {
-    if (activity === "sedentary") {
-      proteins = 1.2 * weight;
-    }
-    if (activity === "lightly_active") {
-      proteins = 1.3 * weight;
-    }
-    if (activity === "moderately_active") {
-      proteins = 1.4 * weight;
-    }
-    if (activity === "very_active") {
-      proteins = 1.5 * weight;
-    }
-    if (activity === "super_active") {
-      proteins = 1.6 * weight;
-    }
-  }
-
-  if (plan === "build_muscle") {
-    if (activity === "sedentary") {
-      proteins = 1.6 * weight;
-    }
-    if (activity === "lightly_active") {
-      proteins = 1.7 * weight;
-    }
-    if (activity === "moderately_active") {
-      proteins = 1.8 * weight;
-    }
-    if (activity === "very_active") {
-      proteins = 1.9 * weight;
-    }
-    if (activity === "super_active") {
-      proteins = 2.0 * weight;
-    }
-  }
-
-  // Calculate Fats
-  var fats;
-  if (plan === "maintain") {
-    fats = (kCalories * 0.275) / 9;
-  }
-  if (plan === "lose_weight") {
-    fats = 0.75 * weight;
-  }
-  if (plan === "build_muscle") {
-    fats = 1.0 * weight;
-  }
-
-  // Calculate Carbs
-  var carbs;
-  if (plan === "lose_weight") {
-    carbs = (kCalories * 0.45) / 4;
-  }
-  if (plan === "maintain") {
-    carbs = (kCalories * 0.55) / 4;
-  }
-  if (plan === "build_muscle") {
-    carbs = (kCalories * 0.65) / 4;
-  }
-
-  // Calculate Iron
-  var iron;
-  if (sex === "female") {
-    if (age <= 50) {
-      iron = 0.018;
-    } else {
-      iron = 0.008;
-    }
-  } else {
-    iron = 0.008;
-  }
-  // Calculate Fiber
-  var fiber = (kCalories / 1000) * 14;
-  // Calculate Sugar
-  var sugar;
-  if (sex === "female") {
-    sugar = 24;
-  } else {
-    sugar = 36;
-  }
-  // Calculate Sugar
-  var salt = 6;
-
-  return {
-    kCalories: Math.round(kCalories),
-    proteins: Math.round(proteins),
-    fats: Math.round(fats),
-    carbs: Math.round(carbs),
-    iron: Math.round(iron),
-    fiber: Math.round(fiber),
-    sugar: Math.round(sugar),
-    salt: Math.round(salt),
-  };
-}
-
-function calculateVitamins(age, sex) {
-  //Vitamin A
-  var vitaminA;
-  if (sex === "female") {
-    vitaminA = 0.0007;
-  } else {
-    vitaminA = 0.0009;
-  }
-
-  //Vitamin C
-  var vitaminC;
-  if (sex === "female" && age === 18) {
-    vitaminC = 0.065;
-  } else {
-    vitaminC = 0.075;
-  }
-
-  //Vitamin D
-  var vitaminD;
-  if (age >= 70) {
-    vitaminD = 0.00002;
-  } else {
-    vitaminD = 0.000015;
-  }
-
-  //Vitamin E
-  var vitaminE = 0.015;
-
-  //Vitamin K
-  var vitaminK;
-  if (age >= 19) {
-    if (sex === "male") {
-      vitaminK = 0.00012;
-    } else {
-      vitaminK = 0.00009;
-    }
-  } else {
-    vitaminK = 0.000075;
-  }
-
-  return {
-    vitaminA: vitaminA,
-    vitaminC: vitaminC,
-    vitaminD: vitaminD,
-    vitaminK: vitaminK,
-  };
-}
+import calculateNutrients from "../components/Calculate/CalculateNutrients";
+import calculateVitamins from "../components/Calculate/CalculateVitamins";
 
 export default function Nutrients() {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
@@ -209,15 +19,56 @@ export default function Nutrients() {
   const { user, setUser } = useContext(User_data);
 
   // Next is SSR so we should ... , Force a render with useEffect
-  const [localNutris, setLocalNutris] = useState(false);
-  //Rendered Once to fetch initial localstorage data
+  const [localInfos, setLocalInfos] = useState({
+      age: "",
+      sex: "",
+      height: "",
+      weight: "",
+      activity: "",
+      plan: ""
+  });
+  const [localNutris, setLocalNutris] = useState({
+      kCalories: 0,
+      proteins: 0,
+      carbs: 0,
+      fats: 0,
+      fiber: 0,
+      salt: 0,
+      iron: 0,
+      sugar: 0
+  });
+
   useEffect(() => {
-    const item = JSON.parse(window.localStorage.getItem("nutris"));
-    setLocalNutris(item);
-    if (item) {
+    // Fetch Data from the server if the user is authenticated
+    const fetchNutriInfo = async () => {
+      await axios.get("/api/nutriInfo").then((res) => {
+        setLocalInfos(res.data);
+      });
+    }
+
+    const fetchNutrients = async () => {
+      await axios.get("/api/nutri").then((res) => {
+        setLocalNutris(res.data);
+      });
+    }
+    // Fetch Data from localStorage if the user is guest
+    const dietInfos = JSON.parse(window.localStorage.getItem("dietInfos"));
+    const nutris = JSON.parse(window.localStorage.getItem("nutris"));
+
+    // Check if the user is authenticated or is a guest
+    if (!user) {
+      setLocalInfos(dietInfos);
+      setLocalNutris(nutris);
+    } else {
+      fetchNutriInfo();
+      fetchNutrients();
+    }
+
+    // if data is fetched, display the nutrients page 
+    if (dietInfos) {
       setIsInfosApplied(true);
     }
-  }, []);
+  }, [user]);
 
   const applyInfos = async (dietInfos) => { 
     const { age, sex, height, weight, activity, plan } = dietInfos;
@@ -257,6 +108,7 @@ export default function Nutrients() {
             handleApply={applyInfos}
             flushInfos={() => setIsInfosApplied(false)}
             isInfosApplied={isInfosApplied}
+            localInfos={localInfos}
           />
         </div>
       </div>

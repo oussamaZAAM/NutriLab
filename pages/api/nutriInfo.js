@@ -12,6 +12,7 @@ export default async function profile(req, res) {
     } else {
       data.userId = req.headers.userid;
     }
+    
     try {
       const nutriInfos = await prisma.NutriInfo.upsert({
         where: {
@@ -51,6 +52,7 @@ export default async function profile(req, res) {
           userId: userid,
         },
       });
+      delete nutriInfo.id;
       res.status(200).json(nutriInfo);
     } catch (e) {
       res.status(401).json({ message: "No Nutri Info" });

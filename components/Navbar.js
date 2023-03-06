@@ -23,8 +23,17 @@ function classNames(...classes) {
 
 export default function Example() {
   const { user, setUser } = useContext(User_data);
-  const router = useRouter();
   const { data: session } = useSession();
+
+  const router = useRouter();
+  useEffect(()=>{
+    if (router.query.requestLogin) {
+      if (router.query.requestLogin === '1') {
+        setOpen(true);
+      }
+      router.push('/')
+    }
+  },[router.query]);
   const [open1, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
   useEffect(() => {
@@ -53,7 +62,7 @@ export default function Example() {
     router.reload();
   };
   return (
-    <div className="grid grid-cols-8 border-b-4 border-custom-orange">
+    <div className="sticky top-0 z-50 bg-white grid grid-cols-8 border-b-4 border-custom-orange">
       <Disclosure
         as="nav"
         className="col-start-0 col-span-8 bg-white lg:col-span-6 lg:col-start-2"

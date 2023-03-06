@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { IoMdMale, IoMdFemale } from "react-icons/io";
 import styles from "../styles/Home.module.css";
@@ -20,24 +20,14 @@ function sliceUnderscore(string) {
 
 // ------------------------------------------------------------------------------------------
 
-const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
-  // Next is SSR so we should wait for window object to get rendered into the Client-Side
-  const data =
-    typeof window !== "undefined"
-      ? JSON.parse(window.localStorage.getItem("dietInfos"))
-      : false;
+const DietInfo = ({ handleApply, isInfosApplied, flushInfos, localInfos }) => {
 
   const [stepper, setStepper] = useState([1, 1]);
-  const [dietInfos, setDietInfos] = useState(
-    data || {
-      age: "",
-      sex: "",
-      height: "",
-      weight: "",
-      activity: "",
-      plan: ""
-    }
-  );
+  const [dietInfos, setDietInfos] = useState(localInfos);
+
+  useEffect(()=>{
+    if (localInfos) setDietInfos(localInfos);
+  }, [localInfos])
 
   // ----------- Errors States ---------------------
   const [ageError, setAgeError] = useState(1);
@@ -544,7 +534,10 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos }) => {
         <div 
           tabIndex={0} 
           onKeyDown={(e)=>{
-            if (e.key === 'Enter') setStepper([5, stepper[0]])
+            if (e.key === 'Enter') {
+              setStepper([5, stepper[0]]);
+              CheckValidity(dietInfos);
+            }
           }} 
           className="flex flex-col justify-around items-center h-full"
         >

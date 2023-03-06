@@ -68,7 +68,7 @@ const ProfilePassword = ({submitPassword, requestState}) => {
             htmlFor="oldPassword"
             className={`
                         absolute top-2 left-1 z-10 
-                        origin-[0] -translate-y-4 scale-75 transform bg-[#4B4B4B]
+                        origin-[0] -translate-y-4 scale-75 transform bg-profile2
                         px-2 text-sm 
                         text-white duration-300 hover:cursor-text 
                         peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 
@@ -106,7 +106,7 @@ const ProfilePassword = ({submitPassword, requestState}) => {
             htmlFor="newPassword"
             className={`
                         absolute top-2 left-1 z-10 
-                        origin-[0] -translate-y-4 scale-75 transform bg-[#4B4B4B]
+                        origin-[0] -translate-y-4 scale-75 transform bg-profile2
                         px-2 text-sm 
                         text-white duration-300 hover:cursor-text 
                         peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 
@@ -144,7 +144,7 @@ const ProfilePassword = ({submitPassword, requestState}) => {
             htmlFor="confirmPassword"
             className={`
                         absolute top-2 left-1 z-10 
-                        origin-[0] -translate-y-4 scale-75 transform bg-[#4B4B4B]
+                        origin-[0] -translate-y-4 scale-75 transform bg-profile2
                         px-2 text-sm 
                         text-white duration-300 hover:cursor-text 
                         peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 

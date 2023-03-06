@@ -11,6 +11,9 @@ module.exports = {
         footer: "#584235",
         gradient1: "rgba(255, 136, 62, 1)",
         gradient2: "rgba(255, 98, 0, 0.35)",
+        profile1: "#191919",
+        profile2: "#4B4B4B",
+        profilehover: "#635953"
       },
       keyframes: {
         wiggle: {

@@ -104,6 +104,7 @@ export default function AddDailyFood({
       "http://127.0.0.1:8000/polls/getFood/",
       neededNutri
     );
+    console.log(eatenFoodList);
     await axios.post("/api/foodList", eatenFoodList);
     setAlgoData(res.data);
     setIsAlgorithmEnabled(true);
@@ -122,8 +123,8 @@ export default function AddDailyFood({
                 <div
                   className={
                     `w-full cursor-pointer
-                          rounded-lg border-x-2 border-b-2 p-2 
-                          indent-4 hover:bg-gray-100` +
+                            rounded-lg border-x-2 border-b-2 p-2 
+                            indent-4 hover:bg-gray-100` +
                     (eatenFoodList.some(
                       (thisFood) => thisFood.name === food.name
                     )
@@ -159,11 +160,11 @@ export default function AddDailyFood({
                 <p
                   className={
                     `
-                          text-ms w-full rounded-lg border-x-2
-                          border-b-2 p-2
-                          indent-4 font-paragraph font-bold
-                          hover:bg-gray-100
-                        ` +
+                            text-ms w-full rounded-lg border-x-2
+                            border-b-2 p-2
+                            indent-4 font-paragraph font-bold
+                            hover:bg-gray-100
+                          ` +
                     (eatenFoodList.some(
                       (thisFood) => thisFood.name === food.name
                     )
@@ -225,28 +226,28 @@ export default function AddDailyFood({
           </div>
           <div className="my-1 flex flex-col items-start self-center xs:w-full">
             {/* <p className="font-paragraph text-xs">
-          Category:{" "}
-          <span className="font-paragraph font-bold text-xs">
-            {food.category}
-          </span>
-        </p> */}
+            Category:{" "}
+            <span className="font-paragraph font-bold text-xs">
+              {food.category}
+            </span>
+          </p> */}
             <div className="flex items-center justify-center font-paragraph text-xs">
               How Much:{" "}
               {/* <span className="font-paragraph font-bold text-xs">
-            {food.size} g
-          </span> */}
+              {food.size} g
+            </span> */}
               <div
                 className={`group ml-2 flex
-            w-20 items-center justify-start
-            rounded-lg border border-gray-300 bg-gray-50 indent-2 text-sm text-gray-900 outline
-            outline-1 group-focus:outline-4`}
+              w-20 items-center justify-start
+              rounded-lg border border-gray-300 bg-gray-50 indent-2 text-sm text-gray-900 outline
+              outline-1 group-focus:outline-4`}
               >
                 <input
                   type="number"
                   className={`
-                  ml-2 block w-12
-                  bg-gray-50 indent-2
-                  text-sm text-gray-900 outline-none`}
+                    ml-2 block w-12
+                    bg-gray-50 indent-2
+                    text-sm text-gray-900 outline-none`}
                   value={food.size || ""}
                   onChange={(e) =>
                     setEatenFoodList((prevList) => {
@@ -293,15 +294,15 @@ export default function AddDailyFood({
 
       <div
         className="
-                        col-span-8 flex w-full
-                        items-center justify-center rounded
-                        border-2 border-custom-orange sm:col-span-6
-                        sm:col-start-2"
+                          col-span-8 flex w-full
+                          items-center justify-center rounded
+                          border-2 border-custom-orange sm:col-span-6
+                          sm:col-start-2"
       >
         <div
           className="
-                        flex w-full max-w-xl flex-col 
-                        items-center justify-center"
+                          flex w-full max-w-xl flex-col 
+                          items-center justify-center"
         >
           {/* Search Box */}
           <div className="my-6 flex w-8/12 flex-col items-center justify-center">
@@ -361,11 +362,11 @@ export default function AddDailyFood({
                 </div>
                 <div className="my-1 flex flex-col items-start self-center xs:w-full">
                   {/* <p className="font-paragraph text-xs">
-                      Category:{" "}
-                      <span className="font-paragraph font-bold text-xs">
-                        {addedFood.category}
-                      </span>
-                    </p> */}
+                        Category:{" "}
+                        <span className="font-paragraph font-bold text-xs">
+                          {addedFood.category}
+                        </span>
+                      </p> */}
                   <div className="flex items-center justify-start">
                     <p className="font-paragraph text-xs">
                       How much did you eat:{" "}
@@ -373,9 +374,9 @@ export default function AddDailyFood({
                     <div
                       className={
                         `group ml-2 flex
-                            w-20 items-center justify-start
-                            rounded-lg border bg-gray-50 indent-2 text-sm text-gray-900 outline
-                             outline-1 group-focus:outline-4 ` +
+                              w-20 items-center justify-start
+                              rounded-lg border bg-gray-50 indent-2 text-sm text-gray-900 outline
+                               outline-1 group-focus:outline-4 ` +
                         (wiggle && "animate-wiggle outline-red-500")
                       }
                     >
@@ -388,8 +389,8 @@ export default function AddDailyFood({
                         autoFocus
                         type="number"
                         className={`ml-2 block w-12
-                            bg-gray-50 indent-2
-                            text-sm text-gray-900 outline-none`}
+                              bg-gray-50 indent-2
+                              text-sm text-gray-900 outline-none`}
                         value={addedFood.size || ""}
                         onChange={(e) =>
                           setAddedFood({
@@ -427,7 +428,7 @@ export default function AddDailyFood({
           <div
             className={
               `
-               my-4 w-11/12 border-b-2 border-custom-orange ` +
+                 my-4 w-11/12 border-b-2 border-custom-orange ` +
               (eatenFoodList.length
                 ? "scale-x-100 transition duration-300"
                 : "scale-x-0 transition duration-300")

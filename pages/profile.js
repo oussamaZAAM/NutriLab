@@ -19,9 +19,9 @@ const Profile = () => {
   const [profile, setProfile] = useState();
   const [render, setRender] = useState(false);
   const [requestState, setRequestState] = useState({
-    profile: [2, ''],
-    diet: [2, ''],
-    password: [2, ''],
+    profile: [2, ""],
+    diet: [2, ""],
+    password: [2, ""],
   });
 
   useEffect(() => {
@@ -34,43 +34,61 @@ const Profile = () => {
   }, [render]);
 
   const submitProfile = async (profileData) => {
-    await axios.put('api/profile', {type: 'profile', data: profileData})
-      .then((response)=>{
+    await axios
+      .put("api/profile", { type: "profile", data: profileData })
+      .then((response) => {
         setRender(true);
-        setRequestState({...requestState, profile: [1, response.data.message]});
+        setRequestState({
+          ...requestState,
+          profile: [1, response.data.message],
+        });
       })
-      .catch(err => {
-        setRequestState({...requestState, profile: [0, err.response.data.message]});
+      .catch((err) => {
+        setRequestState({
+          ...requestState,
+          profile: [0, err.response.data.message],
+        });
       });
-  }
+  };
 
   const submitDiet = async (dietData) => {
-    await axios.put('api/profile', {type: 'diet', data: dietData})
-      .then((response)=>{
+    await axios
+      .put("api/profile", { type: "diet", data: dietData })
+      .then((response) => {
         setRender(true);
-        setRequestState({...requestState, diet: [1, response.data.message]});
+        setRequestState({ ...requestState, diet: [1, response.data.message] });
       })
-      .catch(err => {
-        setRequestState({...requestState, diet: [0, err.response.data.message]});
+      .catch((err) => {
+        setRequestState({
+          ...requestState,
+          diet: [0, err.response.data.message],
+        });
       });
-  }
+  };
 
   const submitPassword = async (passwordData) => {
-    await axios.put('api/profile', {type: 'password', data: passwordData})
-      .then((response)=>{
+    await axios
+      .put("api/profile", { type: "password", data: passwordData })
+      .then((response) => {
         setRender(true);
-        setRequestState({...requestState, password: [1, response.data.message]});
+        setRequestState({
+          ...requestState,
+          password: [1, response.data.message],
+        });
       })
-      .catch(err => {
-        setRequestState({...requestState, password: [0, err.response.data.message]});
+      .catch((err) => {
+        setRequestState({
+          ...requestState,
+          password: [0, err.response.data.message],
+        });
       });
-  }
+  };
 
-  setTimeout(()=>{
+  setTimeout(() => {
     setRequestState({
-      profile: [2, ''],
-      diet: [2, ''],
-      password: [2, '']
+      profile: [2, ""],
+      diet: [2, ""],
+      password: [2, ""],
     });
   }, 3000);
   return (
@@ -86,9 +104,9 @@ const Profile = () => {
 
       {/* Profile Page  */}
       <div className="flex flex-col-reverse md:grid md:grid-cols-12">
-        <div className="col-span-3 flex md:min-h-screen flex-col items-center justify-start border-t-4 md:border-r-4 md:border-t-0 border-custom-orange bg-profile2">
+        <div className="col-span-3 flex flex-col items-center justify-start border-t-4 border-custom-orange bg-profile2 md:min-h-screen md:border-r-4 md:border-t-0">
           {profile ? (
-            <div className="sticky top-[68px] left-0 hidden md:flex flex-col lg:flex-row w-full items-center justify-center space-x-6 bg-profile1 py-4">
+            <div className="sticky top-[68px] left-0 hidden w-full flex-col items-center justify-center space-x-6 bg-profile1 py-4 md:flex lg:flex-row">
               <Image
                 width={100}
                 height={100}
@@ -107,7 +125,7 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            <div className="sticky top-[68px] left-0 hidden md:flex flex-col md:flex-row w-full items-center justify-center space-x-6 bg-profile1 py-4">
+            <div className="sticky top-[68px] left-0 hidden w-full flex-col items-center justify-center space-x-6 bg-profile1 py-4 md:flex md:flex-row">
               <div className="h-20 w-20 animate-pulse rounded-full bg-gray-200"></div>
               <div className="flex animate-pulse flex-col items-start justify-center">
                 <div className="dark:bg-gray-700 mb-4 h-5 w-40 rounded-full bg-gray-200"></div>
@@ -116,89 +134,84 @@ const Profile = () => {
               <span className="sr-only">Loading...</span>
             </div>
           )}
-          <div className="fixed bottom-0 z-50 md:sticky md:top-[228px] lg:top-[180px] left-0 flex md:flex-col items-center justify-start w-full p-2 md:py-8 bg-profile1 md:bg-transparent">
+          <div className="fixed bottom-0 left-0 z-50 flex w-full items-center justify-start bg-profile1 md:sticky md:top-[228px] md:flex-col md:bg-transparent md:py-8 lg:top-[180px] space-y-2 lg:space-y-0">
             <div
-              className="group flex flex-col-reverse md:flex-row h-full md:h-9 w-10/12 md:space-x-2"
+              className="group flex h-full w-10/12 flex-col-reverse md:h-9 md:flex-row md:space-x-2"
               onClick={() => setPage(1)}
             >
               <div
                 className={
-                  "h-2 md:h-5/6 w-5/6 md:w-2 origin-right md:origin-bottom self-center border-b-4 md:border-r-4 md:border-b-0 border-custom-orange transition duration-200 ease-[cubic-bezier(1,-0.4,1,.65)] " +
+                  "hidden md:block self-center border-custom-orange transition duration-200 ease-in-out md:h-5/6 md:w-2 md:origin-bottom md:border-r-4 md:border-b-0 " +
                   (page === 1
-                    ? "-translate-x-0 md:translate-x-0 md:-translate-y-0 opacity-100"
-                    : "translate-x-40 md:translate-x-0 md:translate-y-10 opacity-0")
+                    ? "translate-x-0 md:translate-x-0 md:translate-y-0 lg:translate-y-0"
+                    : page === 2
+                      ? "translate-x-1/3 md:translate-x-0 md:translate-y-[44px] lg:translate-y-[36px]"
+                      : page === 3
+                        ? "translate-x-full md:translate-x-0 md:translate-y-[88px] lg:translate-y-[72px]"
+                        : " ")
                 }
               ></div>
               <div
-                className="
-                            flex flex-col md:flex-row h-full w-full
-                            cursor-pointer items-center
-                            justify-start rounded-lg
-                            hover:bg-profilehover
-                          "
+                className={`
+                            flex h-full w-full cursor-pointer flex-col
+                            items-center justify-start
+                            rounded-lg hover:bg-profilehover
+                            md:flex-row
+                          ` +
+                          (page === 1 && 'bg-profilehover md:bg-transparent')}
               >
-                <BiUserCircle className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="font-logo text-sm text-[#C8C8C8] hidden xs:block">
+                <BiUserCircle className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
                   Profile page
                 </p>
-                <p className="font-logo text-sm text-[#C8C8C8] block xs:hidden">
-                  Profile 
+                <p className="block font-logo text-sm text-[#C8C8C8] xs:hidden">
+                  Profile
                 </p>
               </div>
             </div>
             <div
-              className="group flex flex-col-reverse md:flex-row h-full md:h-9 w-10/12 md:space-x-2"
+              className="group flex h-full w-10/12 flex-col-reverse md:h-9 md:flex-row md:space-x-2"
               onClick={() => setPage(2)}
             >
-              <div
-                className={
-                  "h-2 md:h-5/6 w-5/6 md:w-2 origin-center self-center border-b-4 md:border-r-4 md:border-b-0 border-custom-orange transition duration-200 ease-[cubic-bezier(1,-0.4,1,.65)] " +
-                  (page === 2 ? "scale-x-100 md:scale-y-100" : "scale-x-0 md:scale-x-100 md:scale-y-0")
-                }
-              ></div>
+              <div className="h-2 w-5/6 md:h-5/6 md:w-2"></div>
               <a
                 href="#dietInformations"
-                className="
-                                    flex flex-col md:flex-row h-full w-full
-                                    cursor-pointer items-center
-                                    justify-start rounded-lg
-                                    hover:bg-profilehover
-                                    "
+                className={`
+                            flex h-full w-full cursor-pointer flex-col
+                            items-center justify-start
+                            rounded-lg hover:bg-profilehover
+                            md:flex-row
+                          ` +
+                          (page === 2 && 'bg-profilehover md:bg-transparent')}
               >
-                <IoMdInformationCircleOutline className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="font-logo text-sm text-[#C8C8C8] hidden xs:block">
+                <IoMdInformationCircleOutline className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
                   Diet informations
                 </p>
-                <p className="font-logo text-sm text-[#C8C8C8] block xs:hidden">
+                <p className="block font-logo text-sm text-[#C8C8C8] xs:hidden">
                   Diet
                 </p>
               </a>
             </div>
             <div
-              className="group flex flex-col-reverse md:flex-row h-full md:h-9 w-10/12 md:space-x-2"
+              className="group flex h-full w-10/12 flex-col-reverse md:h-9 md:flex-row md:space-x-2"
               onClick={() => setPage(3)}
             >
+              <div className="h-2 w-5/6 md:h-5/6 md:w-2"></div>
               <div
-                className={
-                  "h-2 md:h-5/6 w-5/6 md:w-2 origin-left md:origin-top self-center border-b-4 md:border-r-4 md:border-b-0 border-custom-orange transition duration-200 ease-[cubic-bezier(1,-0.4,1,.65)] " +
-                  (page === 3
-                    ? "-translate-x-0 md:translate-x-0 md:-translate-y-0 opacity-100"
-                    : "-translate-x-40 md:translate-x-0 md:-translate-y-10 opacity-0")
-                }
-              ></div>
-              <div
-                className="
-                                    flex flex-col md:flex-row h-full w-full
-                                    cursor-pointer items-center
-                                    justify-start rounded-lg
-                                    hover:bg-profilehover
-                                    "
+                className={`
+                            flex h-full w-full cursor-pointer flex-col
+                            items-center justify-start
+                            rounded-lg hover:bg-profilehover
+                            md:flex-row
+                          ` +
+                          (page === 3 && 'bg-profilehover md:bg-transparent')}
               >
-                <MdPassword className="mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="font-logo text-sm text-[#C8C8C8] hidden xs:block">
+                <MdPassword className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
                   Change password
                 </p>
-                <p className="font-logo text-sm text-[#C8C8C8] block xs:hidden">
+                <p className="block font-logo text-sm text-[#C8C8C8] xs:hidden">
                   Password
                 </p>
               </div>
@@ -206,7 +219,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="mb-16 col-span-9 col-start-4 flex h-full w-full flex-col items-center justify-start bg-profile2">
+        <div className="col-span-9 col-start-4 mb-16 flex h-full w-full flex-col items-center justify-start bg-profile2">
           <div className="flex flex-col items-center justify-start md:w-1/2">
             <div className="my-16 flex items-center justify-center">
               <Image
@@ -237,14 +250,14 @@ const Profile = () => {
                       height: profile.height,
                       weight: profile.weight,
                       activity: profile.activity,
-                      plan: profile.plan
+                      plan: profile.plan,
                     }}
                     submitDiet={submitDiet}
                     requestState={requestState.diet}
                   />
                 )}
-                {page === 3 && 
-                  (<ProfilePassword 
+                {page === 3 && (
+                  <ProfilePassword
                     submitPassword={submitPassword}
                     requestState={requestState.password}
                   />

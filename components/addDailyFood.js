@@ -104,7 +104,6 @@ export default function AddDailyFood({
       "http://127.0.0.1:8000/polls/getFood/",
       neededNutri
     );
-    console.log(eatenFoodList);
     await axios.post("/api/foodList", eatenFoodList);
     setAlgoData(res.data);
     setIsAlgorithmEnabled(true);

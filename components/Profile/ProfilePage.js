@@ -39,7 +39,7 @@ const ProfilePage = ({profileData, submitProfile, requestState}) => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
       <>
-        <div className="relative mt-2 w-full md:w-2/3">
+        <div className="relative mt-2 w-full lg:w-2/3">
           <input
             type="text"
             id="name"
@@ -75,7 +75,7 @@ const ProfilePage = ({profileData, submitProfile, requestState}) => {
         <div className="w-full md:w-2/3 mb-3 mt-1">
           <p className='text-xs text-red-500'>{formik.errors.name}</p>
         </div>
-        <div className="relative mt-2 w-full md:w-2/3">
+        <div className="relative mt-2 w-full lg:w-2/3">
           <input
             type="email"
             id="email"
@@ -122,7 +122,7 @@ const ProfilePage = ({profileData, submitProfile, requestState}) => {
         </div>}
 
         {/* Submit Button  */}
-        <div className="my-4 w-full md:w-2/3">
+        <div className="my-4 w-full lg:w-2/3">
           <button
             onClick={formik.handleSubmit}
             type="button"

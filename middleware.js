@@ -29,7 +29,7 @@ export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("userId", user.id);
     return (
-      (user) &&
+      user &&
       NextResponse.next({
         request: {
           headers: requestHeaders,
@@ -37,7 +37,11 @@ export async function middleware(request) {
       })
     );
   } else {
-    return NextResponse.redirect(new URL("/?requestLogin=1", request.url));
+    const path = request.url.replace("http://localhost:3000", "");
+    console.log(path);
+    return NextResponse.redirect(
+      new URL("/?requestLogin=1&path=" + path, request.url)
+    );
   }
 }
 

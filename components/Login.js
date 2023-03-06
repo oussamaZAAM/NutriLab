@@ -5,8 +5,10 @@ import { User_data } from "../context/context";
 import { useContext } from "react";
 import { useState } from "react";
 import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function Login({ setLogin, setAuth, setOpen }) {
+  const router = useRouter();
   const { setUser } = useContext(User_data);
   const [user, setUser1] = useState({
     email: "",
@@ -30,6 +32,10 @@ export default function Login({ setLogin, setAuth, setOpen }) {
       .then(async (response) => {
         setAuth(response.data);
         setOpen(false);
+        if (router.query.path) {
+          router.push(router.query.path);
+          // router.push('/')
+        }
         // await axios.get("/api/nutriInfo").then((res) => {
         //   localStorage.setItem("dietInfos", JSON.stringify(res.data));
         // });

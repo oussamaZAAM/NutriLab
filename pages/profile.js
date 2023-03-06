@@ -6,12 +6,14 @@ import { useContext, useEffect, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdPassword } from "react-icons/md";
+import { FaNutritionix } from "react-icons/fa";
 
 import Navbar from "../components/Navbar";
 import ProfileDiet from "../components/Profile/ProfileDiet";
 import ProfilePage from "../components/Profile/ProfilePage";
 import ProfilePassword from "../components/Profile/ProfilePassword";
 import { User_data } from "../context/context";
+import ProfileNutrients from "../components/Profile/ProfileNutrients";
 
 const Profile = () => {
   const { user, setUser } = useContext(User_data);
@@ -141,14 +143,16 @@ const Profile = () => {
             >
               <div
                 className={
-                  "hidden md:block self-center border-custom-orange transition duration-200 ease-in-out md:h-5/6 md:w-2 md:origin-bottom md:border-r-4 md:border-b-0 " +
+                  "hidden md:block self-center border-custom-orange transition duration-200 ease-[cubic-bezier(.7,.26,.71,.26)] md:h-5/6 md:w-2 md:origin-bottom md:border-r-4 md:border-b-0 " +
                   (page === 1
-                    ? "translate-x-0 md:translate-x-0 md:translate-y-0 lg:translate-y-0"
+                    ? "md:translate-y-0 lg:translate-y-0"
                     : page === 2
-                      ? "translate-x-1/3 md:translate-x-0 md:translate-y-[44px] lg:translate-y-[36px]"
+                      ? "md:translate-y-[44px] lg:translate-y-[36px]"
                       : page === 3
-                        ? "translate-x-full md:translate-x-0 md:translate-y-[88px] lg:translate-y-[72px]"
-                        : " ")
+                        ? "md:translate-y-[88px] lg:translate-y-[72px]"
+                        : page === 4 
+                          ? "md:translate-y-[132px] lg:translate-y-[108px]"
+                          : " ")
                 }
               ></div>
               <div
@@ -207,6 +211,29 @@ const Profile = () => {
                           ` +
                           (page === 3 && 'bg-profilehover md:bg-transparent')}
               >
+                <FaNutritionix className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
+                  Nutrients Informations
+                </p>
+                <p className="block font-logo text-sm text-[#C8C8C8] xs:hidden">
+                Nutrients
+                </p>
+              </div>
+            </div>
+            <div
+              className="group flex h-full w-10/12 flex-col-reverse md:h-9 md:flex-row md:space-x-2"
+              onClick={() => setPage(4)}
+            >
+              <div className="h-2 w-5/6 md:h-5/6 md:w-2"></div>
+              <div
+                className={`
+                            flex h-full w-full cursor-pointer flex-col
+                            items-center justify-start
+                            rounded-lg hover:bg-profilehover
+                            md:flex-row
+                          ` +
+                          (page === 4 && 'bg-profilehover md:bg-transparent')}
+              >
                 <MdPassword className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
                 <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
                   Change password
@@ -257,6 +284,10 @@ const Profile = () => {
                   />
                 )}
                 {page === 3 && (
+                  <ProfileNutrients
+                  />
+                )}
+                {page === 4 && (
                   <ProfilePassword
                     submitPassword={submitPassword}
                     requestState={requestState.password}

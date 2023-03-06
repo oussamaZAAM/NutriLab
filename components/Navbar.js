@@ -59,7 +59,7 @@ export default function Example() {
           alert(error);
         }));
     setLogin(true);
-    router.reload();
+    router.push("/");
   };
   return (
     <div className="sticky top-0 z-50 grid grid-cols-8 border-b-4 border-custom-orange bg-white">

@@ -14,6 +14,15 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
       plan: dietData.plan
     });
 
+    const [dietErrors, setDietErrors] = useState({
+      age: "",
+      sex: "",
+      height: "",
+      weight: "",
+      activity: "",
+      plan: ""
+    });
+
     // Check on inputted numbers to not include 'e', '-', '+' and '.'
     const handleNumberChange = (e) => {
       const last = e.target.value.slice(-1);
@@ -34,11 +43,28 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
       setDietInfos({ ...dietInfos, [event.target.name]: event.target.value });
     }
 
-    const handleSubmit = () => {
-      // TODO: check dietInfos conditions
-      submitDiet(dietInfos);
-    }
+    const handleSubmit = async() => {
+      setDietErrors((prev) => {
+        var [age, sex, height, weight, activity, plan] = ["", "", "", "", "", ""];
 
+        if (dietInfos.age < 18 || dietInfos.age > 120) age = "Age must be between 18 and 120!";
+        if (dietInfos.height < 80 || dietInfos.height > 300) height = "Height must be between 80cm and 300cm!";
+        if (dietInfos.weight < 20 || dietInfos.weight > 220) weight = "Weight must be between 20kg and 220kg!";
+        if (dietInfos.activity === 'none') activity = "Please choose an Activity!";
+        if (dietInfos.plan === 'none') plan = "Please choose a Plan!";
+
+        return { age, sex, height, weight, activity, plan }
+      })
+      if ((dietInfos.age < 18 || dietInfos.age > 120) 
+       || (dietInfos.height < 80 || dietInfos.height > 300)
+       || (dietInfos.weight < 20 || dietInfos.weight > 220)
+       || (dietInfos.activity === 'none')
+       || (dietInfos.plan === 'none')) {
+        void(0);
+       } else {
+        submitDiet(dietInfos);
+       }
+    }
   return (
     <>
       <Head>
@@ -49,7 +75,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
 
       <>
         {/* Age  */}
-        <div id="dietInformations" className="w-full md:w-2/3 my-2 relative">
+        <div id="dietInformations" className="w-full lg:w-2/3 mt-2 mb-1 relative">
           <input
             id="age"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
@@ -65,11 +91,12 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
             Age
           </label>
         </div>
+        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.age}</p>
 
         {/* Sex  */}
-        <div className="w-full md:w-2/3 my-2 relative">
-          <ul className="grid w-full gap-6 md:grid-cols-2">
-            <li>
+        <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
+          <ul className="flex lg:flex-row justify-center items-center">
+            <li className="max-w-28 lg:max-w-32 w-full mr-2 ">
               <input
                 type="radio"
                 id="male"
@@ -95,7 +122,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
                 </div>
               </label>
             </li>
-            <li>
+            <li className="max-w-28 lg:max-w-32 w-full ml-2 ">
               <input
                 type="radio"
                 id="female"
@@ -122,9 +149,10 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
             </li>
           </ul>
         </div>
+        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.sex}</p>
 
         {/* Height  */}
-        <div className="w-full md:w-2/3 my-2 relative">
+        <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
           <input
             id="height"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
@@ -140,9 +168,10 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
             Height
           </label>
         </div>
+        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.height}</p>
 
         {/* Weight  */}
-        <div className="w-full md:w-2/3 my-2 relative">
+        <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
           <input
             id="weight"
             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-custom-orange focus:outline-none focus:ring-0 focus:border-custom-orange peer"
@@ -158,9 +187,10 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
             Weight
           </label>
         </div>
+        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.weight}</p>
 
         {/* Activity  */}
-        <div className="w-full md:w-2/3 my-2 relative">
+        <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
           <select
             id="activity"
             name="activity"
@@ -211,9 +241,10 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
             Activity
           </label>
         </div>
+        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.activity}</p>
 
         {/* Plan  */}
-        <div className="w-full md:w-2/3 my-2 relative">
+        <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
           <select
             id="plan"
             name="plan"
@@ -256,13 +287,14 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
             Plan
           </label>
         </div>
+        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.plan}</p>
 
         {requestState[0] === 0
-        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 mt-3 text-gray-500 bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
             <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
         </div>}
         {requestState[0] === 1
-        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-green-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 mt-3 text-gray-500 bg-green-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
             <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
         </div>}
 

@@ -37,10 +37,9 @@ export async function middleware(request) {
       })
     );
   } else {
-    const path = request.url.replace("http://localhost:3000", "");
-    console.log(path);
+    const path = request.nextUrl.pathname;
     return NextResponse.redirect(
-      new URL("/?requestLogin=1&path=" + path, request.url)
+      new URL("/?path=" + path + "&requestLogin=1", request.url)
     );
   }
 }

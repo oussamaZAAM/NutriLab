@@ -4,21 +4,21 @@ import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 
 import { BiUserCircle } from "react-icons/bi";
-import { IoMdInformationCircleOutline } from "react-icons/io";
+import { IoMdInformationCircleOutline, IoIosNutrition } from "react-icons/io";
 import { MdPassword } from "react-icons/md";
-import { FaNutritionix } from "react-icons/fa";
 
 import Navbar from "../components/Navbar";
 import ProfileDiet from "../components/Profile/ProfileDiet";
 import ProfilePage from "../components/Profile/ProfilePage";
 import ProfilePassword from "../components/Profile/ProfilePassword";
-import { User_data } from "../context/context";
 import ProfileNutrients from "../components/Profile/ProfileNutrients";
+import { User_data } from "../context/context";
 
 const Profile = () => {
   const { user, setUser } = useContext(User_data);
   const [page, setPage] = useState(1);
   const [profile, setProfile] = useState();
+  const [nutrients, setNutrients] = useState();
   const [render, setRender] = useState(false);
   const [requestState, setRequestState] = useState({
     profile: [2, ""],
@@ -32,6 +32,11 @@ const Profile = () => {
       setProfile(res.data);
     };
     fetchProfile();
+    const fetchNutrients = async () => {
+      const res = await axios.get("/api/nutri");
+      setNutrients(res.data);
+    };
+    fetchNutrients();
     setRender(false);
   }, [render]);
 
@@ -211,7 +216,7 @@ const Profile = () => {
                           ` +
                           (page === 3 && 'bg-profilehover md:bg-transparent')}
               >
-                <FaNutritionix className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <IoIosNutrition className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
                 <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
                   Nutrients Informations
                 </p>
@@ -283,8 +288,10 @@ const Profile = () => {
                     requestState={requestState.diet}
                   />
                 )}
-                {page === 3 && (
+                {nutrients && page === 3 && (
                   <ProfileNutrients
+                    nutrients={nutrients}
+                    setPage={setPage}
                   />
                 )}
                 {page === 4 && (

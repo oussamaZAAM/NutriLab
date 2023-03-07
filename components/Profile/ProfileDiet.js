@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from 'next/image';
 import { useState } from "react";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 

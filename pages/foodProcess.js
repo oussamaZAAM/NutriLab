@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
- 
+
 import Navbar from "/components/Navbar";
 import axios from "axios";
 import { User_data } from "/context/context";
@@ -17,20 +17,20 @@ const Food = ({ food }) => {
 
   const [localNutris, setLocalNutris] = useState({});
   const [localInfos, setLocalInfos] = useState({});
-  
+
   useEffect(() => {
     // Fetch Data from the server if the user is authenticated
     const fetchNutriInfo = async () => {
       await axios.get("/api/nutriInfo").then((res) => {
         setLocalInfos(res.data);
       });
-    }
+    };
 
     const fetchNutrients = async () => {
       await axios.get("/api/nutri").then((res) => {
         setLocalNutris(res.data);
       });
-    }
+    };
     // Fetch Data from localStorage if the user is guest
     const dietInfos = JSON.parse(window.localStorage.getItem("dietInfos"));
     const nutris = JSON.parse(window.localStorage.getItem("nutris"));
@@ -82,7 +82,7 @@ const Food = ({ food }) => {
             {food.slice(1).split("_").join(" ")}
           </th>
           <td className="truncate whitespace-nowrap px-3 py-4 text-lg font-black underline">
-            {(Math.round(100 * algoData[food] * 100) / 100).toFixed(2)}g
+            {Math.round(algoData[food]).toFixed(2)}g
           </td>
         </tr>
       );
@@ -103,7 +103,7 @@ const Food = ({ food }) => {
             {food.slice(1).split("_").join(" ")}
           </th>
           <td className="truncate whitespace-normal px-3 py-4 text-lg font-black text-green-500 underline">
-            +{(Math.round(100 * algoData[food] * 100) / 100).toFixed(2)}g
+            +{Math.round(algoData[food]).toFixed(2)}g
           </td>
         </tr>
       );

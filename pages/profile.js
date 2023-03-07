@@ -170,10 +170,10 @@ const Profile = () => {
                           (page === 1 && 'bg-profilehover md:bg-transparent')}
               >
                 <BiUserCircle className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
+                <p className="hidden font-logo text-sm text-[#C8C8C8] sm:block">
                   Profile page
                 </p>
-                <p className="block font-logo text-sm text-[#C8C8C8] xs:hidden">
+                <p className="block font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Profile
                 </p>
               </div>
@@ -194,10 +194,10 @@ const Profile = () => {
                           (page === 2 && 'bg-profilehover md:bg-transparent')}
               >
                 <IoMdInformationCircleOutline className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
+                <p className="hidden font-logo text-sm text-[#C8C8C8] sm:block">
                   Diet informations
                 </p>
-                <p className="block font-logo text-sm text-[#C8C8C8] xs:hidden">
+                <p className="block font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Diet
                 </p>
               </a>
@@ -217,10 +217,10 @@ const Profile = () => {
                           (page === 3 && 'bg-profilehover md:bg-transparent')}
               >
                 <IoIosNutrition className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
+                <p className="hidden font-logo text-sm text-[#C8C8C8] sm:block">
                   Nutrients Informations
                 </p>
-                <p className="block font-logo text-sm text-[#C8C8C8] xs:hidden">
+                <p className="block font-logo text-sm text-[#C8C8C8] sm:hidden">
                 Nutrients
                 </p>
               </div>
@@ -240,10 +240,10 @@ const Profile = () => {
                           (page === 4 && 'bg-profilehover md:bg-transparent')}
               >
                 <MdPassword className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="hidden font-logo text-sm text-[#C8C8C8] xs:block">
+                <p className="hidden font-logo text-sm text-[#C8C8C8] sm:block">
                   Change password
                 </p>
-                <p className="block font-logo text-sm text-[#C8C8C8] xs:hidden">
+                <p className="block font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Password
                 </p>
               </div>

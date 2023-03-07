@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { BiUserCircle } from "react-icons/bi";
 import { IoMdInformationCircleOutline, IoIosNutrition } from "react-icons/io";
-import { MdPassword } from "react-icons/md";
+import { MdOutlineHistory, MdPassword } from "react-icons/md";
 
 import Navbar from "../components/Navbar";
 import ProfileDiet from "../components/Profile/ProfileDiet";
@@ -13,6 +13,7 @@ import ProfilePage from "../components/Profile/ProfilePage";
 import ProfilePassword from "../components/Profile/ProfilePassword";
 import ProfileNutrients from "../components/Profile/ProfileNutrients";
 import { User_data } from "../context/context";
+import ProfileHistory from "../components/Profile/ProfileHistory";
 
 const Profile = () => {
   const { user, setUser } = useContext(User_data);
@@ -157,7 +158,7 @@ const Profile = () => {
                         ? "md:translate-y-[88px] lg:translate-y-[72px]"
                         : page === 4 
                           ? "md:translate-y-[132px] lg:translate-y-[108px]"
-                          : " ")
+                          : "md:translate-y-[176px] lg:translate-y-[144px]")
                 }
               ></div>
               <div
@@ -170,10 +171,10 @@ const Profile = () => {
                           (page === 1 && 'bg-profilehover md:bg-transparent')}
               >
                 <BiUserCircle className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
                   Profile page
                 </p>
-                <p className="block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Profile
                 </p>
               </div>
@@ -194,10 +195,10 @@ const Profile = () => {
                           (page === 2 && 'bg-profilehover md:bg-transparent')}
               >
                 <IoMdInformationCircleOutline className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
                   Diet informations
                 </p>
-                <p className="block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Diet
                 </p>
               </a>
@@ -217,10 +218,10 @@ const Profile = () => {
                           (page === 3 && 'bg-profilehover md:bg-transparent')}
               >
                 <IoIosNutrition className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
                   Nutrients Informations
                 </p>
-                <p className="block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
                 Nutrients
                 </p>
               </div>
@@ -239,11 +240,34 @@ const Profile = () => {
                           ` +
                           (page === 4 && 'bg-profilehover md:bg-transparent')}
               >
+                <MdOutlineHistory className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
+                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                  Food History
+                </p>
+                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                  History
+                </p>
+              </div>
+            </div>
+            <div
+              className="group flex h-full w-10/12 flex-col-reverse md:h-9 md:flex-row md:space-x-2"
+              onClick={() => setPage(5)}
+            >
+              <div className="h-2 w-5/6 md:h-5/6 md:w-2"></div>
+              <div
+                className={`
+                            flex h-full w-full cursor-pointer flex-col
+                            items-center justify-start
+                            rounded-lg hover:bg-profilehover
+                            md:flex-row
+                          ` +
+                          (page === 5 && 'bg-profilehover md:bg-transparent')}
+              >
                 <MdPassword className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
                   Change password
                 </p>
-                <p className="block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Password
                 </p>
               </div>
@@ -295,6 +319,10 @@ const Profile = () => {
                   />
                 )}
                 {page === 4 && (
+                  <ProfileHistory
+                  />
+                )}
+                {page === 5 && (
                   <ProfilePassword
                     submitPassword={submitPassword}
                     requestState={requestState.password}

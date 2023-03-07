@@ -100,6 +100,10 @@ export default function AddDailyFood({
     const nutrients = sumNutrients();
     const nutriRes = await axios.get("/api/nutri");
     const neededNutri = addValuesOfTwoObjects(nutriRes.data, nutrients);
+    const eatenFoodNames = eatenFoodList.map((food) => {
+      return { name: food.name, weight: food.size };
+    });
+    neededNutri.foods = eatenFoodNames;
     const res = await axios.post(
       "http://127.0.0.1:8000/polls/getFood/",
       neededNutri

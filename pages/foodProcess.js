@@ -79,7 +79,7 @@ const Food = ({ food }) => {
             scope="row"
             className="dark:text-white truncate whitespace-normal px-6 py-4 font-bold text-gray-900 sm:whitespace-normal"
           >
-            {food.slice(1).split("_").join(" ")}
+            {food}
           </th>
           <td className="truncate whitespace-nowrap px-3 py-4 text-lg font-black underline">
             {Math.round(algoData[food]).toFixed(2)}g
@@ -98,12 +98,19 @@ const Food = ({ food }) => {
         >
           <th
             scope="row"
-            className="dark:text-white truncate whitespace-nowrap px-6  py-4 font-bold text-green-500 hover:whitespace-normal sm:whitespace-normal"
+            className={`dark:text-white truncate whitespace-nowrap px-6  py-4 font-bold hover:whitespace-normal sm:whitespace-normal ${
+              algoData[food] >= 0 ? "text-green-500" : "text-red-500"
+            }`}
           >
-            {food.slice(1).split("_").join(" ")}
+            {food}
           </th>
-          <td className="truncate whitespace-normal px-3 py-4 text-lg font-black text-green-500 underline">
-            +{Math.round(algoData[food]).toFixed(2)}g
+          <td
+            className={`truncate whitespace-normal px-3 py-4 text-lg font-black  underline ${
+              algoData[food] >= 0 ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {algoData[food] > 0 ? "+" : ""}
+            {Math.round(algoData[food]).toFixed(2)}g
           </td>
         </tr>
       );

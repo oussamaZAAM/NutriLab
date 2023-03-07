@@ -101,14 +101,14 @@ export default function AddDailyFood({
     const nutriRes = await axios.get("/api/nutri");
     const neededNutri = addValuesOfTwoObjects(nutriRes.data, nutrients);
     const eatenFoodNames = eatenFoodList.map((food) => {
-      return { name: food.name, weight: food.size };
+      return { name: food.name, weight: parseFloat(food.size) };
     });
     neededNutri.foods = eatenFoodNames;
+    console.log(neededNutri);
     const res = await axios.post(
       "http://127.0.0.1:8000/polls/getFood/",
       neededNutri
     );
-    console.log(eatenFoodList);
     await axios.post("/api/foodList", eatenFoodList);
     setAlgoData(res.data);
     setIsAlgorithmEnabled(true);

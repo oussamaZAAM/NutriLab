@@ -56,11 +56,11 @@ const Food = ({ food }) => {
       >
         <th
           scope="row"
-          className="dark:text-white truncate whitespace-nowrap px-6 py-4 font-bold text-gray-900 hover:whitespace-normal sm:whitespace-normal"
+          className="dark:text-white truncate whitespace-normal px-6 py-4 font-bold text-gray-900"
         >
           {food.name}
         </th>
-        <td className="truncate whitespace-normal px-3 py-4 text-lg font-black underline">
+        <td className="truncate whitespace-nowrap px-3 py-4 text-lg font-black underline max-w-[100px] hover:max-w-full ">
           {food.size}g
         </td>
       </tr>
@@ -77,11 +77,11 @@ const Food = ({ food }) => {
         >
           <th
             scope="row"
-            className="dark:text-white truncate whitespace-normal px-6 py-4 font-bold text-gray-900 sm:whitespace-normal"
+            className="dark:text-white truncate whitespace-normal px-6 py-4 font-bold text-gray-900"
           >
             {food}
           </th>
-          <td className="truncate whitespace-nowrap px-3 py-4 text-lg font-black underline">
+          <td className="truncate whitespace-nowrap px-3 py-4 text-lg font-black underline max-w-[100px] hover:max-w-full">
             {Math.round(algoData[food]).toFixed(2)}g
           </td>
         </tr>
@@ -98,14 +98,14 @@ const Food = ({ food }) => {
         >
           <th
             scope="row"
-            className={`dark:text-white truncate whitespace-nowrap px-6  py-4 font-bold hover:whitespace-normal sm:whitespace-normal ${
+            className={`dark:text-white truncate whitespace-normal px-6  py-4 font-bold ${
               algoData[food] >= 0 ? "text-green-500" : "text-red-500"
             }`}
           >
             {food}
           </th>
           <td
-            className={`truncate whitespace-normal px-3 py-4 text-lg font-black  underline ${
+            className={`truncate whitespace-nowrap px-3 py-4 text-lg font-black underline max-w-[100px] hover:max-w-full ${
               algoData[food] >= 0 ? "text-green-500" : "text-red-500"
             }`}
           >
@@ -177,8 +177,8 @@ const Food = ({ food }) => {
         <h3 className="| my-16 w-full text-center font-title text-3xl xs:text-4xl sm:text-5xl">
           Your Labo
         </h3>
-        <div className="mb-4 flex w-full items-stretch justify-between xl:w-3/4">
-          <div className="mx-2 flex h-96 w-full flex-1 flex-col items-center justify-start border-2 border-custom-orange">
+        <div className="mb-4 flex flex-col md:flex-row space-y-4 md:space-y-0 w-full items-stretch justify-between xl:w-3/4">
+          <div className="flex w-full flex-1 flex-col items-center justify-start border-2 border-custom-orange">
             <p className="my-4 font-paragraph text-xl font-bold text-black">
               Previous Diet
             </p>
@@ -191,8 +191,7 @@ const Food = ({ food }) => {
           </div>
           {/* {isAlgorithmEnabled && ( */}
           <div
-            className="mx-2 flex w-full flex-1 flex-col items-center justify-start border-2 border-custom-orange
-              
+            className="flex w-full flex-1 flex-col items-center justify-start border-2 border-custom-orange
               "
           >
             <div className="w-full bg-gradient-to-r from-gradient1 to-gradient2 text-center">
@@ -209,7 +208,7 @@ const Food = ({ food }) => {
               </table>
             )}
           </div>
-          <div className="mx-2 flex w-full flex-1 flex-col items-center justify-start border-2 border-custom-orange">
+          <div className="flex w-full flex-1 flex-col items-center justify-start border-2 border-custom-orange">
             <div className="w-full bg-gradient-to-r from-gradient1 to-gradient2 text-center">
               <p className="my-4 font-paragraph text-xl font-bold text-white">
                 New Diet

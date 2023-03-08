@@ -14,6 +14,7 @@ import ProfilePassword from "../components/Profile/ProfilePassword";
 import ProfileNutrients from "../components/Profile/ProfileNutrients";
 import { User_data } from "../context/context";
 import ProfileHistory from "../components/Profile/ProfileHistory";
+import calculateNutrients from "../components/Calculate/CalculateNutrients";
 
 const Profile = () => {
   const { user, setUser } = useContext(User_data);
@@ -24,7 +25,7 @@ const Profile = () => {
   const [requestState, setRequestState] = useState({
     profile: [2, ""],
     diet: [2, ""],
-    password: [2, ""],
+    password: [2, ""]
   });
 
   useEffect(() => {
@@ -60,6 +61,7 @@ const Profile = () => {
   };
 
   const submitDiet = async (dietData) => {
+    submitNutrients(dietData);
     await axios
       .put("api/profile", { type: "diet", data: dietData })
       .then((response) => {
@@ -73,6 +75,12 @@ const Profile = () => {
         });
       });
   };
+
+  const submitNutrients = async (dietData) => {
+    const { age, sex, height, weight, activity, plan } = dietData;
+    const nutrientsData = calculateNutrients(age, sex, height, weight, activity, plan);
+    await axios.put("api/nutri", nutrientsData );
+  }
 
   const submitPassword = async (passwordData) => {
     await axios

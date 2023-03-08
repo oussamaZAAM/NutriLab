@@ -2,6 +2,8 @@ import { RiEditFill } from "react-icons/ri";
 import Link from "next/link";
 
 export default function YourInfo({ localInfos, localNutris }) {
+  console.log(localInfos)
+  console.log(localNutris)
   function capitalizeFirstLetter(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
@@ -33,7 +35,7 @@ export default function YourInfo({ localInfos, localNutris }) {
           />
         </Link>
       </div>
-      {localInfos ? (
+      {localInfos && Object.keys(localInfos).every((info) => localInfos[info] !== null) ? (
         <div className="flex-2 my-4 flex items-center justify-center rounded border">
           <table className="w-full text-left text-sm text-gray-500">
             <tbody>
@@ -142,7 +144,7 @@ export default function YourInfo({ localInfos, localNutris }) {
         </Link>
       </div>
 
-      {localNutris ? (
+      {localNutris && Object.keys(localNutris).every((info) => localNutris[info] !== null) ? (
         <div className="no-scrollwbar my-8 flex w-11/12 overflow-x-auto">
           <table className="w-full text-left text-sm text-gray-500">
             <thead className="text-xs uppercase text-gray-700">

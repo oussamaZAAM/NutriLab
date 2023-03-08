@@ -14,16 +14,7 @@ import calculateVitamins from "../components/Calculate/CalculateVitamins";
 
 export default function Nutrients() {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
-  const [nutrients, setNutrients] = useState({
-    kCalories: 0,
-    proteins: 0,
-    carbs: 0,
-    fats: 0,
-    fiber: 0,
-    salt: 0,
-    iron: 0,
-    sugar: 0,
-  });
+  const [nutrients, setNutrients] = useState();
   const [vitamins, setVitamins] = useState({});
   const { user, setUser } = useContext(User_data);
 
@@ -125,11 +116,18 @@ export default function Nutrients() {
       </div>
 
       <div className="grid grid-cols-8">
-        {(nutrients || Object.keys(localNutris).every((key) => localNutris[key] !== null)) && isInfosApplied && (
-          <DailyNutrients
-            nutrients={nutrients || localNutris}
-            vitamins={vitamins}
-          />
+        {isInfosApplied && (
+          nutrients ? (
+            <DailyNutrients
+              nutrients={nutrients}
+              vitamins={vitamins}
+            />
+          ) : (Object.keys(localNutris).every((key) => localNutris[key] !== null)) && (
+            <DailyNutrients
+              nutrients={localNutris}
+              vitamins={vitamins}
+            />
+          )
         )}
       </div>
 

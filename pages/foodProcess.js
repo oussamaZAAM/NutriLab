@@ -45,13 +45,21 @@ const Food = ({ food }) => {
     }
   }, [user]);
 
+  const objectizeEatenFood = (eatenFoodList) => {
+    var object = {};
+    for (let i = 0; i < eatenFoodList.length; i++) {
+      object = {...object, [eatenFoodList[i].name]: eatenFoodList[i].size}
+    }
+    return object;
+  }
+
   //Handle API changes
   const [algoData, setAlgoData] = useState({});
 
   const laboTable1 = eatenFoodList.map((food) => {
     return (
       <tr
-        key={food.name}
+        key={food}
         className="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
       >
         <th
@@ -60,7 +68,7 @@ const Food = ({ food }) => {
         >
           {food.name}
         </th>
-        <td className="truncate whitespace-nowrap px-3 py-4 text-lg font-black underline max-w-[100px] hover:max-w-full ">
+        <td className="max-w-[100px] md:max-w-[150px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full ">
           {food.size}g
         </td>
       </tr>
@@ -72,28 +80,7 @@ const Food = ({ food }) => {
     Object.keys(algoData).map((food) => {
       return (
         <tr
-          key={food.name}
-          className="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
-        >
-          <th
-            scope="row"
-            className="dark:text-white truncate whitespace-normal px-6 py-4 font-bold text-gray-900"
-          >
-            {food}
-          </th>
-          <td className="truncate whitespace-nowrap px-3 py-4 text-lg font-black underline max-w-[100px] hover:max-w-full">
-            {Math.round(algoData[food]).toFixed(2)}g
-          </td>
-        </tr>
-      );
-    });
-
-  const laboTable3 =
-    Object.keys(algoData).length !== 0 &&
-    Object.keys(algoData).map((food) => {
-      return (
-        <tr
-          key={food.name}
+          key={food}
           className="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
         >
           <th
@@ -105,12 +92,36 @@ const Food = ({ food }) => {
             {food}
           </th>
           <td
-            className={`truncate whitespace-nowrap px-3 py-4 text-lg font-black underline max-w-[100px] hover:max-w-full ${
+            className={`max-w-[100px] md:max-w-[150px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full ${
               algoData[food] >= 0 ? "text-green-500" : "text-red-500"
             }`}
           >
             {algoData[food] > 0 ? "+" : ""}
             {Math.round(algoData[food]).toFixed(2)}g
+          </td>
+        </tr>
+      );
+    });
+
+  const laboTable3 =
+    Object.keys(algoData).length !== 0 &&
+    Object.keys(algoData).map((food) => {
+      const eatenFoodObject = objectizeEatenFood(eatenFoodList);
+      
+      return (
+        <tr
+          key={food}
+          className="dark:bg-gray-800 dark:border-gray-700 border-b bg-white"
+        >
+          <th
+            scope="row"
+            className="dark:text-white truncate whitespace-normal px-6  py-4 font-bold text-blue-500"
+          >
+            {food}
+          </th>
+          <td className='max-w-[100px] md:max-w-[150px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full text-blue-500'>
+            {algoData[food] > 0 ? "+" : ""}
+            {algoData[food] > 0 ? Math.round(algoData[food]).toFixed(2) : Math.round(eatenFoodObject[food]).toFixed(2) - (-Math.round(algoData[food]).toFixed(2))}g
           </td>
         </tr>
       );
@@ -177,7 +188,7 @@ const Food = ({ food }) => {
         <h3 className="| my-16 w-full text-center font-title text-3xl xs:text-4xl sm:text-5xl">
           Your Labo
         </h3>
-        <div className="mb-4 flex flex-col md:flex-row space-y-4 md:space-y-0 w-full items-stretch justify-between xl:w-3/4">
+        <div className="mb-4 flex w-full flex-col items-stretch justify-between space-y-4 md:flex-row md:space-y-0 xl:w-3/4">
           <div className="flex w-full flex-1 flex-col items-center justify-start border-2 border-custom-orange">
             <p className="my-4 font-paragraph text-xl font-bold text-black">
               Previous Diet
@@ -218,7 +229,6 @@ const Food = ({ food }) => {
             <div className="w-full border-b-2 border-custom-orange"></div>
             {isAlgorithmEnabled && (
               <table className="dark:text-white w-full text-left font-logo text-sm text-black">
-                <tbody>{laboTable1}</tbody>
                 <tbody>{laboTable3}</tbody>
               </table>
             )}

@@ -104,7 +104,6 @@ export default function AddDailyFood({
       return { name: food.name, weight: parseFloat(food.size) };
     });
     neededNutri.foods = eatenFoodNames;
-    console.log(neededNutri);
     const res = await axios.post(
       "http://127.0.0.1:8000/polls/getFood/",
       neededNutri

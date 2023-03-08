@@ -2,6 +2,7 @@ import Head from "next/head";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
 const ProfileNutrients = ({ nutrients, setPage }) => {
+  console.log("ayoub");
   return (
     <>
       <Head>
@@ -11,7 +12,7 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
       </Head>
 
       <>
-        <div className="relative w-64 flex items-center justify-start space-x-2 lg:w-2/3">
+        <div className="relative flex w-64 items-center justify-start space-x-2 lg:w-2/3">
           <IoMdInformationCircleOutline className="my-2 h-3 w-3 fill-black" />
           <p className="text-left text-[10px] font-bold text-black">
             You cannot edit these values.
@@ -19,7 +20,12 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
         </div>
         <p className="mb-4 w-64 text-left text-sm font-medium text-black lg:w-2/3">
           They are generated automatically based on your{" "}
-          <button onClick={()=>setPage(2)} className="text-blue-700 underline">Diet Informations.</button>
+          <button
+            onClick={() => setPage(2)}
+            className="text-blue-700 underline"
+          >
+            Diet Informations.
+          </button>
         </p>
         {/* Calories  */}
         <div className="relative mt-2 mb-1 w-full lg:w-2/3">

@@ -116,5 +116,6 @@ model FoodList {
   id     Int     @id @default(autoincrement())
   food   Food[]
   User   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  lable  String?
+  userId String
 }

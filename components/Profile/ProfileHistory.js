@@ -1,8 +1,20 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 const ProfileHistory = () => {
+  const [foodHistory, setFoodHistory] = useState([]);
+  useEffect(() => {
+    async function getHistory() {
+      const foodHistoryData = await axios.get("/api/foodList");
+      setFoodHistory(foodHistoryData);
+    }
+    getHistory();
+  }, []);
+
+  console.log(foodHistory);
   return (
     <>
       <div className="m-5 text-lg">ProfileHistory</div>
-      <table class="table-auto rounded-md bg-slate-50">
+      <table className="table-auto rounded-md bg-slate-50">
         <thead>
           <tr>
             <th>FoodList</th>
@@ -28,4 +40,13 @@ const ProfileHistory = () => {
   );
 };
 
+// export async function getServerSideProps() {
+//   const foodHistory = axios.get("/api/foodList");
+//   console.log(foodHistory);
+//   return {
+//     props: {
+//       foodHistory: foodHistory,
+//     },
+//   };
+// }
 export default ProfileHistory;

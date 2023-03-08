@@ -25,9 +25,8 @@ const Profile = () => {
   const [requestState, setRequestState] = useState({
     profile: [2, ""],
     diet: [2, ""],
-    password: [2, ""]
+    password: [2, ""],
   });
-
   useEffect(() => {
     const fetchProfile = async () => {
       const res = await axios.get("/api/profile");
@@ -78,9 +77,16 @@ const Profile = () => {
 
   const submitNutrients = async (dietData) => {
     const { age, sex, height, weight, activity, plan } = dietData;
-    const nutrientsData = calculateNutrients(age, sex, height, weight, activity, plan);
-    await axios.put("api/nutri", nutrientsData );
-  }
+    const nutrientsData = calculateNutrients(
+      age,
+      sex,
+      height,
+      weight,
+      activity,
+      plan
+    );
+    await axios.put("api/nutri", nutrientsData);
+  };
 
   const submitPassword = async (passwordData) => {
     await axios
@@ -99,14 +105,14 @@ const Profile = () => {
         });
       });
   };
-
-  setTimeout(() => {
-    setRequestState({
-      profile: [2, ""],
-      diet: [2, ""],
-      password: [2, ""],
-    });
-  }, 3000);
+  console.log("ayoub");
+  // setTimeout(() => {
+  //   setRequestState({
+  //     profile: [2, ""],
+  //     diet: [2, ""],
+  //     password: [2, ""],
+  //   });
+  // }, 3000);
   return (
     <>
       <Head>

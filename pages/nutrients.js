@@ -14,28 +14,37 @@ import calculateVitamins from "../components/Calculate/CalculateVitamins";
 
 export default function Nutrients() {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
-  const [nutrients, setNutrients] = useState();
-  const [vitamins, setVitamins] = useState();
+  const [nutrients, setNutrients] = useState({
+    kCalories: 0,
+    proteins: 0,
+    carbs: 0,
+    fats: 0,
+    fiber: 0,
+    salt: 0,
+    iron: 0,
+    sugar: 0,
+  });
+  const [vitamins, setVitamins] = useState({});
   const { user, setUser } = useContext(User_data);
 
   // Next is SSR so we should ... , Force a render with useEffect
   const [localInfos, setLocalInfos] = useState({
-      age: "",
-      sex: "",
-      height: "",
-      weight: "",
-      activity: "",
-      plan: ""
+    age: "",
+    sex: "",
+    height: "",
+    weight: "",
+    activity: "",
+    plan: "",
   });
   const [localNutris, setLocalNutris] = useState({
-      kCalories: 0,
-      proteins: 0,
-      carbs: 0,
-      fats: 0,
-      fiber: 0,
-      salt: 0,
-      iron: 0,
-      sugar: 0
+    kCalories: 0,
+    proteins: 0,
+    carbs: 0,
+    fats: 0,
+    fiber: 0,
+    salt: 0,
+    iron: 0,
+    sugar: 0,
   });
 
   useEffect(() => {
@@ -44,13 +53,13 @@ export default function Nutrients() {
       await axios.get("/api/nutriInfo").then((res) => {
         setLocalInfos(res.data);
       });
-    }
+    };
 
     const fetchNutrients = async () => {
       await axios.get("/api/nutri").then((res) => {
         setLocalNutris(res.data);
       });
-    }
+    };
     // Fetch Data from localStorage if the user is guest
     const dietInfos = JSON.parse(window.localStorage.getItem("dietInfos"));
     const nutris = JSON.parse(window.localStorage.getItem("nutris"));
@@ -64,13 +73,13 @@ export default function Nutrients() {
       fetchNutrients();
     }
 
-    // if data is fetched, display the nutrients page 
+    // if data is fetched, display the nutrients page
     if (dietInfos) {
       setIsInfosApplied(true);
     }
   }, [user]);
 
-  const applyInfos = async (dietInfos) => { 
+  const applyInfos = async (dietInfos) => {
     const { age, sex, height, weight, activity, plan } = dietInfos;
     user &&
       (await axios.put("/api/nutriInfo", dietInfos, {
@@ -82,7 +91,7 @@ export default function Nutrients() {
     //Calculate Nutrients
     setNutrients(nutris);
     localStorage.setItem("nutris", JSON.stringify(nutris));
-    console.log(nutris)
+    console.log(nutris);
     user && (await axios.put("/api/nutri", nutris));
     //Calculate Vitamins
     setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
@@ -101,8 +110,8 @@ export default function Nutrients() {
       <Navbar User={user} />
 
       <div className="grid grid-cols-6 justify-items-center">
-        <div className="flex flex-col justify-center items-center | sm:col-start-2 xl:col-start-3 col-span-6 sm:col-span-4 xl:col-span-2 | max-w-xl mx-4">
-          <h1 className="font-title text-6xl text-center | w-full my-16">
+        <div className="| | col-span-6 mx-4 flex max-w-xl flex-col items-center justify-center sm:col-span-4 sm:col-start-2 xl:col-span-2 xl:col-start-3">
+          <h1 className="| my-16 w-full text-center font-title text-6xl">
             Let us know You
           </h1>
           <DietInfo

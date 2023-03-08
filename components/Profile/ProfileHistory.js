@@ -10,7 +10,7 @@ const ProfileHistory = () => {
     getHistory();
   }, []);
 
-  console.log("foodHistory");
+  console.log(foodHistory);
   return (
     <>
       <div className="m-5 text-lg">ProfileHistory</div>

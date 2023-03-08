@@ -49,7 +49,7 @@ export default async function food(req, res) {
       });
       res.status(200).json(user);
     } catch (e) {
-      res.status(401).json({ message: "No Nutri Info" });
+      res.status(401).json({ message: "No Food list" });
     }
   }
 }

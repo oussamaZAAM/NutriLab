@@ -142,39 +142,41 @@ const Profile = () => {
               <span className="sr-only">Loading...</span>
             </div>
           )}
-          <div className="fixed bottom-0 left-0 z-50 flex w-full items-center justify-start bg-profile1 md:sticky md:top-[228px] md:flex-col md:bg-transparent md:py-8 lg:top-[180px] space-y-2 lg:space-y-0">
+          <div className="fixed bottom-0 left-0 z-50 flex w-full items-center justify-start space-y-2 bg-profile1 md:sticky md:top-[228px] md:flex-col md:bg-transparent md:py-8 lg:top-[180px] lg:space-y-0">
             <div
               className="group flex h-full w-10/12 flex-col-reverse md:h-9 md:flex-row md:space-x-2"
               onClick={() => setPage(1)}
             >
               <div
                 className={
-                  "hidden md:block self-center border-custom-orange transition duration-200 ease-[cubic-bezier(.7,.26,.71,.26)] md:h-5/6 md:w-2 md:origin-bottom md:border-r-4 md:border-b-0 " +
+                  "hidden self-center border-custom-orange transition duration-200 ease-[cubic-bezier(.7,.26,.71,.26)] md:block md:h-5/6 md:w-2 md:origin-bottom md:border-r-4 md:border-b-0 " +
                   (page === 1
                     ? "md:translate-y-0 lg:translate-y-0"
                     : page === 2
-                      ? "md:translate-y-[44px] lg:translate-y-[36px]"
-                      : page === 3
-                        ? "md:translate-y-[88px] lg:translate-y-[72px]"
-                        : page === 4 
-                          ? "md:translate-y-[132px] lg:translate-y-[108px]"
-                          : "md:translate-y-[176px] lg:translate-y-[144px]")
+                    ? "md:translate-y-[44px] lg:translate-y-[36px]"
+                    : page === 3
+                    ? "md:translate-y-[88px] lg:translate-y-[72px]"
+                    : page === 4
+                    ? "md:translate-y-[132px] lg:translate-y-[108px]"
+                    : "md:translate-y-[176px] lg:translate-y-[144px]")
                 }
               ></div>
               <div
-                className={`
+                className={
+                  `
                             flex h-full w-full cursor-pointer flex-col
                             items-center justify-start
                             rounded-lg hover:bg-profilehover
                             md:flex-row
                           ` +
-                          (page === 1 && 'bg-profilehover md:bg-transparent')}
+                  (page === 1 && "bg-profilehover md:bg-transparent")
+                }
               >
-                <BiUserCircle className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <BiUserCircle className="mx-2 h-6 w-6 fill-[#C8C8C8] lg:mx-4" />
+                <p className="hidden text-center font-logo text-sm text-[#C8C8C8] sm:block md:max-w-[100px] md:text-left lg:max-w-[120px]">
                   Profile page
                 </p>
-                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                <p className="block w-11/12 truncate text-center font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Profile
                 </p>
               </div>
@@ -186,19 +188,21 @@ const Profile = () => {
               <div className="h-2 w-5/6 md:h-5/6 md:w-2"></div>
               <a
                 href="#dietInformations"
-                className={`
+                className={
+                  `
                             flex h-full w-full cursor-pointer flex-col
                             items-center justify-start
                             rounded-lg hover:bg-profilehover
                             md:flex-row
                           ` +
-                          (page === 2 && 'bg-profilehover md:bg-transparent')}
+                  (page === 2 && "bg-profilehover md:bg-transparent")
+                }
               >
-                <IoMdInformationCircleOutline className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <IoMdInformationCircleOutline className="mx-2 h-6 w-6 fill-[#C8C8C8] lg:mx-4" />
+                <p className="hidden text-center font-logo text-sm text-[#C8C8C8] sm:block md:max-w-[100px] md:text-left lg:max-w-[120px]">
                   Diet informations
                 </p>
-                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                <p className="block w-11/12 truncate text-center font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Diet
                 </p>
               </a>
@@ -209,20 +213,22 @@ const Profile = () => {
             >
               <div className="h-2 w-5/6 md:h-5/6 md:w-2"></div>
               <div
-                className={`
+                className={
+                  `
                             flex h-full w-full cursor-pointer flex-col
                             items-center justify-start
                             rounded-lg hover:bg-profilehover
                             md:flex-row
                           ` +
-                          (page === 3 && 'bg-profilehover md:bg-transparent')}
+                  (page === 3 && "bg-profilehover md:bg-transparent")
+                }
               >
-                <IoIosNutrition className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <IoIosNutrition className="mx-2 h-6 w-6 fill-[#C8C8C8] lg:mx-4" />
+                <p className="hidden text-center font-logo text-sm text-[#C8C8C8] sm:block md:max-w-[100px] md:text-left lg:max-w-[120px]">
                   Nutrients Informations
                 </p>
-                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
-                Nutrients
+                <p className="block w-11/12 truncate text-center font-logo text-sm text-[#C8C8C8] sm:hidden">
+                  Nutrients
                 </p>
               </div>
             </div>
@@ -232,19 +238,21 @@ const Profile = () => {
             >
               <div className="h-2 w-5/6 md:h-5/6 md:w-2"></div>
               <div
-                className={`
+                className={
+                  `
                             flex h-full w-full cursor-pointer flex-col
                             items-center justify-start
                             rounded-lg hover:bg-profilehover
                             md:flex-row
                           ` +
-                          (page === 4 && 'bg-profilehover md:bg-transparent')}
+                  (page === 4 && "bg-profilehover md:bg-transparent")
+                }
               >
-                <MdOutlineHistory className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <MdOutlineHistory className="mx-2 h-6 w-6 fill-[#C8C8C8] lg:mx-4" />
+                <p className="hidden text-center font-logo text-sm text-[#C8C8C8] sm:block md:max-w-[100px] md:text-left lg:max-w-[120px]">
                   Food History
                 </p>
-                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                <p className="block w-11/12 truncate text-center font-logo text-sm text-[#C8C8C8] sm:hidden">
                   History
                 </p>
               </div>
@@ -255,19 +263,21 @@ const Profile = () => {
             >
               <div className="h-2 w-5/6 md:h-5/6 md:w-2"></div>
               <div
-                className={`
+                className={
+                  `
                             flex h-full w-full cursor-pointer flex-col
                             items-center justify-start
                             rounded-lg hover:bg-profilehover
                             md:flex-row
                           ` +
-                          (page === 5 && 'bg-profilehover md:bg-transparent')}
+                  (page === 5 && "bg-profilehover md:bg-transparent")
+                }
               >
-                <MdPassword className="mx-2 lg:mx-4 h-6 w-6 fill-[#C8C8C8]" />
-                <p className="text-center md:text-left md:max-w-[100px] lg:max-w-[120px] hidden font-logo text-sm text-[#C8C8C8] sm:block">
+                <MdPassword className="mx-2 h-6 w-6 fill-[#C8C8C8] lg:mx-4" />
+                <p className="hidden text-center font-logo text-sm text-[#C8C8C8] sm:block md:max-w-[100px] md:text-left lg:max-w-[120px]">
                   Change password
                 </p>
-                <p className="text-center truncate w-11/12 block font-logo text-sm text-[#C8C8C8] sm:hidden">
+                <p className="block w-11/12 truncate text-center font-logo text-sm text-[#C8C8C8] sm:hidden">
                   Password
                 </p>
               </div>
@@ -313,15 +323,9 @@ const Profile = () => {
                   />
                 )}
                 {nutrients && page === 3 && (
-                  <ProfileNutrients
-                    nutrients={nutrients}
-                    setPage={setPage}
-                  />
+                  <ProfileNutrients nutrients={nutrients} setPage={setPage} />
                 )}
-                {page === 4 && (
-                  <ProfileHistory
-                  />
-                )}
+                {page === 4 && <ProfileHistory />}
                 {page === 5 && (
                   <ProfilePassword
                     submitPassword={submitPassword}

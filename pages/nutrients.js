@@ -42,13 +42,17 @@ export default function Nutrients() {
     // Fetch Data from the server if the user is authenticated
     const fetchNutriInfo = async () => {
       await axios.get("/api/nutriInfo").then((res) => {
-        setLocalInfos(res.data);
+        if (Object.keys(res.data).every(key => res.data[key] !== null)){
+          setLocalInfos(res.data);
+        }
       });
     }
 
     const fetchNutrients = async () => {
       await axios.get("/api/nutri").then((res) => {
-        setLocalNutris(res.data);
+        if (Object.keys(res.data).every(key => res.data[key] !== null)){
+          setLocalNutris(res.data);
+        }
       });
     }
     // Fetch Data from localStorage if the user is guest

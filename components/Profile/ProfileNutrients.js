@@ -28,7 +28,7 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
             className="dark:text-white dark:border-gray-600 dark:focus:border-custom-orange peer block w-full appearance-none rounded-lg border-2 border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-custom-orange focus:outline-none focus:ring-0"
             placeholder=" "
             value={nutrients.kCalories}
-            readOnly="true"
+            readOnly={true}
           />
           <label
             htmlFor="calories"
@@ -45,7 +45,7 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
             className="dark:text-white dark:border-gray-600 dark:focus:border-custom-orange peer block w-full appearance-none rounded-lg border-2 border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-custom-orange focus:outline-none focus:ring-0"
             placeholder=" "
             value={nutrients.proteins}
-            readOnly="true"
+            readOnly={true}
           />
           <label
             htmlFor="proteins"
@@ -62,7 +62,7 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
             className="dark:text-white dark:border-gray-600 dark:focus:border-custom-orange peer block w-full appearance-none rounded-lg border-2 border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-custom-orange focus:outline-none focus:ring-0"
             placeholder=" "
             value={nutrients.carbs}
-            readOnly="true"
+            readOnly={true}
           />
           <label
             htmlFor="carbs"
@@ -79,7 +79,7 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
             className="dark:text-white dark:border-gray-600 dark:focus:border-custom-orange peer block w-full appearance-none rounded-lg border-2 border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-custom-orange focus:outline-none focus:ring-0"
             placeholder=" "
             value={nutrients.fats}
-            readOnly="true"
+            readOnly={true}
           />
           <label
             htmlFor="fats"
@@ -96,7 +96,7 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
             className="dark:text-white dark:border-gray-600 dark:focus:border-custom-orange peer block w-full appearance-none rounded-lg border-2 border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-custom-orange focus:outline-none focus:ring-0"
             placeholder=" "
             value={nutrients.fiber}
-            readOnly="true"
+            readOnly={true}
           />
           <label
             htmlFor="fiber"
@@ -113,7 +113,7 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
             className="dark:text-white dark:border-gray-600 dark:focus:border-custom-orange peer block w-full appearance-none rounded-lg border-2 border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-custom-orange focus:outline-none focus:ring-0"
             placeholder=" "
             value={nutrients.salt}
-            readOnly="true"
+            readOnly={true}
           />
           <label
             htmlFor="salt"
@@ -130,7 +130,7 @@ const ProfileNutrients = ({ nutrients, setPage }) => {
             className="dark:text-white dark:border-gray-600 dark:focus:border-custom-orange peer block w-full appearance-none rounded-lg border-2 border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-custom-orange focus:outline-none focus:ring-0"
             placeholder=" "
             value={nutrients.sugar}
-            readOnly="true"
+            readOnly={true}
           />
           <label
             htmlFor="sugar"

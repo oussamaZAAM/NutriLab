@@ -82,6 +82,7 @@ export default function Nutrients() {
     //Calculate Nutrients
     setNutrients(nutris);
     localStorage.setItem("nutris", JSON.stringify(nutris));
+    console.log(nutris)
     user && (await axios.put("/api/nutri", nutris));
     //Calculate Vitamins
     setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));

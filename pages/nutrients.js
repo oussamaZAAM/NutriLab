@@ -28,30 +28,33 @@ export default function Nutrients() {
       plan: ""
   });
   const [localNutris, setLocalNutris] = useState({
-      kCalories: 0,
-      proteins: 0,
-      carbs: 0,
-      fats: 0,
-      fiber: 0,
-      salt: 0,
-      iron: 0,
-      sugar: 0
+      kCalories: null,
+      proteins: null,
+      carbs: null,
+      fats: null,
+      fiber: null,
+      salt: null,
+      iron: null,
+      sugar: null
   });
 
   useEffect(() => {
     // Fetch Data from the server if the user is authenticated
-    const fetchNutriInfo = async () => {
+    const fetchNutriInfo = async (dietInfos) => {
       await axios.get("/api/nutriInfo").then((res) => {
         if (Object.keys(res.data).every(key => res.data[key] !== null)){
           setLocalInfos(res.data);
+        } else {
+          setLocalInfos(dietInfos);
         }
       });
     }
 
-    const fetchNutrients = async () => {
+    const fetchNutrients = async (nutris) => {
       await axios.get("/api/nutri").then((res) => {
         if (Object.keys(res.data).every(key => res.data[key] !== null)){
           setLocalNutris(res.data);
+          setIsInfosApplied(true);
         }
       });
     }
@@ -62,15 +65,9 @@ export default function Nutrients() {
     // Check if the user is authenticated or is a guest
     if (!user) {
       setLocalInfos(dietInfos);
-      setLocalNutris(nutris);
     } else {
-      fetchNutriInfo();
-      fetchNutrients();
-    }
-
-    // if data is fetched, display the nutrients page 
-    if (dietInfos) {
-      setIsInfosApplied(true);
+      fetchNutriInfo(dietInfos);
+      fetchNutrients(nutris);
     }
   }, [user]);
 
@@ -119,15 +116,11 @@ export default function Nutrients() {
       </div>
 
       <div className="grid grid-cols-8">
-        {localNutris && isInfosApplied ? (
+        {(nutrients || Object.keys(localNutris).every((key) => localNutris[key] !== null)) && isInfosApplied && (
           <DailyNutrients
             nutrients={nutrients || localNutris}
             vitamins={vitamins}
           />
-        ) : (
-          isInfosApplied && (
-            <DailyNutrients nutrients={nutrients} vitamins={vitamins} />
-          )
         )}
       </div>
 

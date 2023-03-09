@@ -59,7 +59,7 @@ const ProfilePassword = ({submitPassword, requestState, hideMessage}) => {
                         text-sm text-white 
                         focus:border-custom-orange focus:outline-none focus:ring-0 
                         dark:border-gray-600 dark:text-white dark:focus:border-custom-orange `+
-                        (formik.errors.oldPassword && formik.touched.oldPassword && 'border-red-500 focus:border-red-500')
+                        (formik.errors.oldPassword && formik.touched.oldPassword && 'border-red-600 focus:border-red-600')
                       }
             placeholder=" "
             name="oldPassword"
@@ -76,13 +76,13 @@ const ProfilePassword = ({submitPassword, requestState, hideMessage}) => {
                         peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-custom-orange 
                         dark:bg-gray-900 dark:text-gray-400 
                         peer-focus:dark:text-blue-500 `+ 
-                      (formik.errors.oldPassword && formik.touched.oldPassword && 'text-red-500 peer-focus:text-red-500')}
+                      (formik.errors.oldPassword && formik.touched.oldPassword && 'text-red-600 peer-focus:text-red-600')}
           >
             Current Password
           </label>
         </div>
         <div className="w-full mb-3 mt-1">
-          <p className='text-xs text-red-500'>{formik.touched.oldPassword && formik.errors.oldPassword}</p>
+          <p className='text-xs text-red-600'>{formik.touched.oldPassword && formik.errors.oldPassword}</p>
         </div>
 
         {/* New Password */}
@@ -97,7 +97,7 @@ const ProfilePassword = ({submitPassword, requestState, hideMessage}) => {
                         text-sm text-white 
                         focus:border-custom-orange focus:outline-none focus:ring-0 
                         dark:border-gray-600 dark:text-white dark:focus:border-custom-orange `+
-                        (formik.errors.newPassword && formik.touched.newPassword && 'border-red-500 focus:border-red-500')
+                        (formik.errors.newPassword && formik.touched.newPassword && 'border-red-600 focus:border-red-600')
                       }
             placeholder=" "
             name="newPassword"
@@ -114,13 +114,13 @@ const ProfilePassword = ({submitPassword, requestState, hideMessage}) => {
                         peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-custom-orange 
                         dark:bg-gray-900 dark:text-gray-400 
                         peer-focus:dark:text-blue-500 `+ 
-                      (formik.errors.newPassword && formik.touched.newPassword && 'text-red-500 peer-focus:text-red-500')}
+                      (formik.errors.newPassword && formik.touched.newPassword && 'text-red-600 peer-focus:text-red-600')}
           >
             New Password
           </label>
         </div>
         <div className="w-full mb-3 mt-1">
-          <p className='text-xs text-red-500'>{formik.touched.newPassword && formik.errors.newPassword}</p>
+          <p className='text-xs text-red-600'>{formik.touched.newPassword && formik.errors.newPassword}</p>
         </div>
 
         {/* Confirm Password */}
@@ -135,7 +135,7 @@ const ProfilePassword = ({submitPassword, requestState, hideMessage}) => {
                         text-sm text-white 
                         focus:border-custom-orange focus:outline-none focus:ring-0 
                         dark:border-gray-600 dark:text-white dark:focus:border-custom-orange `+
-                        (formik.errors.confirmPassword && formik.touched.confirmPassword && 'border-red-500 focus:border-red-500')
+                        (formik.errors.confirmPassword && formik.touched.confirmPassword && 'border-red-600 focus:border-red-600')
                       }
             placeholder=" "
             name="confirmPassword"
@@ -152,13 +152,13 @@ const ProfilePassword = ({submitPassword, requestState, hideMessage}) => {
                         peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-custom-orange 
                         dark:bg-gray-900 dark:text-gray-400 
                         peer-focus:dark:text-blue-500 `+ 
-                      (formik.errors.confirmPassword && formik.touched.confirmPassword && 'text-red-500 peer-focus:text-red-500')}
+                      (formik.errors.confirmPassword && formik.touched.confirmPassword && 'text-red-600 peer-focus:text-red-600')}
           >
             Confirm your Password
           </label>
         </div>
         <div className="w-full mb-3 mt-1">
-          <p className='text-xs text-red-500'>{formik.touched.confirmPassword && formik.errors.confirmPassword}</p>
+          <p className='text-xs text-red-600'>{formik.touched.confirmPassword && formik.errors.confirmPassword}</p>
         </div>
 
         {requestState[0] === 0

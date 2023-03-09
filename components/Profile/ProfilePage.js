@@ -51,7 +51,7 @@ const ProfilePage = ({profileData, submitProfile, requestState, hideMessage}) =>
                         text-sm text-white 
                         focus:border-custom-orange focus:outline-none focus:ring-0 
                         dark:border-gray-600 dark:text-white dark:focus:border-custom-orange `+
-                        (formik.errors.name && 'border-red-500 focus:border-red-500')}
+                        (formik.errors.name && 'border-red-600 focus:border-red-600')}
             placeholder=" "
             name="name"
             onChange={formik.handleChange}
@@ -68,13 +68,13 @@ const ProfilePage = ({profileData, submitProfile, requestState, hideMessage}) =>
                         peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-custom-orange 
                         dark:bg-gray-900 dark:text-gray-400 
                         peer-focus:dark:text-blue-500 `+ 
-                      (formik.errors.name && 'text-red-500 peer-focus:text-red-500')}
+                      (formik.errors.name && 'text-red-600 peer-focus:text-red-600')}
           >
             name
           </label>
         </div>
         <div className="w-full md:w-2/3 mb-3 mt-1">
-          <p className='text-xs text-red-500'>{formik.errors.name}</p>
+          <p className='text-xs text-red-600'>{formik.errors.name}</p>
         </div>
         <div className="relative mt-2 w-full lg:w-2/3">
           <input
@@ -87,7 +87,7 @@ const ProfilePage = ({profileData, submitProfile, requestState, hideMessage}) =>
                         text-sm text-white 
                         focus:border-custom-orange focus:outline-none focus:ring-0 
                         dark:border-gray-600 dark:text-white dark:focus:border-custom-orange `+
-                      (formik.errors.email && 'border-red-500 focus:border-red-500')}
+                      (formik.errors.email && 'border-red-600 focus:border-red-600')}
             name="email"
             onChange={formik.handleChange}
             value={formik.values.email}
@@ -104,17 +104,17 @@ const ProfilePage = ({profileData, submitProfile, requestState, hideMessage}) =>
                         peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-custom-orange 
                         dark:bg-gray-900 dark:text-gray-400 
                         peer-focus:dark:text-blue-500 `+
-                      (formik.errors.email && 'text-red-500 peer-focus:text-red-500')}
+                      (formik.errors.email && 'text-red-600 peer-focus:text-red-600')}
           >
             E-mail
           </label>
         </div>
         <div className="w-full md:w-2/3 mb-3 mt-1">
-          <p className='text-xs text-red-500'>{formik.errors.email}</p>
+          <p className='text-xs text-red-600'>{formik.errors.email}</p>
         </div>
 
         {requestState[0] === 0
-        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
+        && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 text-gray-500 bg-red-600 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">
             <div className="ml-3 text-sm font-normal text-black">{requestState[1]}</div>
         </div>}
         {requestState[0] === 1

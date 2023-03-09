@@ -91,7 +91,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState, hideMessage}) => {
             Age
           </label>
         </div>
-        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.age}</p>
+        <p className="text-xs text-red-600 w-full lg:w-2/3 text-left">{dietErrors.age}</p>
 
         {/* Sex  */}
         <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
@@ -151,7 +151,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState, hideMessage}) => {
             </li>
           </ul>
         </div>
-        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.sex}</p>
+        <p className="text-xs text-red-600 w-full lg:w-2/3 text-left">{dietErrors.sex}</p>
 
         {/* Height  */}
         <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
@@ -170,7 +170,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState, hideMessage}) => {
             Height
           </label>
         </div>
-        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.height}</p>
+        <p className="text-xs text-red-600 w-full lg:w-2/3 text-left">{dietErrors.height}</p>
 
         {/* Weight  */}
         <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
@@ -189,7 +189,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState, hideMessage}) => {
             Weight
           </label>
         </div>
-        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.weight}</p>
+        <p className="text-xs text-red-600 w-full lg:w-2/3 text-left">{dietErrors.weight}</p>
 
         {/* Activity  */}
         <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
@@ -243,7 +243,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState, hideMessage}) => {
             Activity
           </label>
         </div>
-        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.activity}</p>
+        <p className="text-xs text-red-600 w-full lg:w-2/3 text-left">{dietErrors.activity}</p>
 
         {/* Plan  */}
         <div className="w-full lg:w-2/3 mt-2 mb-1 relative">
@@ -289,7 +289,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState, hideMessage}) => {
             Plan
           </label>
         </div>
-        <p className="text-xs text-red-500 w-full lg:w-2/3 text-left">{dietErrors.plan}</p>
+        <p className="text-xs text-red-600 w-full lg:w-2/3 text-left">{dietErrors.plan}</p>
 
         {requestState[0] === 0
         && <div className="w-full md:w-2/3 flex items-center max-w-xs p-4 mt-3 text-gray-500 bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800">

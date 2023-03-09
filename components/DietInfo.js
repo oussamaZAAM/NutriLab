@@ -669,14 +669,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos, localInfos }) => {
                 <tr
                   className={
                     "bg-white border-b " +
-                    (ageError && "animate-wiggle border-red-500")
+                    (ageError && "animate-wiggle border-red-600")
                   }
                 >
                   <th
                     scope="row"
                     className={
                       "px-6 py-4 text-gray-900 whitespace-nowrap " +
-                      (ageError && "text-red-500 font-black")
+                      (ageError && "text-red-600 font-black")
                     }
                   >
                     Age
@@ -695,14 +695,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos, localInfos }) => {
                 <tr
                   className={
                     "border-b bg-gray-50 " +
-                    (sexError && "animate-wiggle border-red-500")
+                    (sexError && "animate-wiggle border-red-600")
                   }
                 >
                   <th
                     scope="row"
                     className={
                       "px-6 py-4 text-gray-900 whitespace-nowrap " +
-                      (sexError && "text-red-500 font-black")
+                      (sexError && "text-red-600 font-black")
                     }
                   >
                     Sex
@@ -723,14 +723,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos, localInfos }) => {
                 <tr
                   className={
                     "bg-white border-b " +
-                    (heightError && "animate-wiggle border-red-500")
+                    (heightError && "animate-wiggle border-red-600")
                   }
                 >
                   <th
                     scope="row"
                     className={
                       "px-6 py-4 text-gray-900 whitespace-nowrap " +
-                      (heightError && "text-red-500 font-black")
+                      (heightError && "text-red-600 font-black")
                     }
                   >
                     Height
@@ -751,14 +751,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos, localInfos }) => {
                 <tr
                   className={
                     "border-b bg-gray-50 " +
-                    (weightError && "animate-wiggle border-red-500")
+                    (weightError && "animate-wiggle border-red-600")
                   }
                 >
                   <th
                     scope="row"
                     className={
                       "px-6 py-4 text-gray-900 whitespace-nowrap " +
-                      (weightError && "text-red-500 font-black")
+                      (weightError && "text-red-600 font-black")
                     }
                   >
                     Weight
@@ -779,14 +779,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos, localInfos }) => {
                 <tr
                   className={
                     "border-b bg-white " +
-                    (activityError && "animate-wiggle border-b border-red-500")
+                    (activityError && "animate-wiggle border-b border-red-600")
                   }
                 >
                   <th
                     scope="row"
                     className={
                       "text-center px-6 py-4 text-gray-900 whitespace-nowrap " +
-                      (activityError && "text-red-500 font-black")
+                      (activityError && "text-red-600 font-black")
                     }
                   >
                     Activity
@@ -805,14 +805,14 @@ const DietInfo = ({ handleApply, isInfosApplied, flushInfos, localInfos }) => {
                 <tr
                   className={
                     "bg-gray-50 " +
-                    (planError && "animate-wiggle border-b border-red-500")
+                    (planError && "animate-wiggle border-b border-red-600")
                   }
                 >
                   <th
                     scope="row"
                     className={
                       "text-center px-6 py-4 text-gray-900 whitespace-nowrap " +
-                      (planError && "text-red-500 font-black")
+                      (planError && "text-red-600 font-black")
                     }
                   >
                     Plan

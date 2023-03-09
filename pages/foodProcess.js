@@ -86,14 +86,14 @@ const Food = ({ food }) => {
           <th
             scope="row"
             className={`dark:text-white truncate whitespace-normal px-6  py-4 font-bold ${
-              algoData[food] >= 0 ? "text-green-500" : "text-red-500"
+              algoData[food] >= 0 ? "text-green-500" : "text-red-600"
             }`}
           >
             {food}
           </th>
           <td
             className={`max-w-[100px] md:max-w-[150px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full ${
-              algoData[food] >= 0 ? "text-green-500" : "text-red-500"
+              algoData[food] >= 0 ? "text-green-500" : "text-red-600"
             }`}
           >
             {algoData[food] > 0 ? "+" : ""}

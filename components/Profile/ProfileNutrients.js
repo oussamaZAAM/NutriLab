@@ -2,7 +2,6 @@ import Head from "next/head";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
 const ProfileNutrients = ({ nutrients, setPage }) => {
-  console.log("ayoub");
   return (
     <>
       <Head>

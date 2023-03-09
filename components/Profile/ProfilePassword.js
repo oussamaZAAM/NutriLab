@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import Head from "next/head";
 import Image from "next/image";
 
-const ProfilePassword = ({submitPassword, requestState}) => {
+const ProfilePassword = ({submitPassword, requestState, hideMessage}) => {
   const validate = values => {
     const errors = {};
     if (!values.oldPassword) {
@@ -34,6 +34,7 @@ const ProfilePassword = ({submitPassword, requestState}) => {
     validate,
     onSubmit: (values) => {
       submitPassword(values);
+      hideMessage();
     },
   });
 

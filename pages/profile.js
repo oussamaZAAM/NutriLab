@@ -105,14 +105,16 @@ const Profile = () => {
         });
       });
   };
-  console.log("ayoub");
-  // setTimeout(() => {
-  //   setRequestState({
-  //     profile: [2, ""],
-  //     diet: [2, ""],
-  //     password: [2, ""],
-  //   });
-  // }, 3000);
+
+  const hideMessage = () => {
+    setTimeout(() => {
+      setRequestState({
+        profile: [2, ""],
+        diet: [2, ""],
+        password: [2, ""],
+      });
+    }, 3000);
+  }
   return (
     <>
       <Head>
@@ -320,6 +322,7 @@ const Profile = () => {
                     }}
                     submitProfile={submitProfile}
                     requestState={requestState.profile}
+                    hideMessage={hideMessage}
                   />
                 )}
                 {page === 2 && (
@@ -334,6 +337,7 @@ const Profile = () => {
                     }}
                     submitDiet={submitDiet}
                     requestState={requestState.diet}
+                    hideMessage={hideMessage}
                   />
                 )}
                 {nutrients && page === 3 && (
@@ -344,6 +348,7 @@ const Profile = () => {
                   <ProfilePassword
                     submitPassword={submitPassword}
                     requestState={requestState.password}
+                    hideMessage={hideMessage}
                   />
                 )}
               </>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 
 
-const ProfileDiet = ({dietData, submitDiet, requestState}) => {
+const ProfileDiet = ({dietData, submitDiet, requestState, hideMessage}) => {
     const [dietInfos, setDietInfos] = useState({
       age: dietData.age,
       sex: dietData.sex,
@@ -62,6 +62,7 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
         void(0);
        } else {
         submitDiet(dietInfos);
+        hideMessage();
        }
     }
   return (
@@ -112,11 +113,12 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
                               text-gray-500 bg-white hover:bg-gray-100
                               border-gray-200 
                               rounded-lg 
+                              group
                               cursor-pointer `+
-                          (dietInfos.sex === 'male' && 'border-2 border-blue-500 text-blue-500 hover:text-blue-600')}
+                          (dietInfos.sex === 'male' && 'border-2 border-blue-500')}
               >
-                <IoMdMale size={35} className="w-1/3" />
-                <div className="block">
+                <IoMdMale size={35} className={`w-1/3 `+(dietInfos.sex === 'male' && 'fill-blue-500 group-hover:fill-blue-600')} />
+                <div className={`block `+(dietInfos.sex === 'male' && 'text-blue-500 group-hover:text-blue-600')}>
                   <div className="w-2/3 text-lg font-semibold">Male</div>
                 </div>
               </label>
@@ -137,11 +139,12 @@ const ProfileDiet = ({dietData, submitDiet, requestState}) => {
                               text-gray-500 bg-white hover:bg-gray-100
                               border-gray-200 
                               rounded-lg 
+                              group
                               cursor-pointer `+
-                          (dietInfos.sex === 'female' && 'border-2 border-pink-500 text-pink-500 hover:text-pink-600')}
+                          (dietInfos.sex === 'female' && 'border-2 border-pink-500')}
               >
-                <IoMdFemale size={35} className="w-1/3" />
-                <div className="block">
+                <IoMdFemale size={35} className={`w-1/3 `+(dietInfos.sex === 'female' && 'fill-pink-500 group-hover:fill-pink-600')} />
+                <div className={`block `+(dietInfos.sex === 'female' && 'text-pink-500 group-hover:text-pink-600')}>
                   <div className="w-2/3 text-lg font-semibold">Female</div>
                 </div>
               </label>

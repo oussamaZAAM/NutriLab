@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import Head from "next/head";
 
-const ProfilePage = ({profileData, submitProfile, requestState}) => {
+const ProfilePage = ({profileData, submitProfile, requestState, hideMessage}) => {
   const validate = values => {
     const errors = {};
 
@@ -28,6 +28,7 @@ const ProfilePage = ({profileData, submitProfile, requestState}) => {
     validate,
     onSubmit: (values) => {
       submitProfile(values);
+      hideMessage();
     },
   });
 

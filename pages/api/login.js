@@ -29,7 +29,6 @@ export default async function login(req, res) {
 
     res.status(200).json("Logged In");
   } catch (e) {
-    console.log(e)
     res.status(401).json({ message: "Wrong Email" });
   }
 }

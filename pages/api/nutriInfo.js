@@ -12,7 +12,7 @@ export default async function profile(req, res) {
     } else {
       data.userId = req.headers.userid;
     }
-    
+
     try {
       const nutriInfos = await prisma.NutriInfo.upsert({
         where: {
@@ -35,7 +35,6 @@ export default async function profile(req, res) {
 
       res.status(200).json(nutriInfos);
     } catch (e) {
-      console.log(e);
       res.status(401).json({ message: "Wrong Info" });
     }
   }

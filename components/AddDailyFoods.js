@@ -110,7 +110,6 @@ export default function AddDailyFood({
       "https://nutrilab-api.up.railway.app/polls/getFood/",
       neededNutri
     );
-    console.log(eatenFoodList);
     await axios.post("/api/foodList", {
       eatenFoodList: eatenFoodList,
       ...nutrients,

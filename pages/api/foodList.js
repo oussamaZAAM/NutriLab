@@ -22,7 +22,6 @@ export default async function food(req, res) {
         Salt: data.Salt,
         Sugar: data.Sugar,
       };
-      console.log(input);
       const foodList = await prisma.FoodList.create({
         data: input,
       });
@@ -59,7 +58,6 @@ export default async function food(req, res) {
           userId: userid,
         },
       });
-      console.log(user[0]);
       res.status(200).json(user);
     } catch (e) {
       res.status(401).json({ message: "No Food list" });

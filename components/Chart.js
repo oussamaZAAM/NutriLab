@@ -20,6 +20,13 @@ ChartJS.register(
   Legend,
   PointElement
 );
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination } from "swiper";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
 
 const Chart = () => {
   const [chartData, setChartData] = useState({
@@ -45,7 +52,6 @@ const Chart = () => {
       const data = await res.json();
       idealNutri = new Array(7).fill(data.kCalories);
       await dailyNutrients();
-      console.log(calorieWeek);
       setChartData({
         labels: [
           "Sunday",
@@ -67,8 +73,8 @@ const Chart = () => {
           {
             data: calorieWeek,
             label: "Accepted",
-            borderColor: "#3cba9f",
-            backgroundColor: "#71d1bd",
+            borderColor: "#FF9351",
+            backgroundColor: "#FF9351",
             fill: false,
           },
         ],
@@ -98,9 +104,38 @@ const Chart = () => {
 
   return (
     <>
-      <div className="relative m-auto h-[50vh] w-full rounded-lg border bg-white p-4 md:col-span-2 lg:h-[70vh]">
-        <Line data={chartData} options={chartOptions} />
-      </div>
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={true}
+        modules={[EffectCoverflow, Pagination]}
+        className=" w-full"
+      >
+        <SwiperSlide>
+          <div className="relative m-auto h-72 rounded-lg border bg-white p-4 md:col-span-2 lg:h-72">
+            <Line data={chartData} options={chartOptions} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="relative m-auto h-72 rounded-lg border bg-white p-4 md:col-span-2 lg:h-72">
+            <Line data={chartData} options={chartOptions} />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="relative m-auto h-72 rounded-lg border bg-white p-4 md:col-span-2 lg:h-72">
+            <Line data={chartData} options={chartOptions} />
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </>
   );
 };

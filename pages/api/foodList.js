@@ -42,12 +42,15 @@ export default async function food(req, res) {
       userid = req.headers.userid;
     }
     try {
-      const user = await prisma.FoodList.findUnique({
+      const user = await prisma.FoodList.findMany({
+        include: {
+          food: true,
+        },
         where: {
           userId: userid,
         },
       });
-      console.log('test')
+      console.log(user[0]);
       res.status(200).json(user);
     } catch (e) {
       res.status(401).json({ message: "No Food list" });

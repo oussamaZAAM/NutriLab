@@ -72,9 +72,9 @@ const ProfileHistory = () => {
   const eatenFoodList = foodHistory && foodHistory.length!==0 && foodHistory[0].food.map((food)=>{
     
     return (
-      <div key={food.id} className="flex w-full flex-col items-start justify-center truncate rounded-md bg-profile1 text-white xs:p-2">
-        <div className="flex items-center justify-center">
-          <b className="my-4 w-full truncate text-center font-logo text-xl font-bold text-custom-orange hover:whitespace-normal xs:text-left sm:whitespace-normal">
+      <div key={food.id} className="xs:max-w-md flex w-full flex-col items-start justify-center whitespace-normal rounded-md bg-profile1 text-white xs:p-2">
+        <div className="flex items-center justify-center w-full">
+          <b className="my-4 w-full text-center font-logo text-xl font-bold text-custom-orange hover:whitespace-normal xs:text-left sm:whitespace-normal">
             {food.name}
           </b>
         </div>
@@ -97,7 +97,7 @@ const ProfileHistory = () => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
 
-      <Chart />
+      {/* <Chart /> */}
       <div className="relative mt-2 mb-1 flex w-full items-center justify-center lg:w-2/3">
         <button>
           <IoIosArrowDropleftCircle
@@ -150,18 +150,19 @@ const ProfileHistory = () => {
         <div className="x-1/2 absolute -top-4 bg-profile2 px-1 font-medium text-white">
           {date.format("DD MMM YYYY")}
         </div>
-        <div className="grid w-full grid-cols-2 items-center justify-center gap-1 xs:flex xs:flex-col xs:gap-2">
+        {/* <div className={"grid w-full items-stretch justify-center gap-1 xs:flex xs:flex-col xs:gap-2 "+(foodHistory && foodHistory.length !== 0 && 'grid-cols-2')}> */}
+        <div className={"w-full grid items-stretch justify-center gap-1 xs:flex xs:flex-col xs:gap-2 "+(foodHistory && foodHistory.length !== 0 && 'grid-cols-2')}>
           
         {foodHistory 
           ? foodHistory.length !== 0
             ? eatenFoodList
-            : <div className="flex flex-col justify-center items-center my-32">
-              <TbError404 className="fill-red-500 h-20 w-20"/>
-              <p className="text-red-500">No data on this day!</p>
+            : <div className="flex flex-col justify-center items-center my-20 xs:my-32">
+                <TbError404 className="fill-red-500 h-20 w-20"/>
+              <p className="font-logo font-medium text-red-500">No data on this date!</p>
             </div>
-          : <div className="animate-pulse">
-            <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-[370px] h-[104px]"></div>
-            <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-[370px] h-[104px]"></div>
+          : <div className="w-[90vw] xs:w-full grid items-center justify-center gap-1 xs:flex xs:flex-col xs:gap-2 grid-cols-2 animate-pulse">
+              <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-full xs:w-[370px] h-[104px]"></div>
+              <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-full xs:w-[370px] h-[104px]"></div>
           </div>
         }
 

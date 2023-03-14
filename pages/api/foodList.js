@@ -77,7 +77,6 @@ export default async function food(req, res) {
       }
       res.status(200).json(user);
     } catch (e) {
-      console.log(e)
       res.status(401).json({ message: "No Food list" });
     }
   }

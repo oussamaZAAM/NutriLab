@@ -40,6 +40,11 @@ export default function Register({ setLogin, setAuth, setOpen }) {
           .then(async (response) => {
             setAuth(response.data);
             setOpen(false);
+            
+            if (router.query.path) {
+              router.push(router.query.path);
+              // router.push('/')
+            }
             // await axios.get("/api/nutriInfo").then((res) => {
             //   const localData = {
             //     ...res.data,
@@ -48,7 +53,7 @@ export default function Register({ setLogin, setAuth, setOpen }) {
             //     weight: "",
             //     height: "",
             //     activity: "",
-            //     plan: "",
+            //     plan: "", 
             //   };
             //   localStorage.setItem("dietInfos", JSON.stringify(localData));
             // });

@@ -98,6 +98,7 @@ export default function AddDailyFood({
   }
   const enableAlgorithm = async () => {
     const nutrients = sumNutrients();
+
     const nutriRes = await axios.get("/api/nutri");
     const neededNutri = addValuesOfTwoObjects(nutriRes.data, nutrients);
     const eatenFoodNames = eatenFoodList.map((food) => {
@@ -109,7 +110,11 @@ export default function AddDailyFood({
       "https://nutrilab-api.up.railway.app/polls/getFood/",
       neededNutri
     );
-    await axios.post("/api/foodList", eatenFoodList);
+    console.log(eatenFoodList);
+    await axios.post("/api/foodList", {
+      eatenFoodList: eatenFoodList,
+      ...nutrients,
+    });
     setAlgoData(res.data);
     setIsAlgorithmEnabled(true);
   };

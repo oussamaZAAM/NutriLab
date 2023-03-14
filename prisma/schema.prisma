@@ -104,19 +104,25 @@ model Nutrients {
 }
 
 model Food {
-  id   Int    @id @default(autoincrement())
-  name String
-  size Float
-
+  id         Int       @id @default(autoincrement())
+  name       String
+  size       Float
   FoodList   FoodList? @relation(fields: [foodListId], references: [id])
   foodListId Int?
 }
 
 model FoodList {
-  id     Int      @id @default(autoincrement())
-  food   Food[]
-  User   User?    @relation(fields: [userId], references: [id])
-  lable  String?
-  date   DateTime @default(now())
-  userId String
+  id       Int      @id @default(autoincrement())
+  food     Food[]
+  User     User?    @relation(fields: [userId], references: [id])
+  lable    String?
+  date     DateTime @default(now())
+  userId   String
+  Calories Float
+  Carbs    Float
+  Fat      Float
+  Fiber    Float
+  Protein  Float
+  Salt     Float
+  Sugar    Float
 }

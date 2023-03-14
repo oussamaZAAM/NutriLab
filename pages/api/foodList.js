@@ -12,13 +12,22 @@ export default async function food(req, res) {
       data.userId = req.headers.userid;
     }
     try {
+      let input = {
+        userId: data.userId,
+        Calories: data.Calories,
+        Carbs: data.Carbs,
+        Fat: data.Fat,
+        Fiber: data.Fiber,
+        Protein: data.Protein,
+        Salt: data.Salt,
+        Sugar: data.Sugar,
+      };
+      console.log(input);
       const foodList = await prisma.FoodList.create({
-        data: {
-          userId: data.userId,
-        },
+        data: input,
       });
 
-      data = data.map((prevObj) => {
+      data = data.eatenFoodList.map((prevObj) => {
         return {
           name: prevObj.name,
           size: parseFloat(prevObj.size),

@@ -40,6 +40,7 @@ export default async function food(req, res) {
 
       res.status(200).json(uus);
     } catch (e) {
+      console.log(e)
       res.status(401).json({ message: "Wrong Info" });
     }
   }
@@ -51,19 +52,32 @@ export default async function food(req, res) {
       userid = req.headers.userid;
     }
     try {
-      const user = await prisma.FoodList.findMany({
-        include: {
-          food: true,
-        },
-        where: {
-          AND: {
-            userId: userid,
-            // date: '2023-03-14T18:17:52.319Z'
-          }
-        },
-      });
+      let user;
+      if (req.query.specifyDate) {
+        user = await prisma.FoodList.findMany({
+          include: {
+            food: true,
+          },
+          where: {
+            AND: {
+              userId: userid,
+              date: req.query.date
+            }
+          },
+        });
+      } else {
+        user = await prisma.FoodList.findMany({
+          include: {
+            food: true,
+          },
+          where: {
+            userId: userid
+          },
+        });
+      }
       res.status(200).json(user);
     } catch (e) {
+      console.log(e)
       res.status(401).json({ message: "No Food list" });
     }
   }

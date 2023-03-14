@@ -5,7 +5,7 @@ const ProfileHistory = () => {
   useEffect(() => {
     async function getHistory() {
       const foodHistoryData = await axios.get("/api/foodList");
-      setFoodHistory(foodHistoryData);
+      setFoodHistory(foodHistoryData); 
     }
     getHistory();
   }, []);

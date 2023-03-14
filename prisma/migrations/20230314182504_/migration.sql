@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "FoodList" ALTER COLUMN "date" SET DATA TYPE DATE;

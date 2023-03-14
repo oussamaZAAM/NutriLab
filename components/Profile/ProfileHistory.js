@@ -7,10 +7,11 @@ import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
+import { TbError404 } from "react-icons/tb";
 const ProfileHistory = () => {
   const [previousAnimation, setPreviousAnimation] = useState(false);
   const [nextAnimation, setNextAnimation] = useState(false);
-  const [foodHistory, setFoodHistory] = useState([]);
+  const [foodHistory, setFoodHistory] = useState();
   const yesterday = dayjs().add(-1, "days");
   const today = dayjs();
   const tomorrow = dayjs().add(1, "days");
@@ -55,13 +56,39 @@ const ProfileHistory = () => {
       setNextAnimation(false);
     }, 90);
   };
-  // useEffect(() => {
-  //   async function getHistory() {
-  //     const foodHistoryData = await axios.get("/api/foodList");
-  //     setFoodHistory(foodHistoryData);
-  //   }
-  //   getHistory();
-  // }, []);
+  useEffect(() => {
+    async function getHistory() {
+      const foodHistoryData = await axios.get("/api/foodList", {
+        params: {
+          specifyDate: true,
+          date: date.toJSON(),
+        },
+      });
+      setFoodHistory(foodHistoryData.data);
+    }
+    getHistory();
+  }, [date]);
+
+  const eatenFoodList = foodHistory && foodHistory.length!==0 && foodHistory[0].food.map((food)=>{
+    
+    return (
+      <div key={food.id} className="flex w-full flex-col items-start justify-center whitespace-normal rounded-md bg-profile1 text-white xs:p-2">
+        <div className="flex items-center justify-center w-full">
+          <b className="my-4 w-full text-center font-logo text-xl font-bold text-custom-orange hover:whitespace-normal xs:text-left sm:whitespace-normal">
+            {food.name}
+          </b>
+        </div>
+        <div className="my-1 flex flex-col items-start self-center xs:w-full">
+          <div className="flex items-center justify-center font-paragraph text-xs">
+            How Much:
+            <span className="ml-1 font-paragraph text-xs font-bold xs:text-sm">
+              {food.size} g
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  })
   return (
     <>
       <Head>
@@ -70,56 +97,77 @@ const ProfileHistory = () => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
 
-      <>
-        <Chart />
-        <div className="relative mt-2 mb-1 flex w-full items-center justify-center lg:w-2/3">
-          <button>
-            <IoIosArrowDropleftCircle
-              className="mx-1 h-6 w-6 fill-white lg:mx-2"
-              onClick={previousDay}
-            />
-          </button>
-          <div
-            className={
-              `mx-1 flex h-16 w-14 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2 ` +
-              (previousAnimation && "animate-rdate")
-            }
-          >
-            <p className="text-xl font-bold">{previousDate.format("DD")}</p>
-            <p className="text-md font-medium">{previousDate.format("MMM")}</p>
-          </div>
-          {/* <div className={`mx-1 flex h-24 w-20 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2 `+
+      <Chart />
+      <div className="relative mt-2 mb-1 flex w-full items-center justify-center lg:w-2/3">
+        <button>
+          <IoIosArrowDropleftCircle
+            className="mx-1 h-6 w-6 fill-white lg:mx-2"
+            onClick={previousDay}
+          />
+        </button>
+        <div
+          className={
+            `mx-1 flex h-16 w-14 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2 ` +
+            (previousAnimation && "animate-rdate")
+          }
+        >
+          <p className="text-xl font-bold">{previousDate.format("DD")}</p>
+          <p className="text-md font-medium">{previousDate.format("MMM")}</p>
+        </div>
+        {/* <div className={`mx-1 flex h-24 w-20 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2 `+
                          (nextAnimation && 'animate-ldate2 ')+
                          (previousAnimation && 'animate-rdate2 ')
                          }> */}
-          <div
-            className={[
-              "mx-1 flex h-24 w-20 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2",
-              nextAnimation && "animate-ldate2",
-              previousAnimation && "animate-rdate2 ",
-            ].join(" ")}
-          >
-            <p className="text-2xl font-bold">{date.format("DD")}</p>
-            <p className="text-lg font-medium">{date.format("MMM")}</p>
-            <p className="font- text-sm">{date.format("YYYY")}</p>
-          </div>
-          <div
-            className={
-              `mx-1 flex h-16 w-14 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2 ` +
-              (nextAnimation && "animate-ldate")
-            }
-          >
-            <p className="text-xl font-bold">{nextDate.format("DD")}</p>
-            <p className="text-md font-medium">{nextDate.format("MMM")}</p>
-          </div>
-          <button>
-            <IoIosArrowDroprightCircle
-              className="mx-1 h-6 w-6 fill-white lg:mx-2"
-              onClick={nextDay}
-            />
-          </button>
+        <div
+          className={[
+            "mx-1 flex h-24 w-20 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2",
+            nextAnimation && "animate-ldate2",
+            previousAnimation && "animate-rdate2 ",
+          ].join(" ")}
+        >
+          <p className="text-2xl font-bold">{date.format("DD")}</p>
+          <p className="text-lg font-medium">{date.format("MMM")}</p>
+          <p className="font- text-sm">{date.format("YYYY")}</p>
         </div>
-      </>
+        <div
+          className={
+            `mx-1 flex h-16 w-14 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2 ` +
+            (nextAnimation && "animate-ldate")
+          }
+        >
+          <p className="text-xl font-bold">{nextDate.format("DD")}</p>
+          <p className="text-md font-medium">{nextDate.format("MMM")}</p>
+        </div>
+        <button>
+          <IoIosArrowDroprightCircle
+            className="mx-1 h-6 w-6 fill-white lg:mx-2"
+            onClick={nextDay}
+          />
+        </button>
+      </div>
+
+      <div className="relative my-8 flex w-full items-stretch justify-center rounded-md border-2 border-white p-4">
+        <div className="x-1/2 absolute -top-4 bg-profile2 px-1 font-medium text-white">
+          {date.format("DD MMM YYYY")}
+        </div>
+        {/* <div className={"grid w-full items-stretch justify-center gap-1 xs:flex xs:flex-col xs:gap-2 "+(foodHistory && foodHistory.length !== 0 && 'grid-cols-2')}> */}
+        <div className={"w-full grid items-stretch justify-center gap-1 xs:flex xs:flex-col xs:gap-2 "+(foodHistory && foodHistory.length !== 0 && 'grid-cols-2')}>
+          
+        {foodHistory 
+          ? foodHistory.length !== 0
+            ? eatenFoodList
+            : <div className="flex flex-col justify-center items-center my-20 xs:my-32">
+                <TbError404 className="fill-red-500 h-20 w-20"/>
+              <p className="font-logo font-medium text-red-500">No data on this date!</p>
+            </div>
+          : <div className="w-[90vw] xs:w-full grid items-center justify-center gap-1 xs:flex xs:flex-col xs:gap-2 grid-cols-2 animate-pulse">
+              <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-full xs:w-[370px] h-[104px]"></div>
+              <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-full xs:w-[370px] h-[104px]"></div>
+          </div>
+        }
+
+        </div>
+      </div>
     </>
   );
 };

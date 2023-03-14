@@ -112,11 +112,12 @@ model Food {
 }
 
 model FoodList {
+
   id       Int      @id @default(autoincrement())
   food     Food[]
   User     User?    @relation(fields: [userId], references: [id])
   lable    String?
-  date     DateTime @default(now())
+  date     DateTime @default(now()) @db.Date
   userId   String
   Calories Float
   Carbs    Float

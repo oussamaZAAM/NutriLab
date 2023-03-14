@@ -10,6 +10,7 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
+import axios from "axios";
 
 ChartJS.register(
   CategoryScale,
@@ -67,7 +68,11 @@ const Chart = () => {
     let saltWeek = [0, 0, 0, 0, 0, 0, 0];
     let sugarWeek = [0, 0, 0, 0, 0, 0, 0];
     async function dailyNutrientsCalories() {
-      const res = await fetch("/api/foodList");
+      const res = await fetch("/api/foodList", {
+        params: {
+          specifyDate: false,
+        },
+      });
       const data = await res.json();
       data.forEach((foodList, index) => {
         calorieWeek.splice(index, 1, foodList.Calories);
@@ -118,8 +123,8 @@ const Chart = () => {
 
     let idealNutri;
     async function nutrientsCalories() {
-      const res = await fetch("/api/nutri");
-      const data = await res.json();
+      const res = await axios.get("/api/nutri");
+      const data = res.data;
       idealNutri = new Array(7).fill(data.kCalories);
       await dailyNutrientsCalories();
       setChartDataCalories({

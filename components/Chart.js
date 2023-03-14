@@ -21,13 +21,12 @@ ChartJS.register(
   PointElement
 );
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-
+import { EffectCoverflow, Pagination } from "swiper";
 const Chart = () => {
   const [chartData, setChartData] = useState({
     datasets: [],
@@ -103,12 +102,12 @@ const Chart = () => {
   }, []);
 
   return (
-    <>
+    <div className="w-[1000px]">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={"auto"}
+        slidesPerView={"3"}
         coverflowEffect={{
           rotate: 50,
           stretch: 0,
@@ -118,7 +117,7 @@ const Chart = () => {
         }}
         pagination={true}
         modules={[EffectCoverflow, Pagination]}
-        className=" w-full"
+        className="w-full"
       >
         <SwiperSlide>
           <div className="relative m-auto h-72 rounded-lg border bg-white p-4 md:col-span-2 lg:h-72">
@@ -136,7 +135,7 @@ const Chart = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 };
 

@@ -48,10 +48,10 @@ const Food = ({ food }) => {
   const objectizeEatenFood = (eatenFoodList) => {
     var object = {};
     for (let i = 0; i < eatenFoodList.length; i++) {
-      object = {...object, [eatenFoodList[i].name]: eatenFoodList[i].size}
+      object = { ...object, [eatenFoodList[i].name]: eatenFoodList[i].size };
     }
     return object;
-  }
+  };
 
   //Handle API changes
   const [algoData, setAlgoData] = useState({});
@@ -68,7 +68,7 @@ const Food = ({ food }) => {
         >
           {food.name}
         </th>
-        <td className="max-w-[100px] md:max-w-[150px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full ">
+        <td className="max-w-[100px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full md:max-w-[150px] ">
           {food.size}g
         </td>
       </tr>
@@ -92,7 +92,7 @@ const Food = ({ food }) => {
             {food}
           </th>
           <td
-            className={`max-w-[100px] md:max-w-[150px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full ${
+            className={`max-w-[100px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full md:max-w-[150px] ${
               algoData[food] >= 0 ? "text-green-500" : "text-red-600"
             }`}
           >
@@ -107,7 +107,7 @@ const Food = ({ food }) => {
     Object.keys(algoData).length !== 0 &&
     Object.keys(algoData).map((food) => {
       const eatenFoodObject = objectizeEatenFood(eatenFoodList);
-      
+
       return (
         <tr
           key={food}
@@ -119,9 +119,13 @@ const Food = ({ food }) => {
           >
             {food}
           </th>
-          <td className='max-w-[100px] md:max-w-[150px] truncate whitespace-nowrap px-3 py-4 text-lg font-black underline hover:max-w-full text-blue-500'>
+          <td className="max-w-[100px] truncate whitespace-nowrap px-3 py-4 text-lg font-black text-blue-500 underline hover:max-w-full md:max-w-[150px]">
             {algoData[food] > 0 ? "+" : ""}
-            {algoData[food] > 0 ? Math.round(algoData[food]).toFixed(2) : Math.round(eatenFoodObject[food]).toFixed(2) - (-Math.round(algoData[food]).toFixed(2))}g
+            {algoData[food] > 0
+              ? Math.round(algoData[food]).toFixed(2)
+              : Math.round(eatenFoodObject[food]).toFixed(2) -
+                -Math.round(algoData[food]).toFixed(2)}
+            g
           </td>
         </tr>
       );

@@ -20,15 +20,56 @@ ChartJS.register(
   Legend,
   PointElement
 );
-
-const BarChart = () => {
+function sumObjectsByKey(object1, object2) {
+  const sum = {
+    Calories:
+      object1.Calories + (object2.Calories * parseInt(object2.size)) / 100,
+    Protein: object1.Protein + (object2.Protein * parseInt(object2.size)) / 100,
+    Carbs: object1.Carbs + (object2.Carbs * parseInt(object2.size)) / 100,
+    Fat: object1.Fat + (object2.Fat * parseInt(object2.size)) / 100,
+    Fiber: object1.Fiber + (object2.Fiber * parseInt(object2.size)) / 100,
+    Salt: object1.Salt + (object2.Salt * parseInt(object2.size)) / 100,
+    Sugar: object1.Sugar + (object2.Sugar * parseInt(object2.size)) / 100,
+  };
+  return sum;
+}
+const sumNutrients = () => {
+  var nutrients = {
+    Calories: 0,
+    Protein: 0,
+    Carbs: 0,
+    Fat: 0,
+    Fiber: 0,
+    Salt: 0,
+    Sugar: 0,
+  };
+  for (let i = 0; i < eatenFoodList.length; i++) {
+    nutrients = sumObjectsByKey(nutrients, eatenFoodList[i]);
+  }
+  return nutrients;
+};
+const Chart = () => {
   const [chartData, setChartData] = useState({
     datasets: [],
   });
 
   const [chartOptions, setChartOptions] = useState({});
+  const [nutri, setNutri] = useState({});
 
   useEffect(() => {
+    async function dailyNutrients() {
+      const res = await fetch("/api/foodList");
+      const data = await res.json();
+      console.log(data);
+    }
+    dailyNutrients();
+    async function nutrients() {
+      const res = await fetch("/api/nutri");
+      const data = await res.json();
+      setNutri(data);
+    }
+    nutrients();
+    let idealNutri = new Array(7).fill(nutri.kCalories);
     setChartData({
       labels: [
         "Sunday",
@@ -41,7 +82,7 @@ const BarChart = () => {
       ],
       datasets: [
         {
-          data: [86, 114, 106, 106, 107, 111, 133],
+          data: idealNutri,
           label: "Applied",
           borderColor: "#3e95cd",
           backgroundColor: "#7bb6dd",
@@ -54,23 +95,13 @@ const BarChart = () => {
           backgroundColor: "#71d1bd",
           fill: false,
         },
-        {
-          data: [10, 21, 60, 44, 17, 21, 17],
-          label: "Pending",
-          borderColor: "#ffa500",
-          backgroundColor: "#ffc04d",
-          fill: false,
-        },
-        {
-          data: [6, 3, 2, 2, 7, 0, 16],
-          label: "Rejected",
-          borderColor: "#c45850",
-          backgroundColor: "#d78f89",
-          fill: false,
-        },
       ],
     });
     setChartOptions({
+      interaction: {
+        mode: "index",
+        intersect: false,
+      },
       plugins: {
         legend: {
           position: "top",
@@ -82,6 +113,7 @@ const BarChart = () => {
       },
       maintainAspectRatio: false,
       responsive: true,
+      tension: 0.3,
     });
   }, []);
 
@@ -94,4 +126,4 @@ const BarChart = () => {
   );
 };
 
-export default BarChart;
+export default Chart;

@@ -15,6 +15,7 @@ export default function AddDailyFood({
   setAlgoData,
   setIsAlgorithmEnabled,
   sumNutrients,
+  setIsAlgorithm
 }) {
   const [wiggle, setWiggle] = useState(false);
   const [addedFood, setAddedFood] = useState({});
@@ -97,8 +98,9 @@ export default function AddDailyFood({
     return obj3;
   }
   const enableAlgorithm = async () => {
+    setIsAlgorithmEnabled(true);
+    
     const nutrients = sumNutrients();
-
     const nutriRes = await axios.get("/api/nutri");
     const neededNutri = addValuesOfTwoObjects(nutriRes.data, nutrients);
     const eatenFoodNames = eatenFoodList.map((food) => {
@@ -115,7 +117,7 @@ export default function AddDailyFood({
       ...nutrients,
     });
     setAlgoData(res.data);
-    setIsAlgorithmEnabled(true);
+    setIsAlgorithm(true);
   };
   // Mapping over the list of Searched Food
   const searchedFood = !food

@@ -11,12 +11,15 @@ import { User_data } from "../context/context";
 import { useContext } from "react";
 import calculateNutrients from "../components/Calculate/CalculateNutrients";
 import calculateVitamins from "../components/Calculate/CalculateVitamins";
+import { useRouter } from "next/router";
 
 export default function Nutrients() {
   const [isInfosApplied, setIsInfosApplied] = useState(false);
   const [nutrients, setNutrients] = useState();
   const [vitamins, setVitamins] = useState({});
   const { user, setUser } = useContext(User_data);
+
+  const router = useRouter();
 
   // Next is SSR so we should ... , Force a render with useEffect
   const [localInfos, setLocalInfos] = useState({
@@ -80,14 +83,21 @@ export default function Nutrients() {
         },
       }));
     const nutris = calculateNutrients(age, sex, height, weight, activity, plan);
-    //Calculate Nutrients
-    setNutrients(nutris);
-    localStorage.setItem("nutris", JSON.stringify(nutris));
-    console.log(nutris);
-    user && (await axios.put("/api/nutri", nutris));
-    //Calculate Vitamins
-    setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
-    setIsInfosApplied(true);
+
+    //Check if user is authenticated
+    if (user) {
+      //Calculate Nutrients
+      setNutrients(nutris);
+      localStorage.setItem("nutris", JSON.stringify(nutris));
+      console.log(nutris);
+      user && (await axios.put("/api/nutri", nutris));
+      //Calculate Vitamins
+      setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
+      setIsInfosApplied(true);
+    } else {
+      // Redirect to logging in
+      router.push("/?path=/nutrients&requestLogin=1")
+    }
   };
 
   return (

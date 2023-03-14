@@ -69,6 +69,22 @@ module.exports = {
           "0%": { transform: "translateX(100px) scaleX(2.2)" },
           "100%": { transform: "translateX(0px)" },
         },
+        rdate: {
+          "0%": {transform: "translateX(0) scale(1)"},
+          "100%": {transform: "translateX(50px) scale(1.5)"},
+        },
+        ldate: {
+          "0%": {transform: "translateX(0) scale(1)"},
+          "100%": {transform: "translateX(-50px) scale(1.5)"},
+        },
+        rdate2: {
+          "0%": {transform: "translateX(0) scale(1)"},
+          "100%": {transform: "translateX(50px) scale(0.66)"},
+        },
+        ldate2: {
+          "0%": {transform: "translateX(0) scale(1)"},
+          "100%": {transform: "translateX(-50px) scale(0.66)"},
+        }
       },
       animation: {
         wiggle: "wiggle 200ms ease-in-out",
@@ -81,6 +97,10 @@ module.exports = {
         translate_bottom: "translate_bottom 3000ms linear infinite",
         lswipe: "lswipe 400ms ease-out",
         rswiper: "rswiper 400ms ease-out",
+        rdate: "rdate 100ms ease-out",
+        ldate: "ldate 100ms ease-out",
+        rdate2: "rdate2 100ms ease-out",
+        ldate2: "ldate2 100ms ease-out",
       },
     },
     fontFamily: {

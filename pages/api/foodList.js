@@ -22,7 +22,6 @@ export default async function food(req, res) {
         Salt: data.Salt,
         Sugar: data.Sugar,
       };
-      console.log(input);
       const foodList = await prisma.FoodList.create({
         data: input,
       });

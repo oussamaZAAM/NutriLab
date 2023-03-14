@@ -13,7 +13,7 @@ module.exports = {
         gradient2: "rgba(255, 98, 0, 0.35)",
         profile1: "#191919",
         profile2: "#4B4B4B",
-        profilehover: "#635953"
+        profilehover: "#635953",
       },
       keyframes: {
         wiggle: {
@@ -70,21 +70,21 @@ module.exports = {
           "100%": { transform: "translateX(0px)" },
         },
         rdate: {
-          "0%": {transform: "translateX(0) scale(1)"},
-          "100%": {transform: "translateX(50px) scale(1.5)"},
+          "0%": { transform: "translateX(0) scale(1)" },
+          "100%": { transform: "translateX(50px) scale(1.5)" },
         },
         ldate: {
-          "0%": {transform: "translateX(0) scale(1)"},
-          "100%": {transform: "translateX(-50px) scale(1.5)"},
+          "0%": { transform: "translateX(0) scale(1)" },
+          "100%": { transform: "translateX(-50px) scale(1.5)" },
         },
         rdate2: {
-          "0%": {transform: "translateX(0) scale(1)"},
-          "100%": {transform: "translateX(50px) scale(0.66)"},
+          "0%": { transform: "translateX(0) scale(1)" },
+          "100%": { transform: "translateX(50px) scale(0.66)" },
         },
         ldate2: {
-          "0%": {transform: "translateX(0) scale(1)"},
-          "100%": {transform: "translateX(-50px) scale(0.66)"},
-        }
+          "0%": { transform: "translateX(0) scale(1)" },
+          "100%": { transform: "translateX(-50px) scale(0.66)" },
+        },
       },
       animation: {
         wiggle: "wiggle 200ms ease-in-out",

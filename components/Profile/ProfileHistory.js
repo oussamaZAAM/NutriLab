@@ -72,7 +72,7 @@ const ProfileHistory = () => {
   const eatenFoodList = foodHistory && foodHistory.length!==0 && foodHistory[0].food.map((food)=>{
     
     return (
-      <div key={food.id} className="xs:max-w-md flex w-full flex-col items-start justify-center whitespace-normal rounded-md bg-profile1 text-white xs:p-2">
+      <div key={food.id} className="flex w-full flex-col items-start justify-center whitespace-normal rounded-md bg-profile1 text-white xs:p-2">
         <div className="flex items-center justify-center w-full">
           <b className="my-4 w-full text-center font-logo text-xl font-bold text-custom-orange hover:whitespace-normal xs:text-left sm:whitespace-normal">
             {food.name}
@@ -97,7 +97,7 @@ const ProfileHistory = () => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
 
-      {/* <Chart /> */}
+      <Chart />
       <div className="relative mt-2 mb-1 flex w-full items-center justify-center lg:w-2/3">
         <button>
           <IoIosArrowDropleftCircle

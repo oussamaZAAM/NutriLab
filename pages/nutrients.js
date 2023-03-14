@@ -31,21 +31,21 @@ export default function Nutrients() {
     plan: "",
   });
   const [localNutris, setLocalNutris] = useState({
-      kCalories: null,
-      proteins: null,
-      carbs: null,
-      fats: null,
-      fiber: null,
-      salt: null,
-      iron: null,
-      sugar: null
+    kCalories: null,
+    proteins: null,
+    carbs: null,
+    fats: null,
+    fiber: null,
+    salt: null,
+    iron: null,
+    sugar: null,
   });
 
   useEffect(() => {
     // Fetch Data from the server if the user is authenticated
     const fetchNutriInfo = async (dietInfos) => {
       await axios.get("/api/nutriInfo").then((res) => {
-        if (Object.keys(res.data).every(key => res.data[key] !== null)){
+        if (Object.keys(res.data).every((key) => res.data[key] !== null)) {
           setLocalInfos(res.data);
         } else {
           setLocalInfos(dietInfos);
@@ -55,7 +55,7 @@ export default function Nutrients() {
 
     const fetchNutrients = async (nutris) => {
       await axios.get("/api/nutri").then((res) => {
-        if (Object.keys(res.data).every(key => res.data[key] !== null)){
+        if (Object.keys(res.data).every((key) => res.data[key] !== null)) {
           setLocalNutris(res.data);
           setIsInfosApplied(true);
         }
@@ -89,14 +89,13 @@ export default function Nutrients() {
       //Calculate Nutrients
       setNutrients(nutris);
       localStorage.setItem("nutris", JSON.stringify(nutris));
-      console.log(nutris);
       user && (await axios.put("/api/nutri", nutris));
       //Calculate Vitamins
       setVitamins(calculateVitamins(age, sex, height, weight, activity, plan));
       setIsInfosApplied(true);
     } else {
       // Redirect to logging in
-      router.push("/?path=/nutrients&requestLogin=1")
+      router.push("/?path=/nutrients&requestLogin=1");
     }
   };
 
@@ -126,19 +125,14 @@ export default function Nutrients() {
       </div>
 
       <div className="grid grid-cols-8">
-        {isInfosApplied && (
-          nutrients ? (
-            <DailyNutrients
-              nutrients={nutrients}
-              vitamins={vitamins}
-            />
-          ) : (Object.keys(localNutris).every((key) => localNutris[key] !== null)) && (
-            <DailyNutrients
-              nutrients={localNutris}
-              vitamins={vitamins}
-            />
-          )
-        )}
+        {isInfosApplied &&
+          (nutrients ? (
+            <DailyNutrients nutrients={nutrients} vitamins={vitamins} />
+          ) : (
+            Object.keys(localNutris).every(
+              (key) => localNutris[key] !== null
+            ) && <DailyNutrients nutrients={localNutris} vitamins={vitamins} />
+          ))}
       </div>
 
       <HowItsBuilt />

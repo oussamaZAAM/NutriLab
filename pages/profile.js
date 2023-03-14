@@ -114,8 +114,8 @@ const Profile = () => {
         password: [2, ""],
       });
     }, 3000);
-  }
-  
+  };
+
   return (
     <>
       <Head>
@@ -304,11 +304,11 @@ const Profile = () => {
 
         <div className="col-span-9 col-start-4 mb-16 flex h-full w-full flex-col items-center justify-start bg-profile2">
           <div className="flex flex-col items-center justify-start md:w-1/2">
-            <div className="my-16 flex items-center justify-center">
+            <div className="my-8 flex items-center justify-center">
               <Image
                 width={500}
                 height={500}
-                className="h-64 w-64 rounded-full object-cover object-center"
+                className="h-44 w-44 rounded-full object-cover object-center"
                 src={(profile && profile.image) || "/user.png"}
                 alt="Profile"
               />

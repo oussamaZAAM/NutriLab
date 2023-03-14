@@ -113,9 +113,10 @@ model Food {
 }
 
 model FoodList {
-  id     Int     @id @default(autoincrement())
+  id     Int      @id @default(autoincrement())
   food   Food[]
-  User   User?   @relation(fields: [userId], references: [id])
+  User   User?    @relation(fields: [userId], references: [id])
   lable  String?
+  date   DateTime @default(now())
   userId String
 }

@@ -10,6 +10,7 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
+import axios from "axios";
 
 ChartJS.register(
   CategoryScale,
@@ -58,15 +59,17 @@ const Chart = () => {
 
   useEffect(() => {
     async function dailyNutrients() {
-      const res = await fetch("/api/foodList");
-      const data = await res.json();
-      console.log(data);
+      const res = await axios.get("/api/foodList", {
+        params: {
+          specifyDate: false
+        },
+      });
+      console.log(res.data);
     }
-    dailyNutrients();
+    // dailyNutrients();
     async function nutrients() {
-      const res = await fetch("/api/nutri");
-      const data = await res.json();
-      setNutri(data);
+      const res = await axios.get("/api/nutri");
+      setNutri(res.data);
     }
     nutrients();
     let idealNutri = new Array(7).fill(nutri.kCalories);

@@ -116,8 +116,6 @@ const Profile = () => {
     }, 3000);
   }
   
-
-  console.log('test')
   return (
     <>
       <Head>

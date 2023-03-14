@@ -47,10 +47,12 @@ export default async function food(req, res) {
           food: true,
         },
         where: {
-          userId: userid,
+          AND: {
+            userId: userid,
+            // date: '2023-03-14T18:17:52.319Z'
+          }
         },
       });
-      console.log(user[0]);
       res.status(200).json(user);
     } catch (e) {
       res.status(401).json({ message: "No Food list" });

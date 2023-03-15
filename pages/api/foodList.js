@@ -39,7 +39,7 @@ export default async function food(req, res) {
 
       res.status(200).json(uus);
     } catch (e) {
-      console.log(e)
+      console.log(e);
       res.status(401).json({ message: "Wrong Info" });
     }
   }
@@ -60,8 +60,8 @@ export default async function food(req, res) {
           where: {
             AND: {
               userId: userid,
-              date: req.query.date
-            }
+              date: req.query.date,
+            },
           },
         });
       } else {
@@ -70,7 +70,7 @@ export default async function food(req, res) {
             food: true,
           },
           where: {
-            userId: userid
+            userId: userid,
           },
         });
       }

@@ -490,12 +490,12 @@ const Chart = () => {
   }, []);
 
   return (
-    <div className="w-[1000px]">
+    <>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={"3"}
+        slidesPerView={"auto"}
         coverflowEffect={{
           rotate: 50,
           stretch: 0,
@@ -543,7 +543,7 @@ const Chart = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-    </div>
+    </>
   );
 };
 

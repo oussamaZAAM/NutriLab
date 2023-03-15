@@ -7,7 +7,7 @@ const ProfilePassword = ({submitPassword, requestState, hideMessage}) => {
     const errors = {};
     if (!values.oldPassword) {
       errors.oldPassword = 'Required';
-    } else if (values.oldPassword.length < 6 || values.newPassword.length > 25) {
+    } else if (values.oldPassword.length < 6 || values.oldPassword.length > 25) {
       errors.oldPassword = 'Must be between 6 and 25 characters';
     }
     

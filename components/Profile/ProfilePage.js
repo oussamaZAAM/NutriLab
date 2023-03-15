@@ -7,8 +7,8 @@ const ProfilePage = ({profileData, submitProfile, requestState, hideMessage}) =>
 
     if (!values.name) {
       errors.name = 'Required';
-    } else if (values.name.length < 3) {
-      errors.name = 'Must be 3 characters or more';
+    } else if (values.name.length < 3 || values.name.length > 25) {
+      errors.name = 'Must be between 3 and 25 characters';
     }
 
     if (!values.email) {

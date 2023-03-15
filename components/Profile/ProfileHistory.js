@@ -8,6 +8,7 @@ import {
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
 import { TbError404 } from "react-icons/tb";
+import { DailyChart } from "./DailyChart";
 const ProfileHistory = () => {
   const [previousAnimation, setPreviousAnimation] = useState(false);
   const [nextAnimation, setNextAnimation] = useState(false);
@@ -124,7 +125,7 @@ const ProfileHistory = () => {
           <p className="text-xl font-bold">{previousDate.format("DD")}</p>
           <p className="text-md font-medium">{previousDate.format("MMM")}</p>
         </div>
-        
+         
         <div
           className={[
             "mx-1 flex h-24 w-20 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2",
@@ -163,18 +164,19 @@ const ProfileHistory = () => {
         {foodHistory 
           ? foodHistory.length !== 0
             ? eatenFoodList
-            : <div className="flex flex-col justify-center items-center my-20 xs:my-32">
+            : <div className="flex flex-col justify-center items-center my-20 xs:my-16">
                 <TbError404 className="fill-red-500 h-20 w-20"/>
               <p className="font-logo font-medium text-red-500">No data on this date!</p>
             </div>
           : <div className="w-[90vw] xs:w-full grid items-center justify-center gap-1 xs:flex xs:flex-col xs:gap-2 grid-cols-2 animate-pulse">
-              <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-full xs:w-[370px] h-[104px]"></div>
-              <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-full xs:w-[370px] h-[104px]"></div>
+              <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-full xs:w-[370px] h-[96px]"></div>
+              <div className="bg-gray-200 rounded-md dark:bg-gray-700 my-2 w-full xs:w-[370px] h-[96px]"></div>
           </div>
         }
 
         </div>
       </div>
+      {foodHistory && foodHistory.length!==0 && <DailyChart date={date} />}
     </>
   );
 };

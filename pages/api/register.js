@@ -40,7 +40,7 @@ export default async function register(req, res) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       // The .code property can be accessed in a type-safe manner
       if (e.code === "P2002") {
-        res.json({ error: "Email already registered" });
+        res.status(401).json({ error: "Email already registered" });
       } else {
         res.json(e);
       }

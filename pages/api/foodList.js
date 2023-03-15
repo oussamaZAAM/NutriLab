@@ -14,13 +14,13 @@ export default async function food(req, res) {
     try {
       let input = {
         userId: data.userId,
-        Calories: data.Calories,
-        Carbs: data.Carbs,
-        Fat: data.Fat,
-        Fiber: data.Fiber,
-        Protein: data.Protein,
-        Salt: data.Salt,
-        Sugar: data.Sugar,
+        kCalories: data.Calories,
+        carbs: data.Carbs,
+        fats: data.Fat,
+        fiber: data.Fiber,
+        proteins: data.Protein,
+        salt: data.Salt,
+        sugar: data.Sugar,
       };
       const foodList = await prisma.FoodList.create({
         data: input,

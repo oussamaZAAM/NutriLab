@@ -119,11 +119,11 @@ model FoodList {
   lable    String?
   date     DateTime @default(now()) @db.Date
   userId   String
-  Calories Float
-  Carbs    Float
-  Fat      Float
-  Fiber    Float
-  Protein  Float
-  Salt     Float
-  Sugar    Float
+  kCalories Float
+  carbs    Float
+  fats      Float
+  fiber    Float
+  proteins  Float
+  salt     Float
+  sugar    Float
 }

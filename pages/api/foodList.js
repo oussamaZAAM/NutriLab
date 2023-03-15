@@ -22,6 +22,27 @@ export default async function food(req, res) {
         salt: data.Salt,
         sugar: data.Sugar,
       };
+      const date = new Date();
+      const latestFoodList = await prisma.FoodList.findMany({
+        where: {
+          userId: data.userId,
+        },
+        orderBy: {
+          date: "desc",
+        },
+        take: 1,
+      });
+
+      if (
+        parseInt(date.getDate()) - parseInt(latestFoodList[0].date.getDate()) <
+        1
+      ) {
+        const deletedFoodList = await prisma.FoodList.delete({
+          where: {
+            id: latestFoodList[0].id,
+          },
+        });
+      }
       const foodList = await prisma.FoodList.create({
         data: input,
       });
@@ -39,7 +60,6 @@ export default async function food(req, res) {
 
       res.status(200).json(uus);
     } catch (e) {
-      console.log(e)
       res.status(401).json({ message: "Wrong Info" });
     }
   }
@@ -60,8 +80,8 @@ export default async function food(req, res) {
           where: {
             AND: {
               userId: userid,
-              date: req.query.date
-            }
+              date: req.query.date,
+            },
           },
         });
       } else {
@@ -70,7 +90,7 @@ export default async function food(req, res) {
             food: true,
           },
           where: {
-            userId: userid
+            userId: userid,
           },
         });
       }

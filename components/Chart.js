@@ -123,10 +123,10 @@ const Chart = () => {
 
     let idealNutri;
     async function nutrientsCalories() {
+      await dailyNutrientsCalories();
       const res = await axios.get("/api/nutri");
       const data = res.data;
       idealNutri = new Array(7).fill(data.kCalories);
-      await dailyNutrientsCalories();
       setChartDataCalories({
         labels: [
           "Sunday",
@@ -156,11 +156,11 @@ const Chart = () => {
       });
     }
     async function nutrientsProtein() {
+      await dailyNutrientsProtein();
       const res = await fetch("/api/nutri");
       const data = await res.json();
       idealNutri = new Array(7).fill(data.proteins);
-      await dailyNutrientsCalories();
-      setChartDataCalories({
+      setChartDataProtein({
         labels: [
           "Sunday",
           "Monday",
@@ -189,10 +189,10 @@ const Chart = () => {
       });
     }
     async function nutrientsCarbs() {
+      await dailyNutrientsCarbs();
       const res = await fetch("/api/nutri");
       const data = await res.json();
       idealNutri = new Array(7).fill(data.carbs);
-      await dailyNutrientsCarbs();
       setChartDataCarbs({
         labels: [
           "Sunday",
@@ -222,10 +222,10 @@ const Chart = () => {
       });
     }
     async function nutrientsFat() {
+      await dailyNutrientsFat();
       const res = await fetch("/api/nutri");
       const data = await res.json();
       idealNutri = new Array(7).fill(data.fats);
-      await dailyNutrientsFat();
       setChartDataFat({
         labels: [
           "Sunday",
@@ -255,10 +255,10 @@ const Chart = () => {
       });
     }
     async function nutrientsFiber() {
+      await dailyNutrientsFiber();
       const res = await fetch("/api/nutri");
       const data = await res.json();
       idealNutri = new Array(7).fill(data.fiber);
-      await dailyNutrientsFiber();
       setChartDataFiber({
         labels: [
           "Sunday",
@@ -288,10 +288,10 @@ const Chart = () => {
       });
     }
     async function nutrientsSalt() {
+      await dailyNutrientsSalt();
       const res = await fetch("/api/nutri");
       const data = await res.json();
       idealNutri = new Array(7).fill(data.salt);
-      await dailyNutrientsSalt();
       setChartDataSalt({
         labels: [
           "Sunday",
@@ -321,10 +321,10 @@ const Chart = () => {
       });
     }
     async function nutrientsSugar() {
+      await dailyNutrientsSugar();
       const res = await fetch("/api/nutri");
       const data = await res.json();
       idealNutri = new Array(7).fill(data.sugar);
-      await dailyNutrientsSugar();
       setChartDataSugar({
         labels: [
           "Sunday",

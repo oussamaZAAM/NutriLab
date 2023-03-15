@@ -77,7 +77,6 @@ const Chart = () => {
       data.forEach((foodList, index) => {
         calorieWeek.splice(index, 1, foodList.Calories);
       });
-      console.log(calorieWeek);
     }
     async function dailyNutrientsProtein() {
       const res = await fetch("/api/foodList");
@@ -127,9 +126,7 @@ const Chart = () => {
       await dailyNutrientsCalories();
       const res = await axios.get("/api/nutri");
       const data = res.data;
-      console.log(data);
       idealNutri = new Array(7).fill(data.kCalories);
-      console.log(idealNutri);
       setChartDataCalories({
         labels: [
           "Sunday",

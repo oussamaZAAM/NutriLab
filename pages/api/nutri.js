@@ -1,5 +1,4 @@
 import prisma from "./prisma";
-import jwt from "jsonwebtoken";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth/[...nextauth]";
 

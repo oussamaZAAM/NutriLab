@@ -3,69 +3,82 @@ import { useRouter } from "next/router";
 import { BsGoogle, BsFacebook, BsTwitter } from "react-icons/bs";
 import { useState } from "react";
 import axios from "axios";
+import { useFormik } from "formik";
 
 export default function Register({ setLogin, setAuth, setOpen }) {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-    rePass: "",
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.name) {
+      errors.name = "Required";
+    } else if (values.name.length < 3 || values.name.length > 25) {
+      errors.name = "Must be between 3 and 25 characters";
+    }
+
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
+    }
+
+    if (!values.password) {
+      errors.password = "Required";
+    } else if (values.password.length < 6 || values.password.length > 25) {
+      errors.password = "Must be between 6 and 25 characters";
+    }
+
+    if (!values.repassword) {
+      errors.repassword = "Required";
+    } else if (values.repassword !== values.password) {
+      errors.repassword = "Password do not match";
+    }
+
+    return errors;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      repassword: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      handleSubmit(values);
+    },
   });
+
   const [error, setError] = useState({
-    name: "",
-    email: "",
-    pass: "",
-    rePass: "",
+    email: ""
   });
 
   const router = useRouter();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    user.password === "" && setError({ rePass: "Enter an Password" });
-    user.email === "" && setError({ email: "Enter an Email" });
-    user.name === "" && setError({ name: "Enter a name" });
-    if (user.name !== "" && user.email !== "" && user.password !== "") {
-      if (user.password === user.rePass) {
-        const data = {
-          name: user.name,
-          email: user.email,
-          password: user.password,
-        };
-        await axios
-          .post("/api/register", data, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-          .then(async (response) => {
-            setAuth(response.data);
-            setOpen(false);
-            
-            if (router.query.path) {
-              router.push(router.query.path);
-              // router.push('/')
-            }
-            // await axios.get("/api/nutriInfo").then((res) => {
-            //   const localData = {
-            //     ...res.data,
-            //     age: "",
-            //     sex: "",
-            //     weight: "",
-            //     height: "",
-            //     activity: "",
-            //     plan: "", 
-            //   };
-            //   localStorage.setItem("dietInfos", JSON.stringify(localData));
-            // });
-            setUser(response.data);
-          })
-          .catch((error) => {
-            setError({ email: "This email already exists" });
-          });
-      } else {
-        setError({ rePass: "Make sure to repeat the password correctly" });
-      }
-    }
+  const handleSubmit = async (values) => {
+    const data = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    };
+    await axios
+      .post("/api/register", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(async (response) => {
+        setAuth(response.data);
+        setOpen(false);
+
+        if (router.query.path) {
+          router.push(router.query.path);
+        }
+      })
+      .catch((error) => {
+        setError({ email: "This email already exists" });
+      });
   };
 
   return (
@@ -106,24 +119,18 @@ export default function Register({ setLogin, setAuth, setOpen }) {
                 </div>
                 <input
                   type="text"
-                  onFocus={() =>
-                    setError({
-                      name: "",
-                      email: "",
-                      pass: "",
-                      rePass: "",
-                    })
-                  }
-                  value={user.name}
-                  onChange={(e) => setUser({ ...user, name: e.target.value })}
+                  name="name"
+                  {...formik.getFieldProps("name")}
                   placeholder="Name"
                   className={
-                    "mt-2 w-max basis-3/4 rounded-md border px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600" +
-                    (error.name && "border-3 border-rose-500")
+                    "mt-2 w-max basis-3/4 rounded-md border px-4 py-2 focus:outline-none  " +
+                    (formik.errors.name &&
+                      formik.touched.name &&
+                      "border-red-600 focus:border-red-600")
                   }
                 />
                 <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
-                  {error.name}
+                  {formik.touched.name && formik.errors.name}
                 </p>
               </div>
               <div className="relative mt-4 flex flex-row">
@@ -136,23 +143,27 @@ export default function Register({ setLogin, setAuth, setOpen }) {
                   type="text"
                   onFocus={() =>
                     setError({
-                      name: "",
+                      ...error,
                       email: "",
-                      pass: "",
-                      rePass: "",
                     })
                   }
-                  value={user.email}
-                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  name="email"
+                  {...formik.getFieldProps("email")}
                   placeholder="Email"
                   className={
-                    "mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600" +
-                    (error.email && "border-3 border-rose-500")
+                    "mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none " +
+                    (formik.errors.email &&
+                      formik.touched.email &&
+                      "border-red-600 focus:border-red-600")
                   }
                 />
                 <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
+                  {formik.touched.email && formik.errors.email}
+                </p>
+                <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
                   {error.email}
                 </p>
+                
               </div>
 
               <div className="relative mt-4 flex flex-row">
@@ -160,46 +171,45 @@ export default function Register({ setLogin, setAuth, setOpen }) {
                   <label className=" text-center">Password</label>
                 </div>
                 <input
-                  onFocus={() =>
-                    setError({
-                      name: "",
-                      email: "",
-                      pass: "",
-                      rePass: "",
-                    })
-                  }
                   type="password"
-                  onChange={(e) =>
-                    setUser({ ...user, password: e.target.value })
-                  }
+                  name="password"
+                  {...formik.getFieldProps("password")}
                   placeholder="Password"
                   className={
-                    " mt-2 w-full basis-3/4 rounded-md border px-4 py-2 hover:ring-blue-600 focus:outline-none focus:ring-1" +
-                    (error.rePass && "border-3 border-rose-500")
+                    " mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none " +
+                    (formik.errors.password &&
+                      formik.touched.password &&
+                      "border-red-600 focus:border-red-600")
                   }
                 />
 
                 <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
-                  {error.rePass}
+                  {formik.touched.password && formik.errors.password}
                 </p>
               </div>
-              <div className="mt-4 flex flex-row">
+              <div className="relative mt-4 flex flex-row">
                 <div className=" basis-1/4">
                   <label className=" text-center">Confirm Password</label>
                 </div>
                 <input
                   type="password"
-                  onChange={(e) => setUser({ ...user, rePass: e.target.value })}
+                  name="repassword"
+                  {...formik.getFieldProps("repassword")}
                   placeholder="Password"
-                  className="mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className={
+                    "mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none " +
+                    (formik.errors.repassword &&
+                      formik.touched.repassword &&
+                      "border-red-600 focus:border-red-600")
+                  }
                 />
+                <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
+                  {formik.touched.repassword && formik.errors.repassword}
+                </p>
               </div>
-              {/* <span className="text-xs text-red-400">
-                Password must be same!
-              </span> */}
               <div className="flex">
                 <button
-                  onClick={handleSubmit}
+                  onClick={formik.handleSubmit}
                   className="mt-4 w-full rounded-lg bg-orange-400 px-6 py-2 text-white hover:bg-orange-600"
                 >
                   Create Account

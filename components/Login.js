@@ -6,22 +6,48 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useFormik } from "formik";
 
 export default function Login({ setLogin, setAuth, setOpen }) {
   const router = useRouter();
   const { setUser } = useContext(User_data);
-  const [user, setUser1] = useState({
-    email: "",
-    password: "",
-  });
   const [error, setError] = useState({ email: "", password: "" });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validate = (values) => {
+    const errors = {};
 
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
+    }
+
+    if (!values.password) {
+      errors.password = "Required";
+    } else if (values.password.length < 6 || values.password.length > 25) {
+      errors.password = "Must be between 6 and 25 characters";
+    }
+
+    return errors;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      handleSubmit(values);
+    },
+  });
+
+  const handleSubmit = async (values) => {
     const data = {
-      email: user.email,
-      password: user.password,
+      email: values.email,
+      password: values.password,
     };
     await axios
       .post("/api/login", data, {
@@ -34,11 +60,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         setOpen(false);
         if (router.query.path) {
           router.push(router.query.path);
-          // router.push('/')
         }
-        // await axios.get("/api/nutriInfo").then((res) => {
-        //   localStorage.setItem("dietInfos", JSON.stringify(res.data));
-        // });
 
         setUser(response.data);
       })
@@ -84,45 +106,53 @@ export default function Login({ setLogin, setAuth, setOpen }) {
                 </label>
               </div>
               <input
-                onFocus={() => setError({ email: "", password: "" })}
+                onFocus={() => setError({ ...error, email: "" })}
                 type="text"
                 placeholder="Email"
-                value={user.email}
-                onChange={(e) => setUser1({ ...user, email: e.target.value })}
+                name="email"
+                {...formik.getFieldProps("email")}
                 className={
-                  "mt-2 w-max basis-3/4 rounded-md border px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600" +
-                  (error.email && "border-3 border-rose-500")
+                  "mt-2 w-max basis-3/4 rounded-md border px-4 py-2 focus:outline-none " +
+                  (formik.errors.email &&
+                    formik.touched.email &&
+                    "border-red-600 focus:border-red-600")
                 }
               />
-              {error.email && (
-                <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
-                  {error.email}
-                </p>
-              )}
+              <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
+                {formik.touched.email && formik.errors.email}
+              </p>
+              <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
+                {error.email}
+              </p>
             </div>
             <div className="relative mt-4 flex flex-row">
               <div className=" flex basis-1/4 items-center">
                 <label className=" text-center">Password</label>
               </div>
               <input
-                onFocus={() => setError({ email: "", password: "" })}
+                onFocus={() => setError({ ...error, password: "" })}
                 type="password"
                 placeholder="Password"
-                onChange={(e) =>
-                  setUser1({ ...user, password: e.target.value })
+                name="password"
+                {...formik.getFieldProps("password")}
+                className={
+                  "mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none " +
+                  (formik.errors.email &&
+                    formik.touched.email &&
+                    "border-red-600 focus:border-red-600")
                 }
-                className=" mt-2 w-full basis-3/4 rounded-md border px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
-              {error.password && (
-                <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
-                  {error.password}
-                </p>
-              )}
+              <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
+                {formik.touched.password && formik.errors.password}
+              </p>
+              <p className="absolute left-20 -top-3 text-xs text-rose-500 sm:-top-4 sm:left-32 sm:text-sm">
+                {error.password}
+              </p>
             </div>
 
             <div className="flex">
               <button
-                onClick={handleSubmit}
+                onClick={formik.handleSubmit}
                 className="mt-4 w-full rounded-lg bg-orange-400 px-6 py-2 text-white hover:bg-orange-600"
               >
                 Login to Account

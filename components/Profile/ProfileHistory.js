@@ -66,6 +66,7 @@ const ProfileHistory = () => {
       });
       setFoodHistory(foodHistoryData.data);
     }
+    setFoodHistory();
     getHistory();
   }, [date]);
 
@@ -97,7 +98,16 @@ const ProfileHistory = () => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
 
+      {/* Weekly Charts  */}
+      <div className="relative mb-4 flex w-full items-center justify-center lg:w-2/3">
+        <p className="text-white tracking-wider text-3xl font-title">Weekly Stats</p>
+      </div>
       <Chart />
+
+      {/* Daily Chart  */}
+      <div className="relative mt-16 mb-4 flex w-full items-center justify-center lg:w-2/3">
+        <p className="text-white tracking-wider text-3xl font-title">Daily Stats</p>
+      </div>
       <div className="relative mt-2 mb-1 flex w-full items-center justify-center lg:w-2/3">
         <button>
           <IoIosArrowDropleftCircle
@@ -114,10 +124,7 @@ const ProfileHistory = () => {
           <p className="text-xl font-bold">{previousDate.format("DD")}</p>
           <p className="text-md font-medium">{previousDate.format("MMM")}</p>
         </div>
-        {/* <div className={`mx-1 flex h-24 w-20 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2 `+
-                         (nextAnimation && 'animate-ldate2 ')+
-                         (previousAnimation && 'animate-rdate2 ')
-                         }> */}
+        
         <div
           className={[
             "mx-1 flex h-24 w-20 flex-col items-center justify-center rounded-md border-2 border-black bg-white font-logo text-black lg:mx-2",

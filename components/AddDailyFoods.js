@@ -15,6 +15,7 @@ export default function AddDailyFood({
   setAlgoData,
   setIsAlgorithmEnabled,
   sumNutrients,
+  setIsAlgorithm
 }) {
   const [wiggle, setWiggle] = useState(false);
   const [addedFood, setAddedFood] = useState({});
@@ -97,8 +98,9 @@ export default function AddDailyFood({
     return obj3;
   }
   const enableAlgorithm = async () => {
+    setIsAlgorithmEnabled(true);
+    
     const nutrients = sumNutrients();
-
     const nutriRes = await axios.get("/api/nutri");
     const neededNutri = addValuesOfTwoObjects(nutriRes.data, nutrients);
     const eatenFoodNames = eatenFoodList.map((food) => {
@@ -115,7 +117,7 @@ export default function AddDailyFood({
       ...nutrients,
     });
     setAlgoData(res.data);
-    setIsAlgorithmEnabled(true);
+    setIsAlgorithm(true);
   };
   // Mapping over the list of Searched Food
   const searchedFood = !food
@@ -216,9 +218,9 @@ export default function AddDailyFood({
           styles.dropshadow
         }
       >
-        <div className="flex w-full flex-col items-start justify-center truncate xs:ml-8">
+        <div className="flex w-full flex-col items-start justify-center xs:ml-8">
           <div className="flex items-center justify-center">
-            <b className="my-4 w-full truncate text-center font-logo text-xl font-bold text-custom-orange hover:whitespace-normal xs:text-left sm:whitespace-normal">
+            <b className="my-4 w-full font-logo text-md xs:text-xl font-bold text-custom-orange whitespace-normal text-left">
               {food.name}
             </b>
             <a
@@ -233,17 +235,8 @@ export default function AddDailyFood({
             </a>
           </div>
           <div className="my-1 flex flex-col items-start self-center xs:w-full">
-            {/* <p className="font-paragraph text-xs">
-            Category:{" "}
-            <span className="font-paragraph font-bold text-xs">
-              {food.category}
-            </span>
-          </p> */}
             <div className="flex items-center justify-center font-paragraph text-xs">
               How Much:{" "}
-              {/* <span className="font-paragraph font-bold text-xs">
-              {food.size} g
-            </span> */}
               <div
                 className={`group ml-2 flex
               w-20 items-center justify-start
@@ -444,7 +437,7 @@ export default function AddDailyFood({
           ></div>
 
           <div className="rounded-2 dropshadow my-4 flex w-11/12 items-center justify-center">
-            <div className="grid w-full grid-cols-2 items-center justify-center gap-2 xs:flex xs:flex-col">
+            <div className="grid w-full grid-cols-2 items-stretch justify-center gap-2 xs:flex xs:flex-col">
               {eatenFood}
             </div>
           </div>

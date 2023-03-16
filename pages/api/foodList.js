@@ -32,11 +32,7 @@ export default async function food(req, res) {
         },
         take: 1,
       });
-
-      if (
-        parseInt(date.getDate()) - parseInt(latestFoodList[0].date.getDate()) <
-        1
-      ) {
+      if (latestFoodList[0] && (parseInt(date.getDate()) - parseInt(latestFoodList[0].date.getDate()) < 1)) {
         const deletedFoodList = await prisma.FoodList.delete({
           where: {
             id: latestFoodList[0].id,
@@ -60,6 +56,7 @@ export default async function food(req, res) {
 
       res.status(200).json(uus);
     } catch (e) {
+      console.log(e)
       res.status(401).json({ message: "Wrong Info" });
     }
   }

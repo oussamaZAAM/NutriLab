@@ -7,6 +7,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { useState } from "react";
 import styles from "/styles/Home.module.css";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function AddDailyFood({
   food,
@@ -15,11 +16,14 @@ export default function AddDailyFood({
   setAlgoData,
   setIsAlgorithmEnabled,
   sumNutrients,
-  setIsAlgorithm
+  setIsAlgorithm,
+  localNutris
 }) {
   const [wiggle, setWiggle] = useState(false);
   const [addedFood, setAddedFood] = useState({});
   const [searchedWord, setSearchedWord] = useState("");
+
+  const router = useRouter();
   //Functions
   const cancelPendingFood = () => {
     setAddedFood({ ...addedFood, removingFade: true });
@@ -98,26 +102,32 @@ export default function AddDailyFood({
     return obj3;
   }
   const enableAlgorithm = async () => {
-    setIsAlgorithmEnabled(true);
-    
-    const nutrients = sumNutrients();
-    const nutriRes = await axios.get("/api/nutri");
-    const neededNutri = addValuesOfTwoObjects(nutriRes.data, nutrients);
-    const eatenFoodNames = eatenFoodList.map((food) => {
-      return { name: food.name, weight: parseFloat(food.size) };
-    });
-    neededNutri.foods = eatenFoodNames;
-    const res = await axios.post(
-      // "http://127.0.0.1:8000/polls/getFood/",
-      "https://nutrilab-api.up.railway.app/polls/getFood/",
-      neededNutri
-    );
-    await axios.post("/api/foodList", {
-      eatenFoodList: eatenFoodList,
-      ...nutrients,
-    });
-    setAlgoData(res.data);
-    setIsAlgorithm(true);
+    if (localNutris && Object.keys(localNutris).every((info) => localNutris[info] !== null)){
+      setIsAlgorithmEnabled(true);
+      setIsAlgorithm(false);
+  
+      const nutrients = sumNutrients();
+      const nutriRes = await axios.get("/api/nutri");
+      const neededNutri = addValuesOfTwoObjects(nutriRes.data, nutrients);
+      const eatenFoodNames = eatenFoodList.map((food) => {
+        return { name: food.name, weight: parseFloat(food.size) };
+      });
+      neededNutri.foods = eatenFoodNames;
+      const res = await axios.post(
+        // "http://127.0.0.1:8000/polls/getFood/",
+        "https://nutrilab-api.up.railway.app/polls/getFood/",
+        neededNutri
+      );
+      await axios.post("/api/foodList", {
+        eatenFoodList: eatenFoodList,
+        ...nutrients,
+      });
+      setAlgoData(res.data);
+      setIsAlgorithm(true);
+    } else {
+      alert("Please insert your informations");
+      router.push("#yourInformations");
+    }
   };
   // Mapping over the list of Searched Food
   const searchedFood = !food
@@ -444,16 +454,16 @@ export default function AddDailyFood({
 
           {eatenFoodList.length !== 0 && (
             <div className="flex w-full items-center justify-center">
-              <a href="#algorithm">
-                <div
-                  className="relative max-w-xs overflow-hidden rounded-2xl bg-cover  bg-no-repeat "
-                  style={{ backgroundColor: "#DCF8FF" }}
-                  onClick={enableAlgorithm}
-                >
-                  <button className="py-4 px-9 font-extrabold">Proceed</button>
-                  <div className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 transition duration-300 ease-in-out hover:opacity-70"></div>
-                </div>
-              </a>
+                <a href="#algorithm">
+                  <div
+                    className="relative max-w-xs overflow-hidden rounded-2xl bg-cover  bg-no-repeat "
+                    style={{ backgroundColor: "#DCF8FF" }}
+                    onClick={enableAlgorithm}
+                  >
+                    <button className="py-4 px-9 font-extrabold">Proceed</button>
+                    <div className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 transition duration-300 ease-in-out hover:opacity-70"></div>
+                  </div>
+                </a>
             </div>
           )}
         </div>

@@ -180,7 +180,8 @@ const Food = ({ food }) => {
         setIsAlgorithmEnabled={setIsAlgorithmEnabled}
         setIsAlgorithm={setIsAlgorithm}
         sumNutrients={sumNutrients}
-      />
+        localNutris={localNutris}
+      /> 
       <YourInfo localInfos={localInfos} localNutris={localNutris} />
 
       {/* Food Algorithm  */}

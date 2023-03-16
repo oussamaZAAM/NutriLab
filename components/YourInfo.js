@@ -19,11 +19,11 @@ export default function YourInfo({ localInfos, localNutris }) {
                     rounded border-2 border-custom-orange
                     sm:col-span-6 sm:col-start-2"
     >
-      <h3 className="| my-16 w-full text-center font-title text-3xl xs:text-4xl sm:text-5xl">
+      <h3 id='yourInformations' className="my-16 w-full text-center font-title text-3xl xs:text-4xl sm:text-5xl">
         Check Your Informations
       </h3>
       <div className="flex items-center justify-between">
-        <h4 className="| w-full text-center font-title text-2xl xs:text-3xl sm:text-4xl">
+        <h4 className="w-full text-center font-title text-2xl xs:text-3xl sm:text-4xl">
           Your Input Infos
         </h4>
         <Link href="/nutrients">

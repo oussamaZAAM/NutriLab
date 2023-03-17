@@ -5,7 +5,7 @@ import React from "react";
 import { MdArrowBack } from "react-icons/md";
 
 const foodInfos = ({ foodData }) => {
-  const title = `NutriLab - ${foodData.name}`
+  const title = `NutriLab - ${foodData.name}`;
   return (
     <div>
       <Head>
@@ -14,100 +14,90 @@ const foodInfos = ({ foodData }) => {
         <link rel="icon" href="https://i.ibb.co/yhHmPr0/orange-slice.png" />
       </Head>
       <div className="flex flex-col">
-        <div className="m-12">
-          <Link href='/food'>
-              <div className="
-                                flex justify-start items-center max-w-min py-2 px-8
-                                border-2 rounded-3xl border-custom-orange
-                                space-x-2
-                                hover:bg-custom-orange hover:cursor-pointer
-                            ">
-                  <MdArrowBack className="w-5 h-5"/>
-                  <span className="font-bold font-logo">Back</span>
-              </div>
-          </Link>
+        <div className="m-12 h-1">
+          <Link href="/food"></Link>
         </div>
-        <div className="grid grid-cols-12 w-full">
-          <div className="flex flex-col col-span-12 xs:col-start-3 xs:col-span-8 sm:col-start-4 sm:col-span-6 xl:col-start-5 xl:col-span-4">
-            <div className="flex flex-col justify-center items-center mt- rounded-xl bg-custom-orange">
-              <h1 className="text-center text-3xl text-black font-medium font-title m-4">
+        <div className="grid w-full grid-cols-12">
+          <div className="col-span-12 flex flex-col xs:col-span-8 xs:col-start-3 sm:col-span-6 sm:col-start-4 xl:col-span-4 xl:col-start-5">
+            <div className="mt- flex flex-col items-center justify-center rounded-xl bg-custom-orange">
+              <h1 className="m-4 text-center font-title text-3xl font-medium text-black">
                 {foodData.name}
               </h1>
             </div>
             <div className="my-6 border-b-2 border-black"></div>
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-              <thead className="border-b text-xs text-black uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table className="dark:text-gray-400 w-full text-left text-sm text-gray-500">
+              <thead className="dark:bg-gray-700 dark:text-gray-400 border-b bg-gray-50 text-xs uppercase text-black">
                 <tr>
                   <th scope="col" className="px-6 py-3">
                     Calories
                   </th>
                   <th scope="col" className="px-6 py-3 text-lg font-black">
-                  {foodData.Calories}
+                    {foodData.Calories}
                   </th>
                 </tr>
               </thead>
               <tbody>
-                
-                <tr className="bg-white border-b text-black dark:text-white dark:bg-gray-900 dark:border-gray-700">
+                <tr className="dark:text-white dark:bg-gray-900 dark:border-gray-700 border-b bg-white text-black">
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                    className="dark:text-white whitespace-nowrap px-6 py-4 font-medium"
                   >
                     Protein
                   </th>
-                  <td className="px-6 py-4 font-semibold">{foodData.Protein}</td>
+                  <td className="px-6 py-4 font-semibold">
+                    {foodData.Protein}
+                  </td>
                 </tr>
 
-                <tr className="border-b bg-gray-50 text-black dark:text-white dark:bg-gray-800 dark:border-gray-700">
+                <tr className="dark:text-white dark:bg-gray-800 dark:border-gray-700 border-b bg-gray-50 text-black">
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                    className="dark:text-white whitespace-nowrap px-6 py-4 font-medium"
                   >
                     Fat
                   </th>
                   <td className="px-6 py-4 font-semibold">{foodData.Fat}</td>
                 </tr>
 
-                <tr className="bg-white border-b text-black dark:text-white dark:bg-gray-900 dark:border-gray-700">
+                <tr className="dark:text-white dark:bg-gray-900 dark:border-gray-700 border-b bg-white text-black">
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                    className="dark:text-white whitespace-nowrap px-6 py-4 font-medium"
                   >
                     Carbs
                   </th>
                   <td className="px-6 py-4 font-semibold">{foodData.Carbs}</td>
                 </tr>
 
-                <tr className="border-b bg-gray-50 text-black dark:text-white dark:bg-gray-800 dark:border-gray-700">
+                <tr className="dark:text-white dark:bg-gray-800 dark:border-gray-700 border-b bg-gray-50 text-black">
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                    className="dark:text-white whitespace-nowrap px-6 py-4 font-medium"
                   >
                     Fiber
                   </th>
                   <td className="px-6 py-4 font-semibold">{foodData.Fiber}</td>
                 </tr>
 
-                <tr className="bg-white border-b text-black dark:text-white dark:bg-gray-900 dark:border-gray-700">
+                <tr className="dark:text-white dark:bg-gray-900 dark:border-gray-700 border-b bg-white text-black">
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                    className="dark:text-white whitespace-nowrap px-6 py-4 font-medium"
                   >
                     Sugar
                   </th>
                   <td className="px-6 py-4 font-semibold">{foodData.Sugar}</td>
                 </tr>
 
-                <tr className="bg-gray-50 text-black dark:text-white dark:bg-gray-800 dark:border-gray-700">
+                <tr className="dark:text-white dark:bg-gray-800 dark:border-gray-700 bg-gray-50 text-black">
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                    className="dark:text-white whitespace-nowrap px-6 py-4 font-medium"
                   >
                     Salt
                   </th>
                   <td className="px-6 py-4 font-semibold">{foodData.Salt}</td>
                 </tr>
-
               </tbody>
             </table>
           </div>
@@ -126,7 +116,7 @@ export const getStaticProps = async (context) => {
       : `http://localhost:3000/api/food/${context.params.id}`;
 
   const res = await fetch(url);
-    
+
   const foodData = await res.json();
   return {
     props: {
@@ -142,20 +132,20 @@ export const getStaticPaths = async () => {
       : `http://localhost:3000/api/food`;
   const res = await fetch(url);
   const foods = await res.json();
-  
+
   const names = foods.map((food) => food.name);
-  const ids = names.map((name)=>{
+  const ids = names.map((name) => {
     const lowerCase = name.toLowerCase();
-    const deleteComma = lowerCase.split(',').join('');
-    const deletePercent = deleteComma.split('%').join('percent');
-    const deleteSlash = deletePercent.split('/').join('per');
-    const formattedURL = deleteSlash.split(' ').join('-');
+    const deleteComma = lowerCase.split(",").join("");
+    const deletePercent = deleteComma.split("%").join("percent");
+    const deleteSlash = deletePercent.split("/").join("per");
+    const formattedURL = deleteSlash.split(" ").join("-");
     return formattedURL;
-  })
-  const paths = ids.map((id) => ({params: {id: id.toString()}}));
+  });
+  const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 
   return {
-      paths,
-      fallback: false
-  }
-}
+    paths,
+    fallback: false,
+  };
+};

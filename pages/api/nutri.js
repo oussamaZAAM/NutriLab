@@ -12,6 +12,7 @@ export default async function nutrients(req, res) {
       data.userId = req.headers.userid;
     }
     try {
+      
       const user = await prisma.Nutrients.upsert({
         where: {
           userId: data.userId,

@@ -74,50 +74,51 @@ const Chart = () => {
         },
       });
       const data = await res.json();
+      console.log(data);
       data.forEach((foodList, index) => {
-        calorieWeek.splice(index, 1, foodList.Calories);
+        index < 7 && calorieWeek.splice(index, 1, foodList.kCalories);
       });
     }
     async function dailyNutrientsProtein() {
       const res = await fetch("/api/foodList");
       const data = await res.json();
       data.forEach((foodList, index) => {
-        proteinWeek.splice(index, 1, foodList.Protein);
+        proteinWeek.splice(index, 1, foodList.proteins);
       });
     }
     async function dailyNutrientsCarbs() {
       const res = await fetch("/api/foodList");
       const data = await res.json();
       data.forEach((foodList, index) => {
-        carbsWeek.splice(index, 1, foodList.Carbs);
+        carbsWeek.splice(index, 1, foodList.carbs);
       });
     }
     async function dailyNutrientsFat() {
       const res = await fetch("/api/foodList");
       const data = await res.json();
       data.forEach((foodList, index) => {
-        fatWeek.splice(index, 1, foodList.Fat);
+        fatWeek.splice(index, 1, foodList.fats);
       });
     }
     async function dailyNutrientsFiber() {
       const res = await fetch("/api/foodList");
       const data = await res.json();
       data.forEach((foodList, index) => {
-        fiberWeek.splice(index, 1, foodList.Fiber);
+        fiberWeek.splice(index, 1, foodList.fiber);
       });
     }
     async function dailyNutrientsSalt() {
       const res = await fetch("/api/foodList");
       const data = await res.json();
       data.forEach((foodList, index) => {
-        saltWeek.splice(index, 1, foodList.Salt);
+        saltWeek.splice(index, 1, foodList.salt);
       });
     }
     async function dailyNutrientsSugar() {
       const res = await fetch("/api/foodList");
       const data = await res.json();
       data.forEach((foodList, index) => {
-        sugarWeek.splice(index, 1, foodList.Sugar);
+        sugarWeek.splice(index, 1, foodList.sugar);
       });
     }
 

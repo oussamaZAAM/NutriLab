@@ -141,14 +141,14 @@ const Chart = () => {
         datasets: [
           {
             data: idealNutri,
-            label: "Applied",
+            label: "Goal",
             borderColor: "#3e95cd",
             backgroundColor: "#7bb6dd",
             fill: false,
           },
           {
             data: calorieWeek,
-            label: "Accepted",
+            label: "Consumed",
             borderColor: "#FF9351",
             backgroundColor: "#FF9351",
             fill: false,
@@ -174,14 +174,14 @@ const Chart = () => {
         datasets: [
           {
             data: idealNutri,
-            label: "Applied",
+            label: "Goal",
             borderColor: "#3e95cd",
             backgroundColor: "#7bb6dd",
             fill: false,
           },
           {
             data: proteinWeek,
-            label: "Accepted",
+            label: "Consumed",
             borderColor: "#FF9351",
             backgroundColor: "#FF9351",
             fill: false,
@@ -207,14 +207,14 @@ const Chart = () => {
         datasets: [
           {
             data: idealNutri,
-            label: "Applied",
+            label: "Goal",
             borderColor: "#3e95cd",
             backgroundColor: "#7bb6dd",
             fill: false,
           },
           {
             data: carbsWeek,
-            label: "Accepted",
+            label: "Consumed",
             borderColor: "#FF9351",
             backgroundColor: "#FF9351",
             fill: false,
@@ -240,14 +240,14 @@ const Chart = () => {
         datasets: [
           {
             data: idealNutri,
-            label: "Applied",
+            label: "Goal",
             borderColor: "#3e95cd",
             backgroundColor: "#7bb6dd",
             fill: false,
           },
           {
             data: fatWeek,
-            label: "Accepted",
+            label: "Consumed",
             borderColor: "#FF9351",
             backgroundColor: "#FF9351",
             fill: false,
@@ -273,14 +273,14 @@ const Chart = () => {
         datasets: [
           {
             data: idealNutri,
-            label: "Applied",
+            label: "Goal",
             borderColor: "#3e95cd",
             backgroundColor: "#7bb6dd",
             fill: false,
           },
           {
             data: fiberWeek,
-            label: "Accepted",
+            label: "Consumed",
             borderColor: "#FF9351",
             backgroundColor: "#FF9351",
             fill: false,
@@ -306,14 +306,14 @@ const Chart = () => {
         datasets: [
           {
             data: idealNutri,
-            label: "Applied",
+            label: "Goal",
             borderColor: "#3e95cd",
             backgroundColor: "#7bb6dd",
             fill: false,
           },
           {
             data: saltWeek,
-            label: "Accepted",
+            label: "Consumed",
             borderColor: "#FF9351",
             backgroundColor: "#FF9351",
             fill: false,
@@ -339,14 +339,14 @@ const Chart = () => {
         datasets: [
           {
             data: idealNutri,
-            label: "Applied",
+            label: "Goal",
             borderColor: "#3e95cd",
             backgroundColor: "#7bb6dd",
             fill: false,
           },
           {
             data: sugarWeek,
-            label: "Accepted",
+            label: "Consumed",
             borderColor: "#FF9351",
             backgroundColor: "#FF9351",
             fill: false,

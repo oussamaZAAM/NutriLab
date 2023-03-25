@@ -23,6 +23,9 @@ export async function verify(token, secret) {
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
+  if (request.cookies.get("__Secure-next-auth.session-token")?.value) {
+    return NextResponse.next();
+  }
   let cookie = request.cookies.get("NutriLab")?.value;
   if (cookie) {
     const user = await verify(cookie, process.env.JWT_SECRET);

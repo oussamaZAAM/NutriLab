@@ -10,12 +10,7 @@ import Register from "./Register";
 import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
-const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "How it works", href: "#", current: false },
-  { name: "Contact", href: "#", current: false },
-  { name: "Team", href: "#", current: false },
-];
+const navigation = [{ name: "Home", href: "/", current: true }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -30,7 +25,7 @@ export default function Example() {
     if (router.query.requestLogin) {
       if (router.query.requestLogin === "1") {
         setOpen(true);
-        router.replace('/?path='+router.query.path, '', { shallow: true });
+        router.replace("/?path=" + router.query.path, "", { shallow: true });
       }
     }
   }, [router.query]);

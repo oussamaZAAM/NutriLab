@@ -115,7 +115,7 @@ export default function AddDailyFood({
       neededNutri.foods = eatenFoodNames;
       const res = await axios.post(
         // "http://127.0.0.1:8000/polls/getFood/",
-        "https://nutrilab-api.up.railway.app/polls/getFood/",
+        "https://sbo3a.onrender.com/polls/getFood/",
         neededNutri
       );
       await axios.post("/api/foodList", {

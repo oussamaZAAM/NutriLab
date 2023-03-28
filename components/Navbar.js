@@ -18,10 +18,18 @@ function classNames(...classes) {
 
 export default function Example() {
   const { user, setUser } = useContext(User_data);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  status === "authenticated" && !user && setUser(session.user.name);
 
   const router = useRouter();
   useEffect(() => {
+    // async function callUser() {
+    //   if (!user) {
+    //     const user = await axios.get("/api/loginGoogle");
+    //     setUser(user);
+    //   }
+    // }
+    // callUser();
     if (router.query.requestLogin) {
       if (router.query.requestLogin === "1") {
         setOpen(true);
@@ -40,7 +48,6 @@ export default function Example() {
     }
     handleUser();
   }, [setUser]);
-  console.log(user);
   const cancelButtonRef = useRef(null);
   const handleLogout = async (e) => {
     session && signOut();

@@ -12,10 +12,9 @@ export default function Login({ setLogin, setAuth, setOpen }) {
   const router = useRouter();
   const { setUser } = useContext(User_data);
   const [error, setError] = useState({ email: "", password: "" });
+
   const handleGoogle = async () => {
-    signIn("google")
-      .then((res) => axios.get("/api/login"))
-      .then((res) => setUser(res));
+    await signIn("google");
     // const userName = await axios.post("/api/login");
     // console.log(userName);
     // setUser(userName);

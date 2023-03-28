@@ -12,7 +12,14 @@ export default function Login({ setLogin, setAuth, setOpen }) {
   const router = useRouter();
   const { setUser } = useContext(User_data);
   const [error, setError] = useState({ email: "", password: "" });
-
+  const handleGoogle = async () => {
+    signIn("google")
+      .then((res) => axios.get("/api/login"))
+      .then((res) => setUser(res));
+    // const userName = await axios.post("/api/login");
+    // console.log(userName);
+    // setUser(userName);
+  };
   const validate = (values) => {
     const errors = {};
 
@@ -81,7 +88,7 @@ export default function Login({ setLogin, setAuth, setOpen }) {
         <div className="flex justify-around">
           <button
             className="transition duration-300 ease-out hover:scale-125"
-            onClick={() => signIn("google")}
+            onClick={() => handleGoogle()}
           >
             <BsGoogle className="h-12 w-12 fill-orange-400 hover:fill-orange-600" />
           </button>

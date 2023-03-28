@@ -25,12 +25,12 @@ export default function Home() {
       {/* <Navbar /> */}
       <Navbar User={user} />
       <div className="mx-auto w-full">
-        <div className="flex justify-center items-center bg-gradient-to-b from-gradient1 via-gradient2 to-transparent">
-          <div className="flex flex-1 flex-col justify-center items-center m-4 sm:m-12 lg:m-28 space-y-8">
-            <h1 className="font-title text-7xl sm:text-8xl w-full mt-4">
+        <div className="flex items-center justify-center bg-gradient-to-b from-gradient1 via-gradient2 to-transparent">
+          <div className="m-4 flex flex-1 flex-col items-center justify-center space-y-8 sm:m-12 lg:m-28">
+            <h1 className="mt-4 w-full font-title text-5xl sm:text-8xl">
               What do we do
             </h1>
-            <div className="flex sm:hidden flex-1 justify-center items-center">
+            <div className="flex flex-1 items-center justify-center sm:hidden">
               <a href="https://ibb.co/xCyZnfh">
                 <Image
                   width={1000}
@@ -38,38 +38,37 @@ export default function Home() {
                   priority
                   // as="image"
                   // rel="preload"
-                  className="rounded-lg object-cover h-80 w-96"
+                  className="h-80 w-96 rounded-lg object-cover"
                   src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                   alt="science1"
                 />
               </a>
             </div>
-            <p className="text-md text-left font-paragraph indent-2">
+            <p className="text-md text-left indent-2 font-paragraph">
               NutriLab uses science to help you find your optimized combination
               of food that will make you meet your daily needs of nutrients
               based on your body, activity, plan and food preferences.
             </p>
-            <p className="text-md text-left font-paragraph indent-2">
-              <b className="underline">Measure your daily need of nutrients</b>,{" "}
-              <b className="underline">Balance your food</b> and{" "}
-              <b className="underline">
-                let us help you find today&apos;s meal
-              </b>
-              .
+            <p className="text-md text-left indent-2 font-paragraph">
+              <b>Measure your daily need of nutrients</b>,{" "}
+              <b>Balance your food</b> and{" "}
+              <b>let us help you find today&apos;s meal</b>.
             </p>
-            <div className="flex justify-end items-center w-full">
+            <div className="flex w-full items-center justify-center sm:justify-end">
               <Link href="/nutrients">
                 <div
-                  className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs  rounded-2xl "
-                  style={{ backgroundColor: "#DCF8FF" }}
+                  className="relative max-w-xs overflow-hidden rounded-2xl bg-cover  bg-no-repeat "
+                  // style={{ backgroundColor: "#DCF8FF" }}
                 >
-                  <button className="py-4 px-9 font-extrabold">Start</button>
-                  <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden opacity-0 transition duration-300 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-70"></div>
+                  <button className=" rounded-2xl border-4 border-custom-orange bg-white py-2 px-5 text-4xl font-bold text-custom-orange sm:py-4 sm:px-9 sm:text-lg sm:font-extrabold">
+                    Start
+                  </button>
+                  {/* <div className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 transition duration-300 ease-in-out hover:opacity-70"></div> */}
                 </div>
               </Link>
             </div>
           </div>
-          <div className="hidden sm:flex flex-1 justify-center items-center my-28 mx-12">
+          <div className="my-28 mx-12 hidden flex-1 items-center justify-center sm:flex">
             <a href="https://ibb.co/xCyZnfh">
               <Image
                 width={1000}
@@ -77,7 +76,7 @@ export default function Home() {
                 priority
                 // as="image"
                 // rel="preload"
-                className="rounded-lg object-cover h-64 md:h-80 w-72 md:w-96"
+                className="h-64 w-72 rounded-lg object-cover md:h-80 md:w-96"
                 src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                 alt="science1"
               />
@@ -85,20 +84,20 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative grid grid-cols-8 my-40">
+        <div className="relative my-40 mx-3 grid grid-cols-8">
           <Image
             width={125}
             height={125}
             src="/icons/diet.png"
             alt="decor"
             className="
-                          animate-rotate_normal 
-                          absolute -top-20 md:top-0 left-20 opacity-[0.44] rotate-[28deg]"
+                          absolute 
+                          -top-20 left-20 rotate-[28deg] animate-rotate_normal opacity-[0.44] md:top-0"
           />
           <div
             className="
-                          hidden md:block md:animate-rotate_normal
-                          absolute top-80 -left-10 w-32 h-32"
+                          absolute top-80 -left-10
+                          hidden h-32 w-32 md:block md:animate-rotate_normal"
           >
             <Image
               width={125}
@@ -106,8 +105,8 @@ export default function Home() {
               src="/icons/plan.png"
               alt="decor"
               className="
-                          hidden md:block md:animate-rotate_reverse
-                          absolute top-10 opacity-[0.44] rotate-0"
+                          absolute top-10 hidden
+                          rotate-0 opacity-[0.44] md:block md:animate-rotate_reverse"
             />
           </div>
           <Image
@@ -116,8 +115,8 @@ export default function Home() {
             src="/icons/order-food.png"
             alt="decor"
             className="
-                        animate-translate_right
-                        absolute top-72 right-28 opacity-[0.44] rotate-[33deg]"
+                        absolute
+                        top-72 right-28 rotate-[33deg] animate-translate_right opacity-[0.44]"
           />
           <Image
             width={125}
@@ -125,8 +124,8 @@ export default function Home() {
             src="/icons/meal.png"
             alt="decor"
             className="
-                        animate-rotate2_reverse 
-                        absolute bottom-64 md:bottom-44 left-10 opacity-[0.44] rotate-0"
+                        absolute 
+                        bottom-64 left-10 rotate-0 animate-rotate2_reverse opacity-[0.44] md:bottom-44"
           />
           <Image
             width={125}
@@ -134,8 +133,8 @@ export default function Home() {
             src="/icons/balanced-diet.png"
             alt="decor"
             className="
-                        animate-translate_bottom
-                        absolute -bottom-8 right-1/3 opacity-[0.44] rotate-0"
+                        absolute
+                        -bottom-8 right-1/3 rotate-0 animate-translate_bottom opacity-[0.44]"
           />
           <Image
             width={125}
@@ -143,34 +142,34 @@ export default function Home() {
             src="/icons/healthy-food.png"
             alt="decor"
             className="
-                        hidden md:block md:animate-rotate3 
-                        absolute bottom-44 right-12 opacity-[0.44] rotate-[14deg]"
+                        absolute bottom-44 right-12 
+                        hidden rotate-[14deg] opacity-[0.44] md:block md:animate-rotate3"
           />
-          <div className="z-10 flex flex-col justify-center items-center | xm:col-start-2 col-span-8 xm:col-span-6 | space-y-8">
+          <div className="| | z-10 col-span-8 flex flex-col items-center justify-center space-y-8 xm:col-span-6 xm:col-start-2">
             <div
               className={
-                "flex justify-center items-center h-80 max-w-6xl w-full rounded-2xl " +
+                "flex h-80 w-full max-w-6xl items-center justify-center rounded-2xl " +
                 styles.dropshadow
               }
             >
-              <div className="flex flex-1 flex-col justify-start item-start h-full mt-8">
-                <b className="font-black text-4xl xs:text-5xl m-4">
+              <div className="item-start mt-8 flex h-full flex-1 flex-col justify-start">
+                <b className="m-4 text-4xl font-black xs:text-5xl">
                   Customized Nutrients
                 </b>
-                <p className="font-paragraph m-4">
+                <p className="m-4 font-paragraph">
                   Measure your daily needed nutrients based on your age, sex,
                   height, weight, activity level and your personal plan.
                 </p>
                 <Link href="/nutrients">
                   <MdDoubleArrow
-                    className="cursor-pointer mx-4 lg:m-4 hover:fill-custom-orange transition duration-300"
+                    className="mx-4 cursor-pointer transition duration-300 hover:fill-custom-orange lg:m-4"
                     size={50}
                   />
                 </Link>
               </div>
               <div
                 className={
-                  "hidden xs:block rounded-tr-2xl rounded-br-2xl " +
+                  "hidden rounded-tr-2xl rounded-br-2xl xs:block " +
                   styles.polygon1
                 }
               ></div>
@@ -178,28 +177,28 @@ export default function Home() {
 
             <div
               className={
-                "flex justify-center items-center h-80 max-w-6xl w-full rounded-2xl " +
+                "flex h-80 w-full max-w-6xl items-center justify-center rounded-2xl " +
                 styles.dropshadow
               }
             >
               <div
                 className={
-                  "hidden xs:block rounded-tl-2xl rounded-bl-2xl " +
+                  "hidden rounded-tl-2xl rounded-bl-2xl xs:block " +
                   styles.polygon2
                 }
               ></div>
-              <div className="flex flex-1 flex-col justify-start item-start h-full mt-8">
-                <b className="font-black text-4xl xs:text-5xl m-4">
+              <div className="item-start mt-8 flex h-full flex-1 flex-col justify-start">
+                <b className="m-4 text-4xl font-black xs:text-5xl">
                   Food Generated
                 </b>
-                <p className="font-paragraph m-4">
+                <p className="m-4 font-paragraph">
                   Based on your daily intake of food, we will provide you the
                   best combination of food to meet your daily needs of
                   nutrients.
                 </p>
                 <Link href="/foodProcess">
                   <MdDoubleArrow
-                    className="cursor-pointer mx-4 lg:m-4 hover:fill-custom-orange transition duration-300"
+                    className="mx-4 cursor-pointer transition duration-300 hover:fill-custom-orange lg:m-4"
                     size={50}
                   />
                 </Link>
@@ -208,22 +207,22 @@ export default function Home() {
 
             <div
               className={
-                "flex justify-center items-center h-80 max-w-6xl w-full rounded-2xl " +
+                "flex h-80 w-full max-w-6xl items-center justify-center rounded-2xl " +
                 styles.dropshadow
               }
             >
-              <div className="flex flex-1 flex-col justify-start item-start h-full mt-8">
-                <b className="font-black text-4xl xs:text-5xl m-4">
+              <div className="item-start mt-8 flex h-full flex-1 flex-col justify-start">
+                <b className="m-4 text-4xl font-black xs:text-5xl">
                   Suggested Meals
                 </b>
-                <p className="font-paragraph m-4">
+                <p className="m-4 font-paragraph">
                   Using the balanced combination of food generated, we can help
                   you find today&apos;s meal.
                 </p>
               </div>
               <div
                 className={
-                  "hidden xs:block rounded-tr-2xl rounded-br-2xl " +
+                  "hidden rounded-tr-2xl rounded-br-2xl xs:block " +
                   styles.polygon3
                 }
               ></div>
@@ -231,57 +230,57 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-8">
+        <div className="mx-3 grid grid-cols-8">
           <div
             className={
-              "flex flex-col justify-center items-center | md:col-start-2 col-span-8 md:col-span-6 | rounded-xl | " +
+              "| | | col-span-8 flex flex-col items-center justify-center rounded-xl md:col-span-6 md:col-start-2 " +
               styles.dropshadow
             }
           >
-            <b className="text-4xl font-title text-center my-16">
+            <b className="my-16 text-center font-title text-4xl">
               The Tools for Your Goals
             </b>
-            <div className="flex flex-col sm:flex-row justify-center items-center">
-              <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
+            <div className="flex flex-col items-center justify-center sm:flex-row">
+              <div className="m-4 flex h-full flex-1 flex-col items-center justify-start xm:m-8 xl:m-16">
                 <a href="https://imgbb.com/">
                   <Image
                     width={1000}
                     height={1000}
-                    className="w-32 h-32 rounded-xl drop-shadow-md my-8"
+                    className="my-8 h-32 w-32 rounded-xl drop-shadow-md"
                     src="https://i.ibb.co/0c2vhFr/nutrients.png"
                     alt="nutrients"
                   />
                 </a>
-                <p className="text-center font-paragraph max-w-xs">
+                <p className="max-w-xs text-center font-paragraph">
                   Helps you measure your calories and nutrients needed.
                 </p>
               </div>
-              <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
+              <div className="m-4 flex h-full flex-1 flex-col items-center justify-start xm:m-8 xl:m-16">
                 <a href="https://imgbb.com/">
                   <Image
                     width={1000}
                     height={1000}
-                    className="w-32 h-32 rounded-xl drop-shadow-md my-8"
+                    className="my-8 h-32 w-32 rounded-xl drop-shadow-md"
                     src="https://i.ibb.co/pJKG4T7/balanced-diet.png"
                     alt="balanced-diet"
                   />
                 </a>
-                <p className="text-center font-paragraph max-w-xs">
+                <p className="max-w-xs text-center font-paragraph">
                   Helps you find the most balanced combination of food based on
                   your preferences.
                 </p>
               </div>
-              <div className="flex flex-1 flex-col justify-start items-center m-4 xm:m-8 xl:m-16 h-full">
+              <div className="m-4 flex h-full flex-1 flex-col items-center justify-start xm:m-8 xl:m-16">
                 <a href="https://imgbb.com/">
                   <Image
                     width={1000}
                     height={1000}
-                    className="w-32 h-32 rounded-xl drop-shadow-md my-8"
+                    className="my-8 h-32 w-32 rounded-xl drop-shadow-md"
                     src="https://i.ibb.co/s5dkt00/recommended-food.png"
                     alt="recommended-food"
                   />
                 </a>
-                <p className="text-center font-paragraph max-w-xs">
+                <p className="max-w-xs text-center font-paragraph">
                   Suggests for you the possible meals based on the generated
                   combination of balanced food.
                 </p>

@@ -22,5 +22,5 @@ export default async function registerProvider(req, res) {
     });
     res.status(200).json({ error: "Done Registering" });
   }
-  res.status(401).json({ error: "Email already registered" });
+  res.status(200).json({ error: "Already Registered" });
 }

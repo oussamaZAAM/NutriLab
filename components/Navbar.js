@@ -16,7 +16,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Home() {
   const { user, setUser } = useContext(User_data);
   const { data: session, status } = useSession();
   if (status === "authenticated" && !user) {
@@ -39,6 +39,7 @@ export default function Example() {
       }
     }
   }, [router.query]);
+  console.log(user);
   const [open1, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
   useEffect(() => {
@@ -48,12 +49,14 @@ export default function Example() {
         .then((input) => setUser(input.data.id ? input.data : undefined))
         .catch((err) => setUser(undefined));
     }
+
     handleUser();
   }, [setUser]);
   const cancelButtonRef = useRef(null);
   const handleLogout = async (e) => {
     session && signOut();
     user &&
+      !session &&
       (await axios
         .get("/api/logout")
         .then(async (response) => {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { SignJWT, jwtVerify } from "jose";
-
+import { decode } from "next-auth/jwt";
 export async function sign(payload, secret) {
   const iat = Math.floor(Date.now() / 1000);
   const exp = iat + 60 * 60; // one hour
@@ -23,8 +23,21 @@ export async function verify(token, secret) {
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
-  if (request.cookies.get("__Secure-next-auth.session-token")?.value) {
-    return NextResponse.next();
+  if (request.cookies.get("next-auth.session-token")?.value) {
+    const decoded = await decode({
+      token: request.cookies.get("next-auth.session-token")?.value,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("userId", decoded.uid);
+    return (
+      decoded &&
+      NextResponse.next({
+        request: {
+          headers: requestHeaders,
+        },
+      })
+    );
   }
   let cookie = request.cookies.get("NutriLab")?.value;
   if (cookie) {

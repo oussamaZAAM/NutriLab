@@ -19,8 +19,10 @@ function classNames(...classes) {
 export default function Example() {
   const { user, setUser } = useContext(User_data);
   const { data: session, status } = useSession();
-  status === "authenticated" && !user && setUser(session.user.name);
-
+  if (status === "authenticated" && !user) {
+    setUser(session.user.name);
+    axios.post("/api/registerProvider", { email: session.user.email });
+  }
   const router = useRouter();
   useEffect(() => {
     // async function callUser() {
@@ -200,7 +202,7 @@ export default function Example() {
                               alt=""
                             />
                           )}
-                          {user && (
+                          {user && !session && (
                             <Image
                               width={50}
                               height={50}

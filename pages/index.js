@@ -31,7 +31,6 @@ export default function Home() {
               What do we do
             </h1>
             <div className="flex flex-1 items-center justify-center sm:hidden">
-              <a href="https://ibb.co/xCyZnfh">
                 <Image
                   width={1000}
                   height={1000}
@@ -42,7 +41,6 @@ export default function Home() {
                   src="https://i.ibb.co/QbZ0WC9/science1.jpg"
                   alt="science1"
                 />
-              </a>
             </div>
             <p className="text-md text-left indent-2 font-paragraph">
               NutriLab uses science to help you find your optimized combination

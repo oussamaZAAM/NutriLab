@@ -39,7 +39,6 @@ export default function Home() {
       }
     }
   }, [router.query]);
-  console.log(user);
   const [open1, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
   useEffect(() => {

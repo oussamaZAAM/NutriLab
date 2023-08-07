@@ -2149,6 +2149,46 @@
       "Carbs": 4,
       "Salt": 0.005,
       "Sugar": 3.5
+    },
+    {
+      "name": "Parsley (100mg)",
+      "Protein": 3,
+      "Calories": 36,
+      "Fat": 0.8,
+      "Fiber": 3.3,
+      "Carbs": 6.3,
+      "Salt": 0.0,
+      "Sugar": 0.9
+    },
+    {
+      "name": "Cumin (100mg)",
+      "Protein": 17.8,
+      "Calories": 375,
+      "Fat": 22.27,
+      "Fiber": 10.5,
+      "Carbs": 44.2,
+      "Salt": 0.93,
+      "Sugar": 2.25
+    },
+    {
+      "name": "Sandwich (Fish, potato cakes)",
+      "Protein": 17.5,
+      "Calories": 450,
+      "Fat": 17.5,
+      "Fiber": 4,
+      "Carbs": 45,
+      "Salt": 1.5,
+      "Sugar": 7.5
+    },
+    {
+      "name": "French Tacos with chicken",
+      "Protein": 25,
+      "Calories": 500,
+      "Fat": 20,
+      "Fiber": 4,
+      "Carbs": 40,
+      "Salt": 2.15,
+      "Sugar": 5
     }
   ]
 }
